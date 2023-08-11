@@ -99,6 +99,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <meta property="og:title" content="Modelos Multinivel - Práctica 1. Preparación de datos en R">
+<meta property="og:description" content="">
 <meta property="og:image" content="https://multinivel.netlify.app/files/img/logo-multinivel.png">
 <meta property="og:site-name" content="Modelos Multinivel">
 <meta property="og:locale" content="es">
@@ -915,7 +916,6 @@ pmerit    2,898 2.654   0.969   1.000 5.000
 <li>“sd” standard deviation</li>
 </ul>
 <p>Por ejemplo, si quiero una tabla solo con promedio, n, sd y p75: <code>stargazer(data, type="text", summary.stat = c("mean", "n", "sd", "p75"))</code></p>
-</section></section></main></div>
 <ul>
 <li>Guardar base de datos procesada: en carpeta local <span class="sidenote">La ruta hacia su carpeta local si está trabajando en windows debería ser algo como “C:/Users/Lenovo/Clases/y aquí nombre del archivo a grabar</span></li>
 </ul>
@@ -936,8 +936,8 @@ pmerit    2,898 2.654   0.969   1.000 5.000
 <li><p><strong>Estructura de carpetas</strong>: para mantener el orden se sugiere seguir un protocolo de estructura de carpetas de proyecto, para lo que recomendamos el protocolo <a href="https://lisa-coes.com/ipo-protocol/">IPO</a>, y que se adapta al flujo de trabajo presentado al principio de este práctico. Básicamente son tres carpetas: <strong>input</strong>, <strong>procesamiento</strong>, <strong>output</strong>. En la carpeta input crear la subcarpeta data-orig para guardar datos originales, y data-proc para los procesados. En procesamiento se guardan los archivos de código y en output las tablas y los gráficos.</p></li>
 </ul>
 </div>
-
-
+</section>
+</section>
 <section id="archivo-de-código" class="level1">
 <h1>Archivo de código</h1>
 <p>El archivo de código R de esta práctica se puede descargar <a href="https://raw.githubusercontent.com/juancarloscastillo/multivariada/master/static/assignment/practica_1.R">aquí</a></p>
@@ -950,7 +950,7 @@ pmerit    2,898 2.654   0.969   1.000 5.000
 
 </section>
 
- <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1184,7 +1184,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
- <!-- /content -->
+</div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">Content <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2023 by <a href="https://www.jc-castillo.com">Juan Castillo</a> <br> All content licensed under a <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> <i class="fa-brands fa-creative-commons-nc" aria-label="creative-commons-nc"></i> <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)</a></div>   

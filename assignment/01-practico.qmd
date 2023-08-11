@@ -491,7 +491,6 @@ Si se desea modificar las columnas que aparecen en la tabla se puede ocupar la o
 
 Por ejemplo, si quiero una tabla solo con promedio, n, sd y p75: `stargazer(data, type="text", summary.stat = c("mean", "n", "sd", "p75"))`
 
-</div>
 
 - Guardar base de datos procesada: en carpeta local <span class="sidenote">La ruta hacia su carpeta local si está trabajando en windows debería ser algo como "C:/Users/Lenovo/Clases/y aquí nombre del archivo a grabar</span>
 
