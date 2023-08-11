@@ -20,13 +20,13 @@ execute:
 
 bibliography: files/bib/references.bib
 csl: files/bib/chicago-author-date.csl
-description-meta: "Estadística Correlacional - Asociación, inferencia y reporte"
+description-meta: "Modelos Multinivel"
 
 website:
-  title: "Estadística Correlacional"
-  site-url: "https://correlacional.netlify.app"
+  title: "Modelos Multinivel"
+  site-url: "https://multinivel.netlify.app"
 
-  favicon: "/files/logo-correlacional-transp.png"
+  favicon: "/files/img/logo-multinivel.png"
 
   # twitter-card:
   #  image: "/files/social-image-sp23.png"
@@ -35,12 +35,12 @@ website:
     # site: "@andrewheiss"
 
   open-graph:
-    image: "/files/logo-correlacional.png" # cambiar luego
+    image: "/files/img/logo-multinivel.png" # cambiar luego
     locale: es
 
   navbar:
     pinned: true
-    background: "#BC3C6F"
+    background: "#1a0b36"
     right:
       - syllabus.qmd
       - schedule.qmd
@@ -50,8 +50,6 @@ website:
         file: assignment/index.qmd
       - text: "Recursos"
         file: resource/index.qmd
-      - text: "Noticias"
-        file: news/index.qmd
       - icon: cloud-fill
         href: "https://rstudio.cloud"
         aria-label: RStudio.cloud
@@ -79,7 +77,7 @@ website:
             - assignment/index.qmd
         - section: "Guías"
           contents:
-            - text: "1: Reportes dinámicos 1"
+            - text: "1: Preparación de Datos con R"
               file: assignment/01-practico.qmd
 
   page-footer:

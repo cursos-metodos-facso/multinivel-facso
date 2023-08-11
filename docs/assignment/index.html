@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Estadística Correlacional - Asociación, inferencia y reporte">
+<meta name="description" content="Modelos Multinivel">
 
-<title>Estadística Correlacional - Instrucciones generales</title>
+<title>Modelos Multinivel - Instrucciones generales</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="..//files/logo-correlacional-transp.png" rel="icon" type="image/png">
+<link href="..//files/img/logo-multinivel.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -64,13 +64,13 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<meta property="og:title" content="Estadística Correlacional - Instrucciones generales">
+<meta property="og:title" content="Modelos Multinivel - Instrucciones generales">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://correlacional.netlify.app/files/logo-correlacional.png">
-<meta property="og:site-name" content="Estadística Correlacional">
+<meta property="og:image" content="https://multinivel.netlify.app/files/img/logo-multinivel.png">
+<meta property="og:site-name" content="Modelos Multinivel">
 <meta property="og:locale" content="es">
-<meta property="og:image:height" content="500">
-<meta property="og:image:width" content="500">
+<meta property="og:image:height" content="595">
+<meta property="og:image:width" content="521">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">Estadística Correlacional</span>
+    <span class="navbar-title">Modelos Multinivel</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Buscar"></div>
@@ -109,10 +109,6 @@ ul.task-list li input[type="checkbox"] {
   <li class="nav-item">
     <a class="nav-link" href="../resource/index.html" rel="" target="">
  <span class="menu-text">Recursos</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../news/index.html" rel="" target="">
- <span class="menu-text">Noticias</span></a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://rstudio.cloud" rel="" target=""><i class="bi bi-cloud-fill" role="img" aria-label="RStudio.cloud">
@@ -171,7 +167,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../assignment/01-practico.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">1: Reportes dinámicos 1</span></a>
+ <span class="menu-text">1: Preparación de Datos con R</span></a>
   </div>
 </li>
       </ul>
@@ -187,7 +183,6 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#descripción" id="toc-descripción" class="nav-link active" data-scroll-target="#descripción">Descripción</a></li>
-  <li><a href="#reporte" id="toc-reporte" class="nav-link" data-scroll-target="#reporte">Reportes de progreso</a></li>
   <li><a href="#trabajo-con-software-r" id="toc-trabajo-con-software-r" class="nav-link" data-scroll-target="#trabajo-con-software-r">Trabajo con software R</a></li>
   <li><a href="#sobre-errores-y-consultas-sobre-problemas-con-r-y-ejecución-de-código" id="toc-sobre-errores-y-consultas-sobre-problemas-con-r-y-ejecución-de-código" class="nav-link" data-scroll-target="#sobre-errores-y-consultas-sobre-problemas-con-r-y-ejecución-de-código">Sobre errores y consultas sobre problemas con R y ejecución de código</a>
   <ul class="collapse">
@@ -211,20 +206,11 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Los prácticos consisten en el desarrollo de una guía práctica (por lo general cada semana) donde se aplican y profundizan los contenidos de las clases, y donde también se abordan otras temáticas relacionadas al manejo y repote de datos. La organización semestras se puede revisar en la <a href="../schedule.html">planificación del curso</a>.</p></li>
 <li><p>El trabajo con estas guías se organiza en los siguientes momentos:</p>
 <ul>
-<li>la guía se presenta los días martes y se avanza en resolver dudas para su resolución</li>
 <li>cada estudiante realiza la guía de manera autónoma durante la semana</li>
-<li>en caso de dudas que surjan durante la semana se recomienda preguntar en el foro de U-Cursos disponible para este fin</li>
-<li>las sesiones prácticas se realizarán por lo general en grupos pequeños guiados por ayudantes.</li>
-<li>cada semana se completa un <strong>reporte de progreso</strong> (detalles abajo)</li>
+<li>en caso de dudas que surjan durante la semana se recomienda preguntar en el foro de Giscus al final del práctico, para lo cual se requiere tener cuenta en <a href="https://github.com">Github</a>. La cuenta gratis y fácil de obtener, y el servicio muy útil. Si se quiere saber en qué consiste se recomienda revisar la siguiente <a href="https://cienciasocialabierta.netlify.app/class/09-class/">clase del curso Ciencia Social Abierta</a></li>
 </ul></li>
 <li><p>En las prácticas vamos a trabajar con el software R, Versión 4.3.1.</p></li>
 </ul>
-</section>
-<section id="reporte" class="level2">
-<h2 class="anchored" data-anchor-id="reporte">Reportes de progreso</h2>
-<p>Este curso se caracteriza por el desarrollo secuencial y acumulativo de aprendizajes. En otras palabras, va a ser muy difícil poder lograr los objetivos de aprendizaje posteriores sin haber logrado los objetivos de contenidos previos (es muy difícil aprender a multiplicar sin saber sumar). Por lo tanto, como equipo a cargo del curso nos interesa poder monitorear permanentemente el cumplimiento de objetivos de aprendizaje semana a semana para así poder prestar asesoría oportuna.</p>
-<p>El sistema de monitoreo permanente de cumplimiento de objetivos se llevará a cabo mediante <strong>reportes de progreso</strong>. Los reportes consisten en completar un formulario simple y breve, donde se preguntará por el cumplimiento de los objetivos de las prácticas respectivas. El link para completar el reporte se encuentra al final de cada guía Se deben completar durante la semana en que se desarrolla la guía, a más tardar los días viernes.</p>
-<p>Como incentivo para completar los reportes de progreso, se entregarán <strong>dos décimas adicionales</strong> a la nota de quienes tengan al menos el 80% de los reportes de progreso completados entre instancias de evaluación (por ejemplo, en el caso de la evaluación 2 se deben tener todos los reportes de progreso completados entre la evaluación 1 y 2).</p>
 </section>
 <section id="trabajo-con-software-r" class="level2">
 <h2 class="anchored" data-anchor-id="trabajo-con-software-r">Trabajo con software R</h2>
@@ -239,7 +225,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="sobre-errores-y-consultas-sobre-problemas-con-r-y-ejecución-de-código" class="level2">
 <h2 class="anchored" data-anchor-id="sobre-errores-y-consultas-sobre-problemas-con-r-y-ejecución-de-código">Sobre errores y consultas sobre problemas con R y ejecución de código</h2>
 <p>En caso de problemas con ejecución de código, se sugiere intentar solucionarlo autónomamente por no más de 10 minutos, si los problemas siguen entonces consultar.</p>
-<p>Se sugiere que las consultas sobre problemas en la ejecución del código y otros se realicen en los foros al final de los prácticos correspondientes, para lo cual se requiere solo habilitar una cuenta en Github. Al hacer la consulta, adjuntar la siguiente información:</p>
+<p>Se sugiere que las consultas sobre problemas en la ejecución del código y otros se realicen en los foros al final de los prácticos correspondientes (en Giscus), para lo cual se requiere solo habilitar una cuenta en Github. Al hacer la consulta, adjuntar la siguiente información:</p>
 <ol type="1">
 <li>Código completo hasta que se produce el problema</li>
 <li>Indicar línea del código donde se produce el problema</li>
@@ -520,7 +506,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-center">
       &nbsp;
     </div>
-    <div class="nav-footer-right">Made with <i class="fa-brands fa-r-project" aria-label="r-project"></i> and <a href="https://quarto.org/">Quarto</a><br> <a href="https://github.com/cursos-metodos-facso/correlacional">View the source at <i class="fa-brands fa-github" aria-label="github"></i> GitHub</a></div>
+    <div class="nav-footer-right">Made with <i class="fa-brands fa-r-project" aria-label="r-project"></i> and <a href="https://quarto.org/">Quarto</a><br> <a href="https://github.com/cursos-metodos-facso/multinivel">View the source at <i class="fa-brands fa-github" aria-label="github"></i> GitHub</a></div>
   </div>
 </footer>
 

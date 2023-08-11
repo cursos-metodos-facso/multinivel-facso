@@ -32,95 +32,68 @@ library(pander)
 
 :::
 
-## Sobre el sentido general del curso
 
-En este curso vamos a aprender tres cosas principales:
 
-- **inferencia**: los resultados que encontramos en nuestra muestra, ¿se encuentran también en la población de la cual proviene la muestra?
+# Descripción
 
-- medidas de **asociación** entre variables: tamaño y significación estadística 
+Gran parte de la investigación sociológica hace referencia al contexto en que las personas viven y se desenvuelven, como por ejemplo lugares de trabajo, salas de clases, barrios, países. Sin embargo, modelos tradicionales como ANOVA y regresión poseen limitaciones a la hora de integrar datos en distintos niveles (individual y contextual), así como también la interacción entre ambos (por ejemplo, la relación entre nivel de vulnerabilidad de escuelas, capital cultural de los padres y rendimiento académico de estudiantes). El presente curso aborda el análisis simultáneo de datos en distintos niveles mediante modelamiento multinivel. Comienza con una problematización de la integración del contexto en el análisis sociológico de datos, para luego describir las principales características y usos de modelos multinivel.
 
-- **reporte y reproducibilidad** de los análisis estadísticos: nuestros análisis se reflejan en productos como tablas y gráficos. No basta con entenderlos e interpretarlos, sino también es fundamental una buena comunicación.
+El curso tiene una orientación práctica y aplicada a problemas de investigación en torno a los cuales se desarrollará un trabajo de investigación.
 
-## Propósito general del curso
 
-Al finalizar el curso los estudiantes conocerán los fundamentos del análisis estadístico inferencial. Se espera que los estudiantes sean capaces de:
+# Orientación
 
-- elaborar de manera pertinente hipótesis estadísticas
-- aplicar estadísticos de asociación y correlación, a partir de los cuáles puedan desarrollar análisis de problemas sociales
-- corroborar el cumplimiento de las condiciones de aplicación de cada estadístico
-- utilizar diferentes softwares de análisis estadístico
-- contrastar hipótesis de investigación
-- elaborar conclusiones integrando fundamentos teóricos con herramientas de análisis estadístico de resultados. 
+El presente curso se propone desarrollar en las y los estudiantes las habilidades necesarias para:
 
-Complementariamente se espera que los estudiantes adquieran herramientas que les permitan comunicar resultados de investigación en contextos sociales, profesionales y académicos.
+- Comprender las limitaciones de métodos de estimación tradicionales (como regresión simple) para el análisis de datos con estructuras jerárquicas.
 
-## Competencias
+- Entender las estructuras de datos que ameritan un análisis de tipo multinivel.
 
-1a. Delimitar, conceptualizar y analizar diversos objetos de investigación social, con especial énfasis en aquellos relacionados con los procesos de transformación del país y Latinoamérica
+- Implementar,  interpretar y reportar análisis de modelos jerárquicos lineales y no lineales.
 
-1b. Manejar diversas estrategias metodológicas de las ciencias sociales
+# Contenidos
 
-1c.  Manejar un conjunto de herramientas para el procesamiento y análisis de información
- 
-1d.  Transmitir los conocimientos derivados de la práctica investigativa, así como aquellos adquiridos durante el proceso formativo.
+## 1. Unidad I: Introducción a la estimación multinivel
 
-## Subcompetencias
+• Datos anidados y datos agregados
 
-- 1.4  Contribuir a generar conocimiento sociológico en el marco de estudios y/o procesos de investigación donde se articulen creativamente las dimensiones teórica, metodológica y práctica.
+• Limitaciones de métodos tradicionales para datos anidados
 
-- 1.5 Comunicar los saberes disciplinares de manera pertinente a las características de distintos contextos y audiencias, utilizando diversas estrategias y formatos. 
+• Correlación intra-clase
 
-## Resultados del aprendizaje
+• Predictores en distintos niveles
 
-1. Comprende, domina y es capaz de explicar los elementos conceptuales subyacentes a la determinación de la asociación poblacional entre dos variables a partir del análisis de una muestra, y es capaz de traducir hipótesis derivadas de la teoría sociológica en hipótesis estadísticas posibles de contrastar empíricamente con los datos.
-   
-2. Es capaz de seleccionar y usar herramientas estadísticas adecuadas para evaluar la asociación entre dos variables considerando las características de los datos y las condiciones de aplicación de cada técnica.
-   
-3. Logra interpretar desde un punto de vista estadístico y sociológico los resultados derivados de pruebas estadísticas para analizar la relación entre dos variables.
-   
-4. Es capaz de reportar y comunicar adecuada y eficientemente los resultados de los análisis estadísticos
+• Generación e importación de datos nivel 2
 
-##  Saberes / Contenidos
+• Reporte
 
-### Unidad I: Asociación entre dos variables cuantitativas.
+## 2. Unidad II: Profundización
 
-- Descripción, asociación, y explicación en estadística. La importancia del análisis de covariación entre variables. La inferencia estadística: tipos y rol en el análisis descriptivo, asociativo y explicativo.
-- Concepto de covarianza y relación/correlación lineal versus relación no-lineal entre variables.
-- Correlación de Pearson: supuestos y condiciones de aplicación, interpretación de resultados como tamaño efecto según criterios de Cohen. El coeficiente de determinación, utilidad e interpretación.
+• Pendiente aleatoria
 
-### Unidad II: Inferencia y asociación
-- Asociación entre una variable cuantitativa y una dicotómica como intervalos de confianza de medias y proporciones usando distribución Z y revisión de conceptos fundamentales de inferencia: área de una distribución, probabilidades en la curva normal, error Tipo I, y error tipo II.
-- Asociación entre una variable cuantitativa y una dicotómica como diferencia de medias y proporciones con prueba Z; revisión y análisis de valor de Z observado, el concepto de valor-p y determinación del tamaño del efecto con d de Cohen. 
-- Generalización de intervalos de confianza y pruebas de diferencia de medias y proporciones en dos grupos en muestras pequeñas usando distribución t de Student; revisión de concepto de grados de libertad.
-- Generalizaciones de esta lógica: Prueba t de Student e intervalos de confianza en correlaciones de Pearson; Comparación de medias de tres o más grupos con ANOVA e intervalos de confianza corregidos por número de comparaciones.
+• Interacción entre niveles
 
-### Unidad III: Asociación con variables categóricas 
+• Ajuste
 
-- El uso de tablas de contingencia y la determinación de la asociación: uso de frecuencias observadas, porcentajes fila, columna y totales.
-- Evaluación de la asociación poblacional mediante Chi Cuadrado: el concepto de frecuencias esperadas y observadas. Estimación e interpretación de resultados y medición de tamaño efecto.
-- Breve mirada a estadísticos de correlación para variables categóricas: la correlación tetracórica y policórica.
+• Centrado de variables
 
-## Metodología
-1. Sesiones de clases lectivas presenciales semanales, donde se presentarán los aspectos centrales de los contenidos correspondientes a la semana.
+• Introducción a estimación con datos longitudinales
 
-2. Prácticos online semanales: cada tema de las sesiones se acompaña de una guía práctica de aplicación de contenidos. Estas guías están diseñadas para ser desarrolladas de manera autónoma por cada estudiante semana a semana. También serán desarrolladas y revisadas cada semana en grupos pequeños con supervisión de ayudantes para dar mayor oportunidad de participación y resolver las dudas respectivas. Existe un reporte de progreso asociado a estas guías que deberá ser completado semanalmente con fines de monitoreo y retroalimentación.
+## 3. Unidad III: Aplicaciones prácticas
 
-3. Trabajos: se desarrollarán trabajos de investigación que permitirán a l_s participantes aplicar contenidos y recibir retroalimentación de su desempeño. Los trabajos serán asesorados por ayudantes que se asignarán a cada grupo.
+• En base a trabajos de alumn_s
 
-## Evaluación
+# Metodología
 
-El curso tendrá tres instancias de evaluación:
+El curso se organiza en sesiones semanales, con una parte lectiva que se acompaña de ejercicios prácticos. En la parte lectiva se transmiten y discuten los conceptos centrales del análisis multinivel. En la parte práctica se aplicarán los conceptos transmitidos en la parte lectiva, además de resolver dudas en el avance de los trabajos de investigación. Durante la práctica se hará énfasis en la perspectiva de ciencia abierta, que se relaciona con transparencia y reproducibilidad de los productos de investigación. En este marco utilizaremos el programa de análisis estadı́stico R (gratuito y open source) tanto para temas de análisis como también para la generación de reportes, apoyados por herramientas como Rmarkdown/Knitr. En la misma lı́nea de ciencia abierta se fomentará la colaboración entre los alumnos para que compartan los resultados de sus aprendizajes y también se evalúen mutuamente.
 
-- Evaluación 1: prueba correlación lineal (30%).
-- Evaluación 2: prueba inferencia estadística (30%)
-- Evaluación 3: trabajo grupal (40%)
+# Evaluación
 
-La nota ponderada de las evaluaciones equivaldrá al 60% de la nota del curso y el examen final al 40% restante.
+La evaluación consistirá en la elaboración de un reporte en el formato de artículo de investigación, realizado de manera grupal. La evaluación será 30% la primera entrega y 40% la segunda, 20% la presentación oral del trabajo y 10% un informe de evaluación de un trabajo realizado por otros participantes del curso.
 
 ## Inasistencias y atraso en entregas
 
-Los justificativos por ausencia o atraso se realizan en la secretaría de carrera. Lo que la carrera informe como justificado, es lo que se va a considerar en el curso. **No enviar justificativos a equipo docente y a ayudantes directamente**, no es necesario ni apropiado para l_s estudiantes tener que exponer situaciones personales.
+Los justificativos por ausencia o atraso se realizan en la secretaría de carrera. Lo que la carrera informe como justificado, es lo que se va a considerar en el curso. **No enviar justificativos directamente**, no es necesario ni apropiado para l_s estudiantes tener que exponer situaciones personales.
 
 En caso de faltar a alguna de las evaluaciones existirá una única fecha para evaluaciones recuperativas. Si en esa fecha no es posible asistir por motivos justificados, entonces pasará directo a examen. 
 
@@ -141,22 +114,7 @@ Requisitos para presentación a examen:
 
 ## Bibliografía Obligatoria 
 
-Capítulos correspondientes a cada sesión de los siguientes textos principales:
-
-- Ritchey, F. (2008) Estadística para las ciencias sociales. McGraw-Hill: México.
-- Moore (2010) Estadística aplicada básica. Barcelona: Antoni Bosch. 
-- Pardo, Ruiz y San Martín (2015). Análisis de Datos en Ciencias Sociales y de la Salud I. Editorial Síntesis: Madrid.
-
-## Bibliografía Complementaria
-
-Wickham, H., & Grolemund, G. (2016). R for data science: import, tidy, transform, visualize, and model data (First edition). Sebastopol: O’Reilly.
-
-Field, A., Milles, J., & Field, Z. (2012). Discovering statistics using R. London: Sage.
-
-Salkind, N. J. (Ed.). (2010). Encyclopedia of research design (Vol. 1). Sage.
-
-Levin, J. & Levin, W. (1997). Fundamentos de Estadística en la Investigación Social (Vol.2). Oxford University Press. 
-
+Capítulos correspondientes a cada sesión se indican en la página de [Planificación](/schedule.html).
 
 ## VARIOS
 

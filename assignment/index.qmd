@@ -10,21 +10,11 @@ lang: es
 
 - El trabajo con estas guías se organiza en los siguientes momentos:
 
-  - la guía se presenta los días martes y se avanza en resolver dudas para su resolución
   - cada estudiante realiza la guía de manera autónoma durante la semana
-  - en caso de dudas que surjan durante la semana se recomienda preguntar en el foro de U-Cursos disponible para este fin
-  - las sesiones prácticas se realizarán por lo general en grupos pequeños guiados por ayudantes.
-  - cada semana se completa un **reporte de progreso** (detalles abajo)
+  - en caso de dudas que surjan durante la semana se recomienda preguntar en el foro de Giscus al final del práctico, para lo cual se requiere tener cuenta en [Github](https://github.com). La cuenta gratis y fácil de obtener, y el servicio muy útil. Si se quiere saber en qué consiste se recomienda revisar la siguiente [clase del curso Ciencia Social Abierta](https://cienciasocialabierta.netlify.app/class/09-class/)  
 
 - En las prácticas vamos a trabajar con el software R, Versión 4.3.1.
 
-## Reportes de progreso{#reporte}
-
-Este curso se caracteriza por el desarrollo secuencial y acumulativo de aprendizajes. En otras palabras, va a ser muy difícil poder lograr los objetivos de aprendizaje posteriores sin haber logrado los objetivos de contenidos previos (es muy difícil aprender a multiplicar sin saber sumar). Por lo tanto, como equipo a cargo del curso nos interesa poder monitorear permanentemente el cumplimiento de objetivos de aprendizaje semana a semana para así poder prestar asesoría oportuna.
-
-El sistema de monitoreo permanente de cumplimiento de objetivos se llevará a cabo mediante **reportes de progreso**. Los reportes consisten en completar un formulario simple y breve, donde se preguntará por el cumplimiento de los objetivos de las prácticas respectivas. El link para completar el reporte se encuentra al final de cada guía Se deben completar durante la semana en que se desarrolla la guía, a más tardar los días viernes.
-
-Como incentivo para completar los reportes de progreso, se entregarán **dos décimas adicionales** a la nota de quienes tengan al menos el 80% de los  reportes de progreso completados entre instancias de evaluación (por ejemplo, en el caso de la evaluación 2 se deben tener todos los reportes de progreso completados entre la evaluación 1 y 2). 
 
 ## Trabajo con software R
 
@@ -41,7 +31,7 @@ Para minimizar estos posibles problemas en este curso, vamos a:
 
 En caso de problemas con ejecución de código, se sugiere intentar solucionarlo autónomamente por no más de 10 minutos, si los problemas siguen entonces consultar. 
 
-Se sugiere que las consultas sobre problemas en la ejecución del código y otros se realicen en los foros al final de los prácticos correspondientes, para lo cual se requiere solo habilitar una cuenta en Github. Al hacer la consulta, adjuntar la siguiente información:
+Se sugiere que las consultas sobre problemas en la ejecución del código y otros se realicen en los foros al final de los prácticos correspondientes (en Giscus), para lo cual se requiere solo habilitar una cuenta en Github. Al hacer la consulta, adjuntar la siguiente información:
 
   1. Código completo hasta que se produce el problema
   2. Indicar línea del código donde se produce el problema

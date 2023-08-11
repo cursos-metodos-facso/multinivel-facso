@@ -1,271 +1,540 @@
 ---
-title: "Reportes dinámicos con RMarkdown"
-date: "2023-08-11"
+title: "Práctica 1. Preparación de datos en R"
+date: "2023-08-18"
 lang: es
 website:
   comments:
     giscus:
-      repo: cursos-metodos-facso/correlacional
+      repo: cursos-metodos-facso/multinivel
 ---
 
-# Objetivo de la práctica
+# Presentación
 
-El objetivo de esta guía práctica es familiarizarnos con las herramientas fundamentales para crear documentos dinámicos que nos permitan combinar texto y análisis (código) en un único reporte utilizando RMarkdown.
+## Objetivo de la práctica
 
-En detalle, aprenderemos:
+El desarrollo de esta guía tiene por objetivo revisar algunos procedimientos básicos de la preparación de datos con R, que son necesarios para luego poder aplicar los contenidos más específicos de este curso.
 
-1.  Qué es la reproducibilidad y un flujo de trabajo reproducible
-2.  Qué es escritura abierta con Markdown
-3.  Qué es RMarkdown y cómo generar reportes dinámicos
+Por temas de orden y reproducibilidad, en este curso vamos a separar en **dos momentos** el trabajo con datos, y dos archivos de código correspondientes:
 
-# 1. Reproducibilidad
+  - **Preparación** corresponde a lo que se conoce generalmente como "limpieza", es decir, realizar las modificaciones necesarias para poder efectuar los análisis. Estas modificaciones previas al análisis son necesarias ya que los datos originales con los que se va a trabajar en general no vienen perfectamente adaptados a los análisis que se quieren hacer. Por lo tanto, en cuanto a datos también hacemos la distinción entre datos originales y datos preparados (o procesados).
 
-La **reproducibilidad** en ciencias sociales es esencial para garantizar resultados confiables y evitar casualidades. Imagina presentar hallazgos emocionantes en una conferencia y que te pidan que demuestres cómo llegaste a esos resultados. ¡La reproducibilidad se convierte en tu mejor amiga o peor enemiga en ese momento!
+  - **Análisis**: se relaciona tanto con análisis descriptivos asociados a las preguntas de investigación y como también modelamiento de datos para contrastar hipótesis de investigación.
 
-![](../files/flujo-herramientas.png)
+#### Los procesos de preparación y análisis vinculados a datos y resultados se presentan en el siguiente esquema:{#flujo}
 
-Cuando un estudio es reproducible, **significa que has detallado claramente tu proceso de investigación para que cualquiera pueda seguirlo y obtener los *mismos resultados***. Esto no solo genera confianza en tu trabajo, sino que permite a otros construir sobre tus hallazgos y contribuir al conocimiento colectivo.
+![](../files/img/produccion.png)
 
-![](../files/reproducibility.jpg)
+Tanto la preparación como el análisis (que son parte del concepto más general de procesamiento) quedan registrados cada en un _archivo de código_. Los detalles de este tipo de archivos se pueden revisar [aquí](/class/#codigoR). <span class="sidenote">**Archivo de código R**: archivo con extensión .R donde se almacena el código de análisis. Para generarlo desde RStudio: _File > New File > R Script_ (o ctrl+shift+N), y para grabarlo  _File > Save (o ctrl+s)_, y darle nombre la primera vez (recordar: sin tilde ni ñ, y evitar espacios) </span>
 
-¿Cómo organizamos **un proyecto reproducible**? lo primero es definir una estructura de proyecto autocontenido:
+El documento de **código de preparación** posee 5 partes, más una sección de identificación inicial:
 
-1.  En este curso trabajaremos con un flujo de trabajo reproducible, basado en el sistema [IPO](https://lisa-coes.com/ipo-repro/). **IPO** es un protocolo de estructura digital de carpetas que permite organizar, procesar y documentar los datos de un proyecto de investigación para que cualquier persona pueda ejecutarlo y compartirlo.
+0. Identificación y descripción general: Título, autor(es), fecha, información breve sobre el contenido del documento
+1. Librerías: cargar librerías a utilizar
+2. Datos: carga de datos
+3. Selección de variables a utilizar
+4. Procesamiento de variables: en este punto, por cada variable se realiza lo siguiente:
+    a. Descriptivo básico
+    b. Recodificación: (datos perdidos y valores (en caso de ser necesario)
+    c. Etiquetamiento: de variable y valores (en caso de ser necesario)
+    e. Otros ajustes
 
-```{r echo=FALSE, warning=FALSE, out.width="75%", fig.align='center'}
-knitr::include_graphics("../files/ipo.png", error = FALSE)
+
+5. Generación de base de datos preparada para el análisis.
+
+Al final de esta práctica la idea es que cada un_ elabore y entienda su propio documento de preparación de datos.
+
+En el ejemplo vamos a procesar variables de meritocracia y estatus (objetivo y subjetivo) utilizando los datos de la encuesta [ELSOC](https://coes.cl/encuesta-panel/) .
+
+## Antecedentes de los datos a utilizar
+
+El Estudio Longitudinal Social de Chile (ELSOC) es una encuesta desarrollada para analizar longitudinalmente la evolución del conflicto y cohesión en la sociedad chilena.
+
+Uno de los módulos de **ELSOC** es "Desigualdad y Legitimidad". Este módulo busca estudiar las percepciones y atribuciones asociadas a las desigualdades sociales. Se ve motivado por el interés de comprender cómo las personas perciben, legitiman y reproducen las diferencias de ingresos, estatus y poder presentes en el Chile contemporáneo.
+
+El presente ejercicio tiene por objetivo el procesar los datos para obtener las variables relevantes para el estudio de la **Percepción de Meritocracia**, entendida como el grado en que los individuos consideran que su sociedad cumple con los principios de una meritocracia, es decir, que funciona como un sistema que asigna recompensas en función del esfuerzo y las habilidades. Para ello, junto con variables de meritocracia, consideraremos también variables de estatus (educación y estatus subjetivo), y variables de caracterización sociodemográfica (sexo y edad).
+
+# Preparación de datos ELSOC 2016
+
+## 1. Librerías principales (de R) a utilizar en el análisis{#librerias}
+
+Como sabemos, la lógica de R es instalar librerías (solo 1 vez, con `install.packages("librería")`), y luego cargarlas cada vez que es necesario usarlas (con `library(librería)`). El problema de esto es que a veces no se sabe claramente qué librerías están instaladas y cuales no, lo que va a arrojar error al cargarlas. Y, como sucede en R, existe una librería para solucionar este problema que se llama `pacman` (package manager). Lo que hace `pacman` es cargar la librería, y si no está instalada, la instala y la carga:
+
+
+Para utilizar la primera vez (si es que no está instalada):
+
+```{r eval=FALSE}
+install.packages("pacman")
+```
+
+Y en adelante, las librerías se cargan así <span class="sidenote"> pacman::p_load(libreria1,libreria2,libreriaX) </span>:
+
+
+```{r}
+pacman::p_load(dplyr, sjmisc, car, sjlabelled, stargazer)
+```
+
+
+Para esta sesión vamos a utilizar Las librerías que vamos a utilizar son:
+
+- `dplyr`: ajuste general de datos
+- `sjmisc`: descripción y exploración de base de datos
+- `car`: principalmente la función `recode` para recodificar/agrupar valores de variable
+- `stargazer`: para tabla descriptiva
+
+
+## 2. Cargar base de datos
+
+**Ajustar espacio de trabajo**
+
+Previo a la carga de nuestra base de datos, se recomienda ejecutar los siguientes comandos:
+
+```{r}
+rm(list=ls())       # borrar todos los objetos en el espacio de trabajo
+options(scipen=999) # valores sin notación científica
+```
+
+La función `rm(list=ls())` permite comenzar con un espacio de trabajo (environment) vacío y sin otros objetos. Así también, la función `options(scipen=999)` desactiva la notación científica, es decir, veremos los valores numéricos con todos sus decimales.
+
+**Datos**
+
+Las bases de datos se pueden cargar de un archivo local o en línea. Para este caso utilizaremos un archivo en línea que viene en formato RData: **ELSOC_W01_v3.10.RData**. <span class="sidenote">**Abrir bases de datos en otros formatos**: Los formatos mas comunes en que se almacenan las bases de datos son .dta (Stata) y .sav (Spss). Para abrir desde R utlilizamos la librería `haven` y sus funciones read_dta y read_sav según corresponda. Ej: `datos <- read_dta("base_casen.dta")`. Recordar antes instalar/cargar la librería: `pacman::p_load(haven)`   </span>
+
+```{r eval=TRUE}
+#cargamos la base de datos desde internet
+load(url("https://multivariada.netlify.com/assignment/data/original/ELSOC_W01_v3.10.RData"))
+```
+
+La base de datos aparece como un objeto en nuestro espacio de trabajo, con el nombre original con la que fue guardada (elsoc_2016):
+
+![](../files/img/basecargada.png)
+
+Realizamos un chequeo básico de la lectura de datos: nombres de las variables y tamaño de la base en términos de casos y variables (en este ejemplo, `r dim(elsoc_2016)[1]` casos y `r dim(elsoc_2016)[2]` variables).
+
+```{r}
+dim(elsoc_2016) # dimension de la base
+```
+Y si se quiere revisar en formato de planilla de datos:
+
+```{r}
+View(elsoc_2016)
+```
+
+## 3. Selección de variables a utilizar
+
+Este paso consiste en crear un subset reducido de datos que contenga solo las variables de interés. Para ello:
+
+1. Se identifica el nombre de las variables que registran la información de preguntas o items del instrumento: esto aparece en el libro de códigos y/o en el cuestionario, o también se puede hacer buscando en la base de datos mediante alguna palabra clave asociada a la pregunta. Por ejemplo, si queremos buscar variables asociadas a educación, utilizamos la función `find_var` (de `sjmisc`, librería que cargamos en el paso 1), que nos entrega nombre de la variable en columna var.name. Por ejemplo, si buscamos alguna variable asociada al concepto _esfuerzo_:
+
+```{r}
+find_var(data = elsoc_2016,"esfuerzo")
+```
+
+Nos informa que esta variable es la `c18_09`.
+
+
+Mediante la función `select` de `dplyr`, seleccionamos cada una de nuestras variables de interés y creamos una nueva base con el nombre `proc_elsoc`, donde "proc" hace referencia a base procesada:
+
+```{r}
+proc_elsoc <- elsoc_2016 %>% select(c18_09, # percepción meritocracia esfuerzo
+                          c18_10, # percepción meritocracia talento
+                          d01_01, # estatus social subjetivo
+                          m01,    # nivel educacional
+                          m0_sexo,# sexo
+                          m0_edad)# edad
+
+# Comprobar
+names(proc_elsoc)
+```
+
+Mediante el comando `get_label` obtenemos el atributo label de las variables.
+
+```{r}
+sjlabelled::get_label(proc_elsoc)
+```
+
+Podemos ver que son muy largas, por lo tanto, es necesario cambiarlas por etiquetas más cortas.
+
+## 4. Procesamiento de variables
+
+Para el procesamiento de cada variable se seguirá el siguiente flujo de trabajo:
+
+a. Descriptivo general
+b. Recodificación: de casos perdidos y otros valores (en caso necesario)
+c. Etiquetado: cambio de nombres de variables y valores (en caso necesario)
+d. Otros ajustes
+
+Y se recomienda también un descriptivo final para revisar que el procesamiento de cada variable está ok.
+
+### 4.1 Percepción de meritocracia
+
+En ELSOC, las variables que permiten medir la percepción de las personas con respecto al funcionamiento de la meritocracia en Chile son las siguientes:
+
+* [`c18_09`]: "Grado de acuerdo: Las personas son recompensadas por sus esfuerzos" (1 = Totalmente en desacuerdo; 5 = Totalmente de acuerdo)
+* [`c18_10`]: "Grado de acuerdo: Las personas son recompensadas por su inteligencia" (1 = Totalmente en desacuerdo; 5 = Totalmente de acuerdo)
+
+_a. Descriptivo_
+
+Para los descriptivos se utilizará la función `frq`, de la librería `sjmisc`:
+
+```{r}
+frq(proc_elsoc$c18_09)
+frq(proc_elsoc$c18_10)
+```
+
+En ambas variables vemos valores asociados a la opción "No responde" (-999) y "No sabe" (-888), que corresponde definirlos como casos perdidos (en el caso de R, como casos NA). El resto de los valores y etiquetas se encuentran en orden, así que en la recodificiación solo nos haremos cargo de los casos perdidos.
+
+_b. Recodificación_
+
+Para recodificar utilizamos la función `recode`, de la librería `car`
+
+```{r}
+proc_elsoc$c18_09 <- recode(proc_elsoc$c18_09, "c(-888,-999)=NA")
+proc_elsoc$c18_10 <- recode(proc_elsoc$c18_10, "c(-888,-999)=NA")
+```
+
+_c - Etiquetado_
+
+Vamos a dar un nombre más sustantivo a las variables  con la función `rename`, de la librería `dplyr`:
+
+```{r}
+proc_elsoc <- proc_elsoc %>% rename("mesfuerzo"=c18_09, # meritocracia esfuerzo
+                                    "mtalento" =c18_10) # meritocracia talento
 
 ```
 
-2.  ¿Y cómo lo hacemos? Mediante los **Rproject**. Estos [ya los conocemos](https://descriptiva-facso.netlify.app/content/01-content), y son la raíz de nuestro proyecto que articula o abraza (como un pulpo) los demás componentes.
+Además de cambiar el nombre, queremos cambiar la etiqueta de la variable.
 
-```{r echo=FALSE, warning=FALSE, out.width="75%", fig.align='center'}
-knitr::include_graphics("../files/ipo-rproj.png", error = FALSE)
+```{r}
+get_label(proc_elsoc$mesfuerzo)
+proc_elsoc$mesfuerzo <- set_label(x = proc_elsoc$mesfuerzo,label = "Recompensa: esfuerzo")
 
+get_label(proc_elsoc$mtalento)
+proc_elsoc$mtalento  <- set_label(x = proc_elsoc$mtalento, label = "Recompensa: talento")
 ```
 
-# 2. Escritura abierta (Markdown)
 
-Probablemente, el programa que más se ha utilizado para la escritura sea Microsoft Word, desde pregrado hasta el mundo profesional.
+_d. Otros ajustes_
 
-![](../files/word.png)
+Para este caso vamos a crear una variable que sea el promedio de los dos items de meritocracia.
 
-Aunque útil, este procesador de texto **tiene diversas barreas**, ya sea de *pago/licencias*, problemas de *versionamiento* (difícil saber quién hizo qué) y no permiten *reproducibilidad* (tenemos que copiar y pegar). Aquí entra el **texto plano**.
-
-::: callout-note
-El texto plano:
-
--   es un tipo de texto que se puede leer independiente del lector que use
--   es abierto y gratuito
--   permite combinar texto y análisis en un solo documento *(reproducibilidad)*
--   foco en el contenido, luego el formato
--   distintas opciones de salida (pdf, html, word, etc.)
-:::
-
-[Markdown](https://daringfireball.net/projects/markdown/) es una clase especial de lenguaje que permite darle formato a texto simple con pocas marcas. Por ejemplo, poder hacer cursivas, negritas, incorporar links, etc.
-
-## Formatos básicos de Markdown
-
-+---------------------------------------------------+----------------------+--------------------------------------------------------------------------------+
-| Escribe...                                        | ...o...              | ...para obtener                                                                |
-+===================================================+======================+================================================================================+
-|     Algo de texto en el párrafo.                  |                      | Algo de texto.                                                                 |
-|                                                   |                      |                                                                                |
-|     Más texto                                     |                      | Algo de texto en el párrafo. Siempre utilizando espacios para dividir párrafos |
-|     espacio entre lineas.                         |                      |                                                                                |
-+---------------------------------------------------+----------------------+--------------------------------------------------------------------------------+
-| `` `*Cursivas*` ``                                | `` `_Cursivas_` ``   | *Cursivas*                                                                     |
-+---------------------------------------------------+----------------------+--------------------------------------------------------------------------------+
-| `` `**Negrita**` ``                               | `` `__Negrita__` ``  | **Negrita**                                                                    |
-+---------------------------------------------------+----------------------+--------------------------------------------------------------------------------+
-| `# Título 1`                                      |                      | # Título 1                                                                     |
-+---------------------------------------------------+----------------------+--------------------------------------------------------------------------------+
-| `## Título 2`                                     |                      | ## Título 2                                                                    |
-+---------------------------------------------------+----------------------+--------------------------------------------------------------------------------+
-| `### Título 3`                                    |                      | ### Título 3                                                                   |
-+---------------------------------------------------+----------------------+--------------------------------------------------------------------------------+
-| (puedes llegar hasta un título N° 6 con `######`) |                      |                                                                                |
-+---------------------------------------------------+----------------------+--------------------------------------------------------------------------------+
-| `` `[Link text](http://www.example.com)` ``       |                      | [Link text](http://www.example.com)                                            |
-+---------------------------------------------------+----------------------+--------------------------------------------------------------------------------+
-| `` `![Image caption](/path/to/image.png)` ``      |                      | ![Class logo](/files/img-144.png){alt="Class logo"}                            |
-+---------------------------------------------------+----------------------+--------------------------------------------------------------------------------+
-| \` \`\`\`Inline code\`\`\` \` with backticks      |                      | `Inline code` with backticks                                                   |
-+---------------------------------------------------+----------------------+--------------------------------------------------------------------------------+
-| `> Citas`                                         |                      | > Citas                                                                        |
-+---------------------------------------------------+----------------------+--------------------------------------------------------------------------------+
-|     - Cosas en                                    |     * Cosas en       | -   Cosas en                                                                   |
-|     - listas                                      |     * listas         |                                                                                |
-|     - desordenadas                                |     * desordenadas   | -   listas                                                                     |
-|                                                   |                      |                                                                                |
-|                                                   |                      | -   desordenadas                                                               |
-+---------------------------------------------------+----------------------+--------------------------------------------------------------------------------+
-|     1. Cosas en                                   |     1) Cosas en      | 1.  Cosas en                                                                   |
-|     2. listas                                     |     2) listas        |                                                                                |
-|     3. ordenadas                                  |     3) ordenadas     | 2.  listas                                                                     |
-|                                                   |                      |                                                                                |
-|                                                   |                      | 3.  ordenadas                                                                  |
-+---------------------------------------------------+----------------------+--------------------------------------------------------------------------------+
-|     Línea horizontal                              |     Línea horizontal | Línea horizontal                                                               |
-|                                                   |                      |                                                                                |
-|     ---                                           |     ***              | ------------------------------------------------------------------------       |
-+---------------------------------------------------+----------------------+--------------------------------------------------------------------------------+
-
-# 3. Documentos dinámicos (RMarkdown)
-
-[R Markdown](https://rmarkdown.rstudio.com/) es un lenguaje que combina texto plano (Markdown) y código (R). Al mezclar ambos mundos en un solo documento *.Rmd*, permite la integración simúltanea de texto y análisis (código) a nuestros reportes. Esto es lo que se conoce como **documentos dinámicos**.
-
-Por ejemplo, este sitio web está escrito con `R Markdown`, lo que nos permite demostrar cómo combinar código de `R` (gráficos, tablas y otros resultados) con `texto plano`, *generando documentos reproducibles.*
-
-```{r echo=FALSE, warning=FALSE, out.width="20%", fig.align='center'}
-knitr::include_graphics("../files/rm-logo.png", error = FALSE)
-
+```{r}
+proc_elsoc$pmerit <- (proc_elsoc$mesfuerzo+proc_elsoc$mtalento)/2
+summary(proc_elsoc$pmerit)
 ```
 
-En el ambiente de RStudio, `R Markdown` es una librería de R que provee de una serie de herramientas para generar documentos dinámicos y publicarlos.
-
-¡Veamos cómo se hace!
-
-# 4. Generación de reporte
-
-### Paso 1: Instalar librerías
-
-El primero paso para inciar un documento `R Markdown` en R Studio es instalar (o actualizar según sea el caso) la librería asociada. Al instalarla, también se descargan otras dependencias que permiten trabajar y publicar con `RMarkdown` (como knitr y también tinitex, que permite generación documentos pdf vía Latex).
-
-Pero primero, llamemos a un viejo conocido: el paquete `pacman`.
-
-```{r eval=FALSE, include=TRUE}
-install.packages("pacman") # en caso de no tener pacman instalado
-library(pacman)
+```{r}
+get_label(proc_elsoc$pmerit)
 ```
 
-Ahora, instalemos las librerías para generar nuestro archivo .Rmd
+Vemos que todavía tiene la etiqueta de la variable "Recompensa: esfuerzo"
 
-```{r eval=FALSE, include=TRUE}
-pacman::p_load(rmarkdown,
-               knitr)
+```{r}
+proc_elsoc$pmerit  <- set_label(x = proc_elsoc$pmerit, label = "Meritocracia promedio")
 ```
 
-### Paso 2: Crear un nuevo archivo en Rmarkdown
 
-1.  Una vez cargados los paquetes deben dirigirse a `File > New File > R Markdown`.
+_Revisión final_
 
-2.  Luego deben darle un título, poner su nombre y especificar un formato de salida, ya sea en **HTML**, **PDF** o **Word**.
+Nuevamente un descriptivo de cada variable para confirmar que el procesamiento está ok:
 
-![](../files/rm-jc.gif)
-
-3.  Se creará un archivo con un *YAML* , donde se especifican opciones generales del documento entre tres guiones (---); y un chunk, o trozo de código.
-
-![](../files/YAML.png)
-
-El *YAML* es muy importante, y consta de tres partes mínimas: título, autor y opción de formato de salida. [Hay más opciones](https://bookdown.org/yihui/rmarkdown/) que iremos viendo durante el curso.
-
-4.  Ahora, ya pueden comenzar a escribir sus informes en `RMarkdown`. Veamos otras configuraciones.
-
-### Paso 3: Crear el archivo con formato desde el .Rmd
-
-Para generar el documento, en la salida que especifiquemos, presionamos el botón de `Knitr`. El `Knitear` permite *compilar* el documento *tejiendo o uniendo* el contenido de manera **secuencial**. Combinará el texto plano y el código de R (en chunks) a partir de las instrucciones que le dimos en el *YAML*.
-
-![](../files/knit-button.png)
-
-Al `knitear` el documento, le estamos dando la instrucción a R de que pase este archivo Markdown (.md) por un convertidor universal llamado [pandoc](https://pandoc.org/). En la práctica, este proceso se le conoce como *renderizar*.
-
-![](../files/pandoc.png)
-
-El resultado aparece en el visor (Viewer) de R, o se puede seleccionar otra opción de visualización desde la rueda de configuración al lado del botón `knitr`.
-
-![](../files/render.png)
-
-El documento queda grabado como archivo (ej: probando.html) en el mismo directorio del archivo .Rmd
-
-### Paso 4: Opciones de chunks
-
-La manera en que integramos código de R en un archivo `RMarkdown` es mediante `chunks`, que son *trozos* de código dentro de nuestra hoja. Estos permiten hacer análisis estadísticos dentro del documento visualizando los resultados en el documento final.
-
-Los chunks se ven así dentro del .Rmd:
-
-    `r ''````{r}
-    # El codigo va aquí
-
-    ````
-
-#### 4.1 Añadir Chunks
-
-Hay tres formas de insertar chunks:
-
-1.  Pulsar `⌘⌥I` en macOS o `Control + Alt + I` en Windows
-
-2.  Pulsa el botón "Insert" en la parte superior de la ventana del editor
-
-```{r insert, echo=FALSE, out.width="40%"}
-knitr::include_graphics("../files/insertchunk.png", error = FALSE)
+```{r}
+frq(proc_elsoc$mesfuerzo)
+frq(proc_elsoc$mtalento)
+frq(proc_elsoc$pmerit)
 ```
 
-3.  Escribirlo manualmente (no recomendado)
+<div class="alert alert-info">
+**Sobre generación de índices**: en este caso aplicamos un promedio simple de dos items, pero hay ciertas consideraciones adicionales a tener cuando existen casos perdidos y también cuando son más de 2 items. Para esto, revisar guía sobre [índices y transformación de variables
+](https://multivariada.netlify.app/assignment/11-code/)
+</div>
 
-#### 4.2 Nombrar chunks
 
-Se puede añadir nombres a los chunks para hacer más fácil la navegación por el documento. Si no incluyes un nombre, el chunk seguirá apareciendo, pero no sabrás lo que hace.
 
-```{r chunk-toc, echo=FALSE, out.width="40%"}
-knitr::include_graphics("../files/chunk-toc.png", error = FALSE)
+#### 4.2. Educación
+
+* [`m01`] = ¿Cuál es su nivel educacional? Indique el tipo de estudio actual (si estudia actualmente) o el último tipo aprobado (si no estudia actualmente).
+
+_a. Descriptivo_
+
+```{r}
+frq(proc_elsoc$m01)
 ```
 
-Para añadir un nombre, inclúyelo inmediatamente después de la `{r` en la primera línea del chunk. Los nombres no pueden contener espacios, pero sí guiones bajos y guiones.
+_b. Recodificación_
 
-Importante: **Todos los nombres de chunk de tu documento deben ser únicos.**
+- Datos perdidos:
 
-    `r ''````{r nombre-chunk}
-    # El codigo va aquí
-
-    ````
-
-#### 4.3 Opciones de chunks
-
-Hay distintas opciones diferentes que puedes establecer para cada chunk. Puedes ver una lista completa en la [Guía de referencia de RMarkdown](https://rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf) o en el [sitio web de **knitr**](https://yihui.org/knitr/options/).
-
-Las opciones van dentro de la sección `{r}` del chunk:
-
-    `r ''````{r nombre-chunk, message = F, echo = F}
-    # El codigo va aquí
-
-    ````
-
-Las opciones de chunk más comunes son estas:
-
--   `echo=FALSE`: El código no se muestra en el documento final, pero los resultados si
-
--   `message=FALSE`: Se omiten los mensajes que genera R (como todas las notas que aparecen después de cargar un paquete)
-
--   `warning=FALSE`: Se omiten las advertencias que genera R
-
--   `include=FALSE`: El chunk se sigue ejecutando, pero el código y los resultados no se incluyen en el documento final
-
-Atajos de configuración de chunk: dar clic en el pequeño icono de engranaje en la esquina superior derecha de cualquier chunk:
-
-```{r chunk-options, echo=FALSE, out.width="70%"}
-knitr::include_graphics("../files/chunk-options.png", error = FALSE)
+```{r}
+proc_elsoc$m01 <- recode(proc_elsoc$m01, "c(-888,-999)=NA")
 ```
 
-# Resumen
+- Valores
 
-Hoy aprendimos a generar documentos dinámicos con RMarkdown. En detalle, aprendímos:
+**Recodificación de acuerdo a las categorías [CINE 2011 (UNESCO)](http://uis.unesco.org/sites/default/files/documents/isced-2011-sp.pdf)**
 
-1.  Qué es la reproducibilidad y un flujo de trabajo reproducible
-2.  Qué es escritura abierta con Markdown
-3.  Qué es RMarkdown y cómo generar reportes dinámicos
+```
+1.  Sin	estudios                                = [CINE 0   ] =  1
+2.  Educacion Basica o Preparatoria incompleta  = [CINE 0   ] =  1
+3.  Educacion Basica o Preparatoria completa    = [CINE 1,2 ] =  2
+4.  Educacion Media o Humanidades incompleta    = [CINE 3   ] =  3
+5.  Educacion Media o Humanidades completa      = [CINE 3   ] =  3
+6.  Tecnico Superior incompleta                 = [CINE 5   ] =  4
+7.  Tecnico Superior completa                   = [CINE 5   ] =  4
+8.  Universitaria incompleta                    = [CINE 6   ] =  5
+9.  Universitaria completa                      = [CINE 6   ] =  6
+10. Estudios de posgrado (magister o doctorado) = [CINE 7, 8] =  6
+```
+```{r}
+# recodificacion usando funcion 'recode' de la libreria car
+proc_elsoc$m01 <- car::recode(proc_elsoc$m01, "c(1,2)=1; c(3)=2;c(4,5)=3;c(6,7)=4;c(8,9,10)=5")
+```
 
-# Reporte de progreso
+Comprobar con un nuevo descriptivo:
 
-Completar el reporte de progreso correspondiente a esta práctica [aquí](https://forms.gle/fnoKAgHHtgAkfFiN6). El plazo para contestarlo es hasta el día viernes de la semana en la que se publica la práctica correspondiente.
+```{r}
+frq(proc_elsoc$m01)
+```
+
+Se observa que los valores coinciden con la recodificación (los casos se acumulan entre las categorías 1 y 5), pero las etiquetas ahora no coinciden; se soluciona en el siguiente paso.
+
+
+_c. Etiquetado_
+
+Para re-etiquetar valores usamos la función `set_labels`, de la librería `sjlabelled`
+
+```{r}
+proc_elsoc$m01 <- set_labels(proc_elsoc$m01,
+            labels=c( "Primaria incompleta menos"=1,
+                      "Primaria y secundaria baja"=2,
+                      "Secundaria alta"=3,
+                      "Terciaria ciclo corto"=4,
+                      "Terciaria y Postgrado"=5))
+```
+
+Luego renombramos la variable con un nombre más sustantivo
+
+```{r}
+proc_elsoc <- rename(proc_elsoc,"edcine"=m01)
+```
+
+Además de cambiar el nombre, queremos cambiar la etiqueta de la variable.
+
+```{r}
+get_label(proc_elsoc$edcine)
+proc_elsoc$edcine <- set_label(x = proc_elsoc$edcine,label = "Educación")
+```
+
+
+### 4.3. Estatus subjetivo
+
+_a. Descriptivo_
+
+* [`d01_01`]: "Estatus Social Subjetivo: Donde se ubicaria ud. en la sociedad chilena" (0 = el nivel mas bajo; 10 = el nivel mas alto)
+
+
+```{r, results='hold'}
+frq(proc_elsoc$d01_01)
+summary(proc_elsoc$d01_01)
+```
+
+_b. Recodificación_
+
+```{r}
+proc_elsoc$d01_01 <- recode(proc_elsoc$d01_01, "c(-888,-999)=NA")
+```
+
+_c. Etiquetado_
+
+- Cambio de nombre de variable a etiqueta más sustantiva ess (estatus social subjetivo)
+
+```{r}
+proc_elsoc <- proc_elsoc %>% rename("ess"=d01_01) # estatus social subjetivo
+```
+
+Además de cambiar el nombre, queremos cambiar la etiqueta de la variable.
+
+```{r}
+get_label(proc_elsoc$ess)
+proc_elsoc$ess <- set_label(x = proc_elsoc$ess,label = "Estatus Social Subjetivo")
+```
+
+### 4.4. Sexo
+
+* [`m0_sexo`]	=	Indicar el sexo del entrevistado.
+
+_a. Descriptivo_
+
+```{r}
+frq(proc_elsoc$m0_sexo)
+```
+
+_b. Recodificación_
+
+En general esta variable no tiene problemas de casos perdidos ni de etiquetas, pero de todas maneras vamos a hacer un cambio de acuerdo a convenciones en análisis de datos, donde por lo general hombres tienen valor 0 y mujeres 1:
+
+```{r}
+proc_elsoc$m0_sexo <- car::recode(proc_elsoc$m0_sexo, "1=0;2=1")
+```
+
+_c. Etiquetado_
+
+Y ahora cambiamos las etiquetas de acuerdo a la recodificación anterior:
+
+```{r}
+proc_elsoc$m0_sexo <- set_labels(proc_elsoc$m0_sexo,
+            labels=c( "Hombre"=0,
+                      "Mujer"=1))
+```
+
+
+También el nombre de la variable a algo más simple:
+
+```{r}
+proc_elsoc <- rename(proc_elsoc,"sexo"=m0_sexo)
+```
+
+Además de cambiar el nombre, queremos cambiar la etiqueta de la variable.
+
+```{r}
+get_label(proc_elsoc$sexo)
+proc_elsoc$sexo <- set_label(x = proc_elsoc$sexo,label = "Sexo")
+```
+
+Revisar con un nuevo descriptivo:
+
+```{r}
+frq(proc_elsoc$sexo)
+```
+
+### 4.5 Edad
+
+* [`m0_edad`]	=	¿Cuáles su edad? (años cumplidos).
+
+
+_a. Descriptivo_
+
+```{r}
+frq(proc_elsoc$m0_edad)
+```
+
+_b. Recodificación_: no es necesario en este caso
+
+_c. Etiquetado_
+
+Cambio del nombre de la variable a algo más simple:
+
+```{r}
+proc_elsoc <- rename(proc_elsoc,"edad"=m0_edad)
+```
+
+Además de cambiar el nombre, queremos cambiar la etiqueta de la variable.
+
+```{r}
+get_label(proc_elsoc$edad)
+proc_elsoc$edad <- set_label(x = proc_elsoc$edad,label = "Edad")
+```
+
+<br>
+
+<div class="alert alert-info">
+**Recodificación de variables y casos perdidos de un conjunto de variables**:
+<br>
+
+- Recodificación
+
+Ejemplo: queremos recodificar un conjunto de variables que están medidas en la misma escala (ej: likert 1 a 5 muy en desacuerdo a muy de acuerdo) y pasarlas a dos categorías, donde 1 a 3 es bajo y 4 a 5 es alto:
+
+```
+data_cohes <-  data_cohes %>% select(var1:var5) %>%
+  rec(rec = "1,2,3=1; 4,5=2",
+  val.labels = c("bajo", "alto"))
+```
+
+En este caso se generarán en la misma base nuevas variables dicotomizadas con el mismo nombre más un sufijo `_r`. Si alternativamente se quiere reemplazar la variable recodificada en la misma variable (no recomendado) entonces agregar la opción `suffix = ""`
+
+- Casos perdidos
+
+Es muy común que una base de datos defina un mismo valor(es) para los casos perdidos, como por ejemplo -99. Para esto se puede utilizar la función `set_na`, por ejemplo :
+
+```
+data_cohes <- data_cohes %>%
+  set_na(pcohes01:pcohes12, na = c(-9:-1)) 
+```
+
+donde pcohes01:pcohes12 establece el rango de variables en la base a ser recodificados, y en `na=` se establecen los valores que pasan a NA.
+</div>
+
+
+
+## 5. Generación de base de datos procesada para el análisis
+
+Antes de guardar la base procesada, revisamos nuevamente todas las variables con una tabla descriptiva general mediante la función `stargazer` (de la librería homónima)
+
+Primero vamos a reformatear el objeto proc_elsoc como base de datos (as.data.frame), paso necesario para que sea reconocido como tal por `stargazer`
+
+
+```{r}
+proc_elsoc <-as.data.frame(proc_elsoc)
+stargazer(proc_elsoc, type="text")
+```
+
+Si se desea modificar las columnas que aparecen en la tabla se puede ocupar la opción `summary.stat`, donde se pueden especificar:
+
+- "max" maximum
+- "mean" mean
+- "median" median
+- "min" minimum
+- "n" number of observations
+- "p25" 25th percentile
+- "p75" 75th percentile
+- "sd" standard deviation
+
+Por ejemplo, si quiero una tabla solo con promedio, n, sd y p75: `stargazer(data, type="text", summary.stat = c("mean", "n", "sd", "p75"))`
+
+</div>
+
+- Guardar base de datos procesada: en carpeta local <span class="sidenote">La ruta hacia su carpeta local si está trabajando en windows debería ser algo como "C:/Users/Lenovo/Clases/y aquí nombre del archivo a grabar</span>
+
+El comando para guardar es `save`:
+
+```{r eval=FALSE}
+save(proc_elsoc,file = "[ruta hacia carpeta local en su computador]/ELSOC_ess_merit2016.RData")
+```
+
+En este caso, seguimos una estructura de carpetas de datos, separando en una carpeta los datos originales, y en otra (proc) los datos procesados:
+
+
+```{r eval=FALSE}
+save(proc_elsoc,file = "assignment/data/proc/ELSOC_ess_merit2016.RData")
+```
+
+<div class="alert alert-info">
+**De rutas, estructura de carpetas y otros **
+
+- **Encontrando la ruta a carpeta local**: lo más fácil es crear la carpeta donde se desean guardar los datos desde el administrador de archivos del computador. Luego, posicionarse con el cursor sobre la carpeta y seleccionar "Propiedades", en la ventana emergente debería aparecer la ruta hacia la carpeta en "Ubicación". Copiar esa ruta y agregar al final el nombre de la carpeta (separada por slash)
+
+- **Sobre los "slashes" (`\` o `/`)**: en la ruta las carpetas y el archivo final aparecen separados por slashes, que según el sistema utilizado pueden ser _slash_ (`/`) o _backslash_ (`\`). En R por defecto se usa _slash_, pero en Windows _backslash_, por lo que si se usa Windows hay que reemplazarlos por _backslash_ o también puede ser por un doble _slash_ (`//`).
+
+- Por temas de compatibilidad general, en las rutas se recomienda evitar tildes, eñes, espacios, mayúsculas y guiones bajos (_).
+
+- **Estructura de carpetas**: para mantener el orden se sugiere seguir un protocolo de estructura de carpetas de proyecto, para lo que recomendamos el protocolo [IPO](https://lisa-coes.com/ipo-protocol/), y que se adapta al flujo de trabajo presentado al principio de este práctico. Básicamente son tres carpetas: **input**, **procesamiento**, **output**. En la carpeta input crear la subcarpeta data-orig para guardar datos originales, y data-proc para los procesados. En procesamiento se guardan los archivos de código y en output las tablas y los gráficos.
+
+
+</div>
+
+
+# Archivo de código
+
+El archivo de código R de esta práctica se puede descargar [aquí](https://raw.githubusercontent.com/juancarloscastillo/multivariada/master/static/assignment/practica_1.R)
+
 
 # Foro
 
 <script src="https://giscus.app/client.js"
-        data-repo="cursos-metodos-facso/correlacional"
-        data-repo-id="R_kgDOKCMXJQ"
+        data-repo="cursos-metodos-facso/multinivel"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyMDA3MTE2MDk="
         data-category="Q&A"
-        data-category-id="DIC_kwDOKCMXJc4CYd9S"
+        data-category-id="DIC_kwDOC_aduc4CYhjI"
         data-mapping="title"
         data-strict="0"
         data-reactions-enabled="1"
@@ -276,4 +545,6 @@ Completar el reporte de progreso correspondiente a esta práctica [aquí](https:
         crossorigin="anonymous"
         async>
 </script>
+
+
 

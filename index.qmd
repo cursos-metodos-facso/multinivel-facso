@@ -1,8 +1,8 @@
 ---
-title: "Estadística Correlacional"
-subtitle: "Asociación, inferencia y reporte"
+title: "Modelos Multinivel"
+subtitle: "Unidades en contexto"
 details: |
-  SOC01019 • Segundo Semestre 2023<br>Departamento de Sociología, Facultad de Ciencias Sociales<br>Universidad de Chile
+  SOC01133/MCS7157 • Segundo Semestre 2023<br>Departamento de Sociología, Facultad de Ciencias Sociales<br>Universidad de Chile
 sidebar: false
 toc: false
 page-layout: full
@@ -10,7 +10,7 @@ format:
   html:
     template-partials:
       - html/home/title-block.html
-course-logo: /files/logo-correlacional.png
+course-logo: /files/img/logo.png
 ---
 
 ```{r set-dependencies, include=FALSE}
@@ -27,23 +27,13 @@ withr::with_dir(here::here(), {
 ::: {.grid .course-details}
 
 ::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
-### Equipo docente
-
-**Profesor**
+### Profesor
 
 - {{< fa user >}} &nbsp; [{{< var instructor.name >}}]({{< var instructor.url >}})
 - {{< fa university >}} &nbsp; {{< var instructor.office >}}
 - {{< fa envelope >}} &nbsp; <a href="mailto:{{< var instructor.email >}}">{{< var instructor.email >}}</a>
 - {{< fa calendar-check >}} &nbsp; [Agendar reunión]({{< var instructor.appointment_url >}})
 
-**Apoyos docentes**
-
-- {{< fa user >}} &nbsp; Daniela Olivares
-- {{< fa envelope >}} &nbsp; <a href="mailto:{{< var other2.email >}}">{{< var other2.email >}}</a>
-- {{< fa calendar-check >}} &nbsp; [Agendar reunión]({{< var other2.appointment_url >}})
-- {{< fa user >}} &nbsp; Andreas Laffert
-- {{< fa envelope >}} &nbsp; <a href="mailto:{{< var other.email >}}">{{< var other.email >}}</a>
-- {{< fa calendar-check >}} &nbsp; [Agendar reunión]({{< var other.appointment_url >}})
 
 
 :::
@@ -51,9 +41,7 @@ withr::with_dir(here::here(), {
 ::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
 ### Actividades
 
-- {{< fa university >}} &nbsp; **Lunes 8:30-10:00** - Aulario A/7-8
-
-- {{< fa computer >}} &nbsp; **Martes 10:15-11:45** Online / Laboratorio computación 2
+- {{< fa university >}} &nbsp; **Viernes 10:15-11:45** - Sala 44 FACSO
 
 :::
 
