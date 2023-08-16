@@ -236,6 +236,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#generación-de-base-de-datos-procesada-para-el-análisis" id="toc-generación-de-base-de-datos-procesada-para-el-análisis" class="nav-link" data-scroll-target="#generación-de-base-de-datos-procesada-para-el-análisis">5. Generación de base de datos procesada para el análisis</a></li>
   </ul></li>
   <li><a href="#archivo-de-código" id="toc-archivo-de-código" class="nav-link" data-scroll-target="#archivo-de-código">Archivo de código</a></li>
+  <li><a href="#bonus-track-flujo-de-trabajo-reproducible" id="toc-bonus-track-flujo-de-trabajo-reproducible" class="nav-link" data-scroll-target="#bonus-track-flujo-de-trabajo-reproducible">Bonus track: flujo de trabajo reproducible</a>
+  <ul class="collapse">
+  <li><a href="#video" id="toc-video" class="nav-link" data-scroll-target="#video">Video</a></li>
+  </ul></li>
   <li><a href="#foro" id="toc-foro" class="nav-link" data-scroll-target="#foro">Foro</a></li>
   </ul>
 </nav>
@@ -247,7 +251,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1 class="title display-7">Práctica 1. Preparación de datos en R</h1>
 
 <div class="date-block bg-assignment text-white p-2">
-  <p class="date">Completar hasta as 11:59 PM del viernes, 18 de agosto de 2023</p>
+  <p class="date">Correspondiente a la sesión del viernes, 18 de agosto de 2023</p>
 </div>
 </header>
 
@@ -255,7 +259,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Presentación</h1>
 <section id="objetivo-de-la-práctica" class="level2">
 <h2 class="anchored" data-anchor-id="objetivo-de-la-práctica">Objetivo de la práctica</h2>
-<p>El desarrollo de esta guía tiene por objetivo revisar algunos procedimientos básicos de la preparación de datos con R, que son necesarios para luego poder aplicar los contenidos más específicos de este curso.</p>
+<p>El desarrollo de esta guía tiene por objetivo revisar algunos procedimientos básicos de la preparación de datos con R, que son necesarios para luego poder aplicar los contenidos más específicos de este curso. Originalmente fue desarrollado para el curso de Estadística Multivariada, disponible <a href="https://multivariada.netlify.app/assignment/01-code/">aquí</a></p>
 <p>Por temas de orden y reproducibilidad, en este curso vamos a separar en <strong>dos momentos</strong> el trabajo con datos, y dos archivos de código correspondientes:</p>
 <ul>
 <li><p><strong>Preparación</strong> corresponde a lo que se conoce generalmente como “limpieza”, es decir, realizar las modificaciones necesarias para poder efectuar los análisis. Estas modificaciones previas al análisis son necesarias ya que los datos originales con los que se va a trabajar en general no vienen perfectamente adaptados a los análisis que se quieren hacer. Por lo tanto, en cuanto a datos también hacemos la distinción entre datos originales y datos preparados (o procesados).</p></li>
@@ -264,7 +268,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="flujo" class="level4">
 <h4 class="anchored" data-anchor-id="flujo">Los procesos de preparación y análisis vinculados a datos y resultados se presentan en el siguiente esquema:</h4>
 <p><img src="../files/img/produccion.png" class="img-fluid"></p>
-<p>Tanto la preparación como el análisis (que son parte del concepto más general de procesamiento) quedan registrados cada en un <em>archivo de código</em>. Los detalles de este tipo de archivos se pueden revisar <a href="../class/#codigoR">aquí</a>. <span class="sidenote"><strong>Archivo de código R</strong>: archivo con extensión .R donde se almacena el código de análisis. Para generarlo desde RStudio: <em>File &gt; New File &gt; R Script</em> (o ctrl+shift+N), y para grabarlo <em>File &gt; Save (o ctrl+s)</em>, y darle nombre la primera vez (recordar: sin tilde ni ñ, y evitar espacios) </span></p>
+<p>Tanto la preparación como el análisis (que son parte del concepto más general de procesamiento) quedan registrados cada en un <em>archivo de código</em>. Los detalles de este tipo de archivos se pueden revisar <a href="../assignment/#codigoR">aquí</a>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<strong>Archivo de código R</strong>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Archivo con extensión .R donde se almacena el código de análisis. Para generarlo desde RStudio: <em>File &gt; New File &gt; R Script</em> (o ctrl+shift+N), y para grabarlo <em>File &gt; Save (o ctrl+s)</em>, y darle nombre la primera vez (recordar: sin tilde ni ñ, y evitar espacios)</p>
+</div>
+</div>
 <p>El documento de <strong>código de preparación</strong> posee 5 partes, más una sección de identificación inicial:</p>
 <ol start="0" type="1">
 <li>Identificación y descripción general: Título, autor(es), fecha, información breve sobre el contenido del documento</li>
@@ -295,50 +312,68 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Preparación de datos ELSOC 2016</h1>
 <section id="librerias" class="level2">
 <h2 class="anchored" data-anchor-id="librerias">1. Librerías principales (de R) a utilizar en el análisis</h2>
-<p>Como sabemos, la lógica de R es instalar librerías (solo 1 vez, con <code>install.packages("librería")</code>), y luego cargarlas cada vez que es necesario usarlas (con <code>library(librería)</code>). El problema de esto es que a veces no se sabe claramente qué librerías están instaladas y cuales no, lo que va a arrojar error al cargarlas. Y, como sucede en R, existe una librería para solucionar este problema que se llama <code>pacman</code> (package manager). Lo que hace <code>pacman</code> es cargar la librería, y si no está instalada, la instala y la carga:</p>
+<p>Como sabemos, la lógica de R es instalar librerías (solo 1 vez, con <code>install.packages("librería")</code>), y luego cargarlas cada vez que es necesario usarlas (con <code>library(librería)</code>). El problema de esto es que a veces no se sabe claramente qué librerías están instaladas y cuales no, lo que va a arrojar error al cargarlas. Y, como sucede en R, existe una librería para solucionar este problema que se llama <code>pacman</code> (package manager). Lo que hace <code>pacman</code> es cargar la librería, y si no está instalada, la instala y la carga.</p>
 <p>Para utilizar la primera vez (si es que no está instalada):</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"pacman"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Y en adelante, las librerías se cargan así <span class="sidenote"> pacman::p_load(libreria1,libreria2,libreriaX) </span>:</p>
+<p>Y en adelante, las librerías se cargan así:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(dplyr, sjmisc, car, sjlabelled, stargazer)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a> pacman<span class="sc">::</span><span class="fu">p_load</span>(libreria1,libreria2,libreriaX)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Para esta sesión vamos a utilizar Las librerías que vamos a utilizar son:</p>
 <ul>
 <li><code>dplyr</code>: ajuste general de datos</li>
 <li><code>sjmisc</code>: descripción y exploración de base de datos</li>
 <li><code>car</code>: principalmente la función <code>recode</code> para recodificar/agrupar valores de variable</li>
+<li><code>sjlabelled</code>: para funciones específicas con datos etiquetados</li>
 <li><code>stargazer</code>: para tabla descriptiva</li>
+<li><code>haven</code>: para abrir bases de datos en distintos formatos</li>
 </ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(dplyr, sjmisc, car, sjlabelled, stargazer)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="cargar-base-de-datos" class="level2">
 <h2 class="anchored" data-anchor-id="cargar-base-de-datos">2. Cargar base de datos</h2>
 <p><strong>Ajustar espacio de trabajo</strong></p>
 <p>Previo a la carga de nuestra base de datos, se recomienda ejecutar los siguientes comandos:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())       <span class="co"># borrar todos los objetos en el espacio de trabajo</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen=</span><span class="dv">999</span>) <span class="co"># valores sin notación científica</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())       <span class="co"># borrar todos los objetos en el espacio de trabajo</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen=</span><span class="dv">999</span>) <span class="co"># valores sin notación científica</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>La función <code>rm(list=ls())</code> permite comenzar con un espacio de trabajo (environment) vacío y sin otros objetos. Así también, la función <code>options(scipen=999)</code> desactiva la notación científica, es decir, veremos los valores numéricos con todos sus decimales.</p>
 <p><strong>Datos</strong></p>
-<p>Las bases de datos se pueden cargar de un archivo local o en línea. Para este caso utilizaremos un archivo en línea que viene en formato RData: <strong>ELSOC_W01_v3.10.RData</strong>. <span class="sidenote"><strong>Abrir bases de datos en otros formatos</strong>: Los formatos mas comunes en que se almacenan las bases de datos son .dta (Stata) y .sav (Spss). Para abrir desde R utlilizamos la librería <code>haven</code> y sus funciones read_dta y read_sav según corresponda. Ej: <code>datos &lt;- read_dta("base_casen.dta")</code>. Recordar antes instalar/cargar la librería: <code>pacman::p_load(haven)</code> </span></p>
+<p>Las bases de datos se pueden cargar de un archivo local o en línea. Para este caso utilizaremos un archivo en línea que viene en formato RData: <strong>ELSOC_W01_v3.10.RData</strong>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Abrir bases de datos en otros formatos**
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Los formatos mas comunes en que se almacenan las bases de datos son .dta (Stata) y .sav (Spss). Para abrir desde R utlilizamos la librería <code>haven</code> y sus funciones read_dta y read_sav según corresponda. Ej: <code>datos &lt;- read_dta("base_casen.dta")</code>. Recordar antes instalar/cargar la librería: <code>pacman::p_load(haven)</code></p>
+</div>
+</div>
+<p>Cargamos la base de datos desde internet</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#cargamos la base de datos desde internet</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">"https://multivariada.netlify.com/assignment/data/original/ELSOC_W01_v3.10.RData"</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">"https://multivariada.netlify.com/assignment/data/original/ELSOC_W01_v3.10.RData"</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>La base de datos aparece como un objeto en nuestro espacio de trabajo, con el nombre original con la que fue guardada (elsoc_2016):</p>
 <p><img src="../files/img/basecargada.png" class="img-fluid"></p>
 <p>Realizamos un chequeo básico de la lectura de datos: nombres de las variables y tamaño de la base en términos de casos y variables (en este ejemplo, 2927 casos y 383 variables).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(elsoc_2016) <span class="co"># dimension de la base</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(elsoc_2016) <span class="co"># dimension de la base</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2927  383</code></pre>
 </div>
 </div>
 <p>Y si se quiere revisar en formato de planilla de datos:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(elsoc_2016)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(elsoc_2016)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="selección-de-variables-a-utilizar" class="level2">
@@ -348,7 +383,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Se identifica el nombre de las variables que registran la información de preguntas o items del instrumento: esto aparece en el libro de códigos y/o en el cuestionario, o también se puede hacer buscando en la base de datos mediante alguna palabra clave asociada a la pregunta. Por ejemplo, si queremos buscar variables asociadas a educación, utilizamos la función <code>find_var</code> (de <code>sjmisc</code>, librería que cargamos en el paso 1), que nos entrega nombre de la variable en columna var.name. Por ejemplo, si buscamos alguna variable asociada al concepto <em>esfuerzo</em>:</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">find_var</span>(<span class="at">data =</span> elsoc_2016,<span class="st">"esfuerzo"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">find_var</span>(<span class="at">data =</span> elsoc_2016,<span class="st">"esfuerzo"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  col.nr var.name
 1    158   c18_09
@@ -359,22 +394,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Nos informa que esta variable es la <code>c18_09</code>.</p>
 <p>Mediante la función <code>select</code> de <code>dplyr</code>, seleccionamos cada una de nuestras variables de interés y creamos una nueva base con el nombre <code>proc_elsoc</code>, donde “proc” hace referencia a base procesada:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc <span class="ot">&lt;-</span> elsoc_2016 <span class="sc">%&gt;%</span> <span class="fu">select</span>(c18_09, <span class="co"># percepción meritocracia esfuerzo</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                          c18_10, <span class="co"># percepción meritocracia talento</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                          d01_01, <span class="co"># estatus social subjetivo</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                          m01,    <span class="co"># nivel educacional</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                          m0_sexo,<span class="co"># sexo</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                          m0_edad)<span class="co"># edad</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Comprobar</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(proc_elsoc)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc <span class="ot">&lt;-</span> elsoc_2016 <span class="sc">%&gt;%</span> <span class="fu">select</span>(c18_09, <span class="co"># percepción meritocracia esfuerzo</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                          c18_10, <span class="co"># percepción meritocracia talento</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                          d01_01, <span class="co"># estatus social subjetivo</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                          m01,    <span class="co"># nivel educacional</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                          m0_sexo,<span class="co"># sexo</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>                          m0_edad)<span class="co"># edad</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Comprobar</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(proc_elsoc)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "c18_09"  "c18_10"  "d01_01"  "m01"     "m0_sexo" "m0_edad"</code></pre>
 </div>
 </div>
 <p>Mediante el comando <code>get_label</code> obtenemos el atributo label de las variables.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>sjlabelled<span class="sc">::</span><span class="fu">get_label</span>(proc_elsoc)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>sjlabelled<span class="sc">::</span><span class="fu">get_label</span>(proc_elsoc)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                                                                  c18_09 
     "Grado de acuerdo: Las personas son recompensadas por sus esfuerzos" 
@@ -412,7 +447,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><em>a. Descriptivo</em></p>
 <p>Para los descriptivos se utilizará la función <code>frq</code>, de la librería <code>sjmisc</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>c18_09)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>c18_09)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Grado de acuerdo: Las personas son recompensadas por sus esfuerzos (x) &lt;numeric&gt; 
 # total N=2927 valid N=2927 mean=-3.06 sd=71.66
@@ -428,7 +463,7 @@ Value |                          Label |    N | Raw % | Valid % | Cum. %
     5 |          Totalmente de acuerdo |   78 |  2.66 |    2.66 | 100.00
  &lt;NA&gt; |                           &lt;NA&gt; |    0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>c18_10)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>c18_10)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Grado de acuerdo: Las personas son recompensada por su inteligencia (x) &lt;numeric&gt; 
 # total N=2927 valid N=2927 mean=-3.42 sd=74.36
@@ -449,53 +484,53 @@ Value |                          Label |    N | Raw % | Valid % | Cum. %
 <p><em>b. Recodificación</em></p>
 <p>Para recodificar utilizamos la función <code>recode</code>, de la librería <code>car</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>c18_09 <span class="ot">&lt;-</span> <span class="fu">recode</span>(proc_elsoc<span class="sc">$</span>c18_09, <span class="st">"c(-888,-999)=NA"</span>)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>c18_10 <span class="ot">&lt;-</span> <span class="fu">recode</span>(proc_elsoc<span class="sc">$</span>c18_10, <span class="st">"c(-888,-999)=NA"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>c18_09 <span class="ot">&lt;-</span> <span class="fu">recode</span>(proc_elsoc<span class="sc">$</span>c18_09, <span class="st">"c(-888,-999)=NA"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>c18_10 <span class="ot">&lt;-</span> <span class="fu">recode</span>(proc_elsoc<span class="sc">$</span>c18_10, <span class="st">"c(-888,-999)=NA"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><em>c - Etiquetado</em></p>
 <p>Vamos a dar un nombre más sustantivo a las variables con la función <code>rename</code>, de la librería <code>dplyr</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc <span class="ot">&lt;-</span> proc_elsoc <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="st">"mesfuerzo"</span><span class="ot">=</span>c18_09, <span class="co"># meritocracia esfuerzo</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"mtalento"</span> <span class="ot">=</span>c18_10) <span class="co"># meritocracia talento</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc <span class="ot">&lt;-</span> proc_elsoc <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="st">"mesfuerzo"</span><span class="ot">=</span>c18_09, <span class="co"># meritocracia esfuerzo</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"mtalento"</span> <span class="ot">=</span>c18_10) <span class="co"># meritocracia talento</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Además de cambiar el nombre, queremos cambiar la etiqueta de la variable.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_label</span>(proc_elsoc<span class="sc">$</span>mesfuerzo)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_label</span>(proc_elsoc<span class="sc">$</span>mesfuerzo)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Grado de acuerdo: Las personas son recompensadas por sus esfuerzos"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>mesfuerzo <span class="ot">&lt;-</span> <span class="fu">set_label</span>(<span class="at">x =</span> proc_elsoc<span class="sc">$</span>mesfuerzo,<span class="at">label =</span> <span class="st">"Recompensa: esfuerzo"</span>)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">get_label</span>(proc_elsoc<span class="sc">$</span>mtalento)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>mesfuerzo <span class="ot">&lt;-</span> <span class="fu">set_label</span>(<span class="at">x =</span> proc_elsoc<span class="sc">$</span>mesfuerzo,<span class="at">label =</span> <span class="st">"Recompensa: esfuerzo"</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">get_label</span>(proc_elsoc<span class="sc">$</span>mtalento)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Grado de acuerdo: Las personas son recompensada por su inteligencia"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>mtalento  <span class="ot">&lt;-</span> <span class="fu">set_label</span>(<span class="at">x =</span> proc_elsoc<span class="sc">$</span>mtalento, <span class="at">label =</span> <span class="st">"Recompensa: talento"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>mtalento  <span class="ot">&lt;-</span> <span class="fu">set_label</span>(<span class="at">x =</span> proc_elsoc<span class="sc">$</span>mtalento, <span class="at">label =</span> <span class="st">"Recompensa: talento"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><em>d.&nbsp;Otros ajustes</em></p>
 <p>Para este caso vamos a crear una variable que sea el promedio de los dos items de meritocracia.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>pmerit <span class="ot">&lt;-</span> (proc_elsoc<span class="sc">$</span>mesfuerzo<span class="sc">+</span>proc_elsoc<span class="sc">$</span>mtalento)<span class="sc">/</span><span class="dv">2</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(proc_elsoc<span class="sc">$</span>pmerit)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>pmerit <span class="ot">&lt;-</span> (proc_elsoc<span class="sc">$</span>mesfuerzo<span class="sc">+</span>proc_elsoc<span class="sc">$</span>mtalento)<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(proc_elsoc<span class="sc">$</span>pmerit)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
   1.000   2.000   2.500   2.654   3.500   5.000      29 </code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_label</span>(proc_elsoc<span class="sc">$</span>pmerit)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_label</span>(proc_elsoc<span class="sc">$</span>pmerit)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Recompensa: esfuerzo"</code></pre>
 </div>
 </div>
 <p>Vemos que todavía tiene la etiqueta de la variable “Recompensa: esfuerzo”</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>pmerit  <span class="ot">&lt;-</span> <span class="fu">set_label</span>(<span class="at">x =</span> proc_elsoc<span class="sc">$</span>pmerit, <span class="at">label =</span> <span class="st">"Meritocracia promedio"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>pmerit  <span class="ot">&lt;-</span> <span class="fu">set_label</span>(<span class="at">x =</span> proc_elsoc<span class="sc">$</span>pmerit, <span class="at">label =</span> <span class="st">"Meritocracia promedio"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><em>Revisión final</em></p>
 <p>Nuevamente un descriptivo de cada variable para confirmar que el procesamiento está ok:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>mesfuerzo)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>mesfuerzo)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Recompensa: esfuerzo (x) &lt;numeric&gt; 
 # total N=2927 valid N=2909 mean=2.57 sd=1.05
@@ -511,7 +546,7 @@ Value |                          Label |    N | Raw % | Valid % | Cum. %
     5 |          Totalmente de acuerdo |   78 |  2.66 |    2.68 | 100.00
  &lt;NA&gt; |                           &lt;NA&gt; |   18 |  0.61 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>mtalento)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>mtalento)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Recompensa: talento (x) &lt;numeric&gt; 
 # total N=2927 valid N=2907 mean=2.74 sd=1.06
@@ -527,7 +562,7 @@ Value |                          Label |    N | Raw % | Valid % | Cum. %
     5 |          Totalmente de acuerdo |   83 |  2.84 |    2.86 | 100.00
  &lt;NA&gt; |                           &lt;NA&gt; |   20 |  0.68 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>pmerit)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>pmerit)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Meritocracia promedio (x) &lt;numeric&gt; 
 # total N=2927 valid N=2898 mean=2.65 sd=0.97
@@ -558,7 +593,7 @@ Value |                          Label |    N | Raw % | Valid % | Cum. %
 </ul>
 <p><em>a. Descriptivo</em></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>m01)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>m01)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Nivel educacional (x) &lt;numeric&gt; 
 # total N=2927 valid N=2927 mean=4.57 sd=26.34
@@ -585,7 +620,7 @@ Value |                                       Label |   N | Raw % | Valid % | Cu
 <li>Datos perdidos:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>m01 <span class="ot">&lt;-</span> <span class="fu">recode</span>(proc_elsoc<span class="sc">$</span>m01, <span class="st">"c(-888,-999)=NA"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>m01 <span class="ot">&lt;-</span> <span class="fu">recode</span>(proc_elsoc<span class="sc">$</span>m01, <span class="st">"c(-888,-999)=NA"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Valores</li>
@@ -602,12 +637,12 @@ Value |                                       Label |   N | Raw % | Valid % | Cu
 9.  Universitaria completa                      = [CINE 6   ] =  6
 10. Estudios de posgrado (magister o doctorado) = [CINE 7, 8] =  6</code></pre>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># recodificacion usando funcion 'recode' de la libreria car</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>m01 <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">recode</span>(proc_elsoc<span class="sc">$</span>m01, <span class="st">"c(1,2)=1; c(3)=2;c(4,5)=3;c(6,7)=4;c(8,9,10)=5"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># recodificacion usando funcion 'recode' de la libreria car</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>m01 <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">recode</span>(proc_elsoc<span class="sc">$</span>m01, <span class="st">"c(1,2)=1; c(3)=2;c(4,5)=3;c(6,7)=4;c(8,9,10)=5"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Comprobar con un nuevo descriptivo:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>m01)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>m01)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Nivel educacional (x) &lt;numeric&gt; 
 # total N=2927 valid N=2925 mean=3.18 sd=1.21
@@ -633,24 +668,24 @@ Value |                                       Label |    N | Raw % | Valid % | C
 <p><em>c.&nbsp;Etiquetado</em></p>
 <p>Para re-etiquetar valores usamos la función <code>set_labels</code>, de la librería <code>sjlabelled</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>m01 <span class="ot">&lt;-</span> <span class="fu">set_labels</span>(proc_elsoc<span class="sc">$</span>m01,</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">labels=</span><span class="fu">c</span>( <span class="st">"Primaria incompleta menos"</span><span class="ot">=</span><span class="dv">1</span>,</span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Primaria y secundaria baja"</span><span class="ot">=</span><span class="dv">2</span>,</span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Secundaria alta"</span><span class="ot">=</span><span class="dv">3</span>,</span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Terciaria ciclo corto"</span><span class="ot">=</span><span class="dv">4</span>,</span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Terciaria y Postgrado"</span><span class="ot">=</span><span class="dv">5</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>m01 <span class="ot">&lt;-</span> <span class="fu">set_labels</span>(proc_elsoc<span class="sc">$</span>m01,</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">labels=</span><span class="fu">c</span>( <span class="st">"Primaria incompleta menos"</span><span class="ot">=</span><span class="dv">1</span>,</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Primaria y secundaria baja"</span><span class="ot">=</span><span class="dv">2</span>,</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Secundaria alta"</span><span class="ot">=</span><span class="dv">3</span>,</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Terciaria ciclo corto"</span><span class="ot">=</span><span class="dv">4</span>,</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Terciaria y Postgrado"</span><span class="ot">=</span><span class="dv">5</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Luego renombramos la variable con un nombre más sustantivo</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc <span class="ot">&lt;-</span> <span class="fu">rename</span>(proc_elsoc,<span class="st">"edcine"</span><span class="ot">=</span>m01)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc <span class="ot">&lt;-</span> <span class="fu">rename</span>(proc_elsoc,<span class="st">"edcine"</span><span class="ot">=</span>m01)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Además de cambiar el nombre, queremos cambiar la etiqueta de la variable.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_label</span>(proc_elsoc<span class="sc">$</span>edcine)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_label</span>(proc_elsoc<span class="sc">$</span>edcine)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Nivel educacional"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>edcine <span class="ot">&lt;-</span> <span class="fu">set_label</span>(<span class="at">x =</span> proc_elsoc<span class="sc">$</span>edcine,<span class="at">label =</span> <span class="st">"Educación"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>edcine <span class="ot">&lt;-</span> <span class="fu">set_label</span>(<span class="at">x =</span> proc_elsoc<span class="sc">$</span>edcine,<span class="at">label =</span> <span class="st">"Educación"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -661,8 +696,8 @@ Value |                                       Label |    N | Raw % | Valid % | C
 <li>[<code>d01_01</code>]: “Estatus Social Subjetivo: Donde se ubicaria ud. en la sociedad chilena” (0 = el nivel mas bajo; 10 = el nivel mas alto)</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>d01_01)</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(proc_elsoc<span class="sc">$</span>d01_01)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>d01_01)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(proc_elsoc<span class="sc">$</span>d01_01)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Estatus Social Subjetivo: Donde se ubicaria ud. en la sociedad chilena (x) &lt;numeric&gt; 
 # total N=2927 valid N=2927 mean=0.63 sd=57.67
@@ -689,22 +724,22 @@ Value |                 Label |   N | Raw % | Valid % | Cum. %
 </div>
 <p><em>b. Recodificación</em></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>d01_01 <span class="ot">&lt;-</span> <span class="fu">recode</span>(proc_elsoc<span class="sc">$</span>d01_01, <span class="st">"c(-888,-999)=NA"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>d01_01 <span class="ot">&lt;-</span> <span class="fu">recode</span>(proc_elsoc<span class="sc">$</span>d01_01, <span class="st">"c(-888,-999)=NA"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><em>c.&nbsp;Etiquetado</em></p>
 <ul>
 <li>Cambio de nombre de variable a etiqueta más sustantiva ess (estatus social subjetivo)</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc <span class="ot">&lt;-</span> proc_elsoc <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="st">"ess"</span><span class="ot">=</span>d01_01) <span class="co"># estatus social subjetivo</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc <span class="ot">&lt;-</span> proc_elsoc <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="st">"ess"</span><span class="ot">=</span>d01_01) <span class="co"># estatus social subjetivo</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Además de cambiar el nombre, queremos cambiar la etiqueta de la variable.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_label</span>(proc_elsoc<span class="sc">$</span>ess)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_label</span>(proc_elsoc<span class="sc">$</span>ess)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Estatus Social Subjetivo: Donde se ubicaria ud. en la sociedad chilena"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>ess <span class="ot">&lt;-</span> <span class="fu">set_label</span>(<span class="at">x =</span> proc_elsoc<span class="sc">$</span>ess,<span class="at">label =</span> <span class="st">"Estatus Social Subjetivo"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>ess <span class="ot">&lt;-</span> <span class="fu">set_label</span>(<span class="at">x =</span> proc_elsoc<span class="sc">$</span>ess,<span class="at">label =</span> <span class="st">"Estatus Social Subjetivo"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="sexo" class="level3">
@@ -714,7 +749,7 @@ Value |                 Label |   N | Raw % | Valid % | Cum. %
 </ul>
 <p><em>a. Descriptivo</em></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>m0_sexo)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>m0_sexo)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Sexo del entrevistado (x) &lt;numeric&gt; 
 # total N=2927 valid N=2927 mean=1.60 sd=0.49
@@ -729,30 +764,30 @@ Value |  Label |    N | Raw % | Valid % | Cum. %
 <p><em>b. Recodificación</em></p>
 <p>En general esta variable no tiene problemas de casos perdidos ni de etiquetas, pero de todas maneras vamos a hacer un cambio de acuerdo a convenciones en análisis de datos, donde por lo general hombres tienen valor 0 y mujeres 1:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>m0_sexo <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">recode</span>(proc_elsoc<span class="sc">$</span>m0_sexo, <span class="st">"1=0;2=1"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>m0_sexo <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">recode</span>(proc_elsoc<span class="sc">$</span>m0_sexo, <span class="st">"1=0;2=1"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><em>c.&nbsp;Etiquetado</em></p>
 <p>Y ahora cambiamos las etiquetas de acuerdo a la recodificación anterior:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>m0_sexo <span class="ot">&lt;-</span> <span class="fu">set_labels</span>(proc_elsoc<span class="sc">$</span>m0_sexo,</span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">labels=</span><span class="fu">c</span>( <span class="st">"Hombre"</span><span class="ot">=</span><span class="dv">0</span>,</span>
-<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Mujer"</span><span class="ot">=</span><span class="dv">1</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>m0_sexo <span class="ot">&lt;-</span> <span class="fu">set_labels</span>(proc_elsoc<span class="sc">$</span>m0_sexo,</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">labels=</span><span class="fu">c</span>( <span class="st">"Hombre"</span><span class="ot">=</span><span class="dv">0</span>,</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Mujer"</span><span class="ot">=</span><span class="dv">1</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>También el nombre de la variable a algo más simple:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc <span class="ot">&lt;-</span> <span class="fu">rename</span>(proc_elsoc,<span class="st">"sexo"</span><span class="ot">=</span>m0_sexo)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc <span class="ot">&lt;-</span> <span class="fu">rename</span>(proc_elsoc,<span class="st">"sexo"</span><span class="ot">=</span>m0_sexo)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Además de cambiar el nombre, queremos cambiar la etiqueta de la variable.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_label</span>(proc_elsoc<span class="sc">$</span>sexo)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_label</span>(proc_elsoc<span class="sc">$</span>sexo)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Sexo del entrevistado"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>sexo <span class="ot">&lt;-</span> <span class="fu">set_label</span>(<span class="at">x =</span> proc_elsoc<span class="sc">$</span>sexo,<span class="at">label =</span> <span class="st">"Sexo"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>sexo <span class="ot">&lt;-</span> <span class="fu">set_label</span>(<span class="at">x =</span> proc_elsoc<span class="sc">$</span>sexo,<span class="at">label =</span> <span class="st">"Sexo"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Revisar con un nuevo descriptivo:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>sexo)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>sexo)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Sexo (x) &lt;numeric&gt; 
 # total N=2927 valid N=2927 mean=0.60 sd=0.49
@@ -772,7 +807,7 @@ Value |  Label |    N | Raw % | Valid % | Cum. %
 </ul>
 <p><em>a. Descriptivo</em></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>m0_edad)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>m0_edad)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Edad del entrevistado (x) &lt;numeric&gt; 
 # total N=2927 valid N=2927 mean=46.09 sd=15.29
@@ -851,15 +886,15 @@ Value |                 Label |  N | Raw % | Valid % | Cum. %
 <p><em>c.&nbsp;Etiquetado</em></p>
 <p>Cambio del nombre de la variable a algo más simple:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc <span class="ot">&lt;-</span> <span class="fu">rename</span>(proc_elsoc,<span class="st">"edad"</span><span class="ot">=</span>m0_edad)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc <span class="ot">&lt;-</span> <span class="fu">rename</span>(proc_elsoc,<span class="st">"edad"</span><span class="ot">=</span>m0_edad)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Además de cambiar el nombre, queremos cambiar la etiqueta de la variable.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_label</span>(proc_elsoc<span class="sc">$</span>edad)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_label</span>(proc_elsoc<span class="sc">$</span>edad)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Edad del entrevistado"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>edad <span class="ot">&lt;-</span> <span class="fu">set_label</span>(<span class="at">x =</span> proc_elsoc<span class="sc">$</span>edad,<span class="at">label =</span> <span class="st">"Edad"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>edad <span class="ot">&lt;-</span> <span class="fu">set_label</span>(<span class="at">x =</span> proc_elsoc<span class="sc">$</span>edad,<span class="at">label =</span> <span class="st">"Edad"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
 <div class="alert alert-info">
@@ -887,8 +922,8 @@ Value |                 Label |  N | Raw % | Valid % | Cum. %
 <p>Antes de guardar la base procesada, revisamos nuevamente todas las variables con una tabla descriptiva general mediante la función <code>stargazer</code> (de la librería homónima)</p>
 <p>Primero vamos a reformatear el objeto proc_elsoc como base de datos (as.data.frame), paso necesario para que sea reconocido como tal por <code>stargazer</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc <span class="ot">&lt;-</span><span class="fu">as.data.frame</span>(proc_elsoc)</span>
-<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(proc_elsoc, <span class="at">type=</span><span class="st">"text"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc <span class="ot">&lt;-</span><span class="fu">as.data.frame</span>(proc_elsoc)</span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(proc_elsoc, <span class="at">type=</span><span class="st">"text"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 ===========================================
@@ -917,15 +952,16 @@ pmerit    2,898 2.654   0.969   1.000 5.000
 </ul>
 <p>Por ejemplo, si quiero una tabla solo con promedio, n, sd y p75: <code>stargazer(data, type="text", summary.stat = c("mean", "n", "sd", "p75"))</code></p>
 <ul>
-<li>Guardar base de datos procesada: en carpeta local <span class="sidenote">La ruta hacia su carpeta local si está trabajando en windows debería ser algo como “C:/Users/Lenovo/Clases/y aquí nombre del archivo a grabar</span></li>
+<li>Guardar base de datos procesada: en carpeta local</li>
 </ul>
+<p>::: {.callout-tip}La ruta hacia su carpeta local si está trabajando en windows debería ser algo como “C:/Users/Lenovo/Clases/y aquí nombre del archivo a grabar:::</p>
 <p>El comando para guardar es <code>save</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(proc_elsoc,<span class="at">file =</span> <span class="st">"[ruta hacia carpeta local en su computador]/ELSOC_ess_merit2016.RData"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(proc_elsoc,<span class="at">file =</span> <span class="st">"[ruta hacia carpeta local en su computador]/ELSOC_ess_merit2016.RData"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>En este caso, seguimos una estructura de carpetas de datos, separando en una carpeta los datos originales, y en otra (proc) los datos procesados:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(proc_elsoc,<span class="at">file =</span> <span class="st">"assignment/data/proc/ELSOC_ess_merit2016.RData"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(proc_elsoc,<span class="at">file =</span> <span class="st">"assignment/data/proc/ELSOC_ess_merit2016.RData"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="alert alert-info">
 <p><strong>De rutas, estructura de carpetas y otros </strong></p>
@@ -941,6 +977,18 @@ pmerit    2,898 2.654   0.969   1.000 5.000
 <section id="archivo-de-código" class="level1">
 <h1>Archivo de código</h1>
 <p>El archivo de código R de esta práctica se puede descargar <a href="https://raw.githubusercontent.com/juancarloscastillo/multivariada/master/static/assignment/practica_1.R">aquí</a></p>
+</section>
+<section id="bonus-track-flujo-de-trabajo-reproducible" class="level1">
+<h1>Bonus track: flujo de trabajo reproducible</h1>
+<p>(del curso Ciencia Social Abierta)</p>
+<section id="video" class="level2">
+<h2 class="anchored" data-anchor-id="video">Video</h2>
+<div style="width: 100%; height: 600px; overflow: hidden;">
+<video style="width: 100%;" controls="">
+<source src="https://www.dropbox.com/s/v3cp7scz5vqsp2o/sesion7.webm?raw=1">
+</video>
+</div>
+</section>
 </section>
 <section id="foro" class="level1">
 <h1>Foro</h1>

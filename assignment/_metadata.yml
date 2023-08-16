@@ -1,5 +1,5 @@
 date-heading:
-  content: "Completar hasta as 11:59 PM del"
+  content: "Correspondiente a la sesión del"
   class: "bg-assignment"
 date-format: "full"
 

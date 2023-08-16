@@ -8,11 +8,18 @@ website:
       repo: cursos-metodos-facso/multinivel
 ---
 
+```{r setup, include=FALSE, cache = TRUE}
+require("knitr")
+opts_chunk$set(warning=FALSE,
+             message=FALSE,
+             echo=TRUE,
+             cache = TRUE, fig.width=7, fig.height=5.2)
+```
 # Presentación
 
 ## Objetivo de la práctica
 
-El desarrollo de esta guía tiene por objetivo revisar algunos procedimientos básicos de la preparación de datos con R, que son necesarios para luego poder aplicar los contenidos más específicos de este curso.
+El desarrollo de esta guía tiene por objetivo revisar algunos procedimientos básicos de la preparación de datos con R, que son necesarios para luego poder aplicar los contenidos más específicos de este curso. Originalmente fue desarrollado para el curso de Estadística Multivariada, disponible [aquí](https://multivariada.netlify.app/assignment/01-code/)
 
 Por temas de orden y reproducibilidad, en este curso vamos a separar en **dos momentos** el trabajo con datos, y dos archivos de código correspondientes:
 
@@ -24,7 +31,17 @@ Por temas de orden y reproducibilidad, en este curso vamos a separar en **dos mo
 
 ![](../files/img/produccion.png)
 
-Tanto la preparación como el análisis (que son parte del concepto más general de procesamiento) quedan registrados cada en un _archivo de código_. Los detalles de este tipo de archivos se pueden revisar [aquí](/class/#codigoR). <span class="sidenote">**Archivo de código R**: archivo con extensión .R donde se almacena el código de análisis. Para generarlo desde RStudio: _File > New File > R Script_ (o ctrl+shift+N), y para grabarlo  _File > Save (o ctrl+s)_, y darle nombre la primera vez (recordar: sin tilde ni ñ, y evitar espacios) </span>
+Tanto la preparación como el análisis (que son parte del concepto más general de procesamiento) quedan registrados cada en un _archivo de código_. Los detalles de este tipo de archivos se pueden revisar [aquí](/assignment/#codigoR).
+
+
+::: {.callout-tip}
+
+## **Archivo de código R**
+
+Archivo con extensión .R donde se almacena el código de análisis. Para generarlo desde RStudio: _File > New File > R Script_ (o ctrl+shift+N), y para grabarlo  _File > Save (o ctrl+s)_, y darle nombre la primera vez (recordar: sin tilde ni ñ, y evitar espacios)
+
+:::
+
 
 El documento de **código de preparación** posee 5 partes, más una sección de identificación inicial:
 
@@ -57,7 +74,7 @@ El presente ejercicio tiene por objetivo el procesar los datos para obtener las 
 
 ## 1. Librerías principales (de R) a utilizar en el análisis{#librerias}
 
-Como sabemos, la lógica de R es instalar librerías (solo 1 vez, con `install.packages("librería")`), y luego cargarlas cada vez que es necesario usarlas (con `library(librería)`). El problema de esto es que a veces no se sabe claramente qué librerías están instaladas y cuales no, lo que va a arrojar error al cargarlas. Y, como sucede en R, existe una librería para solucionar este problema que se llama `pacman` (package manager). Lo que hace `pacman` es cargar la librería, y si no está instalada, la instala y la carga:
+Como sabemos, la lógica de R es instalar librerías (solo 1 vez, con `install.packages("librería")`), y luego cargarlas cada vez que es necesario usarlas (con `library(librería)`). El problema de esto es que a veces no se sabe claramente qué librerías están instaladas y cuales no, lo que va a arrojar error al cargarlas. Y, como sucede en R, existe una librería para solucionar este problema que se llama `pacman` (package manager). Lo que hace `pacman` es cargar la librería, y si no está instalada, la instala y la carga.
 
 
 Para utilizar la primera vez (si es que no está instalada):
@@ -66,11 +83,10 @@ Para utilizar la primera vez (si es que no está instalada):
 install.packages("pacman")
 ```
 
-Y en adelante, las librerías se cargan así <span class="sidenote"> pacman::p_load(libreria1,libreria2,libreriaX) </span>:
+Y en adelante, las librerías se cargan así:
 
-
-```{r}
-pacman::p_load(dplyr, sjmisc, car, sjlabelled, stargazer)
+```{r eval=FALSE}
+ pacman::p_load(libreria1,libreria2,libreriaX)
 ```
 
 
@@ -79,7 +95,14 @@ Para esta sesión vamos a utilizar Las librerías que vamos a utilizar son:
 - `dplyr`: ajuste general de datos
 - `sjmisc`: descripción y exploración de base de datos
 - `car`: principalmente la función `recode` para recodificar/agrupar valores de variable
+- `sjlabelled`: para funciones específicas con datos etiquetados
 - `stargazer`: para tabla descriptiva
+- `haven`: para abrir bases de datos en distintos formatos
+
+
+```{r}
+pacman::p_load(dplyr, sjmisc, car, sjlabelled, stargazer)
+```
 
 
 ## 2. Cargar base de datos
@@ -97,10 +120,16 @@ La función `rm(list=ls())` permite comenzar con un espacio de trabajo (environm
 
 **Datos**
 
-Las bases de datos se pueden cargar de un archivo local o en línea. Para este caso utilizaremos un archivo en línea que viene en formato RData: **ELSOC_W01_v3.10.RData**. <span class="sidenote">**Abrir bases de datos en otros formatos**: Los formatos mas comunes en que se almacenan las bases de datos son .dta (Stata) y .sav (Spss). Para abrir desde R utlilizamos la librería `haven` y sus funciones read_dta y read_sav según corresponda. Ej: `datos <- read_dta("base_casen.dta")`. Recordar antes instalar/cargar la librería: `pacman::p_load(haven)`   </span>
+Las bases de datos se pueden cargar de un archivo local o en línea. Para este caso utilizaremos un archivo en línea que viene en formato RData: **ELSOC_W01_v3.10.RData**. 
 
+
+::: {.callout-tip}
+# Abrir bases de datos en otros formatos**
+Los formatos mas comunes en que se almacenan las bases de datos son .dta (Stata) y .sav (Spss). Para abrir desde R utlilizamos la librería `haven` y sus funciones read_dta y read_sav según corresponda. Ej: `datos <- read_dta("base_casen.dta")`. Recordar antes instalar/cargar la librería: `pacman::p_load(haven)`   
+::: 
+
+Cargamos la base de datos desde internet
 ```{r eval=TRUE}
-#cargamos la base de datos desde internet
 load(url("https://multivariada.netlify.com/assignment/data/original/ELSOC_W01_v3.10.RData"))
 ```
 
@@ -492,7 +521,9 @@ Si se desea modificar las columnas que aparecen en la tabla se puede ocupar la o
 Por ejemplo, si quiero una tabla solo con promedio, n, sd y p75: `stargazer(data, type="text", summary.stat = c("mean", "n", "sd", "p75"))`
 
 
-- Guardar base de datos procesada: en carpeta local <span class="sidenote">La ruta hacia su carpeta local si está trabajando en windows debería ser algo como "C:/Users/Lenovo/Clases/y aquí nombre del archivo a grabar</span>
+- Guardar base de datos procesada: en carpeta local
+
+::: {.callout-tip}La ruta hacia su carpeta local si está trabajando en windows debería ser algo como "C:/Users/Lenovo/Clases/y aquí nombre del archivo a grabar::: 
 
 El comando para guardar es `save`:
 
@@ -525,6 +556,21 @@ save(proc_elsoc,file = "assignment/data/proc/ELSOC_ess_merit2016.RData")
 # Archivo de código
 
 El archivo de código R de esta práctica se puede descargar [aquí](https://raw.githubusercontent.com/juancarloscastillo/multivariada/master/static/assignment/practica_1.R)
+
+# Bonus track: flujo de trabajo reproducible
+
+(del curso Ciencia Social Abierta)
+
+
+## Video 
+
+<div style="width: 100%; height: 600px; overflow: hidden;">
+<video  style="width: 100%;" controls>
+<source src="https://www.dropbox.com/s/v3cp7scz5vqsp2o/sesion7.webm?raw=1">
+</video>
+</div>
+
+
 
 
 # Foro
