@@ -69,7 +69,10 @@ website:
           contents:
             - text: "Sesión 1"
               file: content/01-content.qmd
-
+            - text: "Sesión 2"
+              file: content/02-content.qmd
+            - text: "Sesión 3"
+              file: content/03-content.qmd
 
     - title: "Prácticos"
       contents:
@@ -80,6 +83,8 @@ website:
           contents:
             - text: "1: Preparación de Datos con R"
               file: assignment/01-practico.qmd
+            - text: "2: Datos y estimaciones en dos niveles"
+              file: assignment/02-practico.qmd
 
   page-footer:
     left: |

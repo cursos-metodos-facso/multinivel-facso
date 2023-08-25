@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="Modelos Multinivel">
+
+<title>Modelos Multinivel - Práctica 2. Datos y estimaciones en dos niveles</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="..//files/img/logo-multinivel.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+
+<meta property="og:title" content="Modelos Multinivel - Práctica 2. Datos y estimaciones en dos niveles">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://multinivel.netlify.app/files/img/logo-multinivel.png">
+<meta property="og:site-name" content="Modelos Multinivel">
+<meta property="og:locale" content="es">
+<meta property="og:image:height" content="595">
+<meta property="og:image:width" content="521">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Modelos Multinivel</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Buscar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Navegación de palanca" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus.html" rel="" target="">
+ <span class="menu-text">Programa</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../schedule.html" rel="" target="">
+ <span class="menu-text">Planificación</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../content/index.html" rel="" target="">
+ <span class="menu-text">Clases</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../assignment/index.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Prácticos</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../resource/index.html" rel="" target="">
+ <span class="menu-text">Recursos</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://rstudio.cloud" rel="" target=""><i class="bi bi-cloud-fill" role="img" aria-label="RStudio.cloud">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignment/01-practico.html">Guías</a></li><li class="breadcrumb-item"><a href="../assignment/02-practico.html">2: Datos y estimaciones en dos niveles</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Sobre prácticos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Instrucciones generales</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Guías</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/01-practico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1: Preparación de Datos con R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/02-practico.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">2: Datos y estimaciones en dos niveles</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
+   
+  <ul>
+  <li><a href="#presentación" id="toc-presentación" class="nav-link active" data-scroll-target="#presentación">Presentación</a>
+  <ul class="collapse">
+  <li><a href="#objetivo-de-la-práctica" id="toc-objetivo-de-la-práctica" class="nav-link" data-scroll-target="#objetivo-de-la-práctica">Objetivo de la práctica</a></li>
+  </ul></li>
+  <li><a href="#instalación-de-librerías" id="toc-instalación-de-librerías" class="nav-link" data-scroll-target="#instalación-de-librerías">Instalación de librerías</a></li>
+  <li><a href="#lectura-de-datos-high-school-beyond-hsb" id="toc-lectura-de-datos-high-school-beyond-hsb" class="nav-link" data-scroll-target="#lectura-de-datos-high-school-beyond-hsb">Lectura de datos High School &amp; Beyond (HSB</a></li>
+  <li><a href="#exploración-y-descripción" id="toc-exploración-y-descripción" class="nav-link" data-scroll-target="#exploración-y-descripción">Exploración y descripción</a>
+  <ul class="collapse">
+  <li><a href="#seleccionar-variables-de-interes" id="toc-seleccionar-variables-de-interes" class="nav-link" data-scroll-target="#seleccionar-variables-de-interes">Seleccionar variables de interes</a></li>
+  <li><a href="#tabla-descriptiva-con-stargazer" id="toc-tabla-descriptiva-con-stargazer" class="nav-link" data-scroll-target="#tabla-descriptiva-con-stargazer">Tabla descriptiva con stargazer:</a></li>
+  <li><a href="#exploración-visual-de-datos" id="toc-exploración-visual-de-datos" class="nav-link" data-scroll-target="#exploración-visual-de-datos">Exploración visual de datos</a></li>
+  <li><a href="#matriz-de-correlaciones-de-un-subset-de-variables" id="toc-matriz-de-correlaciones-de-un-subset-de-variables" class="nav-link" data-scroll-target="#matriz-de-correlaciones-de-un-subset-de-variables">Matriz de correlaciones de un subset de variables</a></li>
+  </ul></li>
+  <li><a href="#estimación-de-regresiones" id="toc-estimación-de-regresiones" class="nav-link" data-scroll-target="#estimación-de-regresiones">Estimación de regresiones</a>
+  <ul class="collapse">
+  <li><a href="#nivel-1" id="toc-nivel-1" class="nav-link" data-scroll-target="#nivel-1">Nivel 1</a></li>
+  <li><a href="#diagnóstico-de-residuos-con-librería-car" id="toc-diagnóstico-de-residuos-con-librería-car" class="nav-link" data-scroll-target="#diagnóstico-de-residuos-con-librería-car">Diagnóstico de residuos (con librería <code>car</code>)</a></li>
+  </ul></li>
+  <li><a href="#preparando-datos-agregados" id="toc-preparando-datos-agregados" class="nav-link" data-scroll-target="#preparando-datos-agregados">Preparando datos agregados</a>
+  <ul class="collapse">
+  <li><a href="#generación-de-base-agregada" id="toc-generación-de-base-agregada" class="nav-link" data-scroll-target="#generación-de-base-agregada">Generación de base agregada</a></li>
+  <li><a href="#comparando-regresiones" id="toc-comparando-regresiones" class="nav-link" data-scroll-target="#comparando-regresiones">Comparando regresiones</a></li>
+  </ul></li>
+  <li><a href="#foro" id="toc-foro" class="nav-link" data-scroll-target="#foro">Foro</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header">
+<h1 class="title display-7">Práctica 2. Datos y estimaciones en dos niveles</h1>
+
+<div class="date-block bg-assignment text-white p-2">
+  <p class="date">Correspondiente a la sesión del viernes, 25 de agosto de 2023</p>
+</div>
+</header>
+
+<section id="presentación" class="level1">
+<h1>Presentación</h1>
+<section id="objetivo-de-la-práctica" class="level2">
+<h2 class="anchored" data-anchor-id="objetivo-de-la-práctica">Objetivo de la práctica</h2>
+<p>Preparar y manipular datos a distintos niveles y comprender la diferencia de estimaciones a distintos niveles.</p>
+</section>
+</section>
+<section id="instalación-de-librerías" class="level1">
+<h1>Instalación de librerías</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>haven,  <span class="co"># lectura de datos formato externo</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>car, <span class="co"># función scatterplot y otras de manejo de datos</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>corrplot, <span class="co"># correlaciones</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>dplyr, <span class="co"># varios gestión de datos</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>stargazer, <span class="co"># tablas</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>lme4) <span class="co"># multilevel</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="lectura-de-datos-high-school-beyond-hsb" class="level1">
+<h1>Lectura de datos High School &amp; Beyond (HSB</h1>
+<p>High School &amp; Beyond (HSB) es una muestra representativa nacional de educación secundaria publica y católica de USA implementada por el National Center for Education Statistics (NCES). Esta base de datos se utiliza en varios textos dedicados a multinivel.</p>
+<ul>
+<li><p>Más información en <a href="http://nces.ed.gov/surveys/hsb">https://nces.ed.gov/surveys/hsb/</a></p></li>
+<li><p>En formato stata desde sitio web</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mlm <span class="ot">=</span> <span class="fu">read_dta</span>(<span class="st">"http://www.stata-press.com/data/mlmus3/hsb.dta"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>mlm</code> es el nombre que le daremos al objeto base de datos “High School and Beyond” en nuestra práctica.</p>
+<p><em>Variables relevantes para ejercicios:</em></p>
+<ul>
+<li>Nivel 1:
+<ul>
+<li>minority, an indicator for student ethnicity (1 = minority, 0 = other)</li>
+<li>female, an indicator for student gender (1 = female, 0 = male)</li>
+<li>ses, a standardized scale constructed from variables measuring parental education, occupation, and income</li>
+<li>mathach, a measure of mathematics achievement</li>
+</ul></li>
+<li>Nivel 2
+<ul>
+<li>size (school enrollment)</li>
+<li>sector (1 = Catholic, 0 = public)</li>
+<li>pracad (proportion of students in the academic track)</li>
+<li>disclim (a scale measuring disciplinary climate)</li>
+<li>himnty (1 = more than 40% minority enrollment, 0 = less than 40%)</li>
+<li>mnses (mean of the SES values for the students in this school who are included in the level-1 file)</li>
+</ul></li>
+<li>Cluster variable: schoolid</li>
+</ul>
+</section>
+<section id="exploración-y-descripción" class="level1">
+<h1>Exploración y descripción</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(mlm) <span class="co"># dimensiones de base de datos</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7185   26</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mlm) <span class="co"># Muestra los nombres de las variables en la base</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "minority" "female"   "ses"      "mathach"  "size"     "sector"  
+ [7] "pracad"   "disclim"  "himinty"  "schoolid" "mean"     "sd"      
+[13] "sdalt"    "junk"     "sdalt2"   "num"      "se"       "sealt"   
+[19] "sealt2"   "t2"       "t2alt"    "pickone"  "mmses"    "mnses"   
+[25] "xb"       "resid"   </code></pre>
+</div>
+</div>
+<section id="seleccionar-variables-de-interes" class="level2">
+<h2 class="anchored" data-anchor-id="seleccionar-variables-de-interes">Seleccionar variables de interes</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mlm<span class="ot">=</span>mlm <span class="sc">%&gt;%</span> <span class="fu">select</span>(minority,female,ses,mathach,size,sector,pracad,disclim,himinty,mnses,schoolid) <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(mlm)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7185   11</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mlm) <span class="co"># Muestra los primeros 10 casos para cada variable</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  minority female    ses mathach size sector pracad disclim himinty     mnses
+1        0      1 -1.528   5.876  842      0   0.35   1.597       0 -0.434383
+2        0      1 -0.588  19.708  842      0   0.35   1.597       0 -0.434383
+3        0      0 -0.528  20.349  842      0   0.35   1.597       0 -0.434383
+4        0      0 -0.668   8.781  842      0   0.35   1.597       0 -0.434383
+5        0      0 -0.158  17.898  842      0   0.35   1.597       0 -0.434383
+6        0      0  0.022   4.583  842      0   0.35   1.597       0 -0.434383
+  schoolid
+1     1224
+2     1224
+3     1224
+4     1224
+5     1224
+6     1224</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mlm) <span class="co"># Descriptivos generales (evaluación de datos perdidos)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    minority          female            ses               mathach      
+ Min.   :0.0000   Min.   :0.0000   Min.   :-3.758000   Min.   :-2.832  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:-0.538000   1st Qu.: 7.275  
+ Median :0.0000   Median :1.0000   Median : 0.002000   Median :13.131  
+ Mean   :0.2747   Mean   :0.5282   Mean   : 0.000143   Mean   :12.748  
+ 3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.: 0.602000   3rd Qu.:18.317  
+ Max.   :1.0000   Max.   :1.0000   Max.   : 2.692000   Max.   :24.993  
+      size          sector           pracad          disclim       
+ Min.   : 100   Min.   :0.0000   Min.   :0.0000   Min.   :-2.4160  
+ 1st Qu.: 565   1st Qu.:0.0000   1st Qu.:0.3200   1st Qu.:-0.8170  
+ Median :1016   Median :0.0000   Median :0.5300   Median :-0.2310  
+ Mean   :1057   Mean   :0.4931   Mean   :0.5345   Mean   :-0.1319  
+ 3rd Qu.:1436   3rd Qu.:1.0000   3rd Qu.:0.7000   3rd Qu.: 0.4600  
+ Max.   :2713   Max.   :1.0000   Max.   :1.0000   Max.   : 2.7560  
+    himinty         mnses               schoolid   
+ Min.   :0.00   Min.   :-1.1939460   Min.   :1224  
+ 1st Qu.:0.00   1st Qu.:-0.3230000   1st Qu.:3020  
+ Median :0.00   Median : 0.0320000   Median :5192  
+ Mean   :0.28   Mean   : 0.0001434   Mean   :5278  
+ 3rd Qu.:1.00   3rd Qu.: 0.3269123   3rd Qu.:7342  
+ Max.   :1.00   Max.   : 0.8249825   Max.   :9586  </code></pre>
+</div>
+</div>
+</section>
+<section id="tabla-descriptiva-con-stargazer" class="level2">
+<h2 class="anchored" data-anchor-id="tabla-descriptiva-con-stargazer">Tabla descriptiva con stargazer:</h2>
+<p>stargazer posee tres opciones básicas de output: text, html o latex (defecto). Si se quiere ver el contenido directamente en formato txt en la consola de R con fines exploratorios, usar text. Si se quiere reportar luego via knitr a html cambiar a html, y si se quiere exportar a pdf cambiar a Latex. Recomendación general: dejar inicialmente como text hasta el reporte final de resultados, facilita la visualización en la consola y no requiere tener que compilar para ver el resultado (en el caso de trabajar con Rmarkdown)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(mlm, <span class="at">title =</span> <span class="st">"Descriptivos generales"</span>, <span class="at">type=</span><span class="st">'text'</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Descriptivos generales
+=================================================
+Statistic   N     Mean    St. Dev.   Min    Max  
+-------------------------------------------------
+minority  7,185   0.275     0.446     0      1   
+female    7,185   0.528     0.499     0      1   
+ses       7,185  0.0001     0.779   -3.758 2.692 
+mathach   7,185  12.748     6.878   -2.832 24.993
+size      7,185 1,056.862  604.172   100   2,713 
+sector    7,185   0.493     0.500     0      1   
+pracad    7,185   0.534     0.251   0.000  1.000 
+disclim   7,185  -0.132     0.944   -2.416 2.756 
+himinty   7,185   0.280     0.449     0      1   
+mnses     7,185  0.0001     0.414   -1.194 0.825 
+schoolid  7,185 5,277.898 2,499.578 1,224  9,586 
+-------------------------------------------------</code></pre>
+</div>
+</div>
+<ul>
+<li>y con html…</li>
+</ul>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(mlm, <span class="at">title =</span> <span class="st">"Descriptivos generales"</span>, <span class="at">type=</span><span class="st">'html'</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<table style="text-align:center">
+<caption>
+<strong>Descriptivos generales</strong>
+</caption>
+<tbody><tr>
+<td colspan="6" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Statistic
+</td>
+<td>
+N
+</td>
+<td>
+Mean
+</td>
+<td>
+St.&nbsp;Dev.
+</td>
+<td>
+Min
+</td>
+<td>
+Max
+</td>
+</tr>
+<tr>
+<td colspan="6" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+minority
+</td>
+<td>
+7,185
+</td>
+<td>
+0.275
+</td>
+<td>
+0.446
+</td>
+<td>
+0
+</td>
+<td>
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+female
+</td>
+<td>
+7,185
+</td>
+<td>
+0.528
+</td>
+<td>
+0.499
+</td>
+<td>
+0
+</td>
+<td>
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+ses
+</td>
+<td>
+7,185
+</td>
+<td>
+0.0001
+</td>
+<td>
+0.779
+</td>
+<td>
+-3.758
+</td>
+<td>
+2.692
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+mathach
+</td>
+<td>
+7,185
+</td>
+<td>
+12.748
+</td>
+<td>
+6.878
+</td>
+<td>
+-2.832
+</td>
+<td>
+24.993
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+size
+</td>
+<td>
+7,185
+</td>
+<td>
+1,056.862
+</td>
+<td>
+604.172
+</td>
+<td>
+100
+</td>
+<td>
+2,713
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+sector
+</td>
+<td>
+7,185
+</td>
+<td>
+0.493
+</td>
+<td>
+0.500
+</td>
+<td>
+0
+</td>
+<td>
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+pracad
+</td>
+<td>
+7,185
+</td>
+<td>
+0.534
+</td>
+<td>
+0.251
+</td>
+<td>
+0.000
+</td>
+<td>
+1.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+disclim
+</td>
+<td>
+7,185
+</td>
+<td>
+-0.132
+</td>
+<td>
+0.944
+</td>
+<td>
+-2.416
+</td>
+<td>
+2.756
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+himinty
+</td>
+<td>
+7,185
+</td>
+<td>
+0.280
+</td>
+<td>
+0.449
+</td>
+<td>
+0
+</td>
+<td>
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+mnses
+</td>
+<td>
+7,185
+</td>
+<td>
+0.0001
+</td>
+<td>
+0.414
+</td>
+<td>
+-1.194
+</td>
+<td>
+0.825
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+schoolid
+</td>
+<td>
+7,185
+</td>
+<td>
+5,277.898
+</td>
+<td>
+2,499.578
+</td>
+<td>
+1,224
+</td>
+<td>
+9,586
+</td>
+</tr>
+<tr>
+<td colspan="6" style="border-bottom: 1px solid black">
+</td>
+</tr>
+
+</tbody></table>
+<p>::: Para que se pueda obtener la tabla en html se debe agregar en las opciones del chunk en R <code>results='asis'</code> :::</p>
+<p><strong>Datos perdidos</strong>: crear una nueva base sin missing values (Listwise Deletion) (solo recomendado para objetos que contienen las variables a incluir en el modelo)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>mlm2<span class="ot">=</span><span class="fu">na.omit</span>(mlm) <span class="co">#Sacar missing data</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mlm2)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mlm2)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exploración-visual-de-datos" class="level2">
+<h2 class="anchored" data-anchor-id="exploración-visual-de-datos">Exploración visual de datos</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(mlm<span class="sc">$</span>mathach, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">30</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="02-practico_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mlm<span class="sc">$</span>mathach)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ -2.832   7.275  13.131  12.748  18.317  24.993 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scatterplot</span>(mlm<span class="sc">$</span>mathach <span class="sc">~</span> mlm<span class="sc">$</span>ses, <span class="at">data=</span>mlm, <span class="at">xlab=</span><span class="st">"SES"</span>, <span class="at">ylab=</span><span class="st">"Math Score"</span>, <span class="at">main=</span><span class="st">"Math on SES"</span>, <span class="at">smooth=</span><span class="cn">FALSE</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="02-practico_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="matriz-de-correlaciones-de-un-subset-de-variables" class="level2">
+<h2 class="anchored" data-anchor-id="matriz-de-correlaciones-de-un-subset-de-variables">Matriz de correlaciones de un subset de variables</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>cormat<span class="ot">=</span>mlm <span class="sc">%&gt;%</span> <span class="fu">select</span>(mathach,ses,sector,size) <span class="sc">%&gt;%</span> <span class="fu">cor</span>()</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(cormat, <span class="at">digits=</span><span class="dv">2</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        mathach   ses sector  size
+mathach    1.00  0.36   0.20 -0.05
+ses        0.36  1.00   0.19 -0.07
+sector     0.20  0.19   1.00 -0.42
+size      -0.05 -0.07  -0.42  1.00</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot.mixed</span>(cormat)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="02-practico_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="estimación-de-regresiones" class="level1">
+<h1>Estimación de regresiones</h1>
+<section id="nivel-1" class="level2">
+<h2 class="anchored" data-anchor-id="nivel-1">Nivel 1</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>reg1<span class="ot">&lt;-</span> <span class="fu">lm</span>(mathach<span class="sc">~</span><span class="dv">1</span>, <span class="at">data=</span>mlm)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>reg2<span class="ot">&lt;-</span> <span class="fu">lm</span>(mathach<span class="sc">~</span>ses, <span class="at">data=</span>mlm)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>reg3<span class="ot">&lt;-</span> <span class="fu">lm</span>(mathach<span class="sc">~</span>ses<span class="sc">+</span>female, <span class="at">data=</span>mlm)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">&lt;-</span> <span class="fu">lm</span>(mathach<span class="sc">~</span>ses<span class="sc">+</span>female<span class="sc">+</span>sector, <span class="at">data=</span>mlm)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>reg5<span class="ot">&lt;-</span> <span class="fu">lm</span>(mathach<span class="sc">~</span>ses<span class="sc">+</span>female<span class="sc">+</span>sector<span class="sc">+</span>minority, <span class="at">data=</span>mlm)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg5)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = mathach ~ ses + female + sector + minority, data = mlm)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-20.2286  -4.5076   0.2104   4.7472  17.8078 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 13.24158    0.13386  98.924   &lt;2e-16 ***
+ses          2.36392    0.09946  23.768   &lt;2e-16 ***
+female      -1.42166    0.14608  -9.732   &lt;2e-16 ***
+sector       2.25492    0.14906  15.127   &lt;2e-16 ***
+minority    -3.11239    0.17029 -18.277   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 6.166 on 7180 degrees of freedom
+Multiple R-squared:  0.1969,    Adjusted R-squared:  0.1965 
+F-statistic: 440.1 on 4 and 7180 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(reg5, <span class="at">title =</span> <span class="st">"Regresión datos individuales"</span>, <span class="at">type=</span><span class="st">'text'</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Regresión datos individuales
+===============================================
+                        Dependent variable:    
+                    ---------------------------
+                              mathach          
+-----------------------------------------------
+ses                          2.364***          
+                              (0.099)          
+                                               
+female                       -1.422***         
+                              (0.146)          
+                                               
+sector                       2.255***          
+                              (0.149)          
+                                               
+minority                     -3.112***         
+                              (0.170)          
+                                               
+Constant                     13.242***         
+                              (0.134)          
+                                               
+-----------------------------------------------
+Observations                   7,185           
+R2                             0.197           
+Adjusted R2                    0.196           
+Residual Std. Error      6.166 (df = 7180)     
+F Statistic          440.111*** (df = 4; 7180) 
+===============================================
+Note:               *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
+</div>
+</div>
+</section>
+<section id="diagnóstico-de-residuos-con-librería-car" class="level2">
+<h2 class="anchored" data-anchor-id="diagnóstico-de-residuos-con-librería-car">Diagnóstico de residuos (con librería <code>car</code>)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">influenceIndexPlot</span>(reg5, <span class="at">vars=</span><span class="fu">c</span>(<span class="st">"Cook"</span>, <span class="st">"Studentized"</span>, <span class="st">"hat"</span>), <span class="at">id.n=</span><span class="dv">5</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="02-practico_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">influencePlot</span>(reg5, <span class="at">id.n=</span><span class="dv">3</span>) <span class="co"># el tama~no de los circulos se refiere a la D de Cook</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="02-practico_files/figure-html/unnamed-chunk-13-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        StudRes          Hat        CookD
+869   2.6047540 0.0013831364 0.0018779316
+1629 -2.2407411 0.0020743123 0.0020861529
+3523 -3.2842968 0.0007451964 0.0016066368
+5321 -1.4359364 0.0035373357 0.0014636979
+6033 -0.1116449 0.0042083659 0.0000105369
+7136 -3.2099858 0.0007110209 0.0014644182</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="preparando-datos-agregados" class="level1">
+<h1>Preparando datos agregados</h1>
+<p>En esta sección vamos a generar una base de datos agregada o colapsada, es decir, una base de datos donde los casos serán escuelas (no individuos). El objetivo de generar esta base es para poder realizar comparaciones con las estimaciones realizadas con la base de datos individuales. Estas estimaciones que realizaremos por separados serán luego integradas en una sola estimación mediante métodos multinivel.</p>
+<section id="generación-de-base-agregada" class="level2">
+<h2 class="anchored" data-anchor-id="generación-de-base-agregada">Generación de base agregada</h2>
+<ul>
+<li>Usando la funcion <code>group_by</code> (agrupar por) de la librería <code>dplyr</code></li>
+<li>Se agrupa por la variable <strong>cluster</strong>, que identifica a las unidades de nivel 2 (en este caso, <code>schoolid</code>)</li>
+<li>Por defecto se hace con el promedio, pero se pueden hacer otras funciones como contar, porcentajes, mediana, etc.</li>
+</ul>
+<p>Para ello:</p>
+<ul>
+<li><p>generamos el objeto <code>agg_mlm</code> desde el objeto <code>mlm</code></p></li>
+<li><p>agrupando por la variable cluster <code>schoolid</code></p></li>
+<li><p>agregamos (colapsamos) todas <code>summarise_all</code> por el promedio <code>funs(mean)</code></p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>agg_mlm<span class="ot">=</span>mlm <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(schoolid) <span class="sc">%&gt;%</span> <span class="fu">summarise_all</span>(<span class="fu">funs</span>(mean)) <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(agg_mlm, <span class="at">type =</span> <span class="st">"text"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="comparando-regresiones" class="level2">
+<h2 class="anchored" data-anchor-id="comparando-regresiones">Comparando regresiones</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>reg5_agg<span class="ot">&lt;-</span> <span class="fu">lm</span>(mathach<span class="sc">~</span>ses<span class="sc">+</span>female<span class="sc">+</span>sector<span class="sc">+</span>minority, <span class="at">data=</span>agg_mlm)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(reg5,reg5_agg, <span class="at">title =</span> <span class="st">"Comparación de modelos"</span>,<span class="at">column.labels=</span><span class="fu">c</span>(<span class="st">"Individual"</span>,<span class="st">"Agregado"</span>), <span class="at">type =</span><span class="st">'text'</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Comparación de modelos
+=====================================================================
+                                   Dependent variable:               
+                    -------------------------------------------------
+                                         mathach                     
+                           Individual                Agregado        
+                               (1)                      (2)          
+---------------------------------------------------------------------
+ses                         2.364***                 4.204***        
+                             (0.099)                  (0.418)        
+                                                                     
+female                      -1.422***                -1.997***       
+                             (0.146)                  (0.532)        
+                                                                     
+sector                      2.255***                 1.635***        
+                             (0.149)                  (0.302)        
+                                                                     
+minority                    -3.112***                -2.343***       
+                             (0.170)                  (0.534)        
+                                                                     
+Constant                    13.242***                13.613***       
+                             (0.134)                  (0.347)        
+                                                                     
+---------------------------------------------------------------------
+Observations                  7,185                     160          
+R2                            0.197                    0.711         
+Adjusted R2                   0.196                    0.703         
+Residual Std. Error     6.166 (df = 7180)        1.699 (df = 155)    
+F Statistic         440.111*** (df = 4; 7180) 95.124*** (df = 4; 155)
+=====================================================================
+Note:                                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
+</div>
+</div>
+<p>¿Qué diferencias existen entre ambas estimaciones? ¿Qué problemas o sesgos podría ocasionar el realizar estimaciones paralelamente en dos niveles?</p>
+</section>
+</section>
+<section id="foro" class="level1">
+<h1>Foro</h1>
+<script src="https://giscus.app/client.js" data-repo="cursos-metodos-facso/multinivel" data-repo-id="MDEwOlJlcG9zaXRvcnkyMDA3MTE2MDk=" data-category="Q&amp;A" data-category-id="DIC_kwDOC_aduc4CYhjI" data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="es" crossorigin="anonymous" async="">
+</script>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Content <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2023 by <a href="https://www.jc-castillo.com">Juan Castillo</a> <br> All content licensed under a <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> <i class="fa-brands fa-creative-commons-nc" aria-label="creative-commons-nc"></i> <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)</a></div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">Made with <i class="fa-brands fa-r-project" aria-label="r-project"></i> and <a href="https://quarto.org/">Quarto</a><br> <a href="https://github.com/cursos-metodos-facso/multinivel">View the source at <i class="fa-brands fa-github" aria-label="github"></i> GitHub</a></div>
+  </div>
+</footer>
+
+
+
+</body></html>

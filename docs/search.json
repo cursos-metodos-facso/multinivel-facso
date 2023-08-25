@@ -126,11 +126,88 @@
     "text": "Finding the CACE/LATE with IV/2SLS\nDoing that is super tedious though! What if there was an easier way to find the effect of the bed net program for just the compliers? We can do this with IV/2SLS regression by using assignment to treatment as an instrument.\nAssignment to treatment works as an instrument because it’s (1) relevant, since being told to use bed nets is probably highly correlated with using bed nets, (2) exclusive, since the only way that being told to use bed nets can cause changes in health is through the actual use of the bed nets, and (3) exogenous, since being told to use bed nets probably isn’t related to other things that cause health.\nHere’s a 2SLS regression with assignment to treatment as the instrument:\n\n\nCode\nmodel_2sls &lt;- iv_robust(health ~ bed_net | treatment, data = bed_nets)\ntidy(model_2sls)\n##             term estimate std.error statistic   p.value conf.low conf.high   df outcome\n## 1    (Intercept)    38.12    0.5151     74.01 0.000e+00    37.11     39.13 1998  health\n## 2 bed_netBed net    14.43    1.2538     11.51 1.038e-29    11.97     16.89 1998  health\n\n\nThe coefficient for bed_net is identical to the CACE that we found manually! Instrumental variables are helpful for isolated program effects to only compliers when you’re dealing with noncompliance."
   },
   {
+    "objectID": "content/03-content.html",
+    "href": "content/03-content.html",
+    "title": "Presentación",
+    "section": "",
+    "text": "Documento de presentación\n\n\n\n\nForo"
+  },
+  {
     "objectID": "content/01-content.html",
     "href": "content/01-content.html",
     "title": "Presentación",
     "section": "",
     "text": "Documento de presentación\n\n\n\n\nForo"
+  },
+  {
+    "objectID": "assignment/02-practico.html",
+    "href": "assignment/02-practico.html",
+    "title": "Práctica 2. Datos y estimaciones en dos niveles",
+    "section": "",
+    "text": "Preparar y manipular datos a distintos niveles y comprender la diferencia de estimaciones a distintos niveles."
+  },
+  {
+    "objectID": "assignment/02-practico.html#objetivo-de-la-práctica",
+    "href": "assignment/02-practico.html#objetivo-de-la-práctica",
+    "title": "Práctica 2. Datos y estimaciones en dos niveles",
+    "section": "",
+    "text": "Preparar y manipular datos a distintos niveles y comprender la diferencia de estimaciones a distintos niveles."
+  },
+  {
+    "objectID": "assignment/02-practico.html#seleccionar-variables-de-interes",
+    "href": "assignment/02-practico.html#seleccionar-variables-de-interes",
+    "title": "Práctica 2. Datos y estimaciones en dos niveles",
+    "section": "Seleccionar variables de interes",
+    "text": "Seleccionar variables de interes\n\nmlm=mlm %&gt;% select(minority,female,ses,mathach,size,sector,pracad,disclim,himinty,mnses,schoolid) %&gt;% as.data.frame()\ndim(mlm)\n\n[1] 7185   11\n\nhead(mlm) # Muestra los primeros 10 casos para cada variable\n\n  minority female    ses mathach size sector pracad disclim himinty     mnses\n1        0      1 -1.528   5.876  842      0   0.35   1.597       0 -0.434383\n2        0      1 -0.588  19.708  842      0   0.35   1.597       0 -0.434383\n3        0      0 -0.528  20.349  842      0   0.35   1.597       0 -0.434383\n4        0      0 -0.668   8.781  842      0   0.35   1.597       0 -0.434383\n5        0      0 -0.158  17.898  842      0   0.35   1.597       0 -0.434383\n6        0      0  0.022   4.583  842      0   0.35   1.597       0 -0.434383\n  schoolid\n1     1224\n2     1224\n3     1224\n4     1224\n5     1224\n6     1224\n\nsummary(mlm) # Descriptivos generales (evaluación de datos perdidos)\n\n    minority          female            ses               mathach      \n Min.   :0.0000   Min.   :0.0000   Min.   :-3.758000   Min.   :-2.832  \n 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:-0.538000   1st Qu.: 7.275  \n Median :0.0000   Median :1.0000   Median : 0.002000   Median :13.131  \n Mean   :0.2747   Mean   :0.5282   Mean   : 0.000143   Mean   :12.748  \n 3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.: 0.602000   3rd Qu.:18.317  \n Max.   :1.0000   Max.   :1.0000   Max.   : 2.692000   Max.   :24.993  \n      size          sector           pracad          disclim       \n Min.   : 100   Min.   :0.0000   Min.   :0.0000   Min.   :-2.4160  \n 1st Qu.: 565   1st Qu.:0.0000   1st Qu.:0.3200   1st Qu.:-0.8170  \n Median :1016   Median :0.0000   Median :0.5300   Median :-0.2310  \n Mean   :1057   Mean   :0.4931   Mean   :0.5345   Mean   :-0.1319  \n 3rd Qu.:1436   3rd Qu.:1.0000   3rd Qu.:0.7000   3rd Qu.: 0.4600  \n Max.   :2713   Max.   :1.0000   Max.   :1.0000   Max.   : 2.7560  \n    himinty         mnses               schoolid   \n Min.   :0.00   Min.   :-1.1939460   Min.   :1224  \n 1st Qu.:0.00   1st Qu.:-0.3230000   1st Qu.:3020  \n Median :0.00   Median : 0.0320000   Median :5192  \n Mean   :0.28   Mean   : 0.0001434   Mean   :5278  \n 3rd Qu.:1.00   3rd Qu.: 0.3269123   3rd Qu.:7342  \n Max.   :1.00   Max.   : 0.8249825   Max.   :9586"
+  },
+  {
+    "objectID": "assignment/02-practico.html#tabla-descriptiva-con-stargazer",
+    "href": "assignment/02-practico.html#tabla-descriptiva-con-stargazer",
+    "title": "Práctica 2. Datos y estimaciones en dos niveles",
+    "section": "Tabla descriptiva con stargazer:",
+    "text": "Tabla descriptiva con stargazer:\nstargazer posee tres opciones básicas de output: text, html o latex (defecto). Si se quiere ver el contenido directamente en formato txt en la consola de R con fines exploratorios, usar text. Si se quiere reportar luego via knitr a html cambiar a html, y si se quiere exportar a pdf cambiar a Latex. Recomendación general: dejar inicialmente como text hasta el reporte final de resultados, facilita la visualización en la consola y no requiere tener que compilar para ver el resultado (en el caso de trabajar con Rmarkdown)\n\nstargazer(mlm, title = \"Descriptivos generales\", type='text')\n\n\nDescriptivos generales\n=================================================\nStatistic   N     Mean    St. Dev.   Min    Max  \n-------------------------------------------------\nminority  7,185   0.275     0.446     0      1   \nfemale    7,185   0.528     0.499     0      1   \nses       7,185  0.0001     0.779   -3.758 2.692 \nmathach   7,185  12.748     6.878   -2.832 24.993\nsize      7,185 1,056.862  604.172   100   2,713 \nsector    7,185   0.493     0.500     0      1   \npracad    7,185   0.534     0.251   0.000  1.000 \ndisclim   7,185  -0.132     0.944   -2.416 2.756 \nhiminty   7,185   0.280     0.449     0      1   \nmnses     7,185  0.0001     0.414   -1.194 0.825 \nschoolid  7,185 5,277.898 2,499.578 1,224  9,586 \n-------------------------------------------------\n\n\n\ny con html…\n\nstargazer(mlm, title = \"Descriptivos generales\", type='html')\n\n\n\nDescriptivos generales\n\n\n\n\n\n\n\nStatistic\n\n\nN\n\n\nMean\n\n\nSt. Dev.\n\n\nMin\n\n\nMax\n\n\n\n\n\n\n\n\nminority\n\n\n7,185\n\n\n0.275\n\n\n0.446\n\n\n0\n\n\n1\n\n\n\n\nfemale\n\n\n7,185\n\n\n0.528\n\n\n0.499\n\n\n0\n\n\n1\n\n\n\n\nses\n\n\n7,185\n\n\n0.0001\n\n\n0.779\n\n\n-3.758\n\n\n2.692\n\n\n\n\nmathach\n\n\n7,185\n\n\n12.748\n\n\n6.878\n\n\n-2.832\n\n\n24.993\n\n\n\n\nsize\n\n\n7,185\n\n\n1,056.862\n\n\n604.172\n\n\n100\n\n\n2,713\n\n\n\n\nsector\n\n\n7,185\n\n\n0.493\n\n\n0.500\n\n\n0\n\n\n1\n\n\n\n\npracad\n\n\n7,185\n\n\n0.534\n\n\n0.251\n\n\n0.000\n\n\n1.000\n\n\n\n\ndisclim\n\n\n7,185\n\n\n-0.132\n\n\n0.944\n\n\n-2.416\n\n\n2.756\n\n\n\n\nhiminty\n\n\n7,185\n\n\n0.280\n\n\n0.449\n\n\n0\n\n\n1\n\n\n\n\nmnses\n\n\n7,185\n\n\n0.0001\n\n\n0.414\n\n\n-1.194\n\n\n0.825\n\n\n\n\nschoolid\n\n\n7,185\n\n\n5,277.898\n\n\n2,499.578\n\n\n1,224\n\n\n9,586\n\n\n\n\n\n\n\n\n::: Para que se pueda obtener la tabla en html se debe agregar en las opciones del chunk en R results='asis' :::\nDatos perdidos: crear una nueva base sin missing values (Listwise Deletion) (solo recomendado para objetos que contienen las variables a incluir en el modelo)\n\nmlm2=na.omit(mlm) #Sacar missing data\nnames(mlm2)\nsummary(mlm2)"
+  },
+  {
+    "objectID": "assignment/02-practico.html#exploración-visual-de-datos",
+    "href": "assignment/02-practico.html#exploración-visual-de-datos",
+    "title": "Práctica 2. Datos y estimaciones en dos niveles",
+    "section": "Exploración visual de datos",
+    "text": "Exploración visual de datos\n\nhist(mlm$mathach, xlim = c(0,30))\n\n\n\n\n\nsummary(mlm$mathach)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n -2.832   7.275  13.131  12.748  18.317  24.993 \n\nscatterplot(mlm$mathach ~ mlm$ses, data=mlm, xlab=\"SES\", ylab=\"Math Score\", main=\"Math on SES\", smooth=FALSE)"
+  },
+  {
+    "objectID": "assignment/02-practico.html#matriz-de-correlaciones-de-un-subset-de-variables",
+    "href": "assignment/02-practico.html#matriz-de-correlaciones-de-un-subset-de-variables",
+    "title": "Práctica 2. Datos y estimaciones en dos niveles",
+    "section": "Matriz de correlaciones de un subset de variables",
+    "text": "Matriz de correlaciones de un subset de variables\n\ncormat=mlm %&gt;% select(mathach,ses,sector,size) %&gt;% cor()\nround(cormat, digits=2)\n\n        mathach   ses sector  size\nmathach    1.00  0.36   0.20 -0.05\nses        0.36  1.00   0.19 -0.07\nsector     0.20  0.19   1.00 -0.42\nsize      -0.05 -0.07  -0.42  1.00\n\ncorrplot.mixed(cormat)"
+  },
+  {
+    "objectID": "assignment/02-practico.html#nivel-1",
+    "href": "assignment/02-practico.html#nivel-1",
+    "title": "Práctica 2. Datos y estimaciones en dos niveles",
+    "section": "Nivel 1",
+    "text": "Nivel 1\n\nreg1&lt;- lm(mathach~1, data=mlm)\nreg2&lt;- lm(mathach~ses, data=mlm)\nreg3&lt;- lm(mathach~ses+female, data=mlm)\nreg4&lt;- lm(mathach~ses+female+sector, data=mlm)\nreg5&lt;- lm(mathach~ses+female+sector+minority, data=mlm)\nsummary(reg5)\n\n\nCall:\nlm(formula = mathach ~ ses + female + sector + minority, data = mlm)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-20.2286  -4.5076   0.2104   4.7472  17.8078 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) 13.24158    0.13386  98.924   &lt;2e-16 ***\nses          2.36392    0.09946  23.768   &lt;2e-16 ***\nfemale      -1.42166    0.14608  -9.732   &lt;2e-16 ***\nsector       2.25492    0.14906  15.127   &lt;2e-16 ***\nminority    -3.11239    0.17029 -18.277   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 6.166 on 7180 degrees of freedom\nMultiple R-squared:  0.1969,    Adjusted R-squared:  0.1965 \nF-statistic: 440.1 on 4 and 7180 DF,  p-value: &lt; 2.2e-16\n\n\n\nstargazer(reg5, title = \"Regresión datos individuales\", type='text')\n\n\nRegresión datos individuales\n===============================================\n                        Dependent variable:    \n                    ---------------------------\n                              mathach          \n-----------------------------------------------\nses                          2.364***          \n                              (0.099)          \n                                               \nfemale                       -1.422***         \n                              (0.146)          \n                                               \nsector                       2.255***          \n                              (0.149)          \n                                               \nminority                     -3.112***         \n                              (0.170)          \n                                               \nConstant                     13.242***         \n                              (0.134)          \n                                               \n-----------------------------------------------\nObservations                   7,185           \nR2                             0.197           \nAdjusted R2                    0.196           \nResidual Std. Error      6.166 (df = 7180)     \nF Statistic          440.111*** (df = 4; 7180) \n===============================================\nNote:               *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01"
+  },
+  {
+    "objectID": "assignment/02-practico.html#diagnóstico-de-residuos-con-librería-car",
+    "href": "assignment/02-practico.html#diagnóstico-de-residuos-con-librería-car",
+    "title": "Práctica 2. Datos y estimaciones en dos niveles",
+    "section": "Diagnóstico de residuos (con librería car)",
+    "text": "Diagnóstico de residuos (con librería car)\n\ninfluenceIndexPlot(reg5, vars=c(\"Cook\", \"Studentized\", \"hat\"), id.n=5)\n\n\n\ninfluencePlot(reg5, id.n=3) # el tama~no de los circulos se refiere a la D de Cook\n\n\n\n\n        StudRes          Hat        CookD\n869   2.6047540 0.0013831364 0.0018779316\n1629 -2.2407411 0.0020743123 0.0020861529\n3523 -3.2842968 0.0007451964 0.0016066368\n5321 -1.4359364 0.0035373357 0.0014636979\n6033 -0.1116449 0.0042083659 0.0000105369\n7136 -3.2099858 0.0007110209 0.0014644182"
+  },
+  {
+    "objectID": "assignment/02-practico.html#generación-de-base-agregada",
+    "href": "assignment/02-practico.html#generación-de-base-agregada",
+    "title": "Práctica 2. Datos y estimaciones en dos niveles",
+    "section": "Generación de base agregada",
+    "text": "Generación de base agregada\n\nUsando la funcion group_by (agrupar por) de la librería dplyr\nSe agrupa por la variable cluster, que identifica a las unidades de nivel 2 (en este caso, schoolid)\nPor defecto se hace con el promedio, pero se pueden hacer otras funciones como contar, porcentajes, mediana, etc.\n\nPara ello:\n\ngeneramos el objeto agg_mlm desde el objeto mlm\nagrupando por la variable cluster schoolid\nagregamos (colapsamos) todas summarise_all por el promedio funs(mean)\n\n\nagg_mlm=mlm %&gt;% group_by(schoolid) %&gt;% summarise_all(funs(mean)) %&gt;% as.data.frame()\nstargazer(agg_mlm, type = \"text\")"
+  },
+  {
+    "objectID": "assignment/02-practico.html#comparando-regresiones",
+    "href": "assignment/02-practico.html#comparando-regresiones",
+    "title": "Práctica 2. Datos y estimaciones en dos niveles",
+    "section": "Comparando regresiones",
+    "text": "Comparando regresiones\n\nreg5_agg&lt;- lm(mathach~ses+female+sector+minority, data=agg_mlm)\nstargazer(reg5,reg5_agg, title = \"Comparación de modelos\",column.labels=c(\"Individual\",\"Agregado\"), type ='text')\n\n\nComparación de modelos\n=====================================================================\n                                   Dependent variable:               \n                    -------------------------------------------------\n                                         mathach                     \n                           Individual                Agregado        \n                               (1)                      (2)          \n---------------------------------------------------------------------\nses                         2.364***                 4.204***        \n                             (0.099)                  (0.418)        \n                                                                     \nfemale                      -1.422***                -1.997***       \n                             (0.146)                  (0.532)        \n                                                                     \nsector                      2.255***                 1.635***        \n                             (0.149)                  (0.302)        \n                                                                     \nminority                    -3.112***                -2.343***       \n                             (0.170)                  (0.534)        \n                                                                     \nConstant                    13.242***                13.613***       \n                             (0.134)                  (0.347)        \n                                                                     \n---------------------------------------------------------------------\nObservations                  7,185                     160          \nR2                            0.197                    0.711         \nAdjusted R2                   0.196                    0.703         \nResidual Std. Error     6.166 (df = 7180)        1.699 (df = 155)    \nF Statistic         440.111*** (df = 4; 7180) 95.124*** (df = 4; 155)\n=====================================================================\nNote:                                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01\n\n\n¿Qué diferencias existen entre ambas estimaciones? ¿Qué problemas o sesgos podría ocasionar el realizar estimaciones paralelamente en dos niveles?"
   },
   {
     "objectID": "assignment/01-practico.html",
@@ -222,6 +299,13 @@
     "title": "Instrucciones generales",
     "section": "Sobre errores y consultas sobre problemas con R y ejecución de código",
     "text": "Sobre errores y consultas sobre problemas con R y ejecución de código\nEn caso de problemas con ejecución de código, se sugiere intentar solucionarlo autónomamente por no más de 10 minutos, si los problemas siguen entonces consultar.\nSe sugiere que las consultas sobre problemas en la ejecución del código y otros se realicen en los foros al final de los prácticos correspondientes (en Giscus), para lo cual se requiere solo habilitar una cuenta en Github. Al hacer la consulta, adjuntar la siguiente información:\n\nCódigo completo hasta que se produce el problema\nIndicar línea del código donde se produce el problema\nAdjuntar el resultado del output de la información de la sesión (sessionInfo())\n\n\nInstalación de R & RStudio\nPara esta versión del curso vamos a trabajar con el programa R Version 4.3 y con RStudio, que ofrece un entorno más amigable para trabajar con R.\nPara instalar R: ir a https://cran.r-project.org/index.html y bajar/instalar la versión correspondiente a la plataforma utilizada (Windows, Mac o Linux)\nPara instalar RStudio: ir a https://rstudio.com/products/rstudio/ y bajar/instalar RStudio desktop, Open Source License (libre).\nEn caso de dudas se puede revisar el siguiente video tutorial de instalación de R & RStudio, preparado por Julio Iturra (apoyo docente) del curso Estadística Multivariada 2020:\n\n\n\n\n\nSi por alguna razón se prefiere trabajar sin descargar, también se puede utilizar RCloud, abajo un tutorial preparado por Valentina Andrade para el curso de Estadística Multivariada:\n\n\n\n\n\n\n\nSobre el trabajo en hojas de código en RStudio\n\nEl trabajo de análisis en RStudio se efectua en una hoja de código (o R script o sintaxis, o para los usuarios de Stata la do-file), que es donde se anotan los comandos y funciones. Para abrir una hoja, en RStudio ir a File &gt; New File &gt; R Script (o ctrl+shift+N),y aparecerá un panel con una pestaña “Untitled” (sin título). Esta es la hoja de código donde se anotan los comandos.\nLos contenidos de las hojas de código son básicamente 2:\n\ncomandos o funciones: se escriben en la hoja, y para ejecutarlos se debe posicionar el cursor en la línea respectiva y ctrl+enter, el resultado aparecerá en el panel de resultados o Consola.\ntexto: para escribir títulos, comentarios, y todo lo que permita entender qué se está haciendo, al principio de la línea respectiva escribir el signo #\n\nPara grabar nuestra hoja de código y así respaldar nuestros análisis, File &gt; Save (o ctrl+s), y dar un nombre al archivo. Recordar: breve, sin espacios ni tildes ni eñes. Por defecto, la extensión de estos archivos es .R"
+  },
+  {
+    "objectID": "content/02-content.html",
+    "href": "content/02-content.html",
+    "title": "Presentación",
+    "section": "",
+    "text": "En esta sesión se desarrolla el práctico 1 de manera autónoma.\n\nForo"
   },
   {
     "objectID": "content/index.html",

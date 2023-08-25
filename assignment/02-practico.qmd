@@ -1,0 +1,215 @@
+---
+title: "Práctica 2. Datos y estimaciones en dos niveles"
+date: "2023-08-25"
+lang: es
+website:
+  comments:
+    giscus:
+      repo: cursos-metodos-facso/multinivel
+---
+
+```{r setup, include=FALSE, cache = TRUE}
+require("knitr")
+opts_chunk$set(warning=FALSE,
+             message=FALSE,
+             echo=TRUE,
+             cache = TRUE, fig.width=7, fig.height=5.2)
+```
+# Presentación
+
+## Objetivo de la práctica
+
+Preparar y manipular datos a distintos niveles y comprender la diferencia de estimaciones a distintos niveles.
+
+
+# Instalación de librerías
+
+```{r}
+pacman::p_load(
+haven,  # lectura de datos formato externo
+car, # función scatterplot y otras de manejo de datos
+corrplot, # correlaciones
+dplyr, # varios gestión de datos
+stargazer, # tablas
+lme4) # multilevel
+```
+
+# Lectura de datos High School & Beyond (HSB
+
+High School & Beyond (HSB) es una muestra representativa nacional de educación secundaria publica y católica de USA implementada por el National Center for Education Statistics (NCES). Esta base de datos se utiliza en varios textos dedicados a multinivel.
+
+-   Más información en [https://nces.ed.gov/surveys/hsb/](http://nces.ed.gov/surveys/hsb)
+
+- En formato stata desde sitio web
+
+```{r, echo=TRUE}
+mlm = read_dta("http://www.stata-press.com/data/mlmus3/hsb.dta")
+```
+
+`mlm` es el nombre que le daremos al objeto base de datos "High School and Beyond" en nuestra práctica.
+
+*Variables relevantes para ejercicios:*
+
+- Nivel 1:
+  - minority, an indicator for student ethnicity (1 = minority, 0 = other)
+  - female, an indicator for student gender (1 = female, 0 = male)
+  - ses, a standardized scale constructed from variables measuring parental education, occupation, and income
+  - mathach, a measure of mathematics achievement
+
+- Nivel 2
+  - size (school enrollment)
+  - sector (1 = Catholic, 0 = public)
+  - pracad (proportion of students in the academic track)
+  - disclim (a scale measuring disciplinary climate)
+  - himnty (1 = more than 40% minority enrollment, 0 = less than 40%)
+  - mnses (mean of the SES values for the students in this school who are included in the level-1 file)
+
+- Cluster variable: schoolid
+
+# Exploración y descripción
+
+```{r}
+dim(mlm) # dimensiones de base de datos
+names(mlm) # Muestra los nombres de las variables en la base
+```
+
+## Seleccionar variables de interes
+
+```{r}
+mlm=mlm %>% select(minority,female,ses,mathach,size,sector,pracad,disclim,himinty,mnses,schoolid) %>% as.data.frame()
+dim(mlm)
+head(mlm) # Muestra los primeros 10 casos para cada variable
+summary(mlm) # Descriptivos generales (evaluación de datos perdidos)
+```
+
+## Tabla descriptiva con stargazer:
+
+stargazer posee tres opciones básicas de output: text, html o latex (defecto). Si se quiere ver el contenido directamente en formato txt en la consola de R con fines exploratorios, usar text. Si se quiere reportar luego via knitr a html cambiar a html, y si se quiere exportar a pdf cambiar a Latex. Recomendación general: dejar inicialmente como text hasta el reporte final de resultados, facilita la visualización en la consola y no requiere tener que compilar para ver el resultado (en el caso de trabajar con Rmarkdown)
+
+```{r}
+stargazer(mlm, title = "Descriptivos generales", type='text')
+```
+
+- y con html...
+
+```{r results='asis'}
+stargazer(mlm, title = "Descriptivos generales", type='html')
+```
+
+:::
+Para que se pueda obtener la tabla en html se debe agregar en las opciones del chunk en R `results='asis'`
+:::
+
+
+**Datos perdidos**: crear una nueva base sin missing values (Listwise Deletion) (solo recomendado para objetos que contienen las variables a incluir en el modelo)
+
+```{r results = "hide"}
+mlm2=na.omit(mlm) #Sacar missing data
+names(mlm2)
+summary(mlm2)
+```
+
+## Exploración visual de datos
+
+```{r}
+hist(mlm$mathach, xlim = c(0,30))
+```
+
+```{r}
+summary(mlm$mathach)
+scatterplot(mlm$mathach ~ mlm$ses, data=mlm, xlab="SES", ylab="Math Score", main="Math on SES", smooth=FALSE)
+
+```
+
+## Matriz de correlaciones de un subset de variables
+
+```{r}
+cormat=mlm %>% select(mathach,ses,sector,size) %>% cor()
+round(cormat, digits=2)
+corrplot.mixed(cormat)
+```
+
+# Estimación de regresiones
+
+## Nivel 1
+
+```{r}
+reg1<- lm(mathach~1, data=mlm)
+reg2<- lm(mathach~ses, data=mlm)
+reg3<- lm(mathach~ses+female, data=mlm)
+reg4<- lm(mathach~ses+female+sector, data=mlm)
+reg5<- lm(mathach~ses+female+sector+minority, data=mlm)
+summary(reg5)
+```
+
+```{r}
+stargazer(reg5, title = "Regresión datos individuales", type='text')
+```
+
+## Diagnóstico de residuos (con librería `car`)
+
+```{r, warning=FALSE}
+influenceIndexPlot(reg5, vars=c("Cook", "Studentized", "hat"), id.n=5)
+influencePlot(reg5, id.n=3) # el tama~no de los circulos se refiere a la D de Cook
+```
+
+
+# Preparando datos agregados
+
+En esta sección vamos a generar una base de datos agregada o colapsada, es decir, una base de datos donde los casos serán escuelas (no individuos). El objetivo de generar esta base es para poder realizar comparaciones con las estimaciones realizadas con la base de datos individuales. Estas estimaciones que realizaremos por separados serán luego integradas en una sola estimación mediante métodos multinivel. 
+
+
+## Generación de base agregada
+
+- Usando la funcion `group_by` (agrupar por) de la librería `dplyr`
+- Se agrupa por la variable **cluster**, que identifica a las unidades de nivel 2 (en este caso, `schoolid`)
+- Por defecto se hace con el promedio, pero se pueden hacer otras funciones como contar, porcentajes, mediana, etc.
+
+
+Para ello:
+
+  - generamos el objeto `agg_mlm` desde el objeto `mlm`
+
+  - agrupando por la variable cluster `schoolid`
+
+  - agregamos (colapsamos) todas `summarise_all` por el promedio `funs(mean)`
+
+
+
+```{r results="hide", warning = FALSE}
+agg_mlm=mlm %>% group_by(schoolid) %>% summarise_all(funs(mean)) %>% as.data.frame()
+stargazer(agg_mlm, type = "text")
+```
+
+
+## Comparando regresiones
+
+
+```{r}
+reg5_agg<- lm(mathach~ses+female+sector+minority, data=agg_mlm)
+stargazer(reg5,reg5_agg, title = "Comparación de modelos",column.labels=c("Individual","Agregado"), type ='text')
+```
+
+
+¿Qué diferencias existen entre ambas estimaciones? ¿Qué problemas o sesgos podría ocasionar el realizar estimaciones paralelamente en dos niveles?
+
+# Foro
+
+<script src="https://giscus.app/client.js"
+        data-repo="cursos-metodos-facso/multinivel"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyMDA3MTE2MDk="
+        data-category="Q&A"
+        data-category-id="DIC_kwDOC_aduc4CYhjI"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="es"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+

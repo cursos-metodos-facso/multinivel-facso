@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Modelos Multinivel</title>
+    <meta charset="utf-8" />
+    <meta name="author" content=".small[Juan Carlos Castillo    Departamento de Sociología - UCH / COES   ]" />
+    <script src="libs/header-attrs-2.21/header-attrs.js"></script>
+    <script src="libs/fabric-4.3.1/fabric.min.js"></script>
+    <link href="libs/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <link rel="stylesheet" href="css/custom_2020.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+class: front
+
+
+
+
+
+
+
+
+.pull-left-wide[
+# Modelos multinivel]
+
+.pull-right-narrow[![:scale 85%](img/logo.png)]
+
+## Unidades en contexto
+
+----
+.pull-left[
+
+## Juan Carlos Castillo
+## Sociología FACSO - UChile
+## 2do Sem 2023 
+## [.yellow[multinivel-facso.netlify.com]](https://multinivel-facso.netlify.com)
+]
+    
+
+.pull-right-narrow[
+.center[
+.content-block-gray[
+## Sesión 3: 
+## **.yellow[Estimación en distintos niveles]**]
+]
+]
+---
+
+layout: true
+class: animated, fadeIn
+
+---
+class: middle
+
+#  - Lectura: Finch cap. 2: Introduction to Multilevel Data Structure
+&lt;br&gt;
+# - Práctico: Preparación de datos con R
+---
+class: roja right
+
+# Contenidos
+
+
+## .yellow[1- Resumen sesión anterior]
+
+## 2- Regresión y residuos en contexto
+
+## 3- Estimación con variables agregadas
+
+
+
+---
+# Resumen: Investigación sociológica y contexto
+
+![](images/macromicro.jpg)
+.right[
+(adaptado de Coleman, 1986)]
+
+
+
+---
+# Datos anidados / con estructura jerárquica
+----
+
+| IDi | IDg | var_i1 | var_i2 | var_g1 | var_g2 |
+|-----|-----|--------|--------|--------|--------|
+| 1   | 1   | 8      | 7      | 4      | 1      |
+| 2   | 1   | 5      | 5      | 4      | 1      |
+| 3   | 1   | 3      | 1      | 4      | 1      |
+| 4   | 2   | 3      | 2      | 6      | 8      |
+| 5   | 2   | 1      | 4      | 6      | 8      |
+| 6   | 2   | 7      | 5      | 6      | 8      |
+
+---
+## Problemas asociados a la inferencia con datos anidados
+
+--
+
+### Falacia ecológica:
+
+- Conclusiones erradas acerca de individuos basados en datos de contexto
+
+--
+
+### Falacia individualista:
+
+-   Conclusiones erradas acerca de contextos basados en datos de individuos
+
+
+---
+.pull-left-narrow[
+# Falacia ecológica
+]
+
+.pull-right-wide[
+![](images/fal5.png)
+]
+
+---
+# Formas de estimación multinivel
+
+Modelo multinivel con predictores individuales (x)  y contextuales (z)
+
+![:scale 60%](images/mod4.png)
+
+---
+class: roja right
+
+# Contenidos
+
+
+## 1- Resumen sesión anterior
+
+## .yellow[2- Regresión y residuos en contexto]
+
+## 3- Estimación con variables agregadas
+
+
+
+---
+# Objetivos del modelo de regresión
+
+
+1 - Conocer la .red[variación] de una variable (dependiente, Y) de acuerdo a la variación de otra variable (independiente, X):
+
+  -   Ej: En qué medida el puntaje PSU influye en el éxito académico en la universidad? ...
+
+
+---
+# Objetivos del modelo de regresión
+
+
+2 -  .red[Estimar] el valor de una variable de acuerdo al valor de otra
+(predicción)
+
+  -   Ej: Si una persona obtiene 600 puntos en la PSU, que promedio de notas en la universidad es probable que obtenga? 
+  
+(Atención: predicción no implica explicación)
+  
+---
+# Objetivos del modelo de regresión
+
+3 - Establecer en que medida esta asociación es .red[estadísticamente significativa] (inferencia)
+
+
+---
+## Bases 
+
+`$$\begin{aligned}
+Varianza=\sigma^2 &amp;= \frac{\sum_{i=1}^{n}(x_i - \bar{x})(x_i - \bar{x})} {n-1} =\frac{\sum_{i=1}^{n}(x_i - \bar{x})^2} {n-1} \\ \\
+Covarianza= 
+cov(x,y) &amp;= \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})} {n-1}
+\\ \\
+Correlación=r &amp;= \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})} {(n-1)\sigma_x \sigma_y }
+\end{aligned}$$`
+
+
+---
+# Regresión
+
+.pull-left-wide[
+-   La (co) variación general de Y respecto a X se puede expresar en una
+ecuación de la recta = modelo de regresión
+
+-   Para estimar la “mejor recta” se utiliza la *recta de mínimos
+cuadrados* (OLS – Ordinary Least Squares)
+
+- OLS es un estimador que minimiza la suma de
+los cuadrados de las distancias entre las observaciones y la recta
+en el eje vertical
+]
+
+.pull-right-narrow[
+![](images/ci_resid.png)
+]
+
+---
+# Ecuación de regresión
+
+### `$$Y=a+\beta X + e$$`
+
+--
+
+-   `\(a\)`= intercepto (o `\(\beta_0\)`), el valor de Y cuando X es 0
+
+--
+
+-   `\(b\)`= pendiente (coeficiente de regresión), es el valor que me permite
+estimar el puntaje de Y mediante el puntaje de X
+
+--
+
+-   `\(e\)`= residuo, da cuenta de las fuentes de variabilidad distintas de X en la predicción de Y. O sea, es la parte de Y que no es explicada por X.
+
+
+---
+# Coeficientes de regresión
+
+Estimación de los coeficientes de la ecuación:
+
+`$$\begin{aligned}
+b=\frac{\Sigma xy}{\Sigma x^2}&amp;=\frac{\Sigma((x-\bar{x})(y-\bar{y}))}{\Sigma (x-\bar{x})} \\ \\
+a&amp;=\bar{Y}-b \bar{X} \\ \\
+{Y}^{\prime }&amp;=a+bX
+\end{aligned}$$`
+
+
+--
+-   La ecuación de regresión permite predecir valores de Y para cada valor de X
+
+---
+# Descomposición de Y
+
+.center[
+![:scale 70%](images/resid_3.JPG)
+]
+
+`\begin{align*}
+SS_{tot}&amp;=SS_{reg} + SS_{error} \\ 
+\Sigma(y_i - \bar{y})^2&amp;=\Sigma (\hat{y}_i-\bar{y})^2 +\Sigma(y_i-\hat{y}_i)^2
+\end{align*}`
+
+---
+# Descomposición de Y
+
+`$$\begin{aligned}
+Y&amp;=\bar{Y}+({Y}^{\prime}-\bar{Y})+(Y-{Y}^{\prime})\\\\
+Y-\bar{Y}&amp;=({Y}^{\prime}-\bar{Y}) + (Y-{Y}^{\prime}) \\\\
+\Sigma(y_i - \bar{y})^2 &amp;=\Sigma (\bar{y}-\hat{y}_i)^2 + \Sigma(y_i-\hat{y}_i)^2 \\\\
+SS_{tot}&amp;=SS_{reg}+SS_{error}
+\end{aligned}$$`
+
+
+---
+# Descomposición de Y
+
+
+`$$SS_{tot}=SS_{reg}+SS_{error}$$`
+
+`$$\frac{SS_{tot}}{SS_{tot}}=\frac{SS_{reg}}{SS_{tot}}+\frac{SS_{error}}{SS_{tot}}$$`
+
+`$$1= \frac{SS_{reg}}{SS_{tot}} + \frac{SS_{error}}{SS_{tot}} \\
+\frac{SS_{reg}}{SS_{tot}}= ?$$`
+
+--
+
+`$$R^2$$`
+
+---
+class: roja, middle, center
+
+# Regresión con más de 1 nivel
+
+
+---
+## Residuos y dependencia contextual
+
+![:scale 50%](images/res_mul1.png)
+
+---
+## Residuos y dependencia contextual
+
+![:scale 50%](images/res_mul2.png)
+---
+## Residuos y dependencia contextual
+
+![:scale 50%](images/res_mul3.png)
+
+---
+## Residuos y dependencia contextual
+
+![:scale 50%](images/res_mul4.png)
+
+---
+# Implicancias para el modelo de regresión:
+
+-   Situaciones en que los residuos son distintos de manera sistemática de acuerdo a variables contextuales: .red[dependencia (contextual) de los residuos]
+
+- Si un modelo de regresión de 1 nivel se aplica en situaciones de dependiencia contextual, entonces puede aumentar el error en la estimación
+
+---
+# Alternativas
+
+-   Descomposición de la varianza de los residuos *entre* y
+*dentro* los grupos= en distintos niveles = **multinivel**.
+
+-   En concreto, se agrega un término de error adicional al modelo:
+`\(\mu_{0j}\)`
+
+-   Este término de error se expresa como un **efecto aleatorio** (como opuesto a *efecto fijo*)
+
+
+---
+## Regresión a distintos niveles
+
+![:scale 95%](images/paramet.JPG)
+
+---
+## Modelo con coeficientes aleatorios (RCM)
+
+-   Random Coefficients Models (RCM) o Mixed (effects) Models
+
+-   Forma de estimación de modelos multinivel
+
+-   Idea base: se agrega un parámetro *aleatorio* al modelo, es decir, que posee variación en relación a unidades de nivel 2.
+
+---
+class: roja right
+
+# Contenidos
+
+
+## 1- Resumen sesión anterior
+
+## 2- Regresión y residuos en contexto
+
+## .yellow[3- Estimación con variables agregadas]
+---
+## Práctica: High School &amp; Beyond (HSB) data
+
+  -   High School &amp; Beyond (HSB) es una muestra representativa nacional de educación secundaria publica y católica de USA implementada por el National Center for Education Statistics (NCES).
+
+-   Más información en [https://nces.ed.gov/surveys/hsb/](http://nces.ed.gov/surveys/hsb)
+
+-   Level 1 variables:
+
+  -   minority, etnicidad (1 = minority, 0 =other)
+
+  -   female, student gender (1 = female, 0 = male)
+
+  -   ses, (medida estandarizada de nivel socioeconómico en base a variables como educación de los padres, ocupación e ingreso)
+
+  -   **mathach**, logro en matemática (_math achievement_)
+
+---
+## Práctica: High School &amp; Beyond (HSB) data
+
+-   Level 2 variables:
+
+  -   size (matricula)
+
+  -   sector (1 = Catholic, 0 = public)
+
+  -   pracad (proportion of students in the academic track)
+
+  -   disclim (a scale measuring disciplinary climate)
+
+  -   himnty (1 = more than 40% minority enrollment, 0 = less than 40%)
+
+  -   meanses (mean of the SES values for the students in this school who are included in the level-1 file)
+
+-  **Cluster variable**= id (school id)
+
+
+---
+## Librerías y datos
+
+
+```r
+pacman::p_load(
+haven,  # lectura de datos formato externo
+car, # varias funciones, ej scatterplot
+dplyr, # varios gestión de datos
+stargazer, # tablas
+corrplot, # correlaciones
+ggplot2, # gráficos
+lme4) # multilevel
+```
+
+.medium[
+
+```r
+mlm &lt;-read_dta("http://www.stata-press.com/data/mlmus3/hsb.dta") # datos
+```
+]
+
+---
+## Ajuste datos
+
+.medium[
+
+```r
+dim(mlm)
+```
+
+```
+## [1] 7185   26
+```
+
+```r
+names(mlm)
+```
+
+```
+##  [1] "minority" "female"   "ses"      "mathach"  "size"     "sector"  
+##  [7] "pracad"   "disclim"  "himinty"  "schoolid" "mean"     "sd"      
+## [13] "sdalt"    "junk"     "sdalt2"   "num"      "se"       "sealt"   
+## [19] "sealt2"   "t2"       "t2alt"    "pickone"  "mmses"    "mnses"   
+## [25] "xb"       "resid"
+```
+]
+
+---
+
+# Seleccionar variables de interés
+
+
+```r
+mlm=mlm %&gt;% select(
+  minority,female,ses,mathach, # nivel 1
+  size, sector,mnses,schoolid) %&gt;%  # nivel 2
+  as.data.frame()
+```
+
+
+---
+## Nota: sobre `%&gt;%`
+
+- `%&gt;%` es conocido como "pipe operator", operador pipa o simplemente pipa
+
+- proviene de la librería `magrittr`, que es utilizada en `dplyr`
+
+- objetivo: hacer más fácil y eficiente el código, incorporando varias funciones en una sola línea / comando
+
+- avanza desde lo más general a lo más específico
+
+
+---
+## Descriptivos generales
+
+.pull-left-narrow[
+.medium[
+
+```r
+stargazer(
+  as.data.frame(mlm),
+  title = "Descriptivos generales", 
+  type='text')
+```
+]
+]
+
+.pull-right-wide[
+.small[
+
+```
+## 
+## Descriptivos generales
+## =================================================
+## Statistic   N     Mean    St. Dev.   Min    Max  
+## -------------------------------------------------
+## minority  7,185   0.275     0.446     0      1   
+## female    7,185   0.528     0.499     0      1   
+## ses       7,185  0.0001     0.779   -3.758 2.692 
+## mathach   7,185  12.748     6.878   -2.832 24.993
+## size      7,185 1,056.862  604.172   100   2,713 
+## sector    7,185   0.493     0.500     0      1   
+## mnses     7,185  0.0001     0.414   -1.194 0.825 
+## schoolid  7,185 5,277.898 2,499.578 1,224  9,586 
+## -------------------------------------------------
+```
+
+]
+]
+---
+## Descriptivos generales
+
+
+```r
+hist(mlm$mathach, xlim = c(0,30))
+```
+
+![](03-primera_est._files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+
+---
+## Descriptivos generales
+
+.pull-left[
+
+```r
+scatterplot(mlm$mathach ~ 
+  mlm$ses,
+  data=mlm, 
+  xlab="SES", 
+  ylab="Math Score",
+  main="Math on SES", 
+  smooth=FALSE)
+```
+]
+
+.pull-right[
+![](03-primera_est._files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+]
+---
+## Descriptivos generales
+
+.medium[
+
+```r
+cormat=mlm %&gt;%
+  select(mathach,ses,sector,size, mnses) %&gt;%
+  cor()
+round(cormat, digits=2)
+```
+
+```
+##         mathach   ses sector  size mnses
+## mathach    1.00  0.36   0.20 -0.05  0.34
+## ses        0.36  1.00   0.19 -0.07  0.53
+## sector     0.20  0.19   1.00 -0.42  0.36
+## size      -0.05 -0.07  -0.42  1.00 -0.13
+## mnses      0.34  0.53   0.36 -0.13  1.00
+```
+]
+---
+## Descriptivos generales
+
+
+```r
+corrplot.mixed(cormat)
+```
+
+![](03-primera_est._files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
+
+---
+## Datos agregados
+
+- Datos nivel 2:
+  - propios/idiosincráticos (ej: tamaño)
+  - agregados: generados a partir de datos nivel 1
+
+--
+- Una de las particularidades de los métodos multinivel es que permiten estimar y comparar efectos de la misma variable individual y agregada
+
+- Ejemplo:
+  - nivel socioeconómico individual
+  - nivel socioeconómico de la escuela
+
+
+--
+
+- Para ello, se procede a "agregar", generando una base de datos a nivel 2
+
+
+---
+## Datos agregados
+
+- Usando la funcion `group_by` (agrupar por) de la librería `dplyr`
+
+- Se agrupa por la variable **cluster**, que identifica a las unidades de nivel 2 (en este caso, `schoolid`)
+- Por defecto se hace con el promedio, pero se pueden hacer otras funciones como contar, porcentajes, mediana, etc.
+
+
+---
+# Generando base de datos agregados
+
+
+```r
+agg_mlm=mlm %&gt;% group_by(schoolid) %&gt;%
+  summarise_all(funs(mean)) %&gt;% as.data.frame()
+```
+
+  - generamos el objeto `agg_mlm` desde el objeto `mlm`
+
+  - agrupando por la variable cluster `schoolid`
+
+  - agregamos (colapsamos) todas `summarise_all` por el promedio `funs(mean)`
+
+---
+## Datos agregados
+
+.medium[
+
+```r
+stargazer(agg_mlm, type = "text")
+```
+
+```
+## 
+## ===============================================
+## Statistic  N    Mean    St. Dev.   Min    Max  
+## -----------------------------------------------
+## schoolid  160 5,309.994 2,547.683 1,224  9,586 
+## minority  160   0.275     0.301   0.000  1.000 
+## female    160   0.519     0.256   0.000  1.000 
+## ses       160  -0.006     0.414   -1.194 0.825 
+## mathach   160  12.621     3.118   4.240  19.719
+## size      160 1,097.825  629.506   100   2,713 
+## sector    160   0.438     0.498     0      1   
+## mnses     160  -0.006     0.414   -1.194 0.825 
+## -----------------------------------------------
+```
+]
+
+---
+## Comparación Modelos
+
+- Modelo con datos individuales
+
+
+```r
+reg&lt;- lm(mathach~ses+female+sector, data=mlm)
+```
+
+- Modelo con datos agregados
+
+
+```r
+reg_agg&lt;- lm(mathach~ses+female+sector, data=agg_mlm)
+```
+
+---
+
+- Generación tabla
+
+
+```r
+stargazer(reg,reg_agg,
+  column.labels=c("Individual","Agregado"),
+  type ='text')
+```
+
+---
+## Comparación Modelos
+.small[
+
+```r
+pacman::p_load(sjPlot,sjmisc,sjlabelled)
+tab_model(reg, reg_agg, show.ci=F, show.se = T, dv.labels = c("Individual", "Agregado"))
+```
+
+&lt;table style="border-collapse:collapse; border:none;"&gt;
+&lt;tr&gt;
+&lt;th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; "&gt;&amp;nbsp;&lt;/th&gt;
+&lt;th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; "&gt;Individual&lt;/th&gt;
+&lt;th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; "&gt;Agregado&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; "&gt;Predictors&lt;/td&gt;
+&lt;td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  "&gt;Estimates&lt;/td&gt;
+&lt;td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  "&gt;std. Error&lt;/td&gt;
+&lt;td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  "&gt;p&lt;/td&gt;
+&lt;td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  "&gt;Estimates&lt;/td&gt;
+&lt;td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  "&gt;std. Error&lt;/td&gt;
+&lt;td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col7"&gt;p&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; "&gt;(Intercept)&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;12.52&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;0.13&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;&lt;strong&gt;&amp;lt;0.001&lt;/strong&gt;&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;13.13&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;0.35&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"&gt;&lt;strong&gt;&amp;lt;0.001&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; "&gt;ses&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;2.88&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;0.10&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;&lt;strong&gt;&amp;lt;0.001&lt;/strong&gt;&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;5.19&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;0.37&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"&gt;&lt;strong&gt;&amp;lt;0.001&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; "&gt;female&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;&amp;#45;1.40&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;0.15&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;&lt;strong&gt;&amp;lt;0.001&lt;/strong&gt;&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;&amp;#45;1.97&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;0.56&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"&gt;&lt;strong&gt;0.001&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; "&gt;sector&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;1.96&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;0.15&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;&lt;strong&gt;&amp;lt;0.001&lt;/strong&gt;&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;1.25&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;0.31&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"&gt;&lt;strong&gt;&amp;lt;0.001&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;"&gt;Observations&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3"&gt;7185&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3"&gt;160&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;"&gt;R&lt;sup&gt;2&lt;/sup&gt; / R&lt;sup&gt;2&lt;/sup&gt; adjusted&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3"&gt;0.160 / 0.159&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3"&gt;0.675 / 0.668&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;/table&gt;
+]
+
+---
+class: roja, middle, center
+
+# ¿Qué problema puede haber al estimar un mismo modelo para variables individuales y agregadas?
+
+
+---
+class: front
+.pull-left-wide[
+# Modelos multinivel]
+
+.pull-right-narrow[![:scale 85%](img/logo.png)]
+
+## Unidades en contexto
+
+----
+.pull-left[
+
+## Juan Carlos Castillo
+## Sociología FACSO - UChile
+## 2do Sem 2023 
+## [.yellow[multinivel-facso.netlify.com]](https://multinivel-facso.netlify.com)
+]
+    
+
+.pull-right-narrow[
+.center[
+
+]
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://multinivel.netlify.com/docpres/xaringan_custom/macros.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "tomorrow-night-blue",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url("img/logo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 16.3em;
+  right: 31em;
+  width: 110px;
+  height: 70px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
