@@ -79,8 +79,6 @@ class: roja right
 .right[
 (adaptado de Coleman, 1986)]
 
-
-
 ---
 # Datos anidados / con estructura jerárquica
 ----
@@ -415,11 +413,12 @@ names(mlm)
 ```
 
 ```
-##  [1] "minority" "female"   "ses"      "mathach"  "size"     "sector"  
-##  [7] "pracad"   "disclim"  "himinty"  "schoolid" "mean"     "sd"      
-## [13] "sdalt"    "junk"     "sdalt2"   "num"      "se"       "sealt"   
-## [19] "sealt2"   "t2"       "t2alt"    "pickone"  "mmses"    "mnses"   
-## [25] "xb"       "resid"
+##  [1] "minority" "female"   "ses"      "mathach"  "size"    
+##  [6] "sector"   "pracad"   "disclim"  "himinty"  "schoolid"
+## [11] "mean"     "sd"       "sdalt"    "junk"     "sdalt2"  
+## [16] "num"      "se"       "sealt"    "sealt2"   "t2"      
+## [21] "t2alt"    "pickone"  "mmses"    "mnses"    "xb"      
+## [26] "resid"
 ```
 ]
 
@@ -493,7 +492,7 @@ stargazer(
 hist(mlm$mathach, xlim = c(0,30))
 ```
 
-![](03-primera_est._files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+![](03-primera_est_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
 
 ---
 ## Descriptivos generales
@@ -512,7 +511,7 @@ scatterplot(mlm$mathach ~
 ]
 
 .pull-right[
-![](03-primera_est._files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+![](03-primera_est_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
 ]
 ---
 ## Descriptivos generales
@@ -543,7 +542,7 @@ round(cormat, digits=2)
 corrplot.mixed(cormat)
 ```
 
-![](03-primera_est._files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
+![](03-primera_est_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
 
 ---
 ## Datos agregados

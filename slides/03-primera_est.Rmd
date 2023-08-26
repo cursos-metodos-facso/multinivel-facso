@@ -90,8 +90,6 @@ class: roja right
 ![](images/macromicro.jpg)
 .right[
 (adaptado de Coleman, 1986)]
-`r Cite (bib, "Coleman1986SocialTheorySocial")`
-
 
 ---
 # Datos anidados / con estructura jerárquica
