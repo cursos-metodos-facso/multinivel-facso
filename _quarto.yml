@@ -90,7 +90,7 @@ website:
               file: assignment/01-practico.qmd
             - text: "2: Datos y estimaciones en dos niveles"
               file: assignment/02-practico.qmd
-            - text: "3: Estimación modelos multinivel con lmer en RDatos y estimaciones en dos niveles"
+            - text: "3: Estimación modelos multinivel con lmer en R"
               file: assignment/03-practico.qmd
   page-footer:
     left: |
