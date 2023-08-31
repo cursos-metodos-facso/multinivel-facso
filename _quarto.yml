@@ -50,6 +50,8 @@ website:
         file: content/index.qmd
       - text: "Prácticos"
         file: assignment/index.qmd
+      - text: "Trabajos"
+        file: trabajos.qmd
       - text: "Recursos"
         file: resource/index.qmd
       - icon: cloud-fill
@@ -74,6 +76,8 @@ website:
               file: content/02-content.qmd
             - text: "Sesión 3"
               file: content/03-content.qmd
+            - text: "Sesión 4"
+              file: content/04-content.qmd
 
     - title: "Prácticos"
       contents:
@@ -86,7 +90,8 @@ website:
               file: assignment/01-practico.qmd
             - text: "2: Datos y estimaciones en dos niveles"
               file: assignment/02-practico.qmd
-
+            - text: "3: Estimación modelos multinivel con lmer en RDatos y estimaciones en dos niveles"
+              file: assignment/03-practico.qmd
   page-footer:
     left: |
       Content {{< fa brands creative-commons >}} {{< var course.copyright_year >}} by [{{< var instructor.name_no_title >}}]({{< var instructor.url >}}) <br>

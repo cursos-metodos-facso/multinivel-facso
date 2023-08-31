@@ -1,0 +1,135 @@
+---
+title: Programa
+lang: es
+---
+
+```{r setup, message=FALSE, warning=FALSE, include=FALSE}
+library(dplyr)
+library(tibble)
+library(pander)
+```
+
+::: {.grid .course-details .course-details-smaller}
+
+::: {.g-col-6}
+### Profesor
+
+- {{< fa user >}} &nbsp; [{{< var instructor.name >}}]({{< var instructor.url >}})
+- {{< fa university >}} &nbsp; {{< var instructor.office >}}
+- {{< fa envelope >}} &nbsp; <a href="mailto:{{< var instructor.email >}}">{{< var instructor.email >}}</a>
+- {{< fa calendar-check >}} &nbsp; [Agendar reunión]({{< var instructor.appointment_url >}})
+:::
+
+::: {.g-col-6}
+### Detales del curso
+
+- {{< fa calendar >}} &nbsp; {{< var course.days >}}
+- {{< fa calendar-alt >}} &nbsp; {{< var course.dates >}}
+- {{< fa clock >}} &nbsp; {{< var course.time >}}
+- {{< fa location-dot >}} &nbsp; {{< var course.location >}}
+- {{< fa brands slack >}} &nbsp; [Slack]({{< var course.slack >}})
+:::
+
+:::
+
+
+
+# Descripción
+
+Gran parte de la investigación sociológica hace referencia al contexto en que las personas viven y se desenvuelven, como por ejemplo lugares de trabajo, salas de clases, barrios, países. Sin embargo, modelos tradicionales como ANOVA y regresión poseen limitaciones a la hora de integrar datos en distintos niveles (individual y contextual), así como también la interacción entre ambos (por ejemplo, la relación entre nivel de vulnerabilidad de escuelas, capital cultural de los padres y rendimiento académico de estudiantes). El presente curso aborda el análisis simultáneo de datos en distintos niveles mediante modelamiento multinivel. Comienza con una problematización de la integración del contexto en el análisis sociológico de datos, para luego describir las principales características y usos de modelos multinivel.
+
+El curso tiene una orientación práctica y aplicada a problemas de investigación en torno a los cuales se desarrollará un trabajo de investigación.
+
+
+# Orientación
+
+El presente curso se propone desarrollar en las y los estudiantes las habilidades necesarias para:
+
+- Comprender las limitaciones de métodos de estimación tradicionales (como regresión simple) para el análisis de datos con estructuras jerárquicas.
+
+- Entender las estructuras de datos que ameritan un análisis de tipo multinivel.
+
+- Implementar,  interpretar y reportar análisis de modelos jerárquicos lineales y no lineales.
+
+# Contenidos
+
+## 1. Unidad I: Introducción a la estimación multinivel
+
+• Datos anidados y datos agregados
+
+• Limitaciones de métodos tradicionales para datos anidados
+
+• Correlación intra-clase
+
+• Predictores en distintos niveles
+
+• Generación e importación de datos nivel 2
+
+• Reporte
+
+## 2. Unidad II: Profundización
+
+• Pendiente aleatoria
+
+• Interacción entre niveles
+
+• Ajuste
+
+• Centrado de variables
+
+• Introducción a estimación con datos longitudinales
+
+## 3. Unidad III: Aplicaciones prácticas
+
+• En base a trabajos de alumn_s
+
+# Metodología
+
+El curso se organiza en sesiones semanales, con una parte lectiva que se acompaña de ejercicios prácticos. En la parte lectiva se transmiten y discuten los conceptos centrales del análisis multinivel. En la parte práctica se aplicarán los conceptos transmitidos en la parte lectiva, además de resolver dudas en el avance de los trabajos de investigación. Durante la práctica se hará énfasis en la perspectiva de ciencia abierta, que se relaciona con transparencia y reproducibilidad de los productos de investigación. En este marco utilizaremos el programa de análisis estadı́stico R (gratuito y open source) tanto para temas de análisis como también para la generación de reportes, apoyados por herramientas como Rmarkdown/Knitr. En la misma lı́nea de ciencia abierta se fomentará la colaboración entre los alumnos para que compartan los resultados de sus aprendizajes y también se evalúen mutuamente.
+
+# Evaluación
+
+La evaluación consistirá en la elaboración de un reporte en el formato de artículo de investigación, realizado de manera grupal. La evaluación será 30% la primera entrega y 40% la segunda, 20% la presentación oral del trabajo y 10% un informe de evaluación de un trabajo realizado por otros participantes del curso.
+
+## Inasistencias y atraso en entregas
+
+Los justificativos por ausencia o atraso se realizan en la secretaría de carrera. Lo que la carrera informe como justificado, es lo que se va a considerar en el curso. **No enviar justificativos directamente**, no es necesario ni apropiado para l_s estudiantes tener que exponer situaciones personales.
+
+En caso de faltar a alguna de las evaluaciones existirá una única fecha para evaluaciones recuperativas. Si en esa fecha no es posible asistir por motivos justificados, entonces pasará directo a examen. 
+
+En el caso de los trabajos, en caso de atraso se descontará 0.5 por día adicional. Si el trabajo no se entrega luego del tercer día de atraso será calificado con nota 1.0
+
+## Requisitos de aprobación 
+
+Requisitos de eximición a examen:
+
+- contar con un promedio ponderado igual o superior a 5.5
+- no tener nota bajo 4.0 en ninguna de las evaluaciones
+
+Requisitos para presentación a examen:
+
+- Podrán presentarse al examen de primera oportunidad los estudiantes que hayan obtenido una calificación final igual o superior a 3.5.
+
+- El examen de segunda oportunidad será para aquellos estudiantes que presenten una nota igual o inferior a 3.5 o aquellos que en el examen de primera oportunidad no hubiesen logrado una nota igual o superior a 4.0.
+
+## Bibliografía Obligatoria 
+
+Capítulos correspondientes a cada sesión se indican en la página de [Planificación](/schedule.html).
+
+## VARIOS
+
+- Se espera asistencia y participación activa, tanto a las sesiones lectivas como a las prácticas. Se pasará lista en todas las sesiones. No habrá penalización por inasistencia, pero si llevaremos registro principalmente con objetivos de monitoreo y retroalimentación del curso 
+
+- Las clases en general se acompañan de documentos de presentación, que estarán disponibles antes de la sesión en la página de Contenidos, y están desarrollados con base en Rmarkdown/XaringanRmarkdown/ Xaringan. Estos documentos no son:
+
+  - “la clase”
+  - autoexplicativos (ni aspiran a serlo)
+  - “el ppt” (ni  “la ppt”)
+
+
+- Políticas de participación y trato: se espera y enfatiza la participación por distintos canales disponibles. También se enfatiza un trato respetuoso y horizontal. Quienes están tomando este curso serán referidos como participantes y/o estudiantes, evitar el uso de “l_s cabr_s” o “l_s chiquill_s”, que si bien puede intentar transmitir cercanía finalmente expresan minimización de la contraparte. Quien no se sienta tratad_ apropiadamente o vea que otr_s no lo están siendo, se solicita reportar para solucionar la situación.
+
+## Programación de sesiones
+
+Visitar la página de [Planificación](/schedule.html).
+

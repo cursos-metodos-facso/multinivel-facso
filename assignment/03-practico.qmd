@@ -1,0 +1,202 @@
+---
+title: "Práctica 3. Estimación modelos multinivel con lmer en R"
+date: "2023-09-01"
+lang: es
+website:
+  comments:
+    giscus:
+      repo: cursos-metodos-facso/multinivel
+---
+
+```{r setup, include=FALSE, cache = TRUE}
+require("knitr")
+opts_chunk$set(warning=FALSE,
+             message=FALSE,
+             echo=TRUE,
+             cache = TRUE, fig.width=7, fig.height=5.2)
+```
+
+
+En esta práctica:
+
+- correlación intra clase
+- modelos con efectos aleatorios
+
+
+# 1. Cargar/instalar librerías
+```{r}
+if (!require("pacman")) install.packages("pacman") # solo la primera vez
+pacman::p_load(lme4,
+               reghelper,
+               haven,
+               stargazer,
+               ggplot2, # gráficos
+               texreg, # tablas de regresion (screenreg)
+               dplyr # manipulacion de datos
+               ) # paquetes a cargar
+```
+
+Para esta práctica utilizaremos la librería <tt>`lme4`</tt>, en particular la función <tt>`lmer`</tt>, así como también la librería <tt>`haven`</tt>, para lectura de base de datos externa. Además <tt>`stargazer`</tt> para visualizar outputs.
+
+# 2. Leer datos base High School and Beyond (HSB)**
+
+Como en sesión anterior
+
+```{r echo=TRUE}
+mlm = read_dta("http://www.stata-press.com/data/mlmus3/hsb.dta")
+```
+
+"mlm"" es el nombre que le daremos a la base de datos "High School and Beyond"
+
+Variables relevantes para ejercicios:
+
+1. Nivel 1:
+  * minority, an indicator for student ethnicity (1 = minority, 0 = other)
+  * female, an indicator for student gender (1 = female, 0 = male)
+  * ses, a standardized scale constructed from variables measuring parental education, occupation, and income
+  * mathach, a measure of mathematics achievement
+
+2. Nivel 2
+  * size (school enrollment)
+  * sector (1 = Catholic, 0 = public)
+  * pracad (proportion of students in the academic track)
+  * disclim (a scale measuring disciplinary climate)
+  * himnty (1 = more than 40% minority enrollment, 0 = less than 40%)
+  * mnses (mean of the SES values for the students in this school who are included in the level-1 file)
+  
+3. Cluster variable: schoolid  
+
+Seleccionar variables
+
+```{r}
+mlm=mlm %>% select(minority,female,ses,mathach,size,sector,pracad,disclim,himinty,mnses,schoolid) %>% as.data.frame()
+names(mlm)
+```
+
+```{r}
+#Tabla estadisticos descriptivos
+stargazer(mlm,title="Estadísticos descriptivos", type = "text")
+```
+
+
+# 3. Modelos 
+
+## Modelo 0: Null model
+
+```{r}
+results_0 = lmer(mathach ~ 1 + (1 | schoolid), data = mlm)
+summary(results_0)
+screenreg(results_0) # de library texreg
+```
+
+
+En este modelo es posible identificar $\gamma_{00}$ (intercept - fixed effects), así como también los **componentes la varianza**:
+
+- $\tau_{00}$ (Var:id) 
+- $\sigma^2$ (Var:Residual). 
+
+Con estos últimos coeficientes aleatorios es posible calcular la correlación intraclase ($\rho$). 
+
+Correlación intra-clase = ICC = $\rho=\frac{\tau_{00}}{\tau_{00}+\sigma^2}$
+
+```{r}
+# Cálculo directo en R:
+8.614/(8.614+39.148) # calculo ICC 
+
+# O de manera directa con funcion ICC de reghelper
+reghelper::ICC(results_0)
+```
+
+## Modelo 1: Predictores de nivel individual
+
+```{r}
+results_1 = lmer(mathach ~ 1 + ses + female + (1 | schoolid), data = mlm)
+screenreg(results_1, naive=TRUE)
+```
+
+## Modelo 2: Predictores nivel 2
+
+```{r}
+results_2 = lmer(mathach ~ 1 + sector + mnses + (1 | schoolid), data = mlm)
+screenreg(results_2)
+```
+
+## Modelo 3: Predictores individuales y grupales
+
+```{r}
+results_3 = lmer(mathach ~ 1 + ses + female + sector + mnses + (1 | schoolid), data = mlm)
+screenreg(results_3)
+```
+
+## Modelo 4: Pendiente aleatoria
+
+```{r}
+results_4 = lmer(mathach ~ 1 + ses + female + mnses + sector + (1 + ses | schoolid), data = mlm)
+screenreg(results_4)
+```
+
+## Modelo 5: Interacción entre niveles
+
+$mathach= \gamma_{00}(intercepto)+\gamma_{10}ses_{ij}+
+$\gamma_{01}sector_j+\gamma_{11}ses_{ij} *sector{j}+$
+$\mu_{0j}(intercepto)+\mu_{1j}ses_{ij}+ r_{ij}$
+
+```{r}
+results_5 = lmer(mathach ~ 1 + female + ses*sector + mnses + (1 + ses | schoolid), data = mlm)
+screenreg(results_5)
+```
+
+
+# Comparación individual, agregado y multinivel
+
+Generar regresiones para comparar
+
+```{r}
+reg_ind=lm(mathach ~ ses + female + mnses + sector, data=mlm)
+agg_mlm=mlm %>% group_by(schoolid) %>% summarise_all(funs(mean))
+reg_agg=lm(mathach ~ ses + female + mnses + sector, data=agg_mlm)
+```
+
+Observar: ¿Qué sucede con los coeficientes y errores estándar cuando se comparan los coeficientes y los errores estándar?
+
+
+```{r}
+screenreg(list(reg_ind, reg_agg, results_3))
+```
+
+Generación de tabla para publicar en HTML
+
+```{r results='asis'}
+htmlreg(list(reg_ind, reg_agg, results_3), 
+    custom.model.names = c("Individual","Agregado","Multinivel"),    
+    custom.coef.names = c("Intercepto", "$SES_{ij}$","$Mujer_{ij}$", "$SES_{j}$", "$Sector_{j}$"), 
+    custom.gof.names=c(NA,NA,NA,NA,NA,NA,NA, 
+                   "Var:id ($\\tau_{00}$)","Var: Residual ($\\sigma^2$)"),
+    custom.note = "%stars. Errores estándar en paréntesis",
+    caption="Comparación de modelos Individual, Agregado y Multinivel",
+    caption.above=TRUE,
+    doctype = FALSE)
+```
+
+
+
+# Foro
+
+<script src="https://giscus.app/client.js"
+        data-repo="cursos-metodos-facso/multinivel"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyMDA3MTE2MDk="
+        data-category="Q&A"
+        data-category-id="DIC_kwDOC_aduc4CYhjI"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="es"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+

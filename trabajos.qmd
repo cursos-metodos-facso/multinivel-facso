@@ -1,0 +1,132 @@
+---
+title: "Trabajos: Reporte de aplicación multinivel"
+lang: es
+website:
+  comments:
+    giscus:
+      repo: cursos-metodos-facso/multinivel
+---
+
+
+El trabajo final del curso consiste en una aplicación práctica de la estimación de modelos multinivel a una problemática definida por l_s estudiantes utilizando datos secundarios. Este trabajo posee dos entregas, tal como se señala en el programa del curso: un informe de avance (30% nota final) y un informe final (40%). La presentación oral del trabajo  equivale al 20% de la nota final, y el 10% restante a una evaluación de pares (detalles abajo)
+
+El informe final debe tener formato de artículo o reporte breve de investigación, con las siguientes secciones y número de palabras sugeridas (entre 3.500-4500 palabras en total):
+
+1.  Tı́tulo
+
+2.  Abstract: problema, pregunta, objetivo, datos (y N), resultado principal.
+
+3.  Introducción: definición de la problemática a abordar, su relevancia y enmarque dentro de los contenidos del curso. Es importante hacer referencia a la relevancia de variables contextuales y posible interacción con variables individuales, ası́ como también a la relevancia sociológica del estudio. Como es un artı́culo breve, la introducción incluye también antecedentes conceptuales y de estudios anteriores (1000 palabras)
+
+4.  Objetivos e hipótesis (incluir hipótesis diferenciadas por niveles)  (250 palabras)
+
+5.  Datos, variables y métodos: datos a utilizar (N general y aproximado por unidad de nivel 2, descripción general de los datos, año de aplicación) variables, estadı́sticos descriptivos univariados, descripción de los modelos a estimar (500 palabras).
+
+6.  Resultados: se recomienda la menor cantidad de tablas con resumen de modelos estimados, gráficos, descripción e interpretación de los principales hallazgos en relación a las preguntas de investigación (1500-2000 palabras)
+
+7.  Resumen y conclusiones: principales hallazgos, respuesta a preguntas, ventajas de la estimación multinivel para abordar la problemática, limitaciones, recomendaciones para futuras investigaciones (250 - 500 palabras).
+
+8.  Bibliografı́a
+
+**Formato**: Idealmente en formato html/(R)Markdown; en caso de formato papel, tamaño carta, letra times new roman o LM Roman 12, espaciado 1,5, margenes de 2 cm, número de página. En todos los casos se debe adjuntar el código de análisis; si en el informe de avance se utiliza Rmarkdown - html se puede incluir el código (”chunks”) en el informe. Lo importante, sobre todo en la primera entrega, es preocuparse por el contenido más que el formato.
+
+En términos de contenidos, para el informe de avance se espera un
+reporte de alrededor de 2000 palabras que sea una especie de
+borrador del informe final. El énfasis de esta primera entrega se encuentra en el planteamiento del problema y preguntas de investigación en una lógica multinivel, descripción de los datos, estimación de correlación intra-clase, efectos aleatorios y modelos preliminares. En la segunda entrega se complementan los análisis con temas de interacciones entre niveles, evaluación de ajuste, centrado de variables y análisis de casos influyentes.
+
+Presentación oral
+=================
+
+Las presentaciones son breves, máximo 10 minutos y luego 5 a 10 minutos de preguntas, comentarios y sugerencias. Se debe elaborar un documento a proyectar que acompañe la presentación, máximo 15 láminas. No es necesario que presenten todos los integrantes del grupo, pero sí todos deben estar disponibles para responder preguntas. La asistencia a las presentaciones es obligatoria.
+
+Evaluación de pares
+===================
+
+Tal como se establece en el programa, la evaluación contempla un componente de revisión de trabajo de compañeros, que será de la primera entrega para que sirva como retroalimentación para la segunda. A cada grupo se asignará un trabajo, del cual presentará un informe de evaluación orientado por las siguientes dimensiones:
+
+-   Claridad del problema de investigación en sentido multinivel
+
+-   Antecedentes conceptuales y empíricos
+
+-   Descripción de la metodología
+
+-   Calidad de los análisis (aspecto central, considerar si se cubren adecuadamente los contenidos del curso)
+
+-   Discusión de los hallazgos
+
+-   Recomendaciones
+
+El informe debe tener una extensión máxima de 700 palabras, y debe ser entregado una semana posterior a la entrega del primer trabajo.
+
+Autoevaluación
+==============
+
+Se debe entregar al final del curso un reporte de autoevaluación. Para ello responda en una escala de 1 a 7 y fundamente:
+
+a) Sobre participación e involucramiento con el curso:
+
+-   Lecturas clase a clase
+
+-   Tiempo de dedicación acorde a los requerimientos del curso
+
+-   Participación activa en clases
+
+-   Colaboración con compañeros
+
+-   Entrega oportuna de informes
+
+-   Calidad de mis presentaciones
+
+-   Calidad de mis informes
+
+-   En general, evalúo mi calidad como alumno de este curso con una nota (justificar):
+
+b) Sobre cumplimiento de objetivos: luego del curso, me considero capaz de:
+
+-   Comprender la aplicación de los métodos multinivel a problemas de investigación sociológicos
+
+-   Endenter el concepto de datos jerárquicos
+
+-   Entender el concepto de estimación con efectos aleatorios
+
+-   Estimar modelos de multinivel
+
+-   Interpretar los principales parámetros de modelos multinivel
+
+-   Evaluar ajuste de modelos multinivel
+
+-   Reportar metodología, resultados y discusión de estimación con modelos de multinivel
+
+-   Entender los resultados de un artículo que utilice métodos
+    multinivel
+
+c) Considerando todo lo anterior, ¿qué nota final consideraría justa para mí en este curso?
+
+
+# Normas generales de entregas
+
+- Hasta las 23:59:00 del dı́a indicado, via Ucursos,
+- 0.5 por dı́a corrido de atraso, hasta 3 dı́as
+- Se entrega documento de trabajo y también código de análisis.
+- En caso de atraso por enfermedad presentar certificado médico a secretarı́a de carrera.
+- En el marco de ciencia abierta que promueve el curso, los documentos del trabajo, código y presentaciones serán puestos a disposición de todos los participantes.
+
+
+# Foro de preguntas sobre el trabajo
+
+<script src="https://giscus.app/client.js"
+        data-repo="cursos-metodos-facso/multinivel"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyMDA3MTE2MDk="
+        data-category="Q&A"
+        data-category-id="DIC_kwDOC_aduc4CYhjI"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="es"
+        crossorigin="anonymous"
+        async>
+</script>
+

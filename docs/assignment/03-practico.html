@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="Modelos Multinivel">
+
+<title>Modelos Multinivel - Práctica 3. Estimación modelos multinivel con lmer en R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="..//files/img/logo-multinivel.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<meta property="og:title" content="Modelos Multinivel - Práctica 3. Estimación modelos multinivel con lmer en R">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://multinivel.netlify.app/files/img/logo-multinivel.png">
+<meta property="og:site-name" content="Modelos Multinivel">
+<meta property="og:locale" content="es">
+<meta property="og:image:height" content="595">
+<meta property="og:image:width" content="521">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Modelos Multinivel</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Buscar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Navegación de palanca" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus.html" rel="" target="">
+ <span class="menu-text">Programa</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../schedule.html" rel="" target="">
+ <span class="menu-text">Planificación</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../content/index.html" rel="" target="">
+ <span class="menu-text">Clases</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../assignment/index.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Prácticos</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../resource/index.html" rel="" target="">
+ <span class="menu-text">Recursos</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://rstudio.cloud" rel="" target=""><i class="bi bi-cloud-fill" role="img" aria-label="RStudio.cloud">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignment/01-practico.html">Guías</a></li><li class="breadcrumb-item"><a href="../assignment/03-practico.html">3: Estimación modelos multinivel con lmer en RDatos y estimaciones en dos niveles</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Sobre prácticos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Instrucciones generales</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Guías</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/01-practico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1: Preparación de Datos con R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/02-practico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2: Datos y estimaciones en dos niveles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/03-practico.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">3: Estimación modelos multinivel con lmer en RDatos y estimaciones en dos niveles</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
+   
+  <ul>
+  <li><a href="#cargarinstalar-librerías" id="toc-cargarinstalar-librerías" class="nav-link active" data-scroll-target="#cargarinstalar-librerías">1. Cargar/instalar librerías</a></li>
+  <li><a href="#leer-datos-base-high-school-and-beyond-hsb" id="toc-leer-datos-base-high-school-and-beyond-hsb" class="nav-link" data-scroll-target="#leer-datos-base-high-school-and-beyond-hsb">2. Leer datos base High School and Beyond (HSB)**</a></li>
+  <li><a href="#modelos" id="toc-modelos" class="nav-link" data-scroll-target="#modelos">3. Modelos</a>
+  <ul class="collapse">
+  <li><a href="#modelo-0-null-model" id="toc-modelo-0-null-model" class="nav-link" data-scroll-target="#modelo-0-null-model">Modelo 0: Null model</a></li>
+  <li><a href="#modelo-1-predictores-de-nivel-individual" id="toc-modelo-1-predictores-de-nivel-individual" class="nav-link" data-scroll-target="#modelo-1-predictores-de-nivel-individual">Modelo 1: Predictores de nivel individual</a></li>
+  <li><a href="#modelo-2-predictores-nivel-2" id="toc-modelo-2-predictores-nivel-2" class="nav-link" data-scroll-target="#modelo-2-predictores-nivel-2">Modelo 2: Predictores nivel 2</a></li>
+  <li><a href="#modelo-3-predictores-individuales-y-grupales" id="toc-modelo-3-predictores-individuales-y-grupales" class="nav-link" data-scroll-target="#modelo-3-predictores-individuales-y-grupales">Modelo 3: Predictores individuales y grupales</a></li>
+  <li><a href="#modelo-4-pendiente-aleatoria" id="toc-modelo-4-pendiente-aleatoria" class="nav-link" data-scroll-target="#modelo-4-pendiente-aleatoria">Modelo 4: Pendiente aleatoria</a></li>
+  <li><a href="#modelo-5-interacción-entre-niveles" id="toc-modelo-5-interacción-entre-niveles" class="nav-link" data-scroll-target="#modelo-5-interacción-entre-niveles">Modelo 5: Interacción entre niveles</a></li>
+  </ul></li>
+  <li><a href="#comparación-individual-agregado-y-multinivel" id="toc-comparación-individual-agregado-y-multinivel" class="nav-link" data-scroll-target="#comparación-individual-agregado-y-multinivel">Comparación individual, agregado y multinivel</a></li>
+  <li><a href="#foro" id="toc-foro" class="nav-link" data-scroll-target="#foro">Foro</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header">
+<h1 class="title display-7">Práctica 3. Estimación modelos multinivel con lmer en R</h1>
+
+<div class="date-block bg-assignment text-white p-2">
+  <p class="date">Correspondiente a la sesión del viernes, 1 de septiembre de 2023</p>
+</div>
+</header>
+
+<p>En esta práctica:</p>
+<ul>
+<li>correlación intra clase</li>
+<li>modelos con efectos aleatorios</li>
+</ul>
+<section id="cargarinstalar-librerías" class="level1">
+<h1>1. Cargar/instalar librerías</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) <span class="fu">install.packages</span>(<span class="st">"pacman"</span>) <span class="co"># solo la primera vez</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: pacman</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(lme4,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>               reghelper,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>               haven,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>               stargazer,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>               ggplot2, <span class="co"># gráficos</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>               texreg, <span class="co"># tablas de regresion (screenreg)</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>               dplyr <span class="co"># manipulacion de datos</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>               ) <span class="co"># paquetes a cargar</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Para esta práctica utilizaremos la librería <tt><code>lme4</code></tt>, en particular la función <tt><code>lmer</code></tt>, así como también la librería <tt><code>haven</code></tt>, para lectura de base de datos externa. Además <tt><code>stargazer</code></tt> para visualizar outputs.</p>
+</section>
+<section id="leer-datos-base-high-school-and-beyond-hsb" class="level1">
+<h1>2. Leer datos base High School and Beyond (HSB)**</h1>
+<p>Como en sesión anterior</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mlm <span class="ot">=</span> <span class="fu">read_dta</span>(<span class="st">"http://www.stata-press.com/data/mlmus3/hsb.dta"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>“mlm”” es el nombre que le daremos a la base de datos “High School and Beyond”</p>
+<p>Variables relevantes para ejercicios:</p>
+<ol type="1">
+<li>Nivel 1:</li>
+</ol>
+<ul>
+<li>minority, an indicator for student ethnicity (1 = minority, 0 = other)</li>
+<li>female, an indicator for student gender (1 = female, 0 = male)</li>
+<li>ses, a standardized scale constructed from variables measuring parental education, occupation, and income</li>
+<li>mathach, a measure of mathematics achievement</li>
+</ul>
+<ol start="2" type="1">
+<li>Nivel 2</li>
+</ol>
+<ul>
+<li>size (school enrollment)</li>
+<li>sector (1 = Catholic, 0 = public)</li>
+<li>pracad (proportion of students in the academic track)</li>
+<li>disclim (a scale measuring disciplinary climate)</li>
+<li>himnty (1 = more than 40% minority enrollment, 0 = less than 40%)</li>
+<li>mnses (mean of the SES values for the students in this school who are included in the level-1 file)</li>
+</ul>
+<ol start="3" type="1">
+<li>Cluster variable: schoolid</li>
+</ol>
+<p>Seleccionar variables</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mlm<span class="ot">=</span>mlm <span class="sc">%&gt;%</span> <span class="fu">select</span>(minority,female,ses,mathach,size,sector,pracad,disclim,himinty,mnses,schoolid) <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mlm)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "minority" "female"   "ses"      "mathach"  "size"     "sector"  
+ [7] "pracad"   "disclim"  "himinty"  "mnses"    "schoolid"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Tabla estadisticos descriptivos</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(mlm,<span class="at">title=</span><span class="st">"Estadísticos descriptivos"</span>, <span class="at">type =</span> <span class="st">"text"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Estadísticos descriptivos
+=================================================
+Statistic   N     Mean    St. Dev.   Min    Max  
+-------------------------------------------------
+minority  7,185   0.275     0.446     0      1   
+female    7,185   0.528     0.499     0      1   
+ses       7,185  0.0001     0.779   -3.758 2.692 
+mathach   7,185  12.748     6.878   -2.832 24.993
+size      7,185 1,056.862  604.172   100   2,713 
+sector    7,185   0.493     0.500     0      1   
+pracad    7,185   0.534     0.251   0.000  1.000 
+disclim   7,185  -0.132     0.944   -2.416 2.756 
+himinty   7,185   0.280     0.449     0      1   
+mnses     7,185  0.0001     0.414   -1.194 0.825 
+schoolid  7,185 5,277.898 2,499.578 1,224  9,586 
+-------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="modelos" class="level1">
+<h1>3. Modelos</h1>
+<section id="modelo-0-null-model" class="level2">
+<h2 class="anchored" data-anchor-id="modelo-0-null-model">Modelo 0: Null model</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>results_0 <span class="ot">=</span> <span class="fu">lmer</span>(mathach <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> schoolid), <span class="at">data =</span> mlm)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(results_0)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML ['lmerMod']
+Formula: mathach ~ 1 + (1 | schoolid)
+   Data: mlm
+
+REML criterion at convergence: 47116.8
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.0631 -0.7539  0.0267  0.7606  2.7426 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ schoolid (Intercept)  8.614   2.935   
+ Residual             39.148   6.257   
+Number of obs: 7185, groups:  schoolid, 160
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept)  12.6370     0.2444   51.71</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">screenreg</span>(results_0) <span class="co"># de library texreg</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+========================================
+                           Model 1      
+----------------------------------------
+(Intercept)                    12.64 ***
+                               (0.24)   
+----------------------------------------
+AIC                         47122.79    
+BIC                         47143.43    
+Log Likelihood             -23558.40    
+Num. obs.                    7185       
+Num. groups: schoolid         160       
+Var: schoolid (Intercept)       8.61    
+Var: Residual                  39.15    
+========================================
+*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
+</div>
+</div>
+<p>En este modelo es posible identificar <span class="math inline">\(\gamma_{00}\)</span> (intercept - fixed effects), así como también los <strong>componentes la varianza</strong>:</p>
+<ul>
+<li><span class="math inline">\(\tau_{00}\)</span> (Var:id)</li>
+<li><span class="math inline">\(\sigma^2\)</span> (Var:Residual).</li>
+</ul>
+<p>Con estos últimos coeficientes aleatorios es posible calcular la correlación intraclase (<span class="math inline">\(\rho\)</span>).</p>
+<p>Correlación intra-clase = ICC = <span class="math inline">\(\rho=\frac{\tau_{00}}{\tau_{00}+\sigma^2}\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cálculo directo en R:</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fl">8.614</span><span class="sc">/</span>(<span class="fl">8.614+39.148</span>) <span class="co"># calculo ICC </span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1803526</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># O de manera directa con funcion ICC de reghelper</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>reghelper<span class="sc">::</span><span class="fu">ICC</span>(results_0)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1803518</code></pre>
+</div>
+</div>
+</section>
+<section id="modelo-1-predictores-de-nivel-individual" class="level2">
+<h2 class="anchored" data-anchor-id="modelo-1-predictores-de-nivel-individual">Modelo 1: Predictores de nivel individual</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>results_1 <span class="ot">=</span> <span class="fu">lmer</span>(mathach <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> female <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> schoolid), <span class="at">data =</span> mlm)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">screenreg</span>(results_1, <span class="at">naive=</span><span class="cn">TRUE</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+========================================
+                           Model 1      
+----------------------------------------
+(Intercept)                    13.28 ***
+                               (0.20)   
+ses                             2.36 ***
+                               (0.11)   
+female                         -1.19 ***
+                               (0.17)   
+----------------------------------------
+AIC                         46605.73    
+BIC                         46640.13    
+Log Likelihood             -23297.86    
+Num. obs.                    7185       
+Num. groups: schoolid         160       
+Var: schoolid (Intercept)       4.49    
+Var: Residual                  36.81    
+========================================
+*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
+</div>
+</div>
+</section>
+<section id="modelo-2-predictores-nivel-2" class="level2">
+<h2 class="anchored" data-anchor-id="modelo-2-predictores-nivel-2">Modelo 2: Predictores nivel 2</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>results_2 <span class="ot">=</span> <span class="fu">lmer</span>(mathach <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> sector <span class="sc">+</span> mnses <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> schoolid), <span class="at">data =</span> mlm)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">screenreg</span>(results_2)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+========================================
+                           Model 1      
+----------------------------------------
+(Intercept)                    12.13 ***
+                               (0.20)   
+sector                          1.23 ***
+                               (0.31)   
+mnses                           5.33 ***
+                               (0.37)   
+----------------------------------------
+AIC                         46956.50    
+BIC                         46990.90    
+Log Likelihood             -23473.25    
+Num. obs.                    7185       
+Num. groups: schoolid         160       
+Var: schoolid (Intercept)       2.31    
+Var: Residual                  39.16    
+========================================
+*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
+</div>
+</div>
+</section>
+<section id="modelo-3-predictores-individuales-y-grupales" class="level2">
+<h2 class="anchored" data-anchor-id="modelo-3-predictores-individuales-y-grupales">Modelo 3: Predictores individuales y grupales</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>results_3 <span class="ot">=</span> <span class="fu">lmer</span>(mathach <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> female <span class="sc">+</span> sector <span class="sc">+</span> mnses <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> schoolid), <span class="at">data =</span> mlm)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">screenreg</span>(results_3)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+========================================
+                           Model 1      
+----------------------------------------
+(Intercept)                    12.74 ***
+                               (0.21)   
+ses                             2.15 ***
+                               (0.11)   
+female                         -1.20 ***
+                               (0.16)   
+sector                          1.25 ***
+                               (0.30)   
+mnses                           3.07 ***
+                               (0.37)   
+----------------------------------------
+AIC                         46515.61    
+BIC                         46563.77    
+Log Likelihood             -23250.80    
+Num. obs.                    7185       
+Num. groups: schoolid         160       
+Var: schoolid (Intercept)       2.15    
+Var: Residual                  36.80    
+========================================
+*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
+</div>
+</div>
+</section>
+<section id="modelo-4-pendiente-aleatoria" class="level2">
+<h2 class="anchored" data-anchor-id="modelo-4-pendiente-aleatoria">Modelo 4: Pendiente aleatoria</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>results_4 <span class="ot">=</span> <span class="fu">lmer</span>(mathach <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> female <span class="sc">+</span> mnses <span class="sc">+</span> sector <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">|</span> schoolid), <span class="at">data =</span> mlm)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">screenreg</span>(results_4)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+============================================
+                               Model 1      
+--------------------------------------------
+(Intercept)                        12.65 ***
+                                   (0.21)   
+ses                                 2.16 ***
+                                   (0.12)   
+female                             -1.19 ***
+                                   (0.16)   
+mnses                               3.07 ***
+                                   (0.38)   
+sector                              1.43 ***
+                                   (0.30)   
+--------------------------------------------
+AIC                             46514.33    
+BIC                             46576.24    
+Log Likelihood                 -23248.16    
+Num. obs.                        7185       
+Num. groups: schoolid             160       
+Var: schoolid (Intercept)           2.22    
+Var: schoolid ses                   0.42    
+Cov: schoolid (Intercept) ses       0.27    
+Var: Residual                      36.59    
+============================================
+*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
+</div>
+</div>
+</section>
+<section id="modelo-5-interacción-entre-niveles" class="level2">
+<h2 class="anchored" data-anchor-id="modelo-5-interacción-entre-niveles">Modelo 5: Interacción entre niveles</h2>
+<p>$mathach= <em>{00}(intercepto)+</em>{10}ses_{ij}+ <span class="math inline">\(\gamma_{01}sector_j+\gamma_{11}ses_{ij} *sector{j}+\)</span> <span class="math inline">\(\mu_{0j}(intercepto)+\mu_{1j}ses_{ij}+ r_{ij}\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>results_5 <span class="ot">=</span> <span class="fu">lmer</span>(mathach <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> female <span class="sc">+</span> ses<span class="sc">*</span>sector <span class="sc">+</span> mnses <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">|</span> schoolid), <span class="at">data =</span> mlm)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">screenreg</span>(results_5)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+============================================
+                               Model 1      
+--------------------------------------------
+(Intercept)                        12.81 ***
+                                   (0.21)   
+female                             -1.18 ***
+                                   (0.16)   
+ses                                 2.73 ***
+                                   (0.14)   
+sector                              1.29 ***
+                                   (0.29)   
+mnses                               3.04 ***
+                                   (0.37)   
+ses:sector                         -1.31 ***
+                                   (0.21)   
+--------------------------------------------
+AIC                             46482.91    
+BIC                             46551.71    
+Log Likelihood                 -23231.45    
+Num. obs.                        7185       
+Num. groups: schoolid             160       
+Var: schoolid (Intercept)           2.11    
+Var: schoolid ses                   0.03    
+Cov: schoolid (Intercept) ses       0.17    
+Var: Residual                      36.60    
+============================================
+*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="comparación-individual-agregado-y-multinivel" class="level1">
+<h1>Comparación individual, agregado y multinivel</h1>
+<p>Generar regresiones para comparar</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>reg_ind<span class="ot">=</span><span class="fu">lm</span>(mathach <span class="sc">~</span> ses <span class="sc">+</span> female <span class="sc">+</span> mnses <span class="sc">+</span> sector, <span class="at">data=</span>mlm)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>agg_mlm<span class="ot">=</span>mlm <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(schoolid) <span class="sc">%&gt;%</span> <span class="fu">summarise_all</span>(<span class="fu">funs</span>(mean))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `funs()` was deprecated in dplyr 0.8.0.
+ℹ Please use a list of either functions or lambdas:
+
+# Simple named list: list(mean = mean, median = median)
+
+# Auto named with `tibble::lst()`: tibble::lst(mean, median)
+
+# Using lambdas list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>reg_agg<span class="ot">=</span><span class="fu">lm</span>(mathach <span class="sc">~</span> ses <span class="sc">+</span> female <span class="sc">+</span> mnses <span class="sc">+</span> sector, <span class="at">data=</span>agg_mlm)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Observar: ¿Qué sucede con los coeficientes y errores estándar cuando se comparan los coeficientes y los errores estándar?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">screenreg</span>(<span class="fu">list</span>(reg_ind, reg_agg, results_3))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+=================================================================
+                           Model 1      Model 2     Model 3      
+-----------------------------------------------------------------
+(Intercept)                  12.80 ***   13.13 ***      12.74 ***
+                             (0.13)      (0.35)         (0.21)   
+ses                           2.15 ***    5.19 ***       2.15 ***
+                             (0.11)      (0.37)         (0.11)   
+female                       -1.34 ***   -1.97 ***      -1.20 ***
+                             (0.15)      (0.56)         (0.16)   
+mnses                         2.90 ***                   3.07 ***
+                             (0.22)                     (0.37)   
+sector                        1.32 ***    1.25 ***       1.25 ***
+                             (0.16)      (0.31)         (0.30)   
+-----------------------------------------------------------------
+R^2                           0.18        0.67                   
+Adj. R^2                      0.18        0.67                   
+Num. obs.                  7185         160           7185       
+AIC                                                  46515.61    
+BIC                                                  46563.77    
+Log Likelihood                                      -23250.80    
+Num. groups: schoolid                                  160       
+Var: schoolid (Intercept)                                2.15    
+Var: Residual                                           36.80    
+=================================================================
+*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
+</div>
+</div>
+<p>Generación de tabla para publicar en HTML</p>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">htmlreg</span>(<span class="fu">list</span>(reg_ind, reg_agg, results_3), </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">custom.model.names =</span> <span class="fu">c</span>(<span class="st">"Individual"</span>,<span class="st">"Agregado"</span>,<span class="st">"Multinivel"</span>),    </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">custom.coef.names =</span> <span class="fu">c</span>(<span class="st">"Intercepto"</span>, <span class="st">"$SES_{ij}$"</span>,<span class="st">"$Mujer_{ij}$"</span>, <span class="st">"$SES_{j}$"</span>, <span class="st">"$Sector_{j}$"</span>), </span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">custom.gof.names=</span><span class="fu">c</span>(<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>, </span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Var:id ($</span><span class="sc">\\</span><span class="st">tau_{00}$)"</span>,<span class="st">"Var: Residual ($</span><span class="sc">\\</span><span class="st">sigma^2$)"</span>),</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">custom.note =</span> <span class="st">"%stars. Errores estándar en paréntesis"</span>,</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption=</span><span class="st">"Comparación de modelos Individual, Agregado y Multinivel"</span>,</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption.above=</span><span class="cn">TRUE</span>,</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">doctype =</span> <span class="cn">FALSE</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<table class="texreg" style="margin: 10px auto;border-collapse: collapse;border-spacing: 0px;color: #000000;border-top: 2px solid #000000;">
+<caption>
+Comparación de modelos Individual, Agregado y Multinivel
+</caption>
+<thead>
+<tr>
+<th style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</th>
+<th style="padding-left: 5px;padding-right: 5px;">
+Individual
+</th>
+<th style="padding-left: 5px;padding-right: 5px;">
+Agregado
+</th>
+<th style="padding-left: 5px;padding-right: 5px;">
+Multinivel
+</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-top: 1px solid #000000;">
+<td style="padding-left: 5px;padding-right: 5px;">
+Intercepto
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+12.80<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+13.13<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+12.74<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.13)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.35)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.21)
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+<span class="math inline">\(SES_{ij}\)</span>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+2.15<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+5.19<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+2.15<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.11)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.37)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.11)
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+<span class="math inline">\(Mujer_{ij}\)</span>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-1.34<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-1.97<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-1.20<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.15)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.56)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.16)
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+<span class="math inline">\(SES_{j}\)</span>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+2.90<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+3.07<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.22)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.37)
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+<span class="math inline">\(Sector_{j}\)</span>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+1.32<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+1.25<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+1.25<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.16)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.31)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.30)
+</td>
+</tr>
+<tr style="border-top: 1px solid #000000;">
+<td style="padding-left: 5px;padding-right: 5px;">
+R<sup>2</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.18
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.67
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+Adj. R<sup>2</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.18
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.67
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+Num. obs.
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+7185
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+160
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+7185
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+AIC
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+46515.61
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+BIC
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+46563.77
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+Log Likelihood
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-23250.80
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+Num. groups: schoolid
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+160
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+Var:id (<span class="math inline">\(\tau_{00}\)</span>)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+2.15
+</td>
+</tr>
+<tr style="border-bottom: 2px solid #000000;">
+<td style="padding-left: 5px;padding-right: 5px;">
+Var: Residual (<span class="math inline">\(\sigma^2\)</span>)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+36.80
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="font-size: 0.8em;" colspan="4">
+<sup>***</sup>p &lt; 0.001; <sup>**</sup>p &lt; 0.01; <sup>*</sup>p &lt; 0.05. Errores estándar en paréntesis
+</td>
+</tr>
+</tfoot>
+
+</table>
+</section>
+<section id="foro" class="level1">
+<h1>Foro</h1>
+<script src="https://giscus.app/client.js" data-repo="cursos-metodos-facso/multinivel" data-repo-id="MDEwOlJlcG9zaXRvcnkyMDA3MTE2MDk=" data-category="Q&amp;A" data-category-id="DIC_kwDOC_aduc4CYhjI" data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="es" crossorigin="anonymous" async="">
+</script>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Content <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2023 by <a href="https://www.jc-castillo.com">Juan Castillo</a> <br> All content licensed under a <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> <i class="fa-brands fa-creative-commons-nc" aria-label="creative-commons-nc"></i> <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)</a></div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">Made with <i class="fa-brands fa-r-project" aria-label="r-project"></i> and <a href="https://quarto.org/">Quarto</a><br> <a href="https://github.com/cursos-metodos-facso/multinivel">View the source at <i class="fa-brands fa-github" aria-label="github"></i> GitHub</a></div>
+  </div>
+</footer>
+
+
+
+</body></html>
