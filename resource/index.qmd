@@ -1,8 +1,22 @@
 ---
 title: "Recursos"
+website:
+  comments:
+    giscus:
+      repo: cursos-metodos-facso/multinivel
 ---
 
 En esta sección se irán subiendo una serie de recursos relacionados con el curso.
+
+## Artículos de investigación que utilizan metodología multinivel en ámbitos asociados a sociología
+
+- [Fuentes-Balderrama, J., Rivera-Heredia (2022). Factores personales, contextuales y académicos asociados a la reprobación en educación superior: Una muestra nacional mexicana. Revista mexicana de investigación educativa, 27(95), 1039–1062.
+](https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S1405-66662022000401039&lang=es)
+
+- [Chacón Espejo, S. K., Paredes Araya, D., Chacón Espejo, S. K., & Paredes Araya, D. (2015). Desigualdad espacial de ingresos en Chile y su relación con la concentración de capital humano. El trimestre económico, 82(326), 351–377.
+](https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S2448-718X2015000200351&lang=es)
+
+
 
 ## Reporte
 
@@ -39,5 +53,27 @@ En esta sección se irán subiendo una serie de recursos relacionados con el cur
 ## Bases de datos
 
 - [Bases de datos para trabajos o investigación](https://descriptiva-facso.netlify.app/resource/01-resource)
+
+
+
+# Foro
+
+<script src="https://giscus.app/client.js"
+        data-repo="cursos-metodos-facso/multinivel"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyMDA3MTE2MDk="
+        data-category="Q&A"
+        data-category-id="DIC_kwDOC_aduc4CYhjI"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="es"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
 
 
