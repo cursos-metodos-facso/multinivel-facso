@@ -24,10 +24,6 @@ En esta sección se irán subiendo una serie de recursos relacionados con el cur
 
 - [Introduction to Quarto](https://www.youtube.com/watch?v=_f3latmOhew)
 
-## Estadística descriptiva
-
-- [Curso Estadística Descriptiva Sociología UChile, 1er Sem 2023](https://descriptiva-facso.netlify.app/)
-
 ## Uso de R
 
 - [Conocimientos básicos de programación en R](https://descriptiva-facso.netlify.app/content/02-content)
@@ -40,9 +36,6 @@ En esta sección se irán subiendo una serie de recursos relacionados con el cur
 
 - [Más para aprender R](https://descriptiva-facso.netlify.app/resource/02-resource)
 
-## Inferencia 
-
-- [Inferencia univariada](https://descriptiva-facso.netlify.app/content/08-content)
 
 ## Visualización
 
@@ -52,8 +45,54 @@ En esta sección se irán subiendo una serie de recursos relacionados con el cur
 
 ## Bases de datos
 
-- [Bases de datos para trabajos o investigación](https://descriptiva-facso.netlify.app/resource/01-resource)
+### Comparativas internacionales
 
+- [World Values Survey](https://www.worldvaluessurvey.org/wvs.jsp)
+
+- [ISSP](https://issp.org/)
+
+- [ESS](https://www.europeansocialsurvey.org/)
+
+- [LAPOP](https://www.vanderbilt.edu/lapop/index.php/)
+
+- [Latinobarómetro](https://www.latinobarometro.org/lat.jsp)
+
+- [ICILS: International Computer and Information Literacy Study](https://www.iea.nl/studies/iea/icils)
+
+
+### Nacionales
+
+- [Encuestas CEP](https://www.cepchile.cl/encuestaCEP)
+
+- [ELSOC](https://dataverse.harvard.edu/dataverse/elsoc)
+
+- [CASEN](http://observatorio.ministeriodesarrollosocial.gob.cl/encuesta-casen)
+
+- [ENE](https://www.ine.gob.cl/estadisticas/sociales/mercado-laboral/ocupacion-y-desocupacion)
+
+- [ESI](https://www.ine.gob.cl/estadisticas/sociales/ingresos-y-gastos/encuesta-suplementaria-de-ingresos)
+
+- [ENCLA](https://www.ine.gob.cl/estadisticas/sociales/mercado-laboral/condiciones-de-empleo-y-relaciones-laborales)
+
+- [ENUT](https://www.ine.cl/estadisticas/sociales/genero/uso-del-tiempo)
+
+- [Estudios PNUD](https://www.estudiospnud.cl/)
+
+- [EANNA](http://observatorio.ministeriodesarrollosocial.gob.cl/eanna-2012)
+
+### Internacionales
+
+- [ILO](https://www.ilo.org/shinyapps/bulkexplorer55/?lang=es&segment=&id=STR_DAYS_ECO_RT_A)
+
+- [WID](https://wid.world/)
+
+- [SWIID](https://fsolt.org/swiid/swiid_source/)
+
+- [ICTWSS](https://www.ictwss.org/)
+
+- [OECD](https://data.oecd.org/)
+
+- [Banco Mundial](https://databank.worldbank.org/)
 
 
 # Foro

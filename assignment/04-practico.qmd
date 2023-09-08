@@ -1,0 +1,226 @@
+---
+title: "Práctica 4. Trabajando con variables nivel 2"
+date: "2023-09-08"
+lang: es
+website:
+  comments:
+    giscus:
+      repo: cursos-metodos-facso/multinivel
+---
+
+```{r setup, include=FALSE, cache = TRUE}
+require("knitr")
+opts_chunk$set(warning=FALSE,
+             message=FALSE,
+             echo=TRUE,
+             cache = TRUE, fig.width=7, fig.height=5.2)
+```
+
+# Trabajando con variables nivel 2 en Multinivel
+Juan Carlos Castillo - Septiembre 2017
+jc-castillo.com
+
+Desde un punto de vista operativo, las variables de nivel dos se pueden clasificar en dos tipos:
+
+  a) Las que se pueden generar a partir desde los datos individuales (como por ejemplo, promedio/porcentaje de una variable de nivel 1)
+  b) Las que provienen de fuentes externas a los datos individuales (ej: datos administrativos, nivel de democracia de un país, nivel de vulnerabilidad de una escuela, etc.)
+
+Para los ejemplos vamos a trabajar con la base de datos de ISSP 2009 (www.issp.org), modulo desigualdad económica (datos originales: ZA5400_v4-0-0.dta), y luego con la base del Quality of Government (http://qog.pol.gu.se/) 
+
+```{r}
+# Librerías
+pacman::p_load(haven,descr,sjmisc,dplyr,sjPlot, ggplot2)
+
+# Data ISSP (original)
+issp2009=read_dta("https://multinivel-facso.netlify.app/assignment/data/ZA5400_v4-0-0.dta") # establecer antes directorio de trabajo con setwd
+names(issp2009)
+names(issp2009) <- tolower(names(issp2009)) # cambia a minúsculas
+```
+
+Algunos ajustes preliminares a los datos:
+
+Primero vamos a seleccionar algunas variables de la base de datos (para detalles, ver libro de códigos): 
+
+- v5 : ID país
+- v10: para salir adelante lo importante es el esfuerzo
+- sex: sexo
+- age: edad (en años)
+
+```{r}
+issp2009r=issp2009 %>% select(v5,v10,sex,age) # dplyr
+```
+
+Y ahora recodificaciones y limpieza de perdidos
+
+```{r}
+# v10: Esfuerzo
+  issp2009r$effort=issp2009r$v10
+  freq(issp2009r$effort) # freq es de descr
+  freq(to_label(issp2009r$effort)) #  to_label de sjmisc
+  issp2009r$effort=set_na(issp2009r$effort,na = c(8,9))
+  issp2009r$effort=rec(issp2009r$effort, rec = "rev") # Reverse code, sjmisc 
+  freq(to_label(issp2009r$effort)) # ok.
+  freq(issp2009r$effort) # ok.
+
+# Sex
+  freq(issp2009r$sex);freq(to_label(issp2009r$sex))  # freq es de descr
+  issp2009r$sex=rec(issp2009r$sex, rec="1=0 [Male];2=1[Female]; 9=NA")
+
+# Age
+  freq(issp2009r$age)
+  issp2009r$age=set_na(issp2009r$age, na=c(99)) 
+```
+
+## a) Datos nivel 2 generados a partir de datos individuales
+
+En este caso se habla también de datos "agregados" o "colapsados". 
+Para agregar, utilizaremos primero una función simple para hacerlo en base al promedio
+
+Por ejemplo, agregar a la base de datos el promedio de edad por país (v5)
+```{r}
+issp2009r = issp2009r %>%  group_by(v5) %>% mutate(meanage = mean(age, na.rm = TRUE))
+
+# Otros posibles agregados:
+  
+  # Desviación estándar
+    issp2009r = issp2009r %>%  group_by(v5) %>% mutate(sdage = sd(age, na.rm = TRUE))
+  # Tamaño
+    issp2009r = issp2009r %>%  group_by(v5) %>% mutate(count = length(v5))
+
+# Visualizar datos en tabla
+  issp2009r %>% group_by(Country=to_label(v5)) %>% summarise("Mean Age"=mean(meanage), "SD Age"=mean(sdage), N=mean(count)) %>% print(n = nrow(.))  
+    
+# Exploración gráfica
+bar_age=ggplot(issp2009r, aes(reorder(to_label(v5), -meanage),meanage))
+bar_age + geom_bar(stat = "summary") + 
+  coord_flip() +
+  theme(axis.text=element_text(size=5),
+        axis.title=element_text(size=10,face="bold")) + 
+  labs(x=" ", y="Age ")
+
+box_age= ggplot(issp2009r, aes(reorder(to_label(v5), -meanage),age)) 
+box_age + geom_boxplot() +  
+  coord_flip() + 
+  theme(axis.text=element_text(size=5),
+        axis.title=element_text(size=10,face="bold")) + 
+  labs(x=" ", y="Age ")
+```
+
+## b) Datos nivel 2 externos
+ 
+Para esto usaremos la base del Quality of Government Indicators (QoG).
+La base es algo pesada, bajar directamente del sitio original: http://www.qogdata.pol.gu.se/data/qog_std_ts_jan17.dta
+ 
+```{r}
+qog=read_stata("/media/ntfs/Dropbox/proyectos y papers compartidos/Meritocracy and preferences/meritocracy_pref_international/data/qog/qog_std_ts_jan17.dta")
+
+dim(qog) # tenemos 2070 variables para 14981 filas (países/años)
+qog %>% group_by(cname) %>% summarise() # 211 países
+qog %>% group_by(year) %>% summarise() # 71 años países
+211*71 # número de filas
+
+	# Extract 2009 data
+		qog2009=qog %>% filter(year==2009) %>% select(wdi_gini,cname)	
+		qog2009 %>% group_by(cname) %>% na.omit() %>% summarise_all(mean)
+		names(qog2009)
+```
+
+El procedimiento ahora corresponde a un "merge", que como sabemos requiere un vector (variable) que identifique de la misma manera en ambas bases de datos a los casos presentes, en este caso países. 
+
+En general no es fácil que en ambas bases de datos exista una columna que identifique de la misma manera a las unidades de nivel 2. Por ejemplo, si son países, puede que estos se identifiquen por un código diferente, o que sus nombres en algunos casos se escriban distinto (ej: con/sin acento, distintos idiomas,etc). Si este es el caso, la opción más básica es la "manual", es decir, generar una variable en alguna de las bases de datos a combinar que posea valores idénticos a los de la otra base de datos.
+
+Por ejemplo, en la base ISSP la variable de identificación de país es v5, que posee un código y un valor:
+
+```{r}
+issp2009r %>% group_by("Country"=to_label(v5)) %>% summarise("Country code"=mean(v5))
+```
+
+En base a esto, se puede generar una variable en la base qog con estos mismos códigos para los países:
+
+```{r}
+str(qog2009$cname)
+qog2009 %>% group_by(cname) 
+
+# Generar variable para merge igual a la de ISSP
+  qog2009$v5=qog2009$cname
+
+# Y ahora recodificar de acuerdo a ISSP
+  qog2009$v5=rec(qog2009$cname, rec="Argentina=32;Australia=36") # ... y así para todos
+  qog2009 %>% group_by(v5) %>%  select(v5,cname) %>% slice(1:10)
+```
+
+Luego, cuando la variable esté lista, se puede hacer el merge. Pero antes de mostrar el procedimiento de merge, veamos otra posibilidad que nos ahorra la recodificación al trabajar con países, que es mediante la librería "countrycode", diseñada específicamente para estos casos. Para utilizarla, se requiere tener claro los formatos de las variables de input y de output. En este caso, el input es la variable que viene en la base de datos (nombre de los países en qog2009),y queremos el output con los códigos en que vienen los países en ISSP (v5). 
+
+La base ISSP (ver codebook) sigue el estandar ISO-3166 para los códigos y labels de los países, que es uno de los formatos tradicionales para codificar países. Este entonces es el output que queremos generar en la base qog2009 para luego realizar el merge.
+
+```{r}
+pacman::p_load(countrycode)
+qog2009$v5=countrycode(qog2009$cname, 'country.name','iso3n') # iso3n es ISO-3,para detalles ver documentación librería ?countrycode
+qog2009 %>% group_by(v5) %>%  select(v5,cname) %>% slice(1:10)
+```
+
+(Se generan algunos warnings por países no transformados, tener en cuenta por si luego falta información).
+ 
+Ahora que tenemos una variable identica para los países en ambas bases de datos, es posible realizar el merge de ambas bases:
+ 
+```{r}
+data_tot <- merge(issp2009r,qog2009,by=c("v5"))
+
+# Para ver el resultado
+  data_tot %>% group_by("Country"=cname) %>% summarise("Country code"=mean(v5),"Gini"=mean(wdi_gini)) 
+```
+
+Atención: vemos que hay missings para algunos países en la variable Gini, probablemente porque para ese año no hay información del indicador, eventualmente se puede recurrir a otras fuentes de información para completar.
+
+### Ejemplo de gráfico descriptivo de asociación entre variables nivel 1 y nivel 2
+
+Vamos a considerar la variable de esfuerzo (issp) según desigualdad (qog).
+
+```{r}
+names(data_tot)
+dat_scat=data_tot %>% group_by(v5) %>% select(wdi_gini,effort) %>% na.omit() %>% summarise_all(mean)
+names(dat_scat)
+
+sjp.scatter(dat_scat$wdi_gini, dat_scat$effort,
+            dot.labels = to_label(dat_scat$v5),
+            fit.line = TRUE,
+            show.ci = TRUE
+            )
+```
+
+Para identificar mejor los países, podemos también usar la librería countrycode y generar una variable que contenga los nombres de países abreviados en 3 letras (formato iso3c)
+
+```{r}
+
+data_tot$country3=countrycode(data_tot$v5,'iso3n','iso3c')
+
+dat_scat2=data_tot %>% group_by(country3) %>% na.omit() %>% 
+select(wdi_gini,effort,country3) %>% summarise_all(mean)
+
+sjp.scatter(dat_scat2$wdi_gini, dat_scat2$effort,
+            dot.labels = to_label(dat_scat2$country3),
+            fit.line = TRUE,
+            show.ci = TRUE
+            )
+```
+
+# Foro
+
+<script src="https://giscus.app/client.js"
+        data-repo="cursos-metodos-facso/multinivel"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyMDA3MTE2MDk="
+        data-category="Q&A"
+        data-category-id="DIC_kwDOC_aduc4CYhjI"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="es"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+

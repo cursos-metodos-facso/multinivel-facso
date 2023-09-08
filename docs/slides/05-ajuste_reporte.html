@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Modelos Multinivel</title>
+    <meta charset="utf-8" />
+    <meta name="author" content=".small[Juan Carlos Castillo    Departamento de Sociología - UCH / COES   ]" />
+    <script src="libs/header-attrs-2.21/header-attrs.js"></script>
+    <script src="libs/fabric-4.3.1/fabric.min.js"></script>
+    <link href="libs/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <link rel="stylesheet" href="css/custom_2020.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+class: front
+
+
+
+
+
+
+
+
+.pull-left-wide[
+# Modelos multinivel]
+
+.pull-right-narrow[![:scale 85%](img/logo.png)]
+
+## Unidades en contexto
+
+----
+.pull-left[
+
+## Juan Carlos Castillo
+## Sociología FACSO - UChile
+## 2do Sem 2023 
+## [.yellow[multinivel-facso.netlify.com]](https://multinivel-facso.netlify.com)
+]
+    
+
+.pull-right-narrow[
+.center[
+.content-block-gray[
+## Sesión 5: 
+## **.yellow[Ajuste y reporte]**]
+]
+]
+---
+
+layout: true
+class: animated, fadeIn
+
+---
+class: middle
+
+# Lecturas
+	
+## - O’Conell &amp; McCoach 7, Evaluating model fit and adequacy
+
+## - O’Conell &amp; McCoach 11, Reporting results from multilevel
+
+# Práctico
+
+---
+class: roja right
+# Contenidos
+
+
+## .yellow[1- Resumen sesión anterior]
+
+## 2- Ajuste
+
+## 3- Reporte
+
+---
+
+
+## Comparación Modelos
+
+- Modelo con datos individuales
+
+
+```r
+reg&lt;- lm(mathach~ses+female+sector, data=mlm)
+```
+
+- Modelo con datos agregados
+
+
+```r
+reg_agg&lt;- lm(mathach~ses+female+sector, data=agg_mlm)
+```
+
+---
+## Comparación Modelos
+.small[
+
+```r
+pacman::p_load(sjPlot,sjmisc,sjlabelled)
+tab_model(reg, reg_agg, show.ci=F, show.se = T, dv.labels = c("Individual", "Agregado"))
+```
+
+&lt;table style="border-collapse:collapse; border:none;"&gt;
+&lt;tr&gt;
+&lt;th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; "&gt;&amp;nbsp;&lt;/th&gt;
+&lt;th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; "&gt;Individual&lt;/th&gt;
+&lt;th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; "&gt;Agregado&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; "&gt;Predictors&lt;/td&gt;
+&lt;td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  "&gt;Estimates&lt;/td&gt;
+&lt;td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  "&gt;std. Error&lt;/td&gt;
+&lt;td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  "&gt;p&lt;/td&gt;
+&lt;td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  "&gt;Estimates&lt;/td&gt;
+&lt;td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  "&gt;std. Error&lt;/td&gt;
+&lt;td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col7"&gt;p&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; "&gt;(Intercept)&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;12.52&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;0.13&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;&lt;strong&gt;&amp;lt;0.001&lt;/strong&gt;&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;13.13&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;0.35&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"&gt;&lt;strong&gt;&amp;lt;0.001&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; "&gt;ses&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;2.88&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;0.10&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;&lt;strong&gt;&amp;lt;0.001&lt;/strong&gt;&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;5.19&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;0.37&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"&gt;&lt;strong&gt;&amp;lt;0.001&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; "&gt;female&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;&amp;#45;1.40&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;0.15&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;&lt;strong&gt;&amp;lt;0.001&lt;/strong&gt;&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;&amp;#45;1.97&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;0.56&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"&gt;&lt;strong&gt;0.001&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; "&gt;sector&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;1.96&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;0.15&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;&lt;strong&gt;&amp;lt;0.001&lt;/strong&gt;&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;1.25&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;0.31&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"&gt;&lt;strong&gt;&amp;lt;0.001&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;"&gt;Observations&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3"&gt;7185&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3"&gt;160&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;"&gt;R&lt;sup&gt;2&lt;/sup&gt; / R&lt;sup&gt;2&lt;/sup&gt; adjusted&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3"&gt;0.160 / 0.159&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3"&gt;0.675 / 0.668&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;/table&gt;
+
+
+
+
+]
+
+---
+.pull-left[
+![:scale 85%](img/comp_models.png)
+]
+
+.pull-right[
+
+--&gt; (del último [práctico](https://multinivel-facso.netlify.app/assignment/03-practico))
+&lt;br&gt;
+##¿Qué podemos decir de esta tabla?
+]
+
+---
+## Implicancias estimación individual/agregada
+----
+.pull-left[
+
+  - .red[inflación] de errores estándar para variables nivel 1 estimadas como agregadas, ej: female agregado (riesgo error tipo II) -&gt; .red[no detectar un efecto cuando este existe]
+]
+
+.pull-right[
+  - .red[contracción] de errores estándar para variables nivel 2 estimadas como individuales, ej: sector individual (error tipo I) -&gt; .red[detectar un efecto cuando este no existe]
+]
+---
+# Componentes de la varianza
+
+![:scale 60%](images/tau00.png)
+---
+# Componentes de la varianza
+
+
+![:scale 60%](images/taus.png)
+
+  
+---
+## Correlación intra clase: ICC
+
+-   La correlación intra-clase ( `\(\rho\)` ) indica qué porcentaje de la
+    varianza de la variable dependiente se debe a pertenencia a unidades     de nivel 2
+
+-   Descomposición de la varianza en modelo nulo=
+    `\(Var\ y=\tau_{00} + \sigma^2\)`
+
+-   Es decir, parte de la varianza se debe a los individuos ( `\(\sigma^2\)` )
+    y parte al grupo ( `\(\tau_{00}\)` )
+
+---
+## Correlación intra clase: ICC
+
+-   Correlación intra-clase = ICC =
+
+
+# `$$\rho=\frac{\tau_{00}}{\tau_{00}+\sigma^2}$$`
+
+-   Una ICC **baja** indica baja variabilidad de la
+    variable dependiente entre unidades de nivel 2, y por lo tanto, menores posibilidades de dar cuenta (*explicar*) de esa varianza con
+    predictores de nivel 2.
+
+---
+class: roja, middle, center
+
+# Correlación intra-clase
+
+## "Proporción de la varianza de la variable dependiente que se asocia a la pertenencia a unidades de nivel 2"
+
+
+---
+# librería lme4
+
+-   función lmer (linear mixed effects)
+
+-   forma general:
+
+    -   `objeto &lt;- lmer (depvar ~ predictor_1 + predictor_2 + predictor_n + (1 | cluster), data=data)`
+
+    -   el objeto contiene la información de la estimación; para ver un resumen, `summary(objeto)`, y de manera más presentable,`screenreg(objeto)`
+
+
+---
+class: roja right
+# Contenidos
+
+
+## 1- Resumen sesión anterior
+
+## .yellow[2- Ajuste]
+
+## 3- Reporte
+
+---
+# Tipos de medidas de ajuste
+
+1. Medidas relativas a la varianza de efectos aleatorios (tipo `\(R^2\)`)
+
+2. Medidas de fit comparativo (deviance)
+
+---
+##  Ajuste por proporción de varianzas
+
+![](../images/var_pred.png)
+
+---
+# Estimación de modelos para el ejemplo:
+
+results_0: nulo
+results_1: agrega predictores individuales (nivel 1)
+results_2: agrega predictores grupales (nivel 2)
+
+
+
+```r
+results_0 &lt;-lmer(mathach ~ 1 + (1 | schoolid), data = mlm)
+results_1 &lt;-lmer(mathach ~ 1 + ses + female + (1 | schoolid), data = mlm)
+results_2 &lt;-lmer(mathach ~ 1 + sector + mnses + (1 | schoolid), data = mlm)
+```
+
+
+---
+# Ajuste por proporción de varianzas
+
+-   Se relacionan con el grado de varianza “explicada” (disminución en la(s) varianza(s) atribuida a la inclusión de predictores en el modelo de regresión)
+
+-   Controversia en la literatura de multinivel, no existe una medida única
+
+-   Las propuestas sugieren usualmente cálculos de `\(R^2\)` para cada nivel
+
+---
+## Bryck &amp; Raudenbush R2 multinivel (1992)
+
+- lógica general: calcular la diferencia entre componentes de la varianza entre los modelos estimados
+
+- modelo base para la comparación: modelo nulo
+
+- luego, a medida que se agregan modelos, se compara en que medida los componentes de la varianza van disminuyendo a medida que se agregan predictores
+
+
+---
+## Componentes de la varianza del ejemplo modelos con HSB data
+----
+.medium[
+
+  | `\(\sigma^2\)`   | `\(\tau_{00}\)` 
+--|----------|-----|-----
+Modelo 0  (nulo, sin predictores)                 |  39.148   | 8.553  
+Modelo 1 (predictores ind.)    |  36.813   |  4.492 
+Modelo 2 (predictores grup.)   |  39.161   |  2.314 
+
+]
+
+- Los componentes de la varianza van disminuyendo a medida que se ingresan predictores a los modelos
+
+- Por ejemplo, en el modelo 1 el componente de la varianza individual `\(\sigma^2\)` disminuye en comparación al modelo nulo: .red[39.148-36.813=2.335] - ¿Cómo interpretar esto?
+
+
+---
+## Bryk &amp; Raudenbush - R2 Nivel 1
+
+.pull-left[
+
+
+Para Nivel 1: 
+
+&lt;br&gt;
+
+`$$\begin{split}
+   R^2_{1B\&amp;R}&amp;=\frac{var_0(r_{ij})-var_f(r_{ij})}{var_0(r_{ij})} \\\\
+    &amp;=\frac{\sigma^2(0)-\sigma^2(f)}{\sigma^2(0)}
+    \end{split}$$`
+]
+
+.pull-right[
+&lt;br&gt;
+Donde:
+
+-   `\(0\)` se refiere al modelo nulo
+
+-   `\(f\)` se refiere a un modelo posterior
+]
+
+---
+## Bryk &amp; Raudenbush - R2 Nivel 1
+----
+.medium[
+
+  | `\(\sigma^2\)`   | `\(\tau_{00}\)` |  `\(R^2_{L1}\)` |  `\(R^2_{L2}\)`
+--|----------|-----|-----|--
+Modelo 0                   |  39.148   | 8.553 |   |
+Modelo 1 (predict.ind.)    |  36.813   |  4.492 | 0.059 |
+Modelo 2 (predict.grup.)   |  39.161   |  2.314 |     |
+]
+
+Ej: `\(R^2_{L1}=(39.148-36.813)/39.148=2.335/39.148=0.059\)`
+
+
+---
+## Bryck &amp; Raudenbush - R2 Nivel 2
+
+.pull-left[
+
+Para Nivel 2: 
+
+&lt;br&gt;
+
+`$$\begin{split}
+   R^2_{2B\&amp;R}&amp;=\frac{var_0(\mu_{0j})-var_f(\mu_{0j})}{var_0(\mu_{0j})} \\\\
+    &amp;=\frac{\tau_{00}(0)-\tau_{00}(f)}{\tau_{00}(0)}
+    \end{split}$$`
+]
+
+.pull-right[
+&lt;br&gt;
+Donde:
+
+-   `\(0\)` se refiere al modelo nulo
+
+-   `\(f\)` se refiere a un modelo posterior
+]
+---
+## Bryck &amp; Raudenbush - R2 Nivel 2
+----
+.medium[
+
+  | `\(\sigma^2\)`   | `\(\tau_{00}\)` |  `\(R^2_{L1}\)` |  `\(R^2_{L2}\)`
+--|----------|-----|-----|--
+Modelo 0                   |  39.148   | 8.553 |   |
+Modelo 1 (predict.ind.)    |  36.813   |  4.492 | 0.059 |   
+Modelo 2 (predict.grup.)   |  39.161   |  2.314 |  0.00 |0.73 
+]
+
+Ej: `\(R^2_{L2}=(8.553-2.314)/8.553=6.239/8.553=0.73\)`
+
+-   Recordar interpretación en relación a correlación intra-clase (para
+    el caso de HSB data= 0.18): para el caso del R2 nivel 2 se está dando cuenta del 73% del 18%
+
+
+---
+# Cálculo directo con R - modelo 1
+
+función `multilevel.r2`, librería [`misty`](https://search.r-project.org/CRAN/refmans/misty/html/multilevel.r2.html)
+
+
+```r
+pacman::p_load(misty)# for multilevel R2
+misty::multilevel.r2(results_1, print = "RB")
+```
+
+```
+##  R-Squared Measures for Multilevel and Linear Mixed Effects Models
+## 
+##   Reduction in Residual Variance (Raudenbush and Bryk, 2002)
+## 
+##     Within-Cluster R2: 0.060 
+##    Between-Cluster R2: 0.479
+```
+---
+# Cálculo directo Bryk &amp; Raudenbush  con R - modelo 2
+
+función `multilevel.r2`, librería [`misty`](https://search.r-project.org/CRAN/refmans/misty/html/multilevel.r2.html)
+
+
+```r
+pacman::p_load(misty)# for multilevel R2
+misty::multilevel.r2(results_2, print = "RB")
+```
+
+```
+##  R-Squared Measures for Multilevel and Linear Mixed Effects Models
+## 
+##   Reduction in Residual Variance (Raudenbush and Bryk, 2002)
+## 
+##     Within-Cluster R2: -0.000 
+##    Between-Cluster R2: 0.731
+```
+
+---
+# Nakagawa and Schielzeth R2 (2013)
+
+- dos R2:
+
+  - marginal: para los efectos fijos del modelo
+  
+  - condicional: para el modelo con efectos fijos y aleatorios
+  
+- utiliza la varianza de los valores predichos de la variable dependiente
+
+---
+# Nakagawa and Schielzeth R2 (2013)
+
+- marginal (efectos fijos):
+`$$R^2_m=\frac{var(\hat{Y}_{ij})}{var(\hat{Y}_{ij})+\tau_{00}+\sigma^2}$$` 
+- condicional (efectos fijos + aleatorios)
+`$$R^2_c=\frac{var(\hat{Y}_{ij})+\tau_{00}}{var(\hat{Y}_{ij})+\tau_{00}+\sigma^2}$$`
+---
+# Cálculo directo Nakagawa  con R - modelo 2
+
+
+
+```r
+misty::multilevel.r2(results_2, print = "NS")
+```
+
+```
+##  R-Squared Measures for Multilevel and Linear Mixed Effects Models
+## 
+##   Variance Partitioning (Nakagawa and Schielzeth, 2013; Johnson, 2014)
+## 
+##       Marginal R2: 0.130 
+##    Conditional R2: 0.179
+```
+
+---
+## 2. Ajuste comparativo
+
+### Deviance test
+
+-   El test o estadístico de deviance **compara el ajuste** de dos modelos
+    basado en la log verosimilitud de cada modelo
+
+-   La hipótesis a contrastar es si predictores adicionales del modelo
+    mejoran o no el ajuste
+
+-   Asume que los **modelos son anidados**, es decir, que un modelo con
+    menos predictores puede ser derivado del modelo mayor mediante la
+    fijación de ciertos coeficientes como 0.
+
+-   Deviance= `\(-2*LL\)` (LL=Log Likelihood)
+
+-   Deviance test= `\(deviance(anidado)-deviance(mayor)\)`
+
+---
+## 2. Ajuste comparativo
+
+### Deviance test
+
+-   La distribución del estadístico de devianza es `\(\chi^2\)`, y los
+    grados de libertad para calcular el valor crítico equivalen al
+    número de parámetros extra en el modelo mayor
+
+-   Es decir, parámetros modelo mayor - parámetros modelo inicial (o
+    anterior)
+
+-   Se utiliza con estimación ML en lugar de REML (restricted maximum likelihood).
+
+---
+## Ejemplo deviance
+
+
+
+.small[
+
+```r
+results_0ml = lmer(mathach ~ 1 + (1 | schoolid), REML=FALSE)
+results_1ml = lmer(mathach ~ 1 + minority + ses + (1 | schoolid), REML=FALSE)
+```
+
+  | LL  | deviance | Parámetros
+--|---|---|
+results_0ml  | -23557.91 | 47115.81 |
+results_1ml  | -23221.82 | 46443.64 | 2
+]
+-   Deviance test= 47115.8-46443.64= 672.16, 2 DF (2 parámetros
+    adicionales)
+
+---
+## Ejemplo deviance
+
+-   Valor crítico `\(\chi^2_{DF=2}\)` para `\(p&lt;0.95=5.99\)`
+
+-   Por lo tanto, se rechaza `\(H_0\)`, es decir, las diferencias entre los
+    modelos son distintas de 0 ( `\(p&lt;0.05\)` ). En otras palabras, el modelo
+    con más parámetros presenta un mejor ajuste.
+
+---
+## Ejemplo deviance II - de manera directa en R:
+
+
+```r
+anova(results_0ml,results_1ml)
+```
+
+Y para reportar:
+
+.small[
+
+```r
+print(xtable::xtable(anova(results_0ml,results_1ml)), type="html")
+```
+
+&lt;!-- html table generated in R 4.3.1 by xtable 1.8-4 package --&gt;
+&lt;!-- Fri Sep  8 08:44:03 2023 --&gt;
+&lt;table border=1&gt;
+&lt;tr&gt; &lt;th&gt;  &lt;/th&gt; &lt;th&gt; npar &lt;/th&gt; &lt;th&gt; AIC &lt;/th&gt; &lt;th&gt; BIC &lt;/th&gt; &lt;th&gt; logLik &lt;/th&gt; &lt;th&gt; deviance &lt;/th&gt; &lt;th&gt; Chisq &lt;/th&gt; &lt;th&gt; Df &lt;/th&gt; &lt;th&gt; Pr(&amp;gt;Chisq) &lt;/th&gt;  &lt;/tr&gt;
+  &lt;tr&gt; &lt;td&gt; results_0ml &lt;/td&gt; &lt;td align="right"&gt; 3.00 &lt;/td&gt; &lt;td align="right"&gt; 47121.81 &lt;/td&gt; &lt;td align="right"&gt; 47142.45 &lt;/td&gt; &lt;td align="right"&gt; -23557.91 &lt;/td&gt; &lt;td align="right"&gt; 47115.81 &lt;/td&gt; &lt;td align="right"&gt;  &lt;/td&gt; &lt;td align="right"&gt;  &lt;/td&gt; &lt;td align="right"&gt;  &lt;/td&gt; &lt;/tr&gt;
+  &lt;tr&gt; &lt;td&gt; results_1ml &lt;/td&gt; &lt;td align="right"&gt; 5.00 &lt;/td&gt; &lt;td align="right"&gt; 46453.64 &lt;/td&gt; &lt;td align="right"&gt; 46488.03 &lt;/td&gt; &lt;td align="right"&gt; -23221.82 &lt;/td&gt; &lt;td align="right"&gt; 46443.64 &lt;/td&gt; &lt;td align="right"&gt; 672.17 &lt;/td&gt; &lt;td align="right"&gt; 2 &lt;/td&gt; &lt;td align="right"&gt; 0.0000 &lt;/td&gt; &lt;/tr&gt;
+   &lt;/table&gt;
+]
+---
+#Ajuste y modelos con pendiente aleatoria
+
+-  Los test de ajuste por proporción de varianza (R2) no son recomendados al momento de estimar modelos con pendiente aleatoria
+
+-   El test de deviance se utiliza al momento de reportar la significancia de los efectos aleatorios (ej: con pendiente aleatorio,comparando el mismo modelo con y sin aleatorización)
+
+-   Considerar que los componentes de la varianza son parámetros del modelo, es decir, se cuentan para la diferencia de grados de libertad
+
+
+---
+class: roja right
+
+# Contenidos
+
+## 1- Resumen sesión anterior
+
+## 2- Ajuste
+
+## .yellow[3- Reporte]
+
+---
+## Tablas y descriptivos
+
+-   Tabla de descriptivos de variables L1 y L2
+
+  - para esto conviene generar base de datos agregados para tabla descriptiva
+  
+  - se recomienda utilizar librería summarytools, función dfSummary (información [aquí](https://cran.r-project.org/web/packages/summarytools/vignettes/introduction.html))
+
+-   Descripción del número de casos por nivel y también de otras    variables relevantes (ej, dependiente e independientes comprometidas en hipótesis)
+
+---
+.small[
+
+```r
+sjmisc::descr(mlm,
+      show = c("label","range", "mean", "sd", "NA.prc", "n"))%&gt;%
+      kable(.,digits =2,"markdown")
+```
+
+
+
+|   |var      |label    |    n| NA.prc|    mean|      sd|range               |
+|:--|:--------|:--------|----:|------:|-------:|-------:|:-------------------|
+|3  |minority |minority | 7185|      0|    0.27|    0.45|1 (0-1)             |
+|1  |female   |female   | 7185|      0|    0.53|    0.50|1 (0-1)             |
+|7  |ses      |ses      | 7185|      0|    0.00|    0.78|6.45 (-3.76-2.69)   |
+|2  |mathach  |mathach  | 7185|      0|   12.75|    6.88|27.83 (-2.83-24.99) |
+|8  |size     |size     | 7185|      0| 1056.86|  604.17|2613 (100-2713)     |
+|6  |sector   |sector   | 7185|      0|    0.49|    0.50|1 (0-1)             |
+|4  |mnses    |mnses    | 7185|      0|    0.00|    0.41|2.02 (-1.19-0.82)   |
+|5  |schoolid |schoolid | 7185|      0| 5277.90| 2499.58|8362 (1224-9586)    |
+]
+
+---
+class: middle
+
+# Problema tabla anterior: aparecen en conjunto variables de nivel 1 y nivel 2, tienen distinto N y deberían presentarse por separado
+
+
+---
+.small[
+
+```r
+mlm %&gt;%  select (mathach, ses, female, minority) %&gt;% sjmisc::descr(.,
+      show = c("label","range", "mean", "sd", "NA.prc", "n"))%&gt;%
+      kable(., digits =2, "markdown", caption = "Variables nivel 1")  
+```
+
+
+
+Table: Variables nivel 1
+
+|   |var      |label    |    n| NA.prc|  mean|   sd|range               |
+|:--|:--------|:--------|----:|------:|-----:|----:|:-------------------|
+|2  |mathach  |mathach  | 7185|      0| 12.75| 6.88|27.83 (-2.83-24.99) |
+|4  |ses      |ses      | 7185|      0|  0.00| 0.78|6.45 (-3.76-2.69)   |
+|1  |female   |female   | 7185|      0|  0.53| 0.50|1 (0-1)             |
+|3  |minority |minority | 7185|      0|  0.27| 0.45|1 (0-1)             |
+]
+
+---
+.small[
+
+```r
+agg_mlm %&gt;%  select (size, sector,mnses) %&gt;% sjmisc::descr(.,
+      show = c("label","range", "mean", "sd", "NA.prc", "n"))%&gt;%
+      kable(., digits =2, "markdown", caption = "Variables nivel 2")  
+```
+
+
+
+Table: Variables nivel 2
+
+|   |var    |label  |   n| NA.prc|    mean|     sd|range             |
+|:--|:------|:------|---:|------:|-------:|------:|:-----------------|
+|3  |size   |size   | 160|      0| 1097.83| 629.51|2613 (100-2713)   |
+|2  |sector |sector | 160|      0|    0.44|   0.50|1 (0-1)           |
+|1  |mnses  |mnses  | 160|      0|   -0.01|   0.41|2.02 (-1.19-0.82) |
+]
+
+
+---
+## Descriptivos
+
+### Ejemplo tabla descriptiva (Ferron et al 2007, en O’Connell Cap.11)
+
+.center[![:scale 70%](../images/descriptives.JPG)]
+
+Alternativas en R: Stargazer, [summarytools](https://cran.r-project.org/web/packages/summarytools/vignettes/Introduction.html)
+
+---
+
+### Reporte modelos
+
+![image](../images/models2.JPG)
+
+(O’Connell, cap.11)
+---
+## Reporte modelos
+
+![:scale 70%](../images/models3.JPG)
+
+---
+## Reporte modelos
+
+-   Efectos fijos, con valores t o se
+
+-   Asteriscos para niveles de significación
+
+-   Efectos aleatorios
+
+-   Fit: log likelihood
+
+-   Fit adicionales: AIC, BIC, deviance, R2
+
+---
+
+
+.pull-left[
+## Reporte con tab_model
+
+
+```r
+tab_model(results_1, results_2, 
+  show.ci = FALSE, 
+  show.se = TRUE, 
+  collapse.se = TRUE,
+  show.p = FALSE,
+  p.style = c("scientific_stars")
+  ) 
+```
+]
+
+.pull-right[
+.tiny[
+&lt;table style="border-collapse:collapse; border:none;"&gt;
+&lt;tr&gt;
+&lt;th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; "&gt;&amp;nbsp;&lt;/th&gt;
+&lt;th colspan="1" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; "&gt;mathach&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; "&gt;Predictors&lt;/td&gt;
+&lt;td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  "&gt;Estimates&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; "&gt;(Intercept)&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;12.13 &lt;sup&gt;***&lt;/sup&gt;&lt;br&gt;(0.20)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; "&gt;sector&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;1.23 &lt;sup&gt;***&lt;/sup&gt;&lt;br&gt;(0.31)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; "&gt;mnses&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "&gt;5.33 &lt;sup&gt;***&lt;/sup&gt;&lt;br&gt;(0.37)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td colspan="2" style="font-weight:bold; text-align:left; padding-top:.8em;"&gt;Random Effects&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;"&gt;&amp;sigma;&lt;sup&gt;2&lt;/sup&gt;&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1"&gt;39.16&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;"&gt;&amp;tau;&lt;sub&gt;00&lt;/sub&gt; &lt;sub&gt;schoolid&lt;/sub&gt;&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1"&gt;2.31&lt;/td&gt;
+
+&lt;tr&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;"&gt;ICC&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1"&gt;0.06&lt;/td&gt;
+
+&lt;tr&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;"&gt;N &lt;sub&gt;schoolid&lt;/sub&gt;&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1"&gt;160&lt;/td&gt;
+&lt;tr&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;"&gt;Observations&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="1"&gt;7185&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;"&gt;Marginal R&lt;sup&gt;2&lt;/sup&gt; / Conditional R&lt;sup&gt;2&lt;/sup&gt;&lt;/td&gt;
+&lt;td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1"&gt;0.130 / 0.179&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td colspan="2" style="font-style:italic; border-top:double black; text-align:right;"&gt;* p&amp;lt;0.05&amp;nbsp;&amp;nbsp;&amp;nbsp;** p&amp;lt;0.01&amp;nbsp;&amp;nbsp;&amp;nbsp;*** p&amp;lt;0.001&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;/table&gt;
+]]
+
+---
+# Reportes de relaciones bivariadas
+
+- tablas cruzadas
+- correlaciones / corrplot
+- nubes de puntos
+
+Revisar:
+
+- [https://multivariada.netlify.app/assignment/02-code/](https://multivariada.netlify.app/assignment/02-code/)
+
+- [https://correlacional.netlify.app/assignment/03-practico](https://correlacional.netlify.app/assignment/03-practico)
+
+---
+# Automatizando el reporte con RMarkdown
+.medium[
+- Markdown es un lenguaje de escritura de texto simple, con pocas marcas de edición.
+
+- RMarkdown es un formato que permite vincular escritura en Markdown y código de R, que luego son compilados en diferentes formatos de salida (pdf, html, word) mediante la librería knitr
+
+![](https://es.r4ds.hadley.nz/images/RMarkdownFlow.png)
+
+
+- Este proceso se encuentra automatizado en RStudio, mediante el uso del boton "Knitr", que realiza la compilación y muestra el output.
+]
+---
+
+.pull-left[
+## Ventajas
+
+- permite generar tablas y gráficos automáticamente en el mismo documento, evitando el cortar / pegar
+
+- escritura simple]
+
+.pull-right[
+## Desventajas
+
+- acostumbrarse
+
+- conformarse con un formato simple de texto (al menos inicialmente)
+
+- ... igual es R]
+
+&lt;br&gt;
+.center[
+#  VALE LA PENA
+]
+
+---
+
+## RMarkdown
+
+Tres cosas básicas a aprender:
+
+- Markdown
+
+- Insertar trozos (chunks) de código
+
+- Opciones generales en encabezado YAML
+
+---
+
+## Varios tutoriales ... revisar
+
+- Sección R Markdown de R4DS: https://es.r4ds.hadley.nz/r-markdown.html
+
+- Guía de documentos dinámicos: https://juancarloscastillo.github.io/metsoc-facsouchile/documents/trabajos/guia_rep_dinamico/reportedinamico.html
+
+- [https://correlacional.netlify.app/assignment/01-practico](https://correlacional.netlify.app/assignment/01-practico)
+
+---
+## ... y en RStudio
+
+![:scale 95%](https://juancarloscastillo.github.io/metsoc-facsouchile/documents/trabajos/guia_rep_dinamico/images/rmarkdown.gif)
+
+---
+## Y en general para la entrega de trabajos
+
+- De preferencia en (R)Markdown/html, facilita la apertura y colaboración.
+
+- Preocuparse más del contenido que del formato
+
+
+---
+class: front
+.pull-left-wide[
+# Modelos multinivel]
+
+.pull-right-narrow[![:scale 85%](img/logo.png)]
+
+## Unidades en contexto
+
+----
+.pull-left[
+
+## Juan Carlos Castillo
+## Sociología FACSO - UChile
+## 2do Sem 2023 
+## [.yellow[multinivel-facso.netlify.com]](https://multinivel-facso.netlify.com)
+]
+    
+
+.pull-right-narrow[
+.center[
+
+]
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://multinivel.netlify.com/docpres/xaringan_custom/macros.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "tomorrow-night-blue",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url("img/logo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 16.3em;
+  right: 31em;
+  width: 110px;
+  height: 70px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
