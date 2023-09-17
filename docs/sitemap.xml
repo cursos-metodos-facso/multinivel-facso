@@ -2,82 +2,90 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://multinivel.netlify.app/trabajos.html</loc>
-    <lastmod>2023-09-08T12:06:17.292Z</lastmod>
+    <lastmod>2023-09-17T01:28:28.199Z</lastmod>
   </url>
   <url>
     <loc>https://multinivel.netlify.app/schedule.html</loc>
-    <lastmod>2023-09-08T12:06:16.216Z</lastmod>
+    <lastmod>2023-09-17T01:28:26.855Z</lastmod>
   </url>
   <url>
     <loc>https://multinivel.netlify.app/resource/index.html</loc>
-    <lastmod>2023-09-08T12:06:15.380Z</lastmod>
+    <lastmod>2023-09-17T01:28:25.811Z</lastmod>
   </url>
   <url>
     <loc>https://multinivel.netlify.app/news/2023-01-09_welcome.html</loc>
-    <lastmod>2023-09-08T12:06:14.492Z</lastmod>
+    <lastmod>2023-09-17T01:28:24.767Z</lastmod>
   </url>
   <url>
     <loc>https://multinivel.netlify.app/example/index.html</loc>
-    <lastmod>2023-09-08T12:06:13.700Z</lastmod>
+    <lastmod>2023-09-17T01:28:23.783Z</lastmod>
   </url>
   <url>
     <loc>https://multinivel.netlify.app/content/index.html</loc>
-    <lastmod>2023-09-08T12:06:11.908Z</lastmod>
+    <lastmod>2023-09-17T01:28:21.467Z</lastmod>
   </url>
   <url>
     <loc>https://multinivel.netlify.app/content/04-content.html</loc>
-    <lastmod>2023-09-08T12:06:11.200Z</lastmod>
+    <lastmod>2023-09-17T01:28:20.567Z</lastmod>
   </url>
   <url>
     <loc>https://multinivel.netlify.app/content/02-content.html</loc>
-    <lastmod>2023-09-08T12:06:10.520Z</lastmod>
+    <lastmod>2023-09-17T01:28:19.631Z</lastmod>
   </url>
   <url>
-    <loc>https://multinivel.netlify.app/assignment/index.html</loc>
-    <lastmod>2023-09-08T12:06:09.832Z</lastmod>
+    <loc>https://multinivel.netlify.app/assignment/pruebas_here.html</loc>
+    <lastmod>2023-09-17T01:28:18.751Z</lastmod>
+  </url>
+  <url>
+    <loc>https://multinivel.netlify.app/assignment/04-practico.html</loc>
+    <lastmod>2023-09-17T01:28:17.527Z</lastmod>
   </url>
   <url>
     <loc>https://multinivel.netlify.app/assignment/02-practico.html</loc>
-    <lastmod>2023-09-08T12:06:08.480Z</lastmod>
+    <lastmod>2023-09-17T01:28:15.539Z</lastmod>
   </url>
   <url>
     <loc>https://multinivel.netlify.app/assignment/01-practico.html</loc>
-    <lastmod>2023-09-08T12:06:07.608Z</lastmod>
+    <lastmod>2023-09-17T01:28:14.535Z</lastmod>
   </url>
   <url>
     <loc>https://multinivel.netlify.app/assignment/03-practico.html</loc>
-    <lastmod>2023-09-08T12:06:09.356Z</lastmod>
+    <lastmod>2023-09-17T01:28:16.551Z</lastmod>
+  </url>
+  <url>
+    <loc>https://multinivel.netlify.app/assignment/index.html</loc>
+    <lastmod>2023-09-17T01:28:18.151Z</lastmod>
   </url>
   <url>
     <loc>https://multinivel.netlify.app/content/01-content.html</loc>
-    <lastmod>2023-09-08T12:06:10.184Z</lastmod>
+    <lastmod>2023-09-17T01:28:19.159Z</lastmod>
   </url>
   <url>
     <loc>https://multinivel.netlify.app/content/03-content.html</loc>
-    <lastmod>2023-09-08T12:06:10.848Z</lastmod>
+    <lastmod>2023-09-17T01:28:20.127Z</lastmod>
   </url>
   <url>
     <loc>https://multinivel.netlify.app/content/05-content.html</loc>
-    <lastmod>2023-09-08T12:06:11.556Z</lastmod>
+    <lastmod>2023-09-17T01:28:21.067Z</lastmod>
   </url>
   <url>
     <loc>https://multinivel.netlify.app/example/cace.html</loc>
-    <lastmod>2023-09-08T12:06:13.344Z</lastmod>
+    <lastmod>2023-09-17T01:28:23.307Z</lastmod>
   </url>
   <url>
     <loc>https://multinivel.netlify.app/index.html</loc>
-    <lastmod>2023-09-08T12:06:14.144Z</lastmod>
+    <lastmod>2023-09-17T01:28:24.291Z</lastmod>
   </url>
   <url>
     <loc>https://multinivel.netlify.app/news/index.html</loc>
-    <lastmod>2023-09-08T12:06:14.940Z</lastmod>
+    <lastmod>2023-09-17T01:28:25.347Z</lastmod>
   </url>
   <url>
     <loc>https://multinivel.netlify.app/resource/install.html</loc>
-    <lastmod>2023-09-08T12:06:15.700Z</lastmod>
+    <lastmod>2023-09-17T01:28:26.239Z</lastmod>
   </url>
   <url>
     <loc>https://multinivel.netlify.app/syllabus.html</loc>
-    <lastmod>2023-09-08T12:06:16.756Z</lastmod>
+    <lastmod>2023-09-17T01:28:27.559Z</lastmod>
   </url>
 </urlset>

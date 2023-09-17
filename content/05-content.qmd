@@ -13,6 +13,14 @@ website:
 <iframe src=/slides/05-ajuste_reporte.html height="550" width=100% allowfullscreen="true">
 </iframe> 
 
+# Video de la sesion
+
+<div style="width: 100%; height: 600px; overflow: hidden;">
+<video  style="width: 100%;" controls>
+<source src="https://www.dropbox.com/scl/fi/1oq1owlmah453nzwrufnx/multinivel_sesion5_2023.mp4?raw=1">
+</video>
+</div>
+
 
 # Foro
 

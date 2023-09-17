@@ -1,0 +1,23 @@
+---
+title: "Práctica 4. Trabajando con variables nivel 2"
+date: "2023-09-08"
+lang: es
+---
+
+```{r setup, include=FALSE, cache = TRUE}
+require("knitr")
+opts_chunk$set(warning=FALSE,
+               message=FALSE,
+               echo=TRUE,
+               cache = TRUE, fig.width=7, fig.height=5.2)
+knitr::opts_knit$set(root.dir = here::here())
+```
+
+
+```{r}
+#here::here()
+getwd()
+#setwd(here::here())
+#getwd()
+```
+

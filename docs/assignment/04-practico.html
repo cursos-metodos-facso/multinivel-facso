@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="Modelos Multinivel">
+
+<title>Modelos Multinivel - Combinando datos de distintos niveles</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="..//files/img/logo-multinivel.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+
+<meta property="og:title" content="Modelos Multinivel - Combinando datos de distintos niveles">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://multinivel.netlify.app/files/img/logo-multinivel.png">
+<meta property="og:site-name" content="Modelos Multinivel">
+<meta property="og:locale" content="es">
+<meta property="og:image:height" content="595">
+<meta property="og:image:width" content="521">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Modelos Multinivel</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Buscar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Navegación de palanca" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus.html" rel="" target="">
+ <span class="menu-text">Programa</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../schedule.html" rel="" target="">
+ <span class="menu-text">Planificación</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../content/index.html" rel="" target="">
+ <span class="menu-text">Clases</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../assignment/index.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Prácticos</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../trabajos.html" rel="" target="">
+ <span class="menu-text">Trabajos</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../resource/index.html" rel="" target="">
+ <span class="menu-text">Recursos</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://rstudio.cloud" rel="" target=""><i class="bi bi-cloud-fill" role="img" aria-label="RStudio.cloud">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignment/01-practico.html">Guías</a></li><li class="breadcrumb-item"><a href="../assignment/04-practico.html">4: Combinando datos de distintos niveles</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Sobre prácticos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Instrucciones generales</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Guías</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/01-practico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1: Preparación de Datos con R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/02-practico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2: Datos y estimaciones en dos niveles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/03-practico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3: Estimación modelos multinivel con lmer en R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/04-practico.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">4: Combinando datos de distintos niveles</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
+   
+  <ul>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción"><span class="header-section-number">1</span> Introducción</a></li>
+  <li><a href="#preparación-de-datos-individuales" id="toc-preparación-de-datos-individuales" class="nav-link" data-scroll-target="#preparación-de-datos-individuales"><span class="header-section-number">2</span> Preparación de datos individuales</a></li>
+  <li><a href="#generando-datos-nivel-2-a-partir-de-datos-individuales" id="toc-generando-datos-nivel-2-a-partir-de-datos-individuales" class="nav-link" data-scroll-target="#generando-datos-nivel-2-a-partir-de-datos-individuales"><span class="header-section-number">3</span> Generando datos nivel 2 a partir de datos individuales</a></li>
+  <li><a href="#preparación-de-datos-externos-de-nivel-2" id="toc-preparación-de-datos-externos-de-nivel-2" class="nav-link" data-scroll-target="#preparación-de-datos-externos-de-nivel-2"><span class="header-section-number">4</span> Preparación de datos externos de nivel 2</a></li>
+  <li><a href="#combinando-bases-de-distintos-niveles" id="toc-combinando-bases-de-distintos-niveles" class="nav-link" data-scroll-target="#combinando-bases-de-distintos-niveles"><span class="header-section-number">5</span> Combinando bases de distintos niveles</a></li>
+  <li><a href="#ejemplo-de-descriptivos" id="toc-ejemplo-de-descriptivos" class="nav-link" data-scroll-target="#ejemplo-de-descriptivos"><span class="header-section-number">6</span> Ejemplo de descriptivos</a></li>
+  <li><a href="#foro" id="toc-foro" class="nav-link" data-scroll-target="#foro"><span class="header-section-number">7</span> Foro</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header">
+<h1 class="title display-7">Combinando datos de distintos niveles</h1>
+
+<div class="date-block bg-assignment text-white p-2">
+  <p class="date">Correspondiente a la sesión del viernes, 8 de septiembre de 2023</p>
+</div>
+</header>
+
+<section id="introducción" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introducción</h1>
+<p>Desde un punto de vista operativo, las variables de nivel dos se pueden clasificar en dos tipos:</p>
+<ol type="a">
+<li><p>Las que se pueden generar a partir desde los datos individuales (como por ejemplo, promedio/porcentaje de una variable de nivel 1)</p></li>
+<li><p>Las que provienen de fuentes externas a los datos individuales (ej: datos administrativos, nivel de democracia de un país, nivel de vulnerabilidad de una escuela, etc.)</p></li>
+</ol>
+<p>Para los ejemplos vamos a trabajar con la base de datos de ISSP 2009 (www.issp.org), modulo desigualdad económica (datos originales: ZA5400_v4-0-0.dta), y luego con la base del Quality of Government (http://qog.pol.gu.se/)</p>
+</section>
+<section id="preparación-de-datos-individuales" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Preparación de datos individuales</h1>
+<p>Primero cargamos la base de la encuesta ISSP desigualdad (mayor información sobre esta encuesta <a href="https://www.gesis.org/en/issp/modules/issp-modules-by-topic/social-inequality/2009">aquí</a>)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Librerías</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(haven,descr,sjmisc,dplyr,sjPlot, ggplot2)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Data ISSP (original)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>issp2009 <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">"https://multinivel-facso.netlify.app/assignment/data/ZA5400_v4-0-0.dta"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(issp2009)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(issp2009) <span class="ot">&lt;-</span> <span class="fu">tolower</span>(<span class="fu">names</span>(issp2009)) <span class="co"># cambia a minúsculas</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Algunos ajustes preliminares a los datos:</p>
+<p>Primero vamos a seleccionar algunas variables de la base de datos (para detalles, ver libro de códigos):</p>
+<ul>
+<li>v5 : ID país</li>
+<li>v10: para salir adelante lo importante es el esfuerzo</li>
+<li>sex: sexo</li>
+<li>age: edad (en años)</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>issp2009r<span class="ot">=</span>issp2009 <span class="sc">%&gt;%</span> <span class="fu">select</span>(v5,v10,sex,age) <span class="co"># dplyr</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Y ahora recodificaciones y limpieza de perdidos</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># v10: Esfuerzo</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  issp2009r<span class="sc">$</span>effort<span class="ot">=</span>issp2009r<span class="sc">$</span>v10</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">freq</span>(issp2009r<span class="sc">$</span>effort) <span class="co"># freq es de descr</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="04-practico_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Q1e Getting ahead: How important is hard work? 
+      Frequency  Percent
+1         17432  31.1169
+2         24403  43.5605
+3         10568  18.8644
+4          2370   4.2306
+5           539   0.9621
+8           387   0.6908
+9           322   0.5748
+Total     56021 100.0000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">freq</span>(<span class="fu">to_label</span>(issp2009r<span class="sc">$</span>effort)) <span class="co">#  to_label de sjmisc</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="04-practico_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Q1e Getting ahead: How important is hard work? 
+                     Frequency  Percent
+Essential                17432  31.1169
+Very important           24403  43.5605
+Fairly important         10568  18.8644
+Not very important        2370   4.2306
+Not important at all       539   0.9621
+Cant choose                387   0.6908
+NA                         322   0.5748
+Total                    56021 100.0000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>  issp2009r<span class="sc">$</span>effort<span class="ot">=</span><span class="fu">set_na</span>(issp2009r<span class="sc">$</span>effort,<span class="at">na =</span> <span class="fu">c</span>(<span class="dv">8</span>,<span class="dv">9</span>))</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  issp2009r<span class="sc">$</span>effort<span class="ot">=</span><span class="fu">rec</span>(issp2009r<span class="sc">$</span>effort, <span class="at">rec =</span> <span class="st">"rev"</span>) <span class="co"># Reverse code, sjmisc </span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">freq</span>(<span class="fu">to_label</span>(issp2009r<span class="sc">$</span>effort)) <span class="co"># ok.</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="04-practico_files/figure-html/unnamed-chunk-4-3.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Q1e Getting ahead: How important is hard work? 
+                     Frequency  Percent Valid Percent
+Not important at all       539   0.9621        0.9745
+Not very important        2370   4.2306        4.2848
+Fairly important         10568  18.8644       19.1062
+Very important           24403  43.5605       44.1188
+Essential                17432  31.1169       31.5158
+NA's                       709   1.2656              
+Total                    56021 100.0000      100.0000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">freq</span>(issp2009r<span class="sc">$</span>effort) <span class="co"># ok.</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="04-practico_files/figure-html/unnamed-chunk-4-4.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Q1e Getting ahead: How important is hard work? 
+      Frequency  Percent Valid Percent
+1           539   0.9621        0.9745
+2          2370   4.2306        4.2848
+3         10568  18.8644       19.1062
+4         24403  43.5605       44.1188
+5         17432  31.1169       31.5158
+NA's        709   1.2656              
+Total     56021 100.0000      100.0000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sex</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">freq</span>(issp2009r<span class="sc">$</span>sex);<span class="fu">freq</span>(<span class="fu">to_label</span>(issp2009r<span class="sc">$</span>sex))  <span class="co"># freq es de descr</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="04-practico_files/figure-html/unnamed-chunk-4-5.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R: Sex 
+      Frequency   Percent
+1         25184  44.95457
+2         30792  54.96510
+9            45   0.08033
+Total     56021 100.00000</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="04-practico_files/figure-html/unnamed-chunk-4-6.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R: Sex 
+            Frequency   Percent
+Male            25184  44.95457
+Female          30792  54.96510
+NA, refused        45   0.08033
+Total           56021 100.00000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>  issp2009r<span class="sc">$</span>sex<span class="ot">=</span><span class="fu">rec</span>(issp2009r<span class="sc">$</span>sex, <span class="at">rec=</span><span class="st">"1=0 [Male];2=1[Female]; 9=NA"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Age</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">freq</span>(issp2009r<span class="sc">$</span>age)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="04-practico_files/figure-html/unnamed-chunk-4-7.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R: Age 
+      Frequency   Percent
+15            6 1.071e-02
+16           92 1.642e-01
+17          131 2.338e-01
+18          838 1.496e+00
+19          895 1.598e+00
+20          911 1.626e+00
+21          861 1.537e+00
+22          861 1.537e+00
+23          830 1.482e+00
+24          887 1.583e+00
+25          877 1.565e+00
+26          901 1.608e+00
+27          923 1.648e+00
+28          941 1.680e+00
+29          959 1.712e+00
+30         1016 1.814e+00
+31          887 1.583e+00
+32         1039 1.855e+00
+33          951 1.698e+00
+34          975 1.740e+00
+35         1085 1.937e+00
+36         1033 1.844e+00
+37         1004 1.792e+00
+38         1060 1.892e+00
+39         1056 1.885e+00
+40         1122 2.003e+00
+41          970 1.731e+00
+42         1089 1.944e+00
+43         1069 1.908e+00
+44         1021 1.823e+00
+45         1095 1.955e+00
+46          973 1.737e+00
+47         1042 1.860e+00
+48         1071 1.912e+00
+49         1117 1.994e+00
+50         1104 1.971e+00
+51          984 1.756e+00
+52         1012 1.806e+00
+53         1007 1.798e+00
+54          937 1.673e+00
+55          986 1.760e+00
+56         1008 1.799e+00
+57          969 1.730e+00
+58          915 1.633e+00
+59          968 1.728e+00
+60         1079 1.926e+00
+61          905 1.615e+00
+62          934 1.667e+00
+63          814 1.453e+00
+64          774 1.382e+00
+65          807 1.441e+00
+66          742 1.325e+00
+67          738 1.317e+00
+68          679 1.212e+00
+69          663 1.183e+00
+70          712 1.271e+00
+71          540 9.639e-01
+72          578 1.032e+00
+73          516 9.211e-01
+74          516 9.211e-01
+75          471 8.408e-01
+76          406 7.247e-01
+77          360 6.426e-01
+78          350 6.248e-01
+79          307 5.480e-01
+80          324 5.784e-01
+81          222 3.963e-01
+82          223 3.981e-01
+83          157 2.803e-01
+84          144 2.570e-01
+85          121 2.160e-01
+86           85 1.517e-01
+87           63 1.125e-01
+88           48 8.568e-02
+89           57 1.017e-01
+90           24 4.284e-02
+91            8 1.428e-02
+92            8 1.428e-02
+93            8 1.428e-02
+94            6 1.071e-02
+95            4 7.140e-03
+97            5 8.925e-03
+98            7 1.250e-02
+99          138 2.463e-01
+Total     56021 1.000e+02</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>  issp2009r<span class="sc">$</span>age<span class="ot">=</span><span class="fu">set_na</span>(issp2009r<span class="sc">$</span>age, <span class="at">na=</span><span class="fu">c</span>(<span class="dv">99</span>)) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="generando-datos-nivel-2-a-partir-de-datos-individuales" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Generando datos nivel 2 a partir de datos individuales</h1>
+<p>En este caso se habla también de datos “agregados” o “colapsados”. Para agregar, utilizaremos primero una función simple para hacerlo en base al promedio</p>
+<p>Por ejemplo, agregar a la base de datos el promedio de edad por país (v5)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>issp2009r <span class="ot">=</span> issp2009r <span class="sc">%&gt;%</span>  </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(v5) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">meanage =</span> <span class="fu">mean</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Otros posibles agregados:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Desviación estándar</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    issp2009r <span class="ot">=</span> issp2009r <span class="sc">%&gt;%</span>  </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">group_by</span>(v5) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">sdage =</span> <span class="fu">sd</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Tamaño (cantidad de casos por país)</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    issp2009r <span class="ot">=</span> issp2009r <span class="sc">%&gt;%</span>  </span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">group_by</span>(v5) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">count =</span> <span class="fu">length</span>(v5))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Visualizar datos en tabla</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>issp2009r <span class="sc">%&gt;%</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="at">Country=</span><span class="fu">to_label</span>(v5)) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="st">"Mean Age"</span><span class="ot">=</span><span class="fu">mean</span>(meanage), </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">"SD Age"</span><span class="ot">=</span><span class="fu">mean</span>(sdage), </span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">N=</span><span class="fu">mean</span>(count)) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">n =</span> <span class="fu">nrow</span>(.))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 41 × 4
+   Country                                `Mean Age` `SD Age`     N
+   &lt;fct&gt;                                       &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;
+ 1 AR-Argentina                                 46.7     17.5  1133
+ 2 AU-Australia                                 52.5     16.8  1525
+ 3 AT-Austria                                   45.1     17.1  1019
+ 4 BE-Belgium                                   48.9     17.6  1115
+ 5 BG-Bulgaria                                  49.1     17.2  1000
+ 6 CL-Chile                                     46.6     17.6  1505
+ 7 CN-China                                     43.0     14.1  3010
+ 8 TW-Taiwan                                    44.8     16.6  2026
+ 9 HR-Croatia                                   45.7     17.6  1201
+10 CY-Cyprus                                    42.6     15.4  1000
+11 CZ-Czech Republic                            46.8     16.8  1205
+12 DK-Denmark                                   50.2     17.0  1518
+13 EE-Estonia                                   50.9     18.8  1005
+14 FI-Finland                                   47.6     16.5   880
+15 FR-France                                    55.1     15.7  2817
+16 DE-Germany                                   49.6     17.9  1395
+17 HU-Hungary                                   46.2     15.9  1010
+18 IS-Iceland                                   46.1     17.3   947
+19 IL-Israel                                    43.5     17.5  1193
+20 IT-Italy                                     48.3     17.1  1084
+21 JP-Japan                                     49.2     17.6  1296
+22 KR-South Korea                               43.5     15.2  1599
+23 LV-Latvia                                    44.4     17.0  1069
+24 LT-Lithuania                                 51.5     18.4  1023
+25 NZ-New Zealand                               50.6     17.0   935
+26 NO-Norway                                    48       15.2  1246
+27 PH-Philippines                               42.5     16.1  1200
+28 PL-Poland                                    46.0     17.1  1263
+29 PT-Portugal                                  49.4     18.1  1000
+30 RU-Russia                                    46.8     18.4  1603
+31 SK-Slovakia                                  46.3     16.3  1159
+32 SI-Slovenia                                  46.7     17.8  1065
+33 ZA-South Africa                              39.3     15.7  3305
+34 ES-Spain                                     47.1     17.9  1215
+35 SE-Sweden                                    48.5     16.3  1137
+36 CH-Switzerland                               50.1     17.7  1229
+37 TR-Turkey                                    41.2     15.5  1569
+38 UA-Ukraine                                   48.2     17.7  2012
+39 GB-Great Britain and/or United Kingdom       50.1     17.2   958
+40 US-United States                             49.5     17.1  1581
+41 VE-Venezuela                                 36.8     15.1   969</code></pre>
+</div>
+</div>
+<p>Exploración gráfica</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>bar_age<span class="ot">=</span><span class="fu">ggplot</span>(issp2009r, </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>               <span class="fu">aes</span>(<span class="fu">reorder</span>(<span class="fu">to_label</span>(v5), <span class="sc">-</span>meanage),meanage))</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>bar_age <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"summary"</span>) <span class="sc">+</span> </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">5</span>),</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>,<span class="at">face=</span><span class="st">"bold"</span>)) <span class="sc">+</span> </span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">" "</span>, <span class="at">y=</span><span class="st">"Age "</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="04-practico_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>box_age<span class="ot">=</span> <span class="fu">ggplot</span>(issp2009r, </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>                <span class="fu">aes</span>(<span class="fu">reorder</span>(<span class="fu">to_label</span>(v5), <span class="sc">-</span>meanage),age)) </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>box_age <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span>  </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">5</span>),</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>,<span class="at">face=</span><span class="st">"bold"</span>)) <span class="sc">+</span> </span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">" "</span>, <span class="at">y=</span><span class="st">"Age "</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="04-practico_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="preparación-de-datos-externos-de-nivel-2" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Preparación de datos externos de nivel 2</h1>
+<p>Para esto usaremos la base del Quality of Government Indicators (QoG).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>qog<span class="ot">=</span><span class="fu">read_stata</span>(<span class="st">"https://multinivel-facso.netlify.app/assignment/data/qog_bas_ts_jan23_stata14.dta"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Dimensiones de la base:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(qog) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15366   254</code></pre>
+</div>
+</div>
+<p>Tenemos 254 variables (columnas) para 15366 filas (países/años)</p>
+<p>Ya que los países (<code>cname</code>) y años (<code>year</code>) se repiten en distintos momentos en el tiempo, veamos cuantos hay en total en la base:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>qog <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(cname) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>() <span class="co"># 204 países</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 204 × 1
+   cname              
+   &lt;chr&gt;              
+ 1 Afghanistan        
+ 2 Albania            
+ 3 Algeria            
+ 4 Andorra            
+ 5 Angola             
+ 6 Antigua and Barbuda
+ 7 Argentina          
+ 8 Armenia            
+ 9 Australia          
+10 Austria            
+# ℹ 194 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>qog <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>() <span class="co"># 77 años </span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 77 × 1
+    year
+   &lt;dbl&gt;
+ 1  1946
+ 2  1947
+ 3  1948
+ 4  1949
+ 5  1950
+ 6  1951
+ 7  1952
+ 8  1953
+ 9  1954
+10  1955
+# ℹ 67 more rows</code></pre>
+</div>
+</div>
+<p>Para los análisis vamos ahora a extraer solo los datos del año 2009, que es el que corresponde al año de la encuesta ISSP analizada arriba y que luego serán combinados en una base única. Además vamos a seleccionar solo dos variables de la base qog: el índice de desigualdad Gini (<code>wdi_gini</code>), y la variable de identificación de países <code>cname</code>, que nos servirá luego para combinar con la base ISSP.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>qog2009 <span class="ot">&lt;-</span> qog <span class="sc">%&gt;%</span> </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">2009</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(wdi_gini,cname)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Descripción de base 2009</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(qog2009)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 198   2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>qog2009 <span class="sc">%&gt;%</span> </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cname) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise_all</span>(mean)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 75 × 2
+   cname                            wdi_gini
+   &lt;chr&gt;                               &lt;dbl&gt;
+ 1 Argentina                            43.7
+ 2 Armenia                              28  
+ 3 Austria                              31.5
+ 4 Belarus                              27.7
+ 5 Belgium                              28.6
+ 6 Bolivia (Plurinational State of)     49.2
+ 7 Botswana                             60.5
+ 8 Brazil                               53.7
+ 9 Bulgaria                             33.8
+10 Burkina Faso                         39.8
+# ℹ 65 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(qog2009)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "wdi_gini" "cname"   </code></pre>
+</div>
+</div>
+<p>Con esto tenemos nuestra base de datos con el indicador de desigualdad Gini y los países para el año 2009.</p>
+</section>
+<section id="combinando-bases-de-distintos-niveles" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Combinando bases de distintos niveles</h1>
+<p>Ahora, el procedimiento que combina las bases de datos individuales y grupales/agregadas corresponde a un “merge”, que como sabemos requiere un vector (variable) <strong>que identifique a las unidades de nivel 2 en ambas bases</strong>.</p>
+<p>Acá se pueden producir dos situaciones:</p>
+<ol type="a">
+<li><p>ambas bases identifican de la misma manera a las unidades de nivel 2, es decir, en ambas existe una columna que tiene el mismo nombre y donde cada código o nombre se corresponde de manera exacta entre ambas bases. Este es el caso más favorable y se puede proceder directamente a la combinación de las bases</p></li>
+<li><p>no existe un identificador único en ambas bases para las unidades de nivel 2. Por ejemplo, si son países, puede que estos se identifiquen por un código diferente, o que sus nombres en algunos casos se escriban distinto (ej: con/sin acento, distintos idiomas,etc). Si este es el caso, la opción más básica y trabajosa es la “manual”, es decir, generar una variable en alguna de las bases de datos a combinar que posea valores idénticos a los de la otra base de datos.</p></li>
+</ol>
+<p>Veamos qué sucede en nuestro ejemplo. En la base ISSP la variable de identificación de país es v5, que posee un código y un valor:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>issp2009r <span class="sc">%&gt;%</span> </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="st">"Country"</span><span class="ot">=</span><span class="fu">to_label</span>(v5)) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="st">"Country code"</span><span class="ot">=</span><span class="fu">mean</span>(v5))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 41 × 2
+   Country      `Country code`
+   &lt;fct&gt;                 &lt;dbl&gt;
+ 1 AR-Argentina             32
+ 2 AU-Australia             36
+ 3 AT-Austria               40
+ 4 BE-Belgium               56
+ 5 BG-Bulgaria             100
+ 6 CL-Chile                152
+ 7 CN-China                156
+ 8 TW-Taiwan               158
+ 9 HR-Croatia              191
+10 CY-Cyprus               196
+# ℹ 31 more rows</code></pre>
+</div>
+</div>
+<p>En cuanto a la variable país en la base qog:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>qog2009 <span class="sc">%&gt;%</span> </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="st">"Country"</span><span class="ot">=</span><span class="fu">to_label</span>(cname)) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="st">"Country code"</span><span class="ot">=</span><span class="fu">mean</span>(cname))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 198 × 2
+   Country             `Country code`
+   &lt;chr&gt;                        &lt;dbl&gt;
+ 1 Afghanistan                     NA
+ 2 Albania                         NA
+ 3 Algeria                         NA
+ 4 Andorra                         NA
+ 5 Angola                          NA
+ 6 Antigua and Barbuda             NA
+ 7 Argentina                       NA
+ 8 Armenia                         NA
+ 9 Australia                       NA
+10 Austria                         NA
+# ℹ 188 more rows</code></pre>
+</div>
+</div>
+<p>Entonces, estamos en la situación desfavorable para hacer el merge de ambas bases: no hay un código ni nombre que se corresponda de manera exacta entre ambas.</p>
+<p>Alternativa 1: se puede generar una variable en la base qog que se corresponda con la variable v5 de la base ISSP:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>qog2009<span class="sc">$</span>v5<span class="ot">=</span>qog2009<span class="sc">$</span>cname</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Una vez generada la nueva variable v5 en qog, recodificar de acuerdo a ISSP. Vamos a hacer un ejemplo solo para los códigos de Argentina y Australia:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>qog2009<span class="sc">$</span>v5<span class="ot">=</span><span class="fu">rec</span>(qog2009<span class="sc">$</span>cname, <span class="at">rec=</span><span class="st">"Argentina=32;Australia=36"</span>) <span class="co"># ... y así para todos</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  qog2009 <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(v5) <span class="sc">%&gt;%</span>  <span class="fu">select</span>(v5,cname) <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 2
+# Groups:   v5 [3]
+      v5 cname              
+   &lt;dbl&gt; &lt;chr&gt;              
+ 1    32 Argentina          
+ 2    36 Australia          
+ 3    NA Afghanistan        
+ 4    NA Albania            
+ 5    NA Algeria            
+ 6    NA Andorra            
+ 7    NA Angola             
+ 8    NA Antigua and Barbuda
+ 9    NA Azerbaijan         
+10    NA Austria            
+11    NA Bahamas (the)      
+12    NA Bahrain            </code></pre>
+</div>
+</div>
+<p>Se puede ver que Argentina y Australia ya tienen sus códigos en la variable V5 que son los mismos que en ISSP. Se podría entonces seguir recodificando todos los países hasta completar la variable y entonces se puede hacer el merge.</p>
+<p>Alternativa 2: en este caso tenemos otra posibilidad que nos ahorra la recodificación al trabajar con países. En <code>R</code> existe la librería <code>countrycode</code>, diseñada específicamente para estos casos. Para utilizarla, se requiere tener claro los formatos de las variables de input y de output. En este caso, el input es la variable que viene en la base de datos (nombre de los países en qog2009),y queremos el output con los códigos en que vienen los países en ISSP (v5).</p>
+<p>La base ISSP (ver codebook) sigue el estandar ISO-3166 para los códigos y labels de los países, que es uno de los formatos tradicionales para codificar países. Este entonces es el output que queremos generar en la base qog2009 para luego realizar el merge.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(countrycode)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>qog2009<span class="sc">$</span>v5<span class="ot">=</span><span class="fu">countrycode</span>(qog2009<span class="sc">$</span>cname, <span class="st">'country.name'</span>,<span class="st">'iso3n'</span>) <span class="co"># iso3n es ISO-3,para detalles ver documentación librería ?countrycode</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>qog2009 <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(v5) <span class="sc">%&gt;%</span>  <span class="fu">select</span>(v5,cname) <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 198 × 2
+# Groups:   v5 [195]
+      v5 cname              
+   &lt;dbl&gt; &lt;chr&gt;              
+ 1     4 Afghanistan        
+ 2     8 Albania            
+ 3    12 Algeria            
+ 4    20 Andorra            
+ 5    24 Angola             
+ 6    28 Antigua and Barbuda
+ 7    31 Azerbaijan         
+ 8    32 Argentina          
+ 9    36 Australia          
+10    40 Austria            
+# ℹ 188 more rows</code></pre>
+</div>
+</div>
+<p>(Se generan algunos warnings por países no transformados, tener en cuenta por si luego falta información).</p>
+<p>Ahora que tenemos una variable identica para los países en ambas bases de datos, es posible realizar el merge de ambas bases:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>data_tot <span class="ot">&lt;-</span> <span class="fu">merge</span>(issp2009r,qog2009,<span class="at">by=</span><span class="fu">c</span>(<span class="st">"v5"</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Para ver el resultado</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>  data_tot <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(<span class="st">"Country"</span><span class="ot">=</span>cname) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="st">"Country code"</span><span class="ot">=</span><span class="fu">mean</span>(v5),<span class="st">"Gini"</span><span class="ot">=</span><span class="fu">mean</span>(wdi_gini)) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 42 × 3
+   Country   `Country code`  Gini
+   &lt;chr&gt;              &lt;dbl&gt; &lt;dbl&gt;
+ 1 Argentina             32  43.7
+ 2 Australia             36  NA  
+ 3 Austria               40  31.5
+ 4 Belgium               56  28.6
+ 5 Bulgaria             100  33.8
+ 6 Chile                152  47  
+ 7 China                156  NA  
+ 8 Croatia              191  32.6
+ 9 Cyprus               196  32.1
+10 Czechia              203  26.2
+# ℹ 32 more rows</code></pre>
+</div>
+</div>
+<p>Atención: vemos que hay missings para algunos países en la variable Gini, probablemente porque para ese año no hay información del indicador, eventualmente se puede recurrir a otras fuentes de información para completar.</p>
+</section>
+<section id="ejemplo-de-descriptivos" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Ejemplo de descriptivos</h1>
+<p>Ejemplo de gráfico descriptivo de asociación entre variables nivel 1 y nivel 2</p>
+<p>Vamos a considerar la variable de esfuerzo (issp) según desigualdad (qog).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(data_tot)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "v5"       "v10"      "sex"      "age"      "effort"   "meanage" 
+ [7] "sdage"    "count"    "wdi_gini" "cname"   </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>dat_scat<span class="ot">=</span>data_tot <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(v5) <span class="sc">%&gt;%</span> <span class="fu">select</span>(wdi_gini,effort) <span class="sc">%&gt;%</span> <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span> <span class="fu">summarise_all</span>(mean)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dat_scat)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "v5"       "wdi_gini" "effort"  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>sjPlot<span class="sc">::</span><span class="fu">plot_scatter</span>(dat_scat, wdi_gini,effort,</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">dot.labels =</span> <span class="fu">to_label</span>(dat_scat<span class="sc">$</span>v5),</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">fit.line =</span> <span class="st">"lm"</span>,</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">show.ci =</span> <span class="cn">TRUE</span></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>            )</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="04-practico_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Para identificar mejor los países, podemos también usar la librería <code>countrycode</code> y generar una variable que contenga los nombres de países abreviados en 3 letras (formato iso3c)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>data_tot<span class="sc">$</span>country3<span class="ot">=</span><span class="fu">countrycode</span>(data_tot<span class="sc">$</span>v5,<span class="st">'iso3n'</span>,<span class="st">'iso3c'</span>)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>dat_scat2<span class="ot">=</span>data_tot <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(country3) <span class="sc">%&gt;%</span> <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(wdi_gini,effort,country3) <span class="sc">%&gt;%</span> <span class="fu">summarise_all</span>(mean)</span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>sjPlot<span class="sc">::</span><span class="fu">plot_scatter</span>(dat_scat2, wdi_gini, effort,</span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">dot.labels =</span> <span class="fu">to_label</span>(dat_scat2<span class="sc">$</span>country3),</span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">fit.line =</span> <span class="st">"lm"</span>,</span>
+<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">show.ci =</span> <span class="cn">TRUE</span></span>
+<span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a>            )</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="04-practico_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Ya con la base que posee variables de distintos niveles, es posible comenzar con el modelamiento multinivel.</p>
+</section>
+<section id="foro" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Foro</h1>
+<script src="https://giscus.app/client.js" data-repo="cursos-metodos-facso/multinivel" data-repo-id="MDEwOlJlcG9zaXRvcnkyMDA3MTE2MDk=" data-category="Q&amp;A" data-category-id="DIC_kwDOC_aduc4CYhjI" data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="es" crossorigin="anonymous" async="">
+</script>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Content <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2023 by <a href="https://www.jc-castillo.com">Juan Castillo</a> <br> All content licensed under a <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> <i class="fa-brands fa-creative-commons-nc" aria-label="creative-commons-nc"></i> <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)</a></div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">Made with <i class="fa-brands fa-r-project" aria-label="r-project"></i> and <a href="https://quarto.org/">Quarto</a><br> <a href="https://github.com/cursos-metodos-facso/multinivel">View the source at <i class="fa-brands fa-github" aria-label="github"></i> GitHub</a></div>
+  </div>
+</footer>
+
+
+
+</body></html>
