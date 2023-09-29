@@ -147,7 +147,7 @@ class: roja, middle, center
 ---
 ##  Ajuste por proporción de varianzas
 
-![](../images/var_pred.png)
+![](images/var_pred.png)
 
 ---
 ## Bryck & Raudenbush R2 multinivel (1992)
@@ -389,21 +389,39 @@ ranef(results_0)
 - 12.64 + (-2.66) = 9.98 , que es el valor que se obtiene para esta escuela con la función `coef`
 
 
+
 ---
-## Ej.estimación de pendiente aleatoria (medias posteriores)
+## Coeficientes de regresión - predicción con efectos fijos
 .small[
 ```{r}
-results_4 = lmer(mathach ~ 1 + ses + female + mnses + sector + (1 + ses | schoolid), data=mlm)
+results_4 = lmer(mathach ~ 1 + ses + female + mnses + sector + (1 | schoolid), data=mlm)
 coef(results_4) # coef: comando que muestra coeficientes por grupo $id
 ```
 ]
 
+
 ---
-## Plots
+## Coeficientes regresión - predicción con pendiente aleatoria
+.small[
+```{r}
+results_5 = lmer(mathach ~ 1 + ses + female + mnses + sector + (1 + ses | schoolid), data=mlm)
+coef(results_5) # coef: comando que muestra coeficientes por grupo $id
+```
+]
+
+---
+.medium[
+```{r}
+ranef(results_5)
+```
+]
+
+---
+## Plots: intercepto aleatorio
 
 ![:scale 60%](images/sjp_plot.jpeg)
 ---
-## Plots
+## Plots: pendiente aleatoria
 
 ![:scale 60%](images/xy_plot.jpeg)
 
