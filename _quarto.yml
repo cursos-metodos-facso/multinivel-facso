@@ -80,7 +80,8 @@ website:
               file: content/04-content.qmd
             - text: "Sesión 5"
               file: content/05-content.qmd
-
+            - text: "Sesión 6"
+              file: content/06-content.qmd
     - title: "Prácticos"
       contents:
         - section: "Sobre prácticos"

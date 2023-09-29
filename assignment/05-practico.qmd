@@ -1,0 +1,212 @@
+---
+title: "Predicción de efectos aleatorios"
+date: "2023-09-29"
+lang: es
+number-sections: true
+website:
+  comments:
+    giscus:
+      repo: cursos-metodos-facso/multinivel
+---
+
+```{r setup, include=FALSE, cache = FALSE}
+require("knitr")
+opts_chunk$set(warning=FALSE,
+             message=FALSE,
+             echo=TRUE,
+             cache = FALSE, fig.width=7, fig.height=5.2)
+knitr::opts_knit$set(root.dir = here::here())
+```
+
+
+# Cargar/instalar librerías
+```{r warning=FALSE}
+pacman::p_load(lme4,foreign, stargazer, texreg, lattice, sjPlot, dplyr, ggplot2, ggeffects) # paquetes a cargar
+```
+
+
+# Leer datos base High School and Beyond (HSB)
+
+Como en sesión anterior
+
+```{r results='hide', message=FALSE}
+mlm = read.dta("http://www.stata-press.com/data/mlmus3/hsb.dta")
+dim(mlm)
+names(mlm)
+attach(mlm)
+
+#Agregacion de casos a escuelas
+agg_mlm=mlm %>% group_by(schoolid) %>% summarise_all(funs(mean))
+
+```
+
+# Coeficientes aleatorios
+
+Estos coeficientes se asocian a la posibilidad de estimar variabilidad de intercepto y de pendiente(s) a través de las unidades de nivel 2. Volviendo a la estimación de un modelo con intercepto y pendiente aleatoria:
+
+$y_{ij}=\gamma_{00}+\gamma_{10}X_{ij}+\mu_{0j}+\mu_{1j}X_{ij}+ r_{ij}$ 
+
+
+```{r results='asis' }
+reg_mlm0=lmer(mathach ~ 1 + ( 1 | schoolid), data = mlm)
+reg_mlm1=lmer(mathach ~ 1 + ses + sector +( 1 | schoolid), data = mlm)
+
+reg_mlm2 = lmer(mathach ~ 1 + ses + (1 +ses | schoolid), data=mlm)
+htmlreg(reg_mlm2, doctype = FALSE)
+```
+
+En este modelo vemos la estimación de efectos fijos y aleatorios: fijo para intercepto y pendiente, y aleatorios para intercepto y pendiente. Para poder ver el resultado de la estimación, se puede realizar la predicción de los efectos aleatorios y gráficos.
+
+# Empirical bayes / posterior means para null model
+
+  $\hat{\beta}^{EB}_{0j}=\gamma_j\hat{\beta}_{0j}+(1-\gamma_j)\hat{\gamma}_{00}$
+
+Donde:
+
+  -$\hat{\beta}^{EB}_{0j}$: estimador empirical bayes del intercepto para el grupo $j$
+  -$\gamma_j$ es un ponderador que se define como la confiabilidad del promedio del grupo, y que equivale a
+  
+  $\gamma_j=\frac{\tau_{00}}{\tau_{00}+\sigma^2/n_j}$
+  
+  -$\hat{\beta}_{0j}$: es el promedio del grupo
+  -$\hat{\gamma}_{00}$: gran promedio (efecto fijo intercepto)
+  
+Entonces, primero  seleccionamos una escuela como ejemplo (id 1477)
+
+```{r results="hide", message=FALSE}
+attach(mlm)
+mlm %>% group_by(schoolid) %>% summarise(mean(mathach),count=n()) %>% slice(1:20)
+
+mlm %>% group_by(schoolid) %>% summarise(mean(mathach),count=n()) %>% filter(schoolid==1477)
+
+id1477<- mlm[ which(mlm$schoolid==1477), ] # subset datos para id 1477
+id1477
+dim(id1477)
+```
+
+
+$\gamma_j$
+
+```{r}
+varcomp=as.data.frame(VarCorr(reg_mlm0)) # entrega matriz componentes varianza como base de datos
+
+#recordar reg_mlm0 es la estimación de arriba del modelo nulo
+
+tau00=varcomp[1,4]
+sigma2=varcomp[2,4]
+gama_j=tau00/(tau00+(sigma2/62)) # 62 es el N de la escuela 1477
+```
+
+$\hat{\beta}_{0j}$
+
+```{r}
+mean_j= mlm %>% filter(schoolid==1477) %>% summarise(mean(mathach))
+
+mean_j
+```
+
+
+$\hat{\gamma}_{00}$
+
+```{r}
+gama_00= reg_mlm0@beta # beta es el nombre del estimador gama00 en el objeto
+gama_00
+```
+
+
+Estimación media posterior intercepto para id 1477
+
+```{r}
+int_eb=gama_j*(mean_j)+((1-gama_j)*(reg_mlm0@beta))
+```
+
+Comparaciones (ver "shrinkage effect")
+
+```{r}
+int_eb
+mean_j
+mean(mathach)
+```
+
+
+Contrastar shrinkage para N más pequeño 
+```{r}
+gama_j2=tau00/(tau00+(sigma2/20))
+int_eb2=gama_j2*(mean_j)+((1-gama_j2)*(reg_mlm0@beta))
+int_eb2 # aumenta shrinkage a medida que disminuye N del grupo
+```
+
+
+# Predicción efectos aleatorios
+
+Comandos <tt>`coef`</tt> y <tt>`ranef`</tt>
+
+```{r results='hide'}
+reg_mlm0=lmer(mathach ~ 1 + ( 1 | schoolid), data = mlm)
+reg_mlm1=lmer(mathach ~ 1 + ses + sector +( 1 | schoolid), data = mlm)
+head(ranef(reg_mlm0)) # U0j para cada escuela
+head(coef(reg_mlm0)) # comparar, coef entrega intercepto para cada escuela
+                    # = gamma_00 + U0j
+```
+
+Para el casode id 1477:
+
+```{r}
+gama_00+1.4828 # = coef
+```
+
+
+Modelos con predictores (fijos)
+
+```{r}
+reg_mlm0=lmer(mathach ~ 1 + ( 1 | schoolid), data = mlm)
+reg_mlm1=lmer(mathach ~ 1 + ses + sector +( 1 | schoolid), data = mlm)
+
+mlm$mlm1 <- predict(reg_mlm1)
+
+mlm %>%  
+  ggplot(aes(ses, mlm1, color = schoolid, group = schoolid)) + 
+  geom_smooth(se = F, method = lm) 
+
+
+graf1 <- ggpredict(reg_mlm1, terms = c("ses","schoolid [sample=8]"), type="re")
+
+plot(graf1)
+```
+
+Predictores aleatorios
+
+```{r}
+reg_mlm2=lmer(mathach ~ 1 + ses + sector +( 1 + ses | schoolid), data = mlm)
+
+graf2=ggpredict(reg_mlm2, terms = c("ses","schoolid [sample=9]"), type="random")
+
+
+plot(graf2)
+
+```
+
+
+
+
+
+# Foro
+
+<script src="https://giscus.app/client.js"
+        data-repo="cursos-metodos-facso/multinivel"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyMDA3MTE2MDk="
+        data-category="Q&A"
+        data-category-id="DIC_kwDOC_aduc4CYhjI"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="es"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+
