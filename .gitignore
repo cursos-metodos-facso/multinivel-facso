@@ -8,7 +8,7 @@
 /_freeze/
 
 slides/*.pdf
-# slides/*.html
+slides/*.html
 slides/**/*_cache/*
 projects/*.zip
 

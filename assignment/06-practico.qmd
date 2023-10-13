@@ -1,0 +1,254 @@
+---
+title: "Interacción entre niveles"
+date: "2023-10-13"
+lang: es
+number-sections: true
+website:
+  comments:
+    giscus:
+      repo: cursos-metodos-facso/multinivel
+---
+
+```{r setup, include=FALSE, cache = FALSE}
+require("knitr")
+opts_chunk$set(warning=FALSE,
+             message=FALSE,
+             echo=TRUE,
+             cache = FALSE, fig.width=7, fig.height=5.2)
+knitr::opts_knit$set(root.dir = here::here())
+```
+
+
+# Cargar/instalar librerías
+```{r warning=FALSE}
+pacman::p_load(lme4,haven,foreign, stargazer, texreg, lattice, sjPlot, dplyr, ggplot2, ggeffects) # paquetes a cargar
+```
+
+# Ejemplo 1, datos HSB
+
+## Datos
+
+```{r results='hide', message=FALSE}
+mlm = read_dta("http://www.stata-press.com/data/mlmus3/hsb.dta")
+dim(mlm)
+names(mlm)
+attach(mlm)
+```
+
+Tabla estadisticos descriptivos
+```{r}
+stargazer(as.data.frame(mlm),title="Estadísticos descriptivos", type = "text")
+```
+
+## Modelos
+
+- Revisar estructura variable para la interacción
+
+```{r results='asis'}
+
+str(mlm$sector)
+table(mlm$sector)
+mlm$sector_f=as.factor(mlm$sector) # Cambiar a factor
+```
+
+- Pendiente fija & aleatoria
+
+```{r}
+reg_mlm3a = lmer(mathach ~ 1 + ses + sector_f +  mnses + (1 | schoolid),data=mlm)
+
+# Con pendiente aleatoria
+reg_mlm3b = lmer(mathach ~ 1 + ses + sector_f +  mnses + (1 + ses | schoolid),data=mlm)
+```
+
+
+- Devianza (ajuste comparativo pendiente fija vs aleatoria)
+
+```{r}
+anova(reg_mlm3b,reg_mlm3a)
+```
+
+
+- Estimar modelo con interacción
+
+```{r}
+reg_mlm3c = lmer(mathach ~ 1 + ses + sector_f + ses*sector_f + mnses +  (1 + ses | schoolid), data=mlm)
+screenreg(c(reg_mlm3a,reg_mlm3b, reg_mlm3c))
+
+```
+
+## Plot
+
+```{r}
+plot_model(reg_mlm3c, type = "int")
+```
+
+
+# Ejemplo Aguinis
+
+- Link a paper [aquí](https://multinivel.netlify.com/readings/aguinis2013crosslevel.pdf)
+
+- Planteamiento general:
+
+" Overall, Chen et al.’s theoretical model
+predicted that employees who report higher LMX (i.e., a better relationship with their leader)
+will feel more empowered (i.e., they have the autonomy and capability to perform meaning-
+ful work that can affect their organization). In addition, Chen et al.’s model included the
+hypothesis that the team-level variable leadership climate (i.e., ambient leadership behaviors
+directed at the team as a whole) would also affect individual-level empowerment positively.
+Moreover, Chen et al. hypothesized that the relationship between LMX and empowerment
+would be moderated by leadership climate such that the relationship would be stronger for
+teams with a better leadership climate." (p.1492)
+
+- Preguntas e hipótesis:
+
+1.	 Lower-level direct effects. Does a lower-level predictor X (i.e., Level 1 or L1 predictor) have an
+effect on a lower-level outcome variable Y (i.e., L1 outcome)? Specifically regarding our illus-
+tration, there is an interest in testing whether LMX, as perceived by subordinates, predicts
+individual empowerment. Note that LMX scores are collected for each individual worker (i.e.,
+there is no aggregation of such scores for the purpose of testing the presence of a lower-level
+direct effect).
+
+2.	 Cross-level direct effects. Does a higher-level predictor W (i.e., Level 2 or L2 predictor) have an
+effect on an L1 outcome variable Y? Specifically, we would like to assess whether L2 variable
+leadership climate predicts L1 outcome individual empowerment.
+
+3.	 Cross-level interaction effects. Does the nature or strength of the relationship between two
+lower-level variables (e.g., L1 predictor X and L1 outcome Y) change as a function of a higher-
+level variable W? Referring back to our substantive illustration, we are interested in testing the
+hypothesis that the relationship between LMX and individual empowerment may vary as a
+function of (i.e., is moderated by) the degree of leadership climate such that the relationship will
+be stronger for teams with more positive leadership climate and weaker for teams with less
+positive leadership climate.
+
+
+
+
+## Datos
+
+```{r}
+exdata=read.csv("https://multinivel.netlify.com/practicas/data/aguinis_JOM.csv", header = TRUE, sep = ",")
+stargazer(exdata, type = "text")
+```
+
+- Rename variables para que sean más coherentes con el ejemplo
+
+```{r}
+exdata <- exdata %>% rename(LMX=Xc,Lidclim=Wjc)
+```
+
+- Variables relevantes
+
+  - l2id: id de nivel 2, equipos de trabajo
+  - LMX: quality of leader–member exchange
+  - Lidclim: clima de liderazgo en el equipo
+  - Y: variable dependiente, empoderamiento individual
+
+## Modelos
+
+- Modelo Nulo e ICC
+
+```{r}
+lmm.fit1=lmer(Y ~ 1 + (1|l2id), data=exdata,REML=F)
+summary(lmm.fit1)
+reghelper::ICC(lmm.fit1)
+```
+
+- Modelo con predictores fijos
+
+```{r}
+lmm.fit2=lmer(Y ~1 + LMX + Lidclim +(1|l2id),data=exdata,REML=F)
+screenreg(lmm.fit2)
+```
+
+- Pendiente aleatoria
+
+```{r}
+lmm.fit3=lmer(Y ~1 + LMX + Lidclim +(1 + LMX|l2id), data=exdata,REML=F)
+summary(lmm.fit3)
+```
+
+Deviance
+
+```{r}
+anova(lmm.fit2,lmm.fit3)
+```
+
+- Modelo con interacción entre niveles
+
+```{r}
+lmm.fit4=lmer(Y ~1 + LMX*Lidclim + (1 + LMX|l2id), data=exdata, REML=F)
+screenreg(lmm.fit4)
+```
+
+
+## Reporte final
+
+- Tabla
+
+```{r}
+screenreg(list(lmm.fit1, lmm.fit2, lmm.fit3, lmm.fit4))
+```
+
+
+En html
+
+```{r results='asis'}
+
+htmlreg(list(lmm.fit1, lmm.fit2, lmm.fit3, lmm.fit4),
+    custom.model.names = c("Nulo","Pendiente <br> fija","Pendiente <br> Aleatoria", "Interacción"),
+    custom.coef.names = c("Intercepto", "LMX $(\\gamma_{10})$" ,"Clima liderazgo $(\\gamma_{01})$", "LMX*Clima $(\\gamma_{11})$"),
+    custom.gof.names=c(NA,NA,NA,NA,NA,
+                   "Var: l2id ($\\tau_{00}$)",
+                   "Var: Residual ($\\sigma^2$)",
+                   "Var: l2id LMX ($\\tau_{11}$)",
+                   "Cov: l2id (Intercept) LMX ($\\tau_{01}$)"),
+    custom.note = "%stars. Errores estándar en paréntesis",
+    caption="Replicacion Tabla Aguinis",
+    caption.above=TRUE,
+    digits=3,
+    doctype = FALSE)
+
+```
+
+
+- Interaction Plot
+
+
+```{r}
+plot_model(lmm.fit4, type = "int")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Foro
+
+<script src="https://giscus.app/client.js"
+        data-repo="cursos-metodos-facso/multinivel"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyMDA3MTE2MDk="
+        data-category="Q&A"
+        data-category-id="DIC_kwDOC_aduc4CYhjI"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="es"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+

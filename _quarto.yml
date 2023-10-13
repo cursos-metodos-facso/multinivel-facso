@@ -82,6 +82,10 @@ website:
               file: content/05-content.qmd
             - text: "Sesión 6"
               file: content/06-content.qmd
+            - text: "Sesión 7"
+              file: content/07-content.qmd
+            - text: "Sesión 8"
+              file: content/08-content.qmd
     - title: "Prácticos"
       contents:
         - section: "Sobre prácticos"
@@ -97,6 +101,10 @@ website:
               file: assignment/03-practico.qmd
             - text: "4: Combinando datos de distintos niveles"
               file: assignment/04-practico.qmd
+            - text: "5: Efectos aleatorios"
+              file: assignment/05-practico.qmd
+            - text: "6: Interacción entre niveles"
+              file: assignment/05-practico.qmd
   page-footer:
     left: |
       Content {{< fa brands creative-commons >}} {{< var course.copyright_year >}} by [{{< var instructor.name_no_title >}}]({{< var instructor.url >}}) <br>

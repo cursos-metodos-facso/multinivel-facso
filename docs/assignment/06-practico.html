@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="Modelos Multinivel">
+
+<title>Modelos Multinivel - Interacción entre niveles</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="..//files/img/logo-multinivel.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<meta property="og:title" content="Modelos Multinivel - Interacción entre niveles">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://multinivel.netlify.app/files/img/logo-multinivel.png">
+<meta property="og:site-name" content="Modelos Multinivel">
+<meta property="og:locale" content="es">
+<meta property="og:image:height" content="595">
+<meta property="og:image:width" content="521">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Modelos Multinivel</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Buscar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Navegación de palanca" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus.html" rel="" target="">
+ <span class="menu-text">Programa</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../schedule.html" rel="" target="">
+ <span class="menu-text">Planificación</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../content/index.html" rel="" target="">
+ <span class="menu-text">Clases</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../assignment/index.html" rel="" target="">
+ <span class="menu-text">Prácticos</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../trabajos.html" rel="" target="">
+ <span class="menu-text">Trabajos</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../resource/index.html" rel="" target="">
+ <span class="menu-text">Recursos</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://rstudio.cloud" rel="" target=""><i class="bi bi-cloud-fill" role="img" aria-label="RStudio.cloud">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
+   
+  <ul>
+  <li><a href="#cargarinstalar-librerías" id="toc-cargarinstalar-librerías" class="nav-link active" data-scroll-target="#cargarinstalar-librerías"><span class="header-section-number">1</span> Cargar/instalar librerías</a></li>
+  <li><a href="#ejemplo-1-datos-hsb" id="toc-ejemplo-1-datos-hsb" class="nav-link" data-scroll-target="#ejemplo-1-datos-hsb"><span class="header-section-number">2</span> Ejemplo 1, datos HSB</a>
+  <ul class="collapse">
+  <li><a href="#datos" id="toc-datos" class="nav-link" data-scroll-target="#datos"><span class="header-section-number">2.1</span> Datos</a></li>
+  <li><a href="#modelos" id="toc-modelos" class="nav-link" data-scroll-target="#modelos"><span class="header-section-number">2.2</span> Modelos</a></li>
+  <li><a href="#plot" id="toc-plot" class="nav-link" data-scroll-target="#plot"><span class="header-section-number">2.3</span> Plot</a></li>
+  </ul></li>
+  <li><a href="#ejemplo-aguinis" id="toc-ejemplo-aguinis" class="nav-link" data-scroll-target="#ejemplo-aguinis"><span class="header-section-number">3</span> Ejemplo Aguinis</a>
+  <ul class="collapse">
+  <li><a href="#datos-1" id="toc-datos-1" class="nav-link" data-scroll-target="#datos-1"><span class="header-section-number">3.1</span> Datos</a></li>
+  <li><a href="#modelos-1" id="toc-modelos-1" class="nav-link" data-scroll-target="#modelos-1"><span class="header-section-number">3.2</span> Modelos</a></li>
+  <li><a href="#reporte-final" id="toc-reporte-final" class="nav-link" data-scroll-target="#reporte-final"><span class="header-section-number">3.3</span> Reporte final</a></li>
+  </ul></li>
+  <li><a href="#foro" id="toc-foro" class="nav-link" data-scroll-target="#foro"><span class="header-section-number">4</span> Foro</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header">
+<h1 class="title display-7">Interacción entre niveles</h1>
+
+<div class="date-block bg-assignment text-white p-2">
+  <p class="date">Correspondiente a la sesión del viernes, 13 de octubre de 2023</p>
+</div>
+</header>
+
+<section id="cargarinstalar-librerías" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Cargar/instalar librerías</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(lme4,haven,foreign, stargazer, texreg, lattice, sjPlot, dplyr, ggplot2, ggeffects) <span class="co"># paquetes a cargar</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="ejemplo-1-datos-hsb" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Ejemplo 1, datos HSB</h1>
+<section id="datos" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="datos"><span class="header-section-number">2.1</span> Datos</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mlm <span class="ot">=</span> <span class="fu">read_dta</span>(<span class="st">"http://www.stata-press.com/data/mlmus3/hsb.dta"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(mlm)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mlm)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(mlm)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Tabla estadisticos descriptivos</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(<span class="fu">as.data.frame</span>(mlm),<span class="at">title=</span><span class="st">"Estadísticos descriptivos"</span>, <span class="at">type =</span> <span class="st">"text"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Estadísticos descriptivos
+===================================================
+Statistic   N     Mean    St. Dev.    Min     Max  
+---------------------------------------------------
+minority  7,185   0.275     0.446      0       1   
+female    7,185   0.528     0.499      0       1   
+ses       7,185  0.0001     0.779   -3.758   2.692 
+mathach   7,185  12.748     6.878   -2.832  24.993 
+size      7,185 1,056.862  604.172    100    2,713 
+sector    7,185   0.493     0.500      0       1   
+pracad    7,185   0.534     0.251    0.000   1.000 
+disclim   7,185  -0.132     0.944   -2.416   2.756 
+himinty   7,185   0.280     0.449      0       1   
+schoolid  7,185 5,277.898 2,499.578  1,224   9,586 
+mean      7,185  12.748     3.006    4.240  19.719 
+sd        7,185   6.198     0.864    3.541   8.481 
+sdalt     7,185   6.256     0.000    6.256   6.256 
+junk      7,185  47.316    48.898   0.00002 239.289
+sdalt2    7,185  48.394     0.000   48.394  48.394 
+num       7,185  48.016    10.822     14      67   
+se        7,185   0.919     0.202    0.506   1.824 
+sealt     7,185   0.925     0.129    0.764   1.672 
+sealt2    7,185   1.028     0.144    0.850   1.859 
+t2        7,185  14.656    26.416    0.001  195.811
+t2alt     7,185   8.538    11.063    0.001  52.825 
+pickone   7,185   0.022     0.148      0       1   
+mmses     7,185  0.0001     0.414   -1.194   0.825 
+mnses     7,185  0.0001     0.414   -1.194   0.825 
+xb        7,185  12.685     2.425    5.684  17.522 
+resid     7,185   0.062     6.459   -19.489 16.445 
+---------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="modelos" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="modelos"><span class="header-section-number">2.2</span> Modelos</h2>
+<ul>
+<li>Revisar estructura variable para la interacción</li>
+</ul>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mlm<span class="sc">$</span>sector)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>num [1:7185] 0 0 0 0 0 0 0 0 0 0 … - attr(*, “format.stata”)= chr “%8.0g”</p>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(mlm<span class="sc">$</span>sector)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>0 1 3642 3543</p>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mlm<span class="sc">$</span>sector_f<span class="ot">=</span><span class="fu">as.factor</span>(mlm<span class="sc">$</span>sector) <span class="co"># Cambiar a factor</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Pendiente fija &amp; aleatoria</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>reg_mlm3a <span class="ot">=</span> <span class="fu">lmer</span>(mathach <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> sector_f <span class="sc">+</span>  mnses <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> schoolid),<span class="at">data=</span>mlm)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Con pendiente aleatoria</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>reg_mlm3b <span class="ot">=</span> <span class="fu">lmer</span>(mathach <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> sector_f <span class="sc">+</span>  mnses <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">|</span> schoolid),<span class="at">data=</span>mlm)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Devianza (ajuste comparativo pendiente fija vs aleatoria)</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(reg_mlm3b,reg_mlm3a)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Data: mlm
+Models:
+reg_mlm3a: mathach ~ 1 + ses + sector_f + mnses + (1 | schoolid)
+reg_mlm3b: mathach ~ 1 + ses + sector_f + mnses + (1 + ses | schoolid)
+          npar   AIC   BIC logLik deviance  Chisq Df Pr(&gt;Chisq)  
+reg_mlm3a    6 46560 46602 -23274    46548                       
+reg_mlm3b    8 46558 46613 -23271    46542 6.0463  2    0.04865 *
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<ul>
+<li>Estimar modelo con interacción</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>reg_mlm3c <span class="ot">=</span> <span class="fu">lmer</span>(mathach <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">+</span> sector_f <span class="sc">+</span> ses<span class="sc">*</span>sector_f <span class="sc">+</span> mnses <span class="sc">+</span>  (<span class="dv">1</span> <span class="sc">+</span> ses <span class="sc">|</span> schoolid), <span class="at">data=</span>mlm)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">screenreg</span>(<span class="fu">c</span>(reg_mlm3a,reg_mlm3b, reg_mlm3c))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+==========================================================================
+                               Model 1        Model 2        Model 3      
+--------------------------------------------------------------------------
+(Intercept)                        12.13 ***      12.04 ***      12.20 ***
+                                   (0.20)         (0.20)         (0.20)   
+ses                                 2.19 ***       2.20 ***       2.78 ***
+                                   (0.11)         (0.12)         (0.14)   
+sector_f1                           1.22 ***       1.41 ***       1.27 ***
+                                   (0.31)         (0.31)         (0.30)   
+mnses                               3.15 ***       3.16 ***       3.13 ***
+                                   (0.38)         (0.39)         (0.38)   
+ses:sector_f1                                                    -1.33 ***
+                                                                 (0.21)   
+--------------------------------------------------------------------------
+AIC                             46565.83       46563.47       46532.06    
+BIC                             46607.11       46618.51       46593.98    
+Log Likelihood                 -23276.92      -23273.74      -23257.03    
+Num. obs.                        7185           7185           7185       
+Num. groups: schoolid             160            160            160       
+Var: schoolid (Intercept)           2.37           2.43           2.34    
+Var: Residual                      37.02          36.78          36.79    
+Var: schoolid ses                                  0.47           0.07    
+Cov: schoolid (Intercept) ses                      0.29           0.18    
+==========================================================================
+*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
+</div>
+</div>
+</section>
+<section id="plot" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="plot"><span class="header-section-number">2.3</span> Plot</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_model</span>(reg_mlm3c, <span class="at">type =</span> <span class="st">"int"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="06-practico_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="ejemplo-aguinis" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Ejemplo Aguinis</h1>
+<ul>
+<li><p>Link a paper <a href="https://multinivel.netlify.com/readings/aguinis2013crosslevel.pdf">aquí</a></p></li>
+<li><p>Planteamiento general:</p></li>
+</ul>
+<p>” Overall, Chen et al.’s theoretical model predicted that employees who report higher LMX (i.e., a better relationship with their leader) will feel more empowered (i.e., they have the autonomy and capability to perform meaning- ful work that can affect their organization). In addition, Chen et al.’s model included the hypothesis that the team-level variable leadership climate (i.e., ambient leadership behaviors directed at the team as a whole) would also affect individual-level empowerment positively. Moreover, Chen et al.&nbsp;hypothesized that the relationship between LMX and empowerment would be moderated by leadership climate such that the relationship would be stronger for teams with a better leadership climate.” (p.1492)</p>
+<ul>
+<li>Preguntas e hipótesis:</li>
+</ul>
+<ol type="1">
+<li><p>Lower-level direct effects. Does a lower-level predictor X (i.e., Level 1 or L1 predictor) have an effect on a lower-level outcome variable Y (i.e., L1 outcome)? Specifically regarding our illus- tration, there is an interest in testing whether LMX, as perceived by subordinates, predicts individual empowerment. Note that LMX scores are collected for each individual worker (i.e., there is no aggregation of such scores for the purpose of testing the presence of a lower-level direct effect).</p></li>
+<li><p>Cross-level direct effects. Does a higher-level predictor W (i.e., Level 2 or L2 predictor) have an effect on an L1 outcome variable Y? Specifically, we would like to assess whether L2 variable leadership climate predicts L1 outcome individual empowerment.</p></li>
+<li><p>Cross-level interaction effects. Does the nature or strength of the relationship between two lower-level variables (e.g., L1 predictor X and L1 outcome Y) change as a function of a higher- level variable W? Referring back to our substantive illustration, we are interested in testing the hypothesis that the relationship between LMX and individual empowerment may vary as a function of (i.e., is moderated by) the degree of leadership climate such that the relationship will be stronger for teams with more positive leadership climate and weaker for teams with less positive leadership climate.</p></li>
+</ol>
+<section id="datos-1" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="datos-1"><span class="header-section-number">3.1</span> Datos</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>exdata<span class="ot">=</span><span class="fu">read.csv</span>(<span class="st">"https://multinivel.netlify.com/practicas/data/aguinis_JOM.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">","</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(exdata, <span class="at">type =</span> <span class="st">"text"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+============================================
+Statistic  N   Mean  St. Dev.   Min    Max  
+--------------------------------------------
+l1id      630 3.500   1.709      1      6   
+l2id      630 53.000  30.334     1     105  
+X         630 4.800   1.500    0.221  8.731 
+Xbarj     630 4.800   0.793    3.319  6.907 
+Wj        630 4.770   0.700    2.966  6.987 
+cat       630 0.505   0.500      0      1   
+Y         630 5.720   0.900    2.739  8.381 
+Xc        630 0.000   1.273   -3.904  3.865 
+XcWj      630 -0.000  6.196   -22.683 18.487
+Wjc       630 -0.000  0.700   -1.804  2.217 
+--------------------------------------------</code></pre>
+</div>
+</div>
+<ul>
+<li>Rename variables para que sean más coherentes con el ejemplo</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>exdata <span class="ot">&lt;-</span> exdata <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">LMX=</span>Xc,<span class="at">Lidclim=</span>Wjc)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><p>Variables relevantes</p>
+<ul>
+<li>l2id: id de nivel 2, equipos de trabajo</li>
+<li>LMX: quality of leader–member exchange</li>
+<li>Lidclim: clima de liderazgo en el equipo</li>
+<li>Y: variable dependiente, empoderamiento individual</li>
+</ul></li>
+</ul>
+</section>
+<section id="modelos-1" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="modelos-1"><span class="header-section-number">3.2</span> Modelos</h2>
+<ul>
+<li>Modelo Nulo e ICC</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>lmm.fit1<span class="ot">=</span><span class="fu">lmer</span>(Y <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>l2id), <span class="at">data=</span>exdata,<span class="at">REML=</span>F)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lmm.fit1)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: Y ~ 1 + (1 | l2id)
+   Data: exdata
+
+     AIC      BIC   logLik deviance df.resid 
+  1643.0   1656.4   -818.5   1637.0      627 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.96708 -0.61992 -0.00518  0.60150  2.88977 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ l2id     (Intercept) 0.09494  0.3081  
+ Residual             0.71378  0.8449  
+Number of obs: 630, groups:  l2id, 105
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept)  5.72000    0.04513   126.7</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>reghelper<span class="sc">::</span><span class="fu">ICC</span>(lmm.fit1)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1173919</code></pre>
+</div>
+</div>
+<ul>
+<li>Modelo con predictores fijos</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>lmm.fit2<span class="ot">=</span><span class="fu">lmer</span>(Y <span class="sc">~</span><span class="dv">1</span> <span class="sc">+</span> LMX <span class="sc">+</span> Lidclim <span class="sc">+</span>(<span class="dv">1</span><span class="sc">|</span>l2id),<span class="at">data=</span>exdata,<span class="at">REML=</span>F)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">screenreg</span>(lmm.fit2)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+==================================
+                       Model 1    
+----------------------------------
+(Intercept)               5.72 ***
+                         (0.04)   
+LMX                       0.28 ***
+                         (0.02)   
+Lidclim                   0.35 ***
+                         (0.05)   
+----------------------------------
+AIC                    1487.64    
+BIC                    1509.87    
+Log Likelihood         -738.82    
+Num. obs.               630       
+Num. groups: l2id       105       
+Var: l2id (Intercept)     0.06    
+Var: Residual             0.56    
+==================================
+*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
+</div>
+</div>
+<ul>
+<li>Pendiente aleatoria</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>lmm.fit3<span class="ot">=</span><span class="fu">lmer</span>(Y <span class="sc">~</span><span class="dv">1</span> <span class="sc">+</span> LMX <span class="sc">+</span> Lidclim <span class="sc">+</span>(<span class="dv">1</span> <span class="sc">+</span> LMX<span class="sc">|</span>l2id), <span class="at">data=</span>exdata,<span class="at">REML=</span>F)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lmm.fit3)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: Y ~ 1 + LMX + Lidclim + (1 + LMX | l2id)
+   Data: exdata
+
+     AIC      BIC   logLik deviance df.resid 
+  1483.5   1514.6   -734.7   1469.5      623 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.0693 -0.5814 -0.0309  0.5965  3.5938 
+
+Random effects:
+ Groups   Name        Variance Std.Dev. Corr 
+ l2id     (Intercept) 0.06802  0.2608        
+          LMX         0.02529  0.1590   -0.09
+ Residual             0.51438  0.7172        
+Number of obs: 630, groups:  l2id, 105
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept)  5.72000    0.03827 149.478
+LMX          0.26958    0.02829   9.530
+Lidclim      0.35570    0.05468   6.505
+
+Correlation of Fixed Effects:
+        (Intr) LMX   
+LMX     -0.034       
+Lidclim  0.000 -0.001</code></pre>
+</div>
+</div>
+<p>Deviance</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lmm.fit2,lmm.fit3)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Data: exdata
+Models:
+lmm.fit2: Y ~ 1 + LMX + Lidclim + (1 | l2id)
+lmm.fit3: Y ~ 1 + LMX + Lidclim + (1 + LMX | l2id)
+         npar    AIC    BIC  logLik deviance  Chisq Df Pr(&gt;Chisq)  
+lmm.fit2    5 1487.6 1509.9 -738.82   1477.6                       
+lmm.fit3    7 1483.5 1514.6 -734.75   1469.5 8.1422  2    0.01706 *
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<ul>
+<li>Modelo con interacción entre niveles</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>lmm.fit4<span class="ot">=</span><span class="fu">lmer</span>(Y <span class="sc">~</span><span class="dv">1</span> <span class="sc">+</span> LMX<span class="sc">*</span>Lidclim <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> LMX<span class="sc">|</span>l2id), <span class="at">data=</span>exdata, <span class="at">REML=</span>F)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">screenreg</span>(lmm.fit4)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+======================================
+                           Model 1    
+--------------------------------------
+(Intercept)                   5.72 ***
+                             (0.04)   
+LMX                           0.27 ***
+                             (0.03)   
+Lidclim                       0.35 ***
+                             (0.05)   
+LMX:Lidclim                   0.10 ** 
+                             (0.04)   
+--------------------------------------
+AIC                        1478.19    
+BIC                        1513.76    
+Log Likelihood             -731.10    
+Num. obs.                   630       
+Num. groups: l2id           105       
+Var: l2id (Intercept)         0.07    
+Var: l2id LMX                 0.02    
+Cov: l2id (Intercept) LMX    -0.00    
+Var: Residual                 0.52    
+======================================
+*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
+</div>
+</div>
+</section>
+<section id="reporte-final" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="reporte-final"><span class="header-section-number">3.3</span> Reporte final</h2>
+<ul>
+<li>Tabla</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">screenreg</span>(<span class="fu">list</span>(lmm.fit1, lmm.fit2, lmm.fit3, lmm.fit4))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+=============================================================================
+                           Model 1      Model 2      Model 3      Model 4    
+-----------------------------------------------------------------------------
+(Intercept)                   5.72 ***     5.72 ***     5.72 ***     5.72 ***
+                             (0.05)       (0.04)       (0.04)       (0.04)   
+LMX                                        0.28 ***     0.27 ***     0.27 ***
+                                          (0.02)       (0.03)       (0.03)   
+Lidclim                                    0.35 ***     0.36 ***     0.35 ***
+                                          (0.05)       (0.05)       (0.05)   
+LMX:Lidclim                                                          0.10 ** 
+                                                                    (0.04)   
+-----------------------------------------------------------------------------
+AIC                        1643.04      1487.64      1483.50      1478.19    
+BIC                        1656.38      1509.87      1514.62      1513.76    
+Log Likelihood             -818.52      -738.82      -734.75      -731.10    
+Num. obs.                   630          630          630          630       
+Num. groups: l2id           105          105          105          105       
+Var: l2id (Intercept)         0.09         0.06         0.07         0.07    
+Var: Residual                 0.71         0.56         0.51         0.52    
+Var: l2id LMX                                           0.03         0.02    
+Cov: l2id (Intercept) LMX                              -0.00        -0.00    
+=============================================================================
+*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
+</div>
+</div>
+<p>En html</p>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">htmlreg</span>(<span class="fu">list</span>(lmm.fit1, lmm.fit2, lmm.fit3, lmm.fit4),</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">custom.model.names =</span> <span class="fu">c</span>(<span class="st">"Nulo"</span>,<span class="st">"Pendiente &lt;br&gt; fija"</span>,<span class="st">"Pendiente &lt;br&gt; Aleatoria"</span>, <span class="st">"Interacción"</span>),</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">custom.coef.names =</span> <span class="fu">c</span>(<span class="st">"Intercepto"</span>, <span class="st">"LMX $(</span><span class="sc">\\</span><span class="st">gamma_{10})$"</span> ,<span class="st">"Clima liderazgo $(</span><span class="sc">\\</span><span class="st">gamma_{01})$"</span>, <span class="st">"LMX*Clima $(</span><span class="sc">\\</span><span class="st">gamma_{11})$"</span>),</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">custom.gof.names=</span><span class="fu">c</span>(<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Var: l2id ($</span><span class="sc">\\</span><span class="st">tau_{00}$)"</span>,</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Var: Residual ($</span><span class="sc">\\</span><span class="st">sigma^2$)"</span>,</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Var: l2id LMX ($</span><span class="sc">\\</span><span class="st">tau_{11}$)"</span>,</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Cov: l2id (Intercept) LMX ($</span><span class="sc">\\</span><span class="st">tau_{01}$)"</span>),</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">custom.note =</span> <span class="st">"%stars. Errores estándar en paréntesis"</span>,</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption=</span><span class="st">"Replicacion Tabla Aguinis"</span>,</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption.above=</span><span class="cn">TRUE</span>,</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">digits=</span><span class="dv">3</span>,</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">doctype =</span> <span class="cn">FALSE</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<table class="texreg" style="margin: 10px auto;border-collapse: collapse;border-spacing: 0px;color: #000000;border-top: 2px solid #000000;">
+<caption>
+Replicacion Tabla Aguinis
+</caption>
+<thead>
+<tr>
+<th style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</th>
+<th style="padding-left: 5px;padding-right: 5px;">
+Nulo
+</th>
+<th style="padding-left: 5px;padding-right: 5px;">
+Pendiente <br> fija
+</th>
+<th style="padding-left: 5px;padding-right: 5px;">
+Pendiente <br> Aleatoria
+</th>
+<th style="padding-left: 5px;padding-right: 5px;">
+Interacción
+</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-top: 1px solid #000000;">
+<td style="padding-left: 5px;padding-right: 5px;">
+Intercepto
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+5.720<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+5.720<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+5.720<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+5.720<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.045)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.038)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.038)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.038)
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+LMX <span class="math inline">\((\gamma_{10})\)</span>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.279<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.270<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.269<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.023)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.028)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.027)
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+Clima liderazgo <span class="math inline">\((\gamma_{01})\)</span>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.351<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.356<sup>***</sup>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.351<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.055)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.055)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.055)
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+LMX*Clima <span class="math inline">\((\gamma_{11})\)</span>
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.104<sup>**</sup>
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+(0.037)
+</td>
+</tr>
+<tr style="border-top: 1px solid #000000;">
+<td style="padding-left: 5px;padding-right: 5px;">
+AIC
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+1643.040
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+1487.641
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+1483.499
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+1478.192
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+BIC
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+1656.377
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+1509.870
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+1514.619
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+1513.758
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+Log Likelihood
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-818.520
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-738.821
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-734.749
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-731.096
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+Num. obs.
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+630
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+630
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+630
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+630
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+Num. groups: l2id
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+105
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+105
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+105
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+105
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+Var: l2id (<span class="math inline">\(\tau_{00}\)</span>)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.095
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.060
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.068
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.068
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+Var: Residual (<span class="math inline">\(\sigma^2\)</span>)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.714
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.563
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.514
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.516
+</td>
+</tr>
+<tr>
+<td style="padding-left: 5px;padding-right: 5px;">
+Var: l2id LMX (<span class="math inline">\(\tau_{11}\)</span>)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.025
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+0.019
+</td>
+</tr>
+<tr style="border-bottom: 2px solid #000000;">
+<td style="padding-left: 5px;padding-right: 5px;">
+Cov: l2id (Intercept) LMX (<span class="math inline">\(\tau_{01}\)</span>)
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+&nbsp;
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-0.004
+</td>
+<td style="padding-left: 5px;padding-right: 5px;">
+-0.004
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="font-size: 0.8em;" colspan="5">
+<sup>***</sup>p &lt; 0.001; <sup>**</sup>p &lt; 0.01; <sup>*</sup>p &lt; 0.05. Errores estándar en paréntesis
+</td>
+</tr>
+</tfoot>
+
+</table>
+<ul>
+<li>Interaction Plot</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_model</span>(lmm.fit4, <span class="at">type =</span> <span class="st">"int"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="06-practico_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="foro" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Foro</h1>
+<script src="https://giscus.app/client.js" data-repo="cursos-metodos-facso/multinivel" data-repo-id="MDEwOlJlcG9zaXRvcnkyMDA3MTE2MDk=" data-category="Q&amp;A" data-category-id="DIC_kwDOC_aduc4CYhjI" data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="es" crossorigin="anonymous" async="">
+</script>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Content <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2023 by <a href="https://www.jc-castillo.com">Juan Castillo</a> <br> All content licensed under a <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> <i class="fa-brands fa-creative-commons-nc" aria-label="creative-commons-nc"></i> <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)</a></div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">Made with <i class="fa-brands fa-r-project" aria-label="r-project"></i> and <a href="https://quarto.org/">Quarto</a><br> <a href="https://github.com/cursos-metodos-facso/multinivel">View the source at <i class="fa-brands fa-github" aria-label="github"></i> GitHub</a></div>
+  </div>
+</footer>
+
+
+
+</body></html>
