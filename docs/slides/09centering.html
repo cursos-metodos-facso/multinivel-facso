@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Modelos Multinivel</title>
+    <meta charset="utf-8" />
+    <meta name="author" content=".small[Juan Carlos Castillo    Departamento de Sociología - UCH / COES   ]" />
+    <script src="libs/header-attrs-2.21/header-attrs.js"></script>
+    <script src="libs/fabric-4.3.1/fabric.min.js"></script>
+    <link href="libs/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <link rel="stylesheet" href="css/custom_2020.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+class: front
+
+
+
+
+
+
+
+
+.pull-left-wide[
+# Modelos multinivel]
+
+.pull-right-narrow[![:scale 85%](img/logo.png)]
+
+## Unidades en contexto
+
+----
+.pull-left[
+
+## Juan Carlos Castillo
+## Sociología FACSO - UChile
+## 2do Sem 2023 
+## [.yellow[multinivel-facso.netlify.com]](https://multinivel-facso.netlify.com)
+]
+    
+
+.pull-right-narrow[
+.center[
+.content-block-gray[
+## Sesión 9: 
+## **.yellow[Centrado]**]
+]
+]
+---
+
+layout: true
+class: animated, fadeIn
+
+
+---
+class: roja, middle, center
+
+# Bases: Centrado en regresión simple
+
+---
+## Regresión y centrado
+
+-   El centrado de las variables en regresión simple posee consecuencias
+    en el valor del intercepto
+
+-   Intercepto: estimación del valor de la variable dependiente cuando
+    los predictores son 0
+
+-   La estimación sin centrar en algunos casos puede llevar a algunos
+    problemas en la interpretación de los parámetros del modelo
+
+-   El centrado se implementa restando una constante del predictor
+    (usualmente el promedio)
+
+---
+
+## Ejemplo centrado regresión simple
+
+Datos: puntaje en CI y en una escala de felicidad 1-7
+
+    &gt; mydata
+        felicidad  ci
+    1         1     90
+    2         3     95
+    3         4     98
+    4         6     105
+
+    lm(formula = felicidad ~ ci)
+
+    (Intercept)           ci
+    -28.5593       0.3305
+
+¿Qué significa el valor del intercepto?
+
+---
+## Ejemplo centrado en regresión simple 
+
+.center[
+![image](images/plot1.jpeg) 
+]
+
+---
+## Ejemplo centrado en regresión simple 
+
+
+![image](images/plot2.jpeg)
+
+---
+### Ejemplo centrado regresión simple
+
+    &gt; mydata
+      felicidad  ci mean_ci cicent_mean cicent_100
+    1         1  90      97          -7        -10
+    2         3  95      97          -2         -5
+    3         4  98      97           1         -2
+    4         6 105      97           8          5
+
+    lm(formula = felicidad ~ cicent_mean)
+    (Intercept): 3.5000  ; cicent_mean:0.3305
+
+    lm(formula = felicidad ~ cicent_100)
+    (Intercept): 4.4915  ; mydata$cicent_100: 0.3305
+        
+---
+### Ejemplo centrado en regresión simple
+
+![image](images/plot3.jpeg)
+
+---
+### Ejemplo centrado en regresión simple
+
+![image](images/plot4.jpeg)
+
+---
+
+### Ejemplo centrado regresión simple V
+
+-   `\(\beta\)` constante en todos los modelos, varía solo intercepto
+
+-   Modelo sin centrar: intercepto -28,5, felicidad para alguien con
+    inteligencia 0 (no tiene mucho sentido ...)
+
+-   Centrado al promedio: 3.5, estimación de la felicidad para alguien
+    con inteligencia promedio
+
+-   Centrado a 100: 4.49, estimación de la felicidad para alguien con
+    inteligencia 100
+
+---
+class: roja, middle, center
+
+# Centrado en modelos multinivel
+
+---
+# Distintos centrados según nivel
+
+-   En MLM, las posibilidades de centrado se amplían según la cantidad
+    de niveles que se tengan
+
+-   Tomando como referencia dos niveles, el centrado de los predictores
+    de nivel uno puede tomar 2 formas principales: 
+      - a la gran media o promedio general (**CGM**)
+      - al promedio al interior (within) de
+    grupos/clusters (**CWC**) 
+    
+
+(nomenclatura Enders &amp; Tofighi, 2007)
+
+---
+# Distintos centrados según nivel
+
+-   El **CGM** es equivalente al de regresión simple para el mismo
+    propósito: se resta el valor del promedio general
+
+-   En el **CWC** se resta el promedio del grupo en lugar de la gran
+    media
+
+---
+# Distintos centrados según nivel
+
+-   A diferencia de regresión simple, las decisiones respecto de
+    centrado afectan más allá del valor del intercepto, influyendo en:
+
+    -   valor de `\(\beta\)`
+
+    -   componentes de la varianza ( `\(\tau_{00},\tau_{11},\tau_{01})\)`
+
+    -   interacciones entre niveles
+
+-   *CGM y CWC estiman la relación entre X e Y de distinta manera y
+    producen intepretaciones distintas de los parámetros*
+    
+---
+# Distintos centrados según nivel
+
+-   Pregunta principal: Which form of centering provides interpretable
+    parameter estimates that can be used to address a particular
+    substantive research question? (Enders &amp; Tofighi 2007, p. 122)
+
+---
+# Distintos centrados según nivel
+
+-   Ejemplo: dataset artificial que maximiza las diferencias entre
+    clusters para mostrar mejor los efectos de los distintos tipos de
+    centrado (Enders &amp; Tofighi, 2007)
+
+-   Variable dependiente: bienestar
+
+-   Variable independiente nivel 1 ( `\(\gamma_{10}\)` )= horas de trabajo
+
+-   Variable independiente nivel 2 ( `\(\gamma_{01}\)` )= tamaño del grupo
+
+---
+## Centrado a la gran media
+
+.center[
+![:scale 45%](images/cgm.JPG)   ![:scale 45%](images/cmeans.JPG)
+]
+---
+## CGM
+
+-   La relación entre las horas de trabajo y bienestar posee componentes
+    a nivel 1 y nivel 2
+
+    -   Individuos que trabajan más tienen a tener menor bienestar (L1)
+
+    -   Grupos que en promedio trabajan menos poseen menores niveles de
+        bienestar (L2)
+
+-   Como en regresión simple, en CGM no se altera la estimación de
+    `\(\beta\)`, solo varía la estimación del valor del intercepto ...
+    además de alterar otros parámetros (detalles más adelante)
+
+---
+## Comparación con centrado al grupo
+
+.pull-left[
+![:scale 90%](images/cgm.JPG ) 
+]
+.pull-right[
+![:scale 90%](images/cwc.JPG)
+]
+---
+## Correlaciones entre especificaciones de centrado
+
+.center[
+![:scale 50%](images/tab1.JPG)
+]
+
+---
+## Correlaciones entre especificaciones de centrado
+
+
+-   La correlación entre variables no varia entre puntajes brutos y
+    centrados CGM
+
+-   El CWC crea una variable distinta, y por tanto correlaciona distinto
+    con otras
+
+-   La variable CGM correlaciona tanto con predictores de nivel 1 como
+    de nivel 2 (contiene en su covariación una dimiension *between*)
+
+-   La variable CWC correlaciona 0 con predictores de nivel 2 (porque su
+    varianza a nivel 2 es 0)
+
+---
+## En términos de regresión:
+
+.center[
+![:scale 55%](images/reglines.JPG)
+]
+
+---
+## Regresión multinivel y centrado
+
+-   OLS puede verse como una combinación ponderada de los coeficientes
+    between y within clusters
+
+-   En CGM, `\(\gamma_{10}\)` es una mezcla de asociación within y between:
+
+    -   “the hierarchical estimator under grand-mean centering is an
+        inappropriate estimator of the person-level [i.e., Level 1]
+        effect. It too is an uninterpretable blend: neither `\(\beta_w\)`
+        nor `\(\beta_b\)`” (Raudenbush and Bryk, 2002, p. 139).
+---
+## Regresión multinivel y centrado
+
+.pull-left[
+-   En CGM, se altera también la estimación de la varianza de las     pendientes ( `\(\tau_{11}\)` ) al incorporar elementos between que pueden reducir variabilidad:]
+
+.pull-right[
+.center[
+![:scale 90%](images/reglines_cwc.JPG)
+]
+]
+---
+## En CWC (1):
+
+-   No contiene variación entre clusters y por lo tanto no correlaciona con variables de nivel 2
+
+-   El intercepto se interpreta como el promedio no ajustado del
+    promedio de los clusters
+
+-   Por lo tanto, con predictores CWC, `\(\gamma_{00}\)` es equivalente al
+    del modelo nulo
+
+---
+## En CWC (2):
+
+-   En CWC la pendiente corresponde a la regresión within cluster, es un
+    estimador “puro” de la relación nivel 1 entre x e y
+
+-   La estimación de `\(\tau_{00}\)` con un predictor CWC cuantifica la
+    varianza de los promedios no ajustados; por lo tanto debería ser
+    similar a la de un modelo incondicional (sin predictores)
+
+---
+## Centrado y 4 posibles focos de investigación
+
+1.  Predictor de nivel 1
+
+2.  Predictor de nivel 2
+
+3.  Comparar la influencia de un predictor a distintos niveles
+
+4.  Efectos de interacción
+
+---
+## 1. Predictor de nivel 1
+
+Se recomienda CWC
+
+-   Estimador “puro” de efectos nivel 1
+
+-   Estimación más adecuada de la varianza de la pendiente
+
+-   Sustantivamente: la posición relativa respecto del grupo es un
+    determinante relevante para los individuos (comportamientos,
+    actitudes, etc.)
+
+---
+## 2. Predictor de nivel 2
+
+-   Si solo hay predictores de nivel 2, seguir recomendaciones de
+    centrado de OLS
+
+-   Cuando hay predictores de nivel 1, se recomienda CGM, ya que como
+    contiene varianza between ajusta la estimación de los predictores de
+    nivel 2
+
+-   Ej: Enders &amp; Tofighi Tabla 2, ver ajuste de predictor de tamaño
+    (SIZE) cuando HOURS es CGM en lugar de CWC
+---
+class: middle
+
+![image](images/tab2.JPG)
+
+---
+## 3. Predictor en ambos niveles
+
+-   Caso de modelos contextuales o composicionales
+
+-   Requiere usar los puntajes individuales y los promedios de los
+    clusters
+
+-   Por lo tanto se requiere descomponer la varianza de la pendiente en
+    within y between,
+
+-   El objetivo es saber si `\(\gamma_{01}\)` es significativo y distinto de
+    `\(\gamma_{10}\)`, es decir, si hay un efecto del grupo más allá del
+    efecto individual
+
+-   Al estar presentes los promedios de los clusters, `\(\gamma_{10}\)` es
+    equivalente para ambos centrados (CGM=CWC), ya que CGM se encuentra
+    parcializado de los promedios grupales
+
+---
+
+-   Por lo tanto, dos vías equivalentes para evaluar esto:
+
+    -   CWC: restar ambos coeficientes y ver si la diferencia es significativa
+    
+    -   CGM: si `\(\gamma_{01}\)` es significativo implica que la diferencia
+        es significativa
+
+---
+![image](images/tab3.JPG)
+
+-   Para el caso de CWC:  `\(\gamma_{10}-\gamma_{01}=-.608-.294=.315\)`
+
+-   Para CGM: `\(\gamma_{01}=.315\)` (equivalente a la diferencia con CWC), y es significativo.
+
+---
+## 4. Interacción entre niveles
+
+-   La estimación CGM de `\(\gamma_{11}\)` (coeficiente de interacción) es
+    una mezcla poco interpretable de interacciones a ambos niveles
+
+-   CWC desacopla las interacciones
+
+-   Por lo tanto, se recomienda CWC en interacciones entre niveles
+
+
+---
+class: inverse
+
+## Resumen
+
+- un predictor nivel 1 no centrado contiene elementos de varianza entre y dentro
+
+- por lo tanto, se requiere separar ambas varianzas según las hipótesis a contrastar
+
+- en general, para hipótesis de nivel 1 los predictores deben estar centrados al grupo, o controlados por el promedio del predictor por clusters como variable de nivel 2
+
+- centardo es de especial relevancia al establecer hipótesis de interacciones entre niveles
+
+
+---
+class: front
+.pull-left-wide[
+# Modelos multinivel]
+
+.pull-right-narrow[![:scale 85%](img/logo.png)]
+
+## Unidades en contexto
+
+----
+.pull-left[
+
+## Juan Carlos Castillo
+## Sociología FACSO - UChile
+## 2do Sem 2023 
+## [.yellow[multinivel-facso.netlify.com]](https://multinivel-facso.netlify.com)
+]
+    
+
+.pull-right-narrow[
+.center[
+
+]
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://multinivel.netlify.com/docpres/xaringan_custom/macros.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "tomorrow-night-blue",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url("img/logo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 16.3em;
+  right: 31em;
+  width: 110px;
+  height: 70px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
