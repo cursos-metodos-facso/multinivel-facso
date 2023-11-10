@@ -88,6 +88,8 @@ website:
               file: content/08-content.qmd
             - text: "Sesión 9"
               file: content/09-content.qmd
+            - text: "Sesión 10"
+              file: content/10-content.qmd
 
     - title: "Prácticos"
       contents:
