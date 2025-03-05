@@ -17,6 +17,3 @@ projects/*.zip
 **/*_cache/*
 !README_files/*
 
-files/incomplete-reports.zip
-
-/.luarc.json

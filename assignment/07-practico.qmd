@@ -1,0 +1,49 @@
+---
+title: "Centrado"
+date: "2023-10-20"
+lang: es
+number-sections: false
+website:
+  comments:
+    giscus:
+      repo: cursos-metodos-facso/multinivel
+---
+
+```{r setup, include=FALSE, cache = FALSE}
+require("knitr")
+opts_chunk$set(warning=FALSE,
+             message=FALSE,
+             echo=TRUE,
+             cache = FALSE, fig.width=7, fig.height=5.2)
+knitr::opts_knit$set(root.dir = here::here())
+```
+
+Para este práctico revisar el siguiente capítulo con ejercicios de centrado: [Centering in Multilevel Models](https://commresearch.arizona.edu/classes/comm640/640_Book/docs/centering-in-multilevel-models.html).
+
+
+
+
+
+
+
+
+# Foro
+
+<script src="https://giscus.app/client.js"
+        data-repo="cursos-metodos-facso/multinivel"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyMDA3MTE2MDk="
+        data-category="Q&A"
+        data-category-id="DIC_kwDOC_aduc4CYhjI"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="es"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+
