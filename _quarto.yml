@@ -72,24 +72,24 @@ website:
           contents:
             - text: "Sesión 1"
               file: content/01-content.qmd
-            - text: "Sesión 2"
-              file: content/02-content.qmd
-            - text: "Sesión 3"
-              file: content/03-content.qmd
-            - text: "Sesión 4"
-              file: content/04-content.qmd
-            - text: "Sesión 5"
-              file: content/05-content.qmd
-            - text: "Sesión 6"
-              file: content/06-content.qmd
-            - text: "Sesión 7"
-              file: content/07-content.qmd
-            - text: "Sesión 8"
-              file: content/08-content.qmd
-            - text: "Sesión 9"
-              file: content/09-content.qmd
-            - text: "Sesión 10"
-              file: content/10-content.qmd
+            # - text: "Sesión 2"
+            #   file: content/02-content.qmd
+            # - text: "Sesión 3"
+            #   file: content/03-content.qmd
+            # - text: "Sesión 4"
+            #   file: content/04-content.qmd
+            # - text: "Sesión 5"
+            #   file: content/05-content.qmd
+            # - text: "Sesión 6"
+            #   file: content/06-content.qmd
+            # - text: "Sesión 7"
+            #   file: content/07-content.qmd
+            # - text: "Sesión 8"
+            #   file: content/08-content.qmd
+            # - text: "Sesión 9"
+            #   file: content/09-content.qmd
+            # - text: "Sesión 10"
+            #   file: content/10-content.qmd
 
     - title: "Prácticos"
       contents:
@@ -98,20 +98,20 @@ website:
             - assignment/index.qmd
         - section: "Guías"
           contents:
-            - text: "1: Preparación de Datos con R"
+            - text: "1: Repaso inferencia"
               file: assignment/01-practico.qmd
-            - text: "2: Datos y estimaciones en dos niveles"
-              file: assignment/02-practico.qmd
-            - text: "3: Estimación modelos multinivel con lmer en R"
-              file: assignment/03-practico.qmd
-            - text: "4: Combinando datos de distintos niveles"
-              file: assignment/04-practico.qmd
-            - text: "5: Efectos aleatorios"
-              file: assignment/05-practico.qmd
-            - text: "6: Interacción entre niveles"
-              file: assignment/06-practico.qmd
-            - text: "7: Centrado"
-              file: assignment/07-practico.qmd
+            # - text: "2: Datos y estimaciones en dos niveles"
+            #   file: assignment/02-practico.qmd
+            # - text: "3: Estimación modelos multinivel con lmer en R"
+            #   file: assignment/03-practico.qmd
+            # - text: "4: Combinando datos de distintos niveles"
+            #   file: assignment/04-practico.qmd
+            # - text: "5: Efectos aleatorios"
+            #   file: assignment/05-practico.qmd
+            # - text: "6: Interacción entre niveles"
+            #   file: assignment/06-practico.qmd
+            # - text: "7: Centrado"
+            #   file: assignment/07-practico.qmd
   page-footer:
     left: |
       Content {{< fa brands creative-commons >}} {{< var course.copyright_year >}} by [{{< var instructor.name_no_title >}}]({{< var instructor.url >}}) <br>

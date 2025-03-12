@@ -30,7 +30,7 @@ El informe final debe tener formato de artículo o reporte breve de investigaci�
 
 8.  Bibliografı́a
 
-**Formato**: Idealmente en formato html/(R)Markdown; en caso de formato papel, tamaño carta, letra times new roman o LM Roman 12, espaciado 1,5, margenes de 2 cm, número de página. En todos los casos se debe adjuntar el código de análisis; si en el informe de avance se utiliza Rmarkdown - html se puede incluir el código (”chunks”) en el informe. Lo importante, sobre todo en la primera entrega, es preocuparse por el contenido más que el formato.
+**Formato**: Idealmente en formato html/(R)Markdown/Quarto.
 
 En términos de contenidos, para el informe de avance se espera un
 reporte de alrededor de 2000 palabras que sea una especie de
@@ -39,7 +39,7 @@ borrador del informe final. El énfasis de esta primera entrega se encuentra en 
 Presentación oral
 =================
 
-Las presentaciones son breves, máximo 10 minutos y luego 5 a 10 minutos de preguntas, comentarios y sugerencias. Se debe elaborar un documento a proyectar que acompañe la presentación, máximo 15 láminas. No es necesario que presenten todos los integrantes del grupo, pero sí todos deben estar disponibles para responder preguntas. La asistencia a las presentaciones es obligatoria.
+Las presentaciones son breves, máximo 10 minutos y luego 5 a 10 minutos de preguntas, comentarios y sugerencias. Se debe elaborar un documento a proyectar que acompañe la presentación, máximo 10 láminas. No es necesario que presenten todos los integrantes del grupo, pero sí todos deben estar disponibles para responder preguntas. La asistencia a las presentaciones es obligatoria.
 
 Evaluación de pares
 ===================
@@ -109,10 +109,9 @@ c) Considerando todo lo anterior, ¿qué nota final consideraría justa para mí
 
 - Hasta las 23:59:00 del dı́a indicado, via Ucursos,
 - 0.5 por dı́a corrido de atraso, hasta 3 dı́as
-- Se entrega documento de trabajo y también código de análisis.
+- Se entrega documento de trabajo y también código de análisis en formato (R)Markdown.
 - En caso de atraso por enfermedad presentar certificado médico a secretarı́a de carrera.
 - En el marco de ciencia abierta que promueve el curso, los documentos del trabajo, código y presentaciones serán puestos a disposición de todos los participantes.
-
 
 # Foro de preguntas sobre el trabajo
 

@@ -13,15 +13,15 @@ instructor:
   appointment_url: https://calendly.com/juancastillov/horas-oficina
 
 course:
-  number: "SOC01133/MCS7157"
-  semester: "Segundo 2023"
-  days: "Viernes"
-  time: "10:15 - 11:45"
-  location: "Sala 44 - FACSO"
-  dates: "11 Agosto al 28 de Noviembre, 2023"
-  github: "https://github.com/cursos-metodos-facso/multinivel"
-  url: "https://multinivel.netlify.app"
-  copyright_year: "2023"
+  number: "SOC01133/MCS7174"
+  semester: "Primero 2025"
+  days: "Jueves"
+  time: "14:30 - 17:45"
+  location: "Salas 34/45 - FACSO"
+  dates: "Marzo-Junio, 2025"
+  github: "https://github.com/cursos-metodos-facso/multinivel-facso"
+  url: "https://multinivel-facso.netlify.app"
+  copyright_year: "2025"
   slack: ""
 
 university:
