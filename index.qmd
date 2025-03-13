@@ -22,18 +22,38 @@ withr::with_dir(here::here(), {
 })
 ```
 
+
+
+
+
 ::: {.home}
 
 ::: {.grid .course-details}
 
+
+
 ::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
 ### Profesor
+
+
+<div class="image-cropper">
+  <img src="https://ucampus.uchile.cl/d/r/usuario/ff/ffd4a9d15a5239c0a425a58a798889c8/perfil/bf49d6261628eb095bcaec76eda1e0d1.jpg" alt="avatar" class="profile-pic" width= "100" height= "auto">
+</div>
 
 - {{< fa user >}} &nbsp; [{{< var instructor.name >}}]({{< var instructor.url >}})
 - {{< fa building >}} &nbsp; {{< var instructor.office >}}
 - {{< fa envelope >}} &nbsp; <a href="mailto:juancastillov@uchile.cl">juancastillov@uchile.cl</a>
 - {{< fa calendar-check >}} &nbsp; [Agendar reunión]({{< var instructor.appointment_url >}})
 
+#### Apoyo Docente
+
+<div class="image-cropper">
+  <img src="files/img/kevin.png" alt="avatar" class="profile-pic"   width= "100" height= "auto">
+</div>
+- {{< fa user >}} &nbsp; Kevin Carrasco
+- {{< fa building >}} &nbsp; 328 Sociología FACSO, Universidad de Chile
+- {{< fa envelope >}} &nbsp; <a href="mailto:kevinkevin.carrasco@ug.uchile.cl ">kevin.carrasco@ug.uchile.cl </a>
+- {{< fa calendar-check >}} &nbsp; Agendar reunión
 
 
 :::
@@ -52,6 +72,4 @@ withr::with_dir(here::here(), {
 :::
 
 :::
-
-
 :::

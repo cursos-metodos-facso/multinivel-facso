@@ -22,13 +22,14 @@ En detalle, aprenderemos y recordaremos:
 
 Cargaremos algunas librerías que serán necesarias en las diferentes partes de esta guía práctica:
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, message=FALSE}
 library(pacman)
 pacman::p_load(tidyverse, # para sintaxis
                ggplot2,  
                rempsyc, # Reporte
                kableExtra, # Tablas
-               broom) # Varios
+               broom,
+               Publish) # Varios
 options(scipen = 999) # para desactivar notacion cientifica
 rm(list = ls())       # para limpar el entonrno de trabajo
 ```

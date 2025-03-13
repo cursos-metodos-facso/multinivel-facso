@@ -8,7 +8,7 @@
 
 <meta name="description" content="Modelos Multinivel">
 
-<title>Práctica 1. Preparación de datos en R – Modelos Multinivel</title>
+<title>Repaso inferencia estadística – Modelos Multinivel</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -103,9 +103,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Buscar"
   }
 }</script>
+<link href="../site_libs/tabwid-1.1.3/tabwid.css" rel="stylesheet">
+<script src="../site_libs/tabwid-1.1.3/tabwid.js"></script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta property="og:title" content="Práctica 1. Preparación de datos en R – Modelos Multinivel">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Repaso inferencia estadística – Modelos Multinivel">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://multinivel.netlify.app/files/img/logo-multinivel.png">
 <meta property="og:site_name" content="Modelos Multinivel">
@@ -171,7 +202,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignment/01-practico.html">Guías</a></li><li class="breadcrumb-item"><a href="../assignment/01-practico.html">1: Preparación de Datos con R</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignment/01-practico.html">Guías</a></li><li class="breadcrumb-item"><a href="../assignment/01-practico.html">1: Repaso inferencia</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -212,43 +243,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../assignment/01-practico.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">1: Preparación de Datos con R</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../assignment/02-practico.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2: Datos y estimaciones en dos niveles</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../assignment/03-practico.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3: Estimación modelos multinivel con lmer en R</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../assignment/04-practico.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4: Combinando datos de distintos niveles</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../assignment/05-practico.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">5: Efectos aleatorios</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../assignment/06-practico.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">6: Interacción entre niveles</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../assignment/07-practico.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">7: Centrado</span></a>
+ <span class="menu-text">1: Repaso inferencia</span></a>
   </div>
 </li>
       </ul>
@@ -263,30 +258,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">En esta página</h2>
    
   <ul>
-  <li><a href="#presentación" id="toc-presentación" class="nav-link active" data-scroll-target="#presentación">Presentación</a>
+  <li><a href="#objetivo-de-la-práctica" id="toc-objetivo-de-la-práctica" class="nav-link active" data-scroll-target="#objetivo-de-la-práctica">Objetivo de la práctica</a>
   <ul class="collapse">
-  <li><a href="#objetivo-de-la-práctica" id="toc-objetivo-de-la-práctica" class="nav-link" data-scroll-target="#objetivo-de-la-práctica">Objetivo de la práctica</a></li>
-  <li><a href="#antecedentes-de-los-datos-a-utilizar" id="toc-antecedentes-de-los-datos-a-utilizar" class="nav-link" data-scroll-target="#antecedentes-de-los-datos-a-utilizar">Antecedentes de los datos a utilizar</a></li>
+  <li><a href="#librerías" id="toc-librerías" class="nav-link" data-scroll-target="#librerías">Librerías</a></li>
   </ul></li>
-  <li><a href="#preparación-de-datos-elsoc-2016" id="toc-preparación-de-datos-elsoc-2016" class="nav-link" data-scroll-target="#preparación-de-datos-elsoc-2016">Preparación de datos ELSOC 2016</a>
+  <li><a href="#distribución-normal" id="toc-distribución-normal" class="nav-link" data-scroll-target="#distribución-normal">1. Distribución Normal</a>
   <ul class="collapse">
-  <li><a href="#librerias" id="toc-librerias" class="nav-link" data-scroll-target="#librerias">1. Librerías principales (de R) a utilizar en el análisis</a></li>
-  <li><a href="#cargar-base-de-datos" id="toc-cargar-base-de-datos" class="nav-link" data-scroll-target="#cargar-base-de-datos">2. Cargar base de datos</a></li>
-  <li><a href="#selección-de-variables-a-utilizar" id="toc-selección-de-variables-a-utilizar" class="nav-link" data-scroll-target="#selección-de-variables-a-utilizar">3. Selección de variables a utilizar</a></li>
-  <li><a href="#procesamiento-de-variables" id="toc-procesamiento-de-variables" class="nav-link" data-scroll-target="#procesamiento-de-variables">4. Procesamiento de variables</a>
+  <li><a href="#curvas-de-distribución" id="toc-curvas-de-distribución" class="nav-link" data-scroll-target="#curvas-de-distribución">1.1. Curvas de distribución</a></li>
+  <li><a href="#distribución-normal-1" id="toc-distribución-normal-1" class="nav-link" data-scroll-target="#distribución-normal-1">1.2. Distribución Normal</a></li>
+  <li><a href="#distribución-normal-estándar" id="toc-distribución-normal-estándar" class="nav-link" data-scroll-target="#distribución-normal-estándar">1.3. Distribución Normal Estándar</a></li>
+  </ul></li>
+  <li><a href="#intervalos-de-confianza" id="toc-intervalos-de-confianza" class="nav-link" data-scroll-target="#intervalos-de-confianza">2. Intervalos de confianza</a>
   <ul class="collapse">
-  <li><a href="#percepción-de-meritocracia" id="toc-percepción-de-meritocracia" class="nav-link" data-scroll-target="#percepción-de-meritocracia">4.1 Percepción de meritocracia</a></li>
-  <li><a href="#estatus-subjetivo" id="toc-estatus-subjetivo" class="nav-link" data-scroll-target="#estatus-subjetivo">4.3. Estatus subjetivo</a></li>
-  <li><a href="#sexo" id="toc-sexo" class="nav-link" data-scroll-target="#sexo">4.4. Sexo</a></li>
-  <li><a href="#edad" id="toc-edad" class="nav-link" data-scroll-target="#edad">4.5 Edad</a></li>
+  <li><a href="#cálculo-de-intervalos-de-confianza" id="toc-cálculo-de-intervalos-de-confianza" class="nav-link" data-scroll-target="#cálculo-de-intervalos-de-confianza">2.1. Cálculo de intervalos de confianza</a></li>
   </ul></li>
-  <li><a href="#generación-de-base-de-datos-procesada-para-el-análisis" id="toc-generación-de-base-de-datos-procesada-para-el-análisis" class="nav-link" data-scroll-target="#generación-de-base-de-datos-procesada-para-el-análisis">5. Generación de base de datos procesada para el análisis</a></li>
-  </ul></li>
-  <li><a href="#archivo-de-código" id="toc-archivo-de-código" class="nav-link" data-scroll-target="#archivo-de-código">Archivo de código</a></li>
-  <li><a href="#bonus-track-flujo-de-trabajo-reproducible" id="toc-bonus-track-flujo-de-trabajo-reproducible" class="nav-link" data-scroll-target="#bonus-track-flujo-de-trabajo-reproducible">Bonus track: flujo de trabajo reproducible</a>
+  <li><a href="#inferencia-estadística" id="toc-inferencia-estadística" class="nav-link" data-scroll-target="#inferencia-estadística">3. Inferencia estadística</a>
   <ul class="collapse">
-  <li><a href="#video" id="toc-video" class="nav-link" data-scroll-target="#video">Video</a></li>
+  <li><a href="#cinco-pasos-para-la-inferencia-estadística" id="toc-cinco-pasos-para-la-inferencia-estadística" class="nav-link" data-scroll-target="#cinco-pasos-para-la-inferencia-estadística">Cinco pasos para la inferencia estadística</a></li>
   </ul></li>
+  <li><a href="#recordemos" id="toc-recordemos" class="nav-link" data-scroll-target="#recordemos">Recordemos…</a></li>
+  <li><a href="#ejercicio-1" id="toc-ejercicio-1" class="nav-link" data-scroll-target="#ejercicio-1">Ejercicio 1</a></li>
+  <li><a href="#ejercicio-2" id="toc-ejercicio-2" class="nav-link" data-scroll-target="#ejercicio-2">Ejercicio 2</a></li>
+  <li><a href="#ejercicio-3" id="toc-ejercicio-3" class="nav-link" data-scroll-target="#ejercicio-3">Ejercicio 3</a>
+  <ul class="collapse">
+  <li><a href="#formulación-de-hipótesis" id="toc-formulación-de-hipótesis" class="nav-link" data-scroll-target="#formulación-de-hipótesis">1. Formulación de hipótesis</a></li>
+  <li><a href="#pasos-2-3-y-4-de-una-vez-con-r" id="toc-pasos-2-3-y-4-de-una-vez-con-r" class="nav-link" data-scroll-target="#pasos-2-3-y-4-de-una-vez-con-r">Pasos 2, 3 y 4 de una vez con R</a></li>
+  <li><a href="#interpretación" id="toc-interpretación" class="nav-link" data-scroll-target="#interpretación">5. Interpretación</a></li>
+  </ul></li>
+  <li><a href="#resumen" id="toc-resumen" class="nav-link" data-scroll-target="#resumen">Resumen</a></li>
   </ul>
 </nav>
     </div>
@@ -294,759 +293,513 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header">
-<h1 class="title display-7">Práctica 1. Preparación de datos en R</h1>
+<h1 class="title display-7">Repaso inferencia estadística</h1>
 
 <div class="date-block bg-assignment text-white p-2">
-  <p class="date">Correspondiente a la sesión del viernes, 18 de agosto de 2023</p>
+  <p class="date">Correspondiente a la sesión del jueves, 13 de marzo de 2025</p>
 </div>
 </header>
 
 
-<section id="presentación" class="level1">
-<h1>Presentación</h1>
-<section id="objetivo-de-la-práctica" class="level2">
-<h2 class="anchored" data-anchor-id="objetivo-de-la-práctica">Objetivo de la práctica</h2>
-<p>El desarrollo de esta guía tiene por objetivo revisar algunos procedimientos básicos de la preparación de datos con R, que son necesarios para luego poder aplicar los contenidos más específicos de este curso. Originalmente fue desarrollado para el curso de Estadística Multivariada, disponible <a href="https://multivariada.netlify.app/assignment/01-code/">aquí</a></p>
-<p>Por temas de orden y reproducibilidad, en este curso vamos a separar en <strong>dos momentos</strong> el trabajo con datos, y dos archivos de código correspondientes:</p>
-<ul>
-<li><p><strong>Preparación</strong> corresponde a lo que se conoce generalmente como “limpieza”, es decir, realizar las modificaciones necesarias para poder efectuar los análisis. Estas modificaciones previas al análisis son necesarias ya que los datos originales con los que se va a trabajar en general no vienen perfectamente adaptados a los análisis que se quieren hacer. Por lo tanto, en cuanto a datos también hacemos la distinción entre datos originales y datos preparados (o procesados).</p></li>
-<li><p><strong>Análisis</strong>: se relaciona tanto con análisis descriptivos asociados a las preguntas de investigación y como también modelamiento de datos para contrastar hipótesis de investigación.</p></li>
-</ul>
-<section id="flujo" class="level4">
-<h4 class="anchored" data-anchor-id="flujo">Los procesos de preparación y análisis vinculados a datos y resultados se presentan en el siguiente esquema:</h4>
-<p><img src="../files/img/produccion.png" class="img-fluid"></p>
-<p>Tanto la preparación como el análisis (que son parte del concepto más general de procesamiento) quedan registrados cada en un <em>archivo de código</em>. Los detalles de este tipo de archivos se pueden revisar <a href="../assignment/#codigoR">aquí</a>.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<strong>Archivo de código R</strong>
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Archivo con extensión .R donde se almacena el código de análisis. Para generarlo desde RStudio: <em>File &gt; New File &gt; R Script</em> (o ctrl+shift+N), y para grabarlo <em>File &gt; Save (o ctrl+s)</em>, y darle nombre la primera vez (recordar: sin tilde ni ñ, y evitar espacios)</p>
-</div>
-</div>
-<p>El documento de <strong>código de preparación</strong> posee 5 partes, más una sección de identificación inicial:</p>
-<ol start="0" type="1">
-<li>Identificación y descripción general: Título, autor(es), fecha, información breve sobre el contenido del documento</li>
-<li>Librerías: cargar librerías a utilizar</li>
-<li>Datos: carga de datos</li>
-<li>Selección de variables a utilizar</li>
-<li>Procesamiento de variables: en este punto, por cada variable se realiza lo siguiente:
-<ol type="a">
-<li>Descriptivo básico</li>
-<li>Recodificación: (datos perdidos y valores (en caso de ser necesario)</li>
-<li>Etiquetamiento: de variable y valores (en caso de ser necesario)</li>
-<li>Otros ajustes</li>
-</ol></li>
-<li>Generación de base de datos preparada para el análisis.</li>
-</ol>
-<p>Al final de esta práctica la idea es que cada un_ elabore y entienda su propio documento de preparación de datos.</p>
-<p>En el ejemplo vamos a procesar variables de meritocracia y estatus (objetivo y subjetivo) utilizando los datos de la encuesta <a href="https://coes.cl/encuesta-panel/">ELSOC</a> .</p>
-</section>
-</section>
-<section id="antecedentes-de-los-datos-a-utilizar" class="level2">
-<h2 class="anchored" data-anchor-id="antecedentes-de-los-datos-a-utilizar">Antecedentes de los datos a utilizar</h2>
-<p>El Estudio Longitudinal Social de Chile (ELSOC) es una encuesta desarrollada para analizar longitudinalmente la evolución del conflicto y cohesión en la sociedad chilena.</p>
-<p>Uno de los módulos de <strong>ELSOC</strong> es “Desigualdad y Legitimidad”. Este módulo busca estudiar las percepciones y atribuciones asociadas a las desigualdades sociales. Se ve motivado por el interés de comprender cómo las personas perciben, legitiman y reproducen las diferencias de ingresos, estatus y poder presentes en el Chile contemporáneo.</p>
-<p>El presente ejercicio tiene por objetivo el procesar los datos para obtener las variables relevantes para el estudio de la <strong>Percepción de Meritocracia</strong>, entendida como el grado en que los individuos consideran que su sociedad cumple con los principios de una meritocracia, es decir, que funciona como un sistema que asigna recompensas en función del esfuerzo y las habilidades. Para ello, junto con variables de meritocracia, consideraremos también variables de estatus (educación y estatus subjetivo), y variables de caracterización sociodemográfica (sexo y edad).</p>
-</section>
-</section>
-<section id="preparación-de-datos-elsoc-2016" class="level1">
-<h1>Preparación de datos ELSOC 2016</h1>
-<section id="librerias" class="level2">
-<h2 class="anchored" data-anchor-id="librerias">1. Librerías principales (de R) a utilizar en el análisis</h2>
-<p>Como sabemos, la lógica de R es instalar librerías (solo 1 vez, con <code>install.packages("librería")</code>), y luego cargarlas cada vez que es necesario usarlas (con <code>library(librería)</code>). El problema de esto es que a veces no se sabe claramente qué librerías están instaladas y cuales no, lo que va a arrojar error al cargarlas. Y, como sucede en R, existe una librería para solucionar este problema que se llama <code>pacman</code> (package manager). Lo que hace <code>pacman</code> es cargar la librería, y si no está instalada, la instala y la carga.</p>
-<p>Para utilizar la primera vez (si es que no está instalada):</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"pacman"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Y en adelante, las librerías se cargan así:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a> pacman<span class="sc">::</span><span class="fu">p_load</span>(libreria1,libreria2,libreriaX)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Para esta sesión vamos a utilizar Las librerías que vamos a utilizar son:</p>
-<ul>
-<li><code>dplyr</code>: ajuste general de datos</li>
-<li><code>sjmisc</code>: descripción y exploración de base de datos</li>
-<li><code>car</code>: principalmente la función <code>recode</code> para recodificar/agrupar valores de variable</li>
-<li><code>sjlabelled</code>: para funciones específicas con datos etiquetados</li>
-<li><code>stargazer</code>: para tabla descriptiva</li>
-<li><code>haven</code>: para abrir bases de datos en distintos formatos</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(dplyr, sjmisc, car, sjlabelled, stargazer)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="cargar-base-de-datos" class="level2">
-<h2 class="anchored" data-anchor-id="cargar-base-de-datos">2. Cargar base de datos</h2>
-<p><strong>Ajustar espacio de trabajo</strong></p>
-<p>Previo a la carga de nuestra base de datos, se recomienda ejecutar los siguientes comandos:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())       <span class="co"># borrar todos los objetos en el espacio de trabajo</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen=</span><span class="dv">999</span>) <span class="co"># valores sin notación científica</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>La función <code>rm(list=ls())</code> permite comenzar con un espacio de trabajo (environment) vacío y sin otros objetos. Así también, la función <code>options(scipen=999)</code> desactiva la notación científica, es decir, veremos los valores numéricos con todos sus decimales.</p>
-<p><strong>Datos</strong></p>
-<p>Las bases de datos se pueden cargar de un archivo local o en línea. Para este caso utilizaremos un archivo en línea que viene en formato RData: <strong>ELSOC_W01_v3.10.RData</strong>.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Abrir bases de datos en otros formatos**
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Los formatos mas comunes en que se almacenan las bases de datos son .dta (Stata) y .sav (Spss). Para abrir desde R utlilizamos la librería <code>haven</code> y sus funciones read_dta y read_sav según corresponda. Ej: <code>datos &lt;- read_dta("base_casen.dta")</code>. Recordar antes instalar/cargar la librería: <code>pacman::p_load(haven)</code></p>
-</div>
-</div>
-<p>Cargamos la base de datos desde internet</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">"https://multivariada.netlify.com/assignment/data/original/ELSOC_W01_v3.10.RData"</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>La base de datos aparece como un objeto en nuestro espacio de trabajo, con el nombre original con la que fue guardada (elsoc_2016):</p>
-<p><img src="../files/img/basecargada.png" class="img-fluid"></p>
-<p>Realizamos un chequeo básico de la lectura de datos: nombres de las variables y tamaño de la base en términos de casos y variables (en este ejemplo, 2927 casos y 383 variables).</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(elsoc_2016) <span class="co"># dimension de la base</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2927  383</code></pre>
-</div>
-</div>
-<p>Y si se quiere revisar en formato de planilla de datos:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(elsoc_2016)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="selección-de-variables-a-utilizar" class="level2">
-<h2 class="anchored" data-anchor-id="selección-de-variables-a-utilizar">3. Selección de variables a utilizar</h2>
-<p>Este paso consiste en crear un subset reducido de datos que contenga solo las variables de interés. Para ello:</p>
+<section id="objetivo-de-la-práctica" class="level1">
+<h1>Objetivo de la práctica</h1>
+<p>El objetivo de esta guía práctica es repasar contenidos de inferencia estadística, revisando los conceptos y aplicaciones de distribución normal, cálculo de intervalos de confianza y test de hipótesis.</p>
+<p>En detalle, aprenderemos y recordaremos:</p>
 <ol type="1">
-<li>Se identifica el nombre de las variables que registran la información de preguntas o items del instrumento: esto aparece en el libro de códigos y/o en el cuestionario, o también se puede hacer buscando en la base de datos mediante alguna palabra clave asociada a la pregunta. Por ejemplo, si queremos buscar variables asociadas a educación, utilizamos la función <code>find_var</code> (de <code>sjmisc</code>, librería que cargamos en el paso 1), que nos entrega nombre de la variable en columna var.name. Por ejemplo, si buscamos alguna variable asociada al concepto <em>esfuerzo</em>:</li>
+<li>Qué es la distribución normal</li>
+<li>Cómo calcular e interpretar intervalos de confianza</li>
+<li>Test de hipótesis</li>
 </ol>
+<section id="librerías" class="level2">
+<h2 class="anchored" data-anchor-id="librerías">Librerías</h2>
+<p>Cargaremos algunas librerías que serán necesarias en las diferentes partes de esta guía práctica:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">find_var</span>(<span class="at">data =</span> elsoc_2016,<span class="st">"esfuerzo"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  col.nr var.name
-1    158   c18_09
-                                                           var.label
-1 Grado de acuerdo: Las personas son recompensadas por sus esfuerzos</code></pre>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, <span class="co"># para sintaxis</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>               ggplot2,  </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>               rempsyc, <span class="co"># Reporte</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>               kableExtra, <span class="co"># Tablas</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>               broom,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>               Publish) <span class="co"># Varios</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>) <span class="co"># para desactivar notacion cientifica</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())       <span class="co"># para limpar el entonrno de trabajo</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<p>Nos informa que esta variable es la <code>c18_09</code>.</p>
-<p>Mediante la función <code>select</code> de <code>dplyr</code>, seleccionamos cada una de nuestras variables de interés y creamos una nueva base con el nombre <code>proc_elsoc</code>, donde “proc” hace referencia a base procesada:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc <span class="ot">&lt;-</span> elsoc_2016 <span class="sc">%&gt;%</span> <span class="fu">select</span>(c18_09, <span class="co"># percepción meritocracia esfuerzo</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                          c18_10, <span class="co"># percepción meritocracia talento</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                          d01_01, <span class="co"># estatus social subjetivo</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                          m01,    <span class="co"># nivel educacional</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                          m0_sexo,<span class="co"># sexo</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>                          m0_edad)<span class="co"># edad</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Comprobar</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(proc_elsoc)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "c18_09"  "c18_10"  "d01_01"  "m01"     "m0_sexo" "m0_edad"</code></pre>
-</div>
-</div>
-<p>Mediante el comando <code>get_label</code> obtenemos el atributo label de las variables.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>sjlabelled<span class="sc">::</span><span class="fu">get_label</span>(proc_elsoc)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                                                                  c18_09 
-    "Grado de acuerdo: Las personas son recompensadas por sus esfuerzos" 
-                                                                  c18_10 
-   "Grado de acuerdo: Las personas son recompensada por su inteligencia" 
-                                                                  d01_01 
-"Estatus Social Subjetivo: Donde se ubicaria ud. en la sociedad chilena" 
-                                                                     m01 
-                                                     "Nivel educacional" 
-                                                                 m0_sexo 
-                                                 "Sexo del entrevistado" 
-                                                                 m0_edad 
-                                                 "Edad del entrevistado" </code></pre>
-</div>
-</div>
-<p>Podemos ver que son muy largas, por lo tanto, es necesario cambiarlas por etiquetas más cortas.</p>
 </section>
-<section id="procesamiento-de-variables" class="level2">
-<h2 class="anchored" data-anchor-id="procesamiento-de-variables">4. Procesamiento de variables</h2>
-<p>Para el procesamiento de cada variable se seguirá el siguiente flujo de trabajo:</p>
-<ol type="a">
-<li>Descriptivo general</li>
-<li>Recodificación: de casos perdidos y otros valores (en caso necesario)</li>
-<li>Etiquetado: cambio de nombres de variables y valores (en caso necesario)</li>
-<li>Otros ajustes</li>
+</section>
+<section id="distribución-normal" class="level1">
+<h1>1. Distribución Normal</h1>
+<section id="curvas-de-distribución" class="level2">
+<h2 class="anchored" data-anchor-id="curvas-de-distribución">1.1. Curvas de distribución</h2>
+<p>Por <strong>distribución</strong> nos referimos al conjunto de todos los valores posibles de una variable y las frecuencias (o probabilidades) con las que se producen.</p>
+<p>Existen <strong>distribuciones empíricas</strong> y <strong>distribuciones teóricas</strong>, en donde:</p>
+<ul>
+<li>las primeras reflejan la distribución de los valores que asume la variable en un grupo <em>concreto</em> a partir de una observación.</li>
+<li>las segundas son una <em>función matématica</em> que expresan la distribución de un conjunto de números mediante su <em>probabilidad de ocurencia</em>.</li>
+</ul>
+<p>Estas últimas son también llamadas <strong>curvas de distribución</strong>.</p>
+</section>
+<section id="distribución-normal-1" class="level2">
+<h2 class="anchored" data-anchor-id="distribución-normal-1">1.2. Distribución Normal</h2>
+<p>Es una distribución teórica que corresponde a una curva que representa la distribución de los casos de la población en torno al promedio y con una varianza conocida.</p>
+<ul>
+<li>Simétricas y con un solo punto de elevación</li>
+<li>La pendiente es más fuerte cerca del centro, y se suaviza hacia los extremos</li>
+<li>Coinciden al centro el promedio, la mediana y la moda</li>
+<li>La desviación estandar expresa su dispersión.</li>
+<li>Establece áreas o <em>proporciones</em> bajo la curva en base a desviaciones estándar del promedio.</li>
+</ul>
+</section>
+<section id="distribución-normal-estándar" class="level2">
+<h2 class="anchored" data-anchor-id="distribución-normal-estándar">1.3. Distribución Normal Estándar</h2>
+<p>La distribución normal estándar es una distribución normal con una media de 0 y una desviación estándar de 1.</p>
+<p><img src="../slides/img/norm2.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="intervalos-de-confianza" class="level1">
+<h1>2. Intervalos de confianza</h1>
+<p>Un intervalo de confianza es un rango dentro del cual es probable que se encuentre un parámetro poblacional con un nivel de confianza específico. Además, proporciona información sobre la precisión de nuestras estimaciones.</p>
+<p>Retomando la <a href="../content/04-content.html">sesión 4</a> de estadística correlacional: el promedio de la muestra <span class="math inline">\(\bar{x}\)</span> se distribuye de manera normal, con un error estándar <span class="math inline">\(SE\)</span>, lo que nos permite estimar probabilidades basándonos en la curva normal.</p>
+<p>Por ejemplo, si nos desviamos <span class="math inline">\(\pm1.96SE\)</span> desde la media abarcaremos aproximadamente el 95% de los valores probables.</p>
+<p><img src="https://multivariada.netlify.app/slides/images/normal.png" class="img-fluid"></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Nivel de confianza</strong>: Corresponde a la probabilidad de que la muestra elegida produzca un intervalo que incluya el parámetro que se está estimando (<span class="math inline">\(1-\alpha\)</span>).</p>
+<p><strong>Nivel de significancia</strong>: Corresponde a la probabilidad de que el intervalo calculado a partir de la muestra no comprenda el parámetro de la población (<span class="math inline">\(\alpha\)</span>).</p>
+</div>
+</div>
+<section id="cálculo-de-intervalos-de-confianza" class="level2">
+<h2 class="anchored" data-anchor-id="cálculo-de-intervalos-de-confianza">2.1. Cálculo de intervalos de confianza</h2>
+<p>Generemos un vector aleatorio para estimar un intervalo de confianza para la media, el que se puede calcular de la siguiente manera:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># Fijar la semilla para reproducibilidad</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>vector <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>media <span class="ot">&lt;-</span> <span class="fu">mean</span>(vector)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>desv_estandar <span class="ot">&lt;-</span> <span class="fu">sd</span>(vector)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Media:"</span>, media, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Media: 5.180812 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Desviación Estándar:"</span>, desv_estandar, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Desviación Estándar: 1.825632 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular un intervalo de confianza para la media</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>intervalo_confianza <span class="ot">&lt;-</span> <span class="fu">t.test</span>(vector)<span class="sc">$</span>conf.int  <span class="co"># Intervalo de confianza del 95% para la media</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>intervalo_confianza</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.818567 5.543057
+attr(,"conf.level")
+[1] 0.95</code></pre>
+</div>
+</div>
+<p>También podemos calcular intervalos de confianza para casos reales. Carguemos la base de datos que utilizaremos, que corresponde a un subset de Chile de la International Social Survey Program <a href="https://www.ine.gob.cl/estadisticas/sociales/ingresos-y-gastos/encuesta-suplementaria-de-ingresos">ISSP</a> del 2009:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">url</span>(<span class="st">"https://github.com/cursos-metodos-facso/datos-ejemplos/raw/main/issp_2009_chile.RData"</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Recordemos que podemos contar con bases de datos que tengan factor de expansión (ponderador) o no. Esta distinción se presenta cuando trabajamos con muestras simples o complejas. Al trabajar con muestras complejas debemos identificar cuál es la variable del ponderador e incorporarla en nuestro cálculo.</p>
+<p>En este momento trabajaremos sin factores de expansión o ponderadores.</p>
+</div>
+</div>
+<section id="ic-para-medias" class="level4">
+<h4 class="anchored" data-anchor-id="ic-para-medias">IC para Medias</h4>
+<p>Calculemos un intervalo de confianza para la media de edad:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(issp<span class="sc">$</span>age)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   vars    n  mean    sd median trimmed   mad min max range skew kurtosis   se
+X1    1 1505 46.56 17.64     45   45.82 19.27  18  91    73 0.32    -0.76 0.45</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>Publish<span class="sc">::</span><span class="fu">ci.mean</span>(issp<span class="sc">$</span>age, <span class="at">alpha =</span> <span class="fl">0.05</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> mean  CI-95%       
+ 46.56 [45.67;47.45]</code></pre>
+</div>
+</div>
+<p>Contamos con una media de edad de 46,56 años como estimación puntual. Pero también podemos decir que con un 95% de confianza el parámetro poblacional se encontrará entre 45,67 y 47,45 años.</p>
+</section>
+</section>
+</section>
+<section id="inferencia-estadística" class="level1">
+<h1>3. Inferencia estadística</h1>
+<p>En esta sección, se abordan pruebas de hipótesis para diferencias de medias y direccionales utilizando la prueba t</p>
+<p>Esta sección tiene 3 ejercicios. El primero de ellos es un ejemplo, y los ejercicios 2 y 3 se desarrollan de manera autónoma en la sala (también puede ser en grupo).</p>
+<section id="cinco-pasos-para-la-inferencia-estadística" class="level2">
+<h2 class="anchored" data-anchor-id="cinco-pasos-para-la-inferencia-estadística">Cinco pasos para la inferencia estadística</h2>
+<p>En inferencia, las pruebas de hipótesis nos ayudan a determinar si el resultado que obtenemos en nuestra muestra es un efecto real/extensible a la población o un error. Aquí recomendamos una lista de cinco pasos lógicos para enfrentarnos a la inferencia estadística:</p>
+<style>
+  table {
+    margin-left: auto; /* Ajustamos el margen izquierdo a automático */
+    margin-right: auto; /* Ajustamos el margen derecho a automático */
+    border-collapse: collapse;
+    width: 60%;
+    border: 2px solid black;
+  }
+  
+  th, td {
+    border: 1px solid #D3D3D3;
+    padding: 8px;
+    text-align: center;
+  }
+</style>
+<table>
+<tbody><tr>
+<th class="cell-left">
+Paso
+</th>
+<th class="cell-left">
+Detalle
+</th>
+</tr>
+<tr>
+<td class="cell-left">
+1
+</td>
+<td class="cell-left">
+Formula <span class="math inline">\(H_0\)</span> y <span class="math inline">\(H_A\)</span> y estipula la dirección de la prueba
+</td>
+</tr>
+<tr>
+<td class="cell-left">
+2
+</td>
+<td class="cell-left">
+Calcula el error estándar (SE) y el valor estimado de la prueba (ej: Z o t)
+</td>
+</tr>
+<tr>
+<td class="cell-left">
+3
+</td>
+<td class="cell-left">
+Especifica la probabilidad de error <span class="math inline">\(\alpha\)</span> y el valor crítico de la prueba
+</td>
+</tr>
+<tr>
+<td class="cell-left">
+4
+</td>
+<td class="cell-left">
+Contrasta el valor estimado con el valor crítico
+</td>
+</tr>
+<tr>
+<td class="cell-left">
+5
+</td>
+<td class="cell-left">
+Intrepreta los resultados
+</td>
+</tr>
+</tbody></table>
+<p>Además de estos 5 pasos también existe la posibilidad de calcular un intervalo de confianza, que acompañe la precisión de nuestra estimación.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Los # en el código</strong></p>
+<p>En este código y siguientes aparecen varios #, que son una función de comentarios en R. No son necesarios para que el código funcione, pero son útiles en este caso para poder explicar que función cumple cada sección del código. Todo lo que aparece a la derecha de un # no es leído por el programa.</p>
+</div>
+</div>
+<p>Exploremos la base de datos <strong>issp 2009</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(issp) <span class="co"># Nombre de columnas</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "sex"           "age"           "educyrs"       "income"       
+ [5] "topbot"        "pref_redis"    "perc_ineq"     "conflict_rp"  
+ [9] "conflict_wcmc" "conflict_mw"   "conflict_tb"  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(issp) <span class="co"># Dimensiones</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1505   11</code></pre>
+</div>
+</div>
+<p>Contamos con 11 variables (columnas) y 1.505 observaciones (filas).</p>
+</section>
+</section>
+<section id="recordemos" class="level1">
+<h1>Recordemos…</h1>
+<p>En estadística, la formulación de hipótesis que implica dos variables (o la comparación de grupos) busca determinar si existen diferencias en una variable entre grupos y, de ser el caso, evaluar si esta diferencia es estadísticamente significativa.</p>
+<p><a href="https://correlacional.netlify.app/content/06-content">Hasta ahora</a>, en estadística correlacional hemos aprendido a contrastar hipótesis sobre <strong>diferencias entre grupos</strong>. A esto también se le llama <strong>hipótesis de dos colas</strong>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Prueba de dos colas
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Contrastamos la <em>hipótesis nula</em> (o de trabajo) de <em>no</em> diferencias entre grupos: <span class="math display">\[  H_{0}: \mu_{1} - \mu_{2} = 0 \]</span> En relación a una <em>hipótesis alternativa</em> sobre <em>diferencias</em> entre grupos: <span class="math display">\[  H_{A}: \mu_{1} - \mu_{2} \neq 0 \]</span></p>
+</div>
+</div>
+<p>Además, podemos <strong>plantear hipótesis</strong> respecto a que el valor de cierto parámetro para un grupo <strong>puede ser mayor o menor</strong> al de otro grupo. A esto se le conoce como <strong>hipótesis de una cola</strong>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Prueba de una cola
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[  H_{0}: \mu_{0} ≥ \mu_{1} ; \mu_{0} ≤ \mu_{1}\]</span></p>
+<p><span class="math display">\[  H_{A}: \mu_{0} &gt; \mu_{1} \]</span></p>
+<p><span class="math display">\[  H_{A}: \mu_{0} &lt; \mu_{1} \]</span></p>
+</div>
+</div>
+<p>Veamos ahora cómo aplicar todos estos conocimientos con ejercicios.</p>
+</section>
+<section id="ejercicio-1" class="level1">
+<h1>Ejercicio 1</h1>
+<p>Este ejercicio está desarrollado para que sirva de ejemplo a los siguientes ejercicios que deben ser desarrollados de manera autónoma.</p>
+<p>La pregunta de investigación es: <em>¿Es el nivel escolar de los hombres mayor que el de las mujeres?</em></p>
+<p>Para contrastar esta hipótesis, vamos utilizar la bbdd <code>issp</code> y seleccionaremos las variables <code>sex</code> e <code>educyrs</code>, que representa el nivel educacional medido en cantidad de años de educación.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>issp_subset <span class="ot">&lt;-</span> issp <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(sex, educyrs) <span class="co"># seleccionamos</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>issp_subset <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(issp_subset) <span class="co"># eliminamos casos perdidos (listwise)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Generamos tabla para visualizar la distribución de los datos.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>issp_subset <span class="sc">%&gt;%</span> </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span> <span class="co"># se agrupan por la variable categórica </span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">Obs. =</span> <span class="fu">n</span>(),</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">Promedio =</span> <span class="fu">mean</span>(educyrs, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">SD =</span> <span class="fu">sd</span>(educyrs, <span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> <span class="co"># se agregan las operaciones a presentar en la tabla</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable</span>(<span class="at">format =</span> <span class="st">"markdown"</span>) <span class="co"># se genera la tabla</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">sex</th>
+<th style="text-align: right;">Obs.</th>
+<th style="text-align: right;">Promedio</th>
+<th style="text-align: right;">SD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">604</td>
+<td style="text-align: right;">11.08940</td>
+<td style="text-align: right;">4.532026</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">847</td>
+<td style="text-align: right;">10.53011</td>
+<td style="text-align: right;">4.308025</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Ahora vamos con los <a href="https://correlacional.netlify.app/slides/05-inferencia4.html#33">5 pasos de la inferencia</a></p>
+<p><strong>1. Formulación de hipótesis</strong></p>
+<p>El primer aspecto a establecer es el tipo de hipótesis a formular: ¿Direccional o no direccional? En este caso, la pregunta indica una direccionalidad (“mayor que”), por lo tanto corresponde a una hipótesis direccional. Si hubiera sido una pregunta que hiciera referencia simplemente a diferencias (“¿Es el nivel educacional de los hombres distinto al de las mujeres?”) correspondería a una hipótesis no direccional.</p>
+<p>La hipótesis general es que el nivel educacional de los hombres es mayor que el de las mujeres. Pasando a lenguaje de hipótesis, esto se plantea como:</p>
+<p>Hipótesis alternativa:</p>
+<ul>
+<li><span class="math inline">\(H_A\)</span>: Promedio educación hombres ( <span class="math inline">\(\bar{X}_{hombres}\)</span>) - Promedio educación de mujeres ( <span class="math inline">\(\bar{X}_{mujeres}\)</span>) &gt; 0</li>
+</ul>
+<p>Hipótesis nula:</p>
+<ul>
+<li><span class="math inline">\(H_0\)</span>: <span class="math inline">\(\bar{X}_{hombres} - \bar{X}_{mujeres} \leq 0\)</span></li>
+</ul>
+<p><strong>Pasos 2, 3 y 4 de una vez con R</strong></p>
+<p>En clases vimos que los pasos 2, 3 y 4 corresponden a:</p>
+<ol type="1">
+<li><p>Obtener error estándar y estadístico de prueba empírica correspondiente (ej: Z o t)</p></li>
+<li><p>Establecer la probabilidad de error <span class="math inline">\(\alpha\)</span> (usualmente 0.05) y obtener valor crítico (teórico) de la prueba correspondiente</p></li>
+<li><p>Cálculo de intervalo de confianza / contraste valores empírico/crítico</p></li>
 </ol>
-<p>Y se recomienda también un descriptivo final para revisar que el procesamiento de cada variable está ok.</p>
-<section id="percepción-de-meritocracia" class="level3">
-<h3 class="anchored" data-anchor-id="percepción-de-meritocracia">4.1 Percepción de meritocracia</h3>
-<p>En ELSOC, las variables que permiten medir la percepción de las personas con respecto al funcionamiento de la meritocracia en Chile son las siguientes:</p>
-<ul>
-<li>[<code>c18_09</code>]: “Grado de acuerdo: Las personas son recompensadas por sus esfuerzos” (1 = Totalmente en desacuerdo; 5 = Totalmente de acuerdo)</li>
-<li>[<code>c18_10</code>]: “Grado de acuerdo: Las personas son recompensadas por su inteligencia” (1 = Totalmente en desacuerdo; 5 = Totalmente de acuerdo)</li>
-</ul>
-<p><em>a. Descriptivo</em></p>
-<p>Para los descriptivos se utilizará la función <code>frq</code>, de la librería <code>sjmisc</code>:</p>
+<p>Esta secuencia de pasos tiene un sentido pedagógico para poder entender cómo finalmente se llega a interpretar el contraste de hipótesis en el paso 5. Pero en análisis de datos, luego de establecer las hipótesis nos vamos directamente al software que nos permite obtener de una vez toda la información de los pasos 2, 3 y 4.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>c18_09)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Grado de acuerdo: Las personas son recompensadas por sus esfuerzos (x) &lt;numeric&gt; 
-# total N=2927 valid N=2927 mean=-3.06 sd=71.66
-
-Value |                          Label |    N | Raw % | Valid % | Cum. %
-------------------------------------------------------------------------
- -999 |          No Responde (no leer) |    4 |  0.14 |    0.14 |   0.14
- -888 |              No Sabe (no leer) |   14 |  0.48 |    0.48 |   0.61
-    1 |       Totalmente en desacuerdo |  357 | 12.20 |   12.20 |  12.81
-    2 |                  En desacuerdo | 1331 | 45.47 |   45.47 |  58.28
-    3 | Ni de acuerdo ni en desacuerdo |  497 | 16.98 |   16.98 |  75.26
-    4 |                     De acuerdo |  646 | 22.07 |   22.07 |  97.34
-    5 |          Totalmente de acuerdo |   78 |  2.66 |    2.66 | 100.00
- &lt;NA&gt; |                           &lt;NA&gt; |    0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>c18_10)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Grado de acuerdo: Las personas son recompensada por su inteligencia (x) &lt;numeric&gt; 
-# total N=2927 valid N=2927 mean=-3.42 sd=74.36
-
-Value |                          Label |    N | Raw % | Valid % | Cum. %
-------------------------------------------------------------------------
- -999 |          No Responde (no leer) |    2 |  0.07 |    0.07 |   0.07
- -888 |              No Sabe (no leer) |   18 |  0.61 |    0.61 |   0.68
-    1 |       Totalmente en desacuerdo |  288 |  9.84 |    9.84 |  10.52
-    2 |                  En desacuerdo | 1163 | 39.73 |   39.73 |  50.26
-    3 | Ni de acuerdo ni en desacuerdo |  559 | 19.10 |   19.10 |  69.35
-    4 |                     De acuerdo |  814 | 27.81 |   27.81 |  97.16
-    5 |          Totalmente de acuerdo |   83 |  2.84 |    2.84 | 100.00
- &lt;NA&gt; |                           &lt;NA&gt; |    0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
-</div>
-</div>
-<p>En ambas variables vemos valores asociados a la opción “No responde” (-999) y “No sabe” (-888), que corresponde definirlos como casos perdidos (en el caso de R, como casos NA). El resto de los valores y etiquetas se encuentran en orden, así que en la recodificiación solo nos haremos cargo de los casos perdidos.</p>
-<p><em>b. Recodificación</em></p>
-<p>Para recodificar utilizamos la función <code>recode</code>, de la librería <code>car</code></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>c18_09 <span class="ot">&lt;-</span> <span class="fu">recode</span>(proc_elsoc<span class="sc">$</span>c18_09, <span class="st">"c(-888,-999)=NA"</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>c18_10 <span class="ot">&lt;-</span> <span class="fu">recode</span>(proc_elsoc<span class="sc">$</span>c18_10, <span class="st">"c(-888,-999)=NA"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><em>c - Etiquetado</em></p>
-<p>Vamos a dar un nombre más sustantivo a las variables con la función <code>rename</code>, de la librería <code>dplyr</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc <span class="ot">&lt;-</span> proc_elsoc <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="st">"mesfuerzo"</span><span class="ot">=</span>c18_09, <span class="co"># meritocracia esfuerzo</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"mtalento"</span> <span class="ot">=</span>c18_10) <span class="co"># meritocracia talento</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Además de cambiar el nombre, queremos cambiar la etiqueta de la variable.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_label</span>(proc_elsoc<span class="sc">$</span>mesfuerzo)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Grado de acuerdo: Las personas son recompensadas por sus esfuerzos"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>mesfuerzo <span class="ot">&lt;-</span> <span class="fu">set_label</span>(<span class="at">x =</span> proc_elsoc<span class="sc">$</span>mesfuerzo,<span class="at">label =</span> <span class="st">"Recompensa: esfuerzo"</span>)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">get_label</span>(proc_elsoc<span class="sc">$</span>mtalento)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Grado de acuerdo: Las personas son recompensada por su inteligencia"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>mtalento  <span class="ot">&lt;-</span> <span class="fu">set_label</span>(<span class="at">x =</span> proc_elsoc<span class="sc">$</span>mtalento, <span class="at">label =</span> <span class="st">"Recompensa: talento"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><em>d.&nbsp;Otros ajustes</em></p>
-<p>Para este caso vamos a crear una variable que sea el promedio de los dos items de meritocracia.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>pmerit <span class="ot">&lt;-</span> (proc_elsoc<span class="sc">$</span>mesfuerzo<span class="sc">+</span>proc_elsoc<span class="sc">$</span>mtalento)<span class="sc">/</span><span class="dv">2</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(proc_elsoc<span class="sc">$</span>pmerit)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
-  1.000   2.000   2.500   2.654   3.500   5.000      29 </code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_label</span>(proc_elsoc<span class="sc">$</span>pmerit)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Recompensa: esfuerzo"</code></pre>
-</div>
-</div>
-<p>Vemos que todavía tiene la etiqueta de la variable “Recompensa: esfuerzo”</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>pmerit  <span class="ot">&lt;-</span> <span class="fu">set_label</span>(<span class="at">x =</span> proc_elsoc<span class="sc">$</span>pmerit, <span class="at">label =</span> <span class="st">"Meritocracia promedio"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><em>Revisión final</em></p>
-<p>Nuevamente un descriptivo de cada variable para confirmar que el procesamiento está ok:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>mesfuerzo)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Recompensa: esfuerzo (x) &lt;numeric&gt; 
-# total N=2927 valid N=2909 mean=2.57 sd=1.05
-
-Value |                          Label |    N | Raw % | Valid % | Cum. %
-------------------------------------------------------------------------
- -999 |          No Responde (no leer) |    0 |  0.00 |    0.00 |   0.00
- -888 |              No Sabe (no leer) |    0 |  0.00 |    0.00 |   0.00
-    1 |       Totalmente en desacuerdo |  357 | 12.20 |   12.27 |  12.27
-    2 |                  En desacuerdo | 1331 | 45.47 |   45.75 |  58.03
-    3 | Ni de acuerdo ni en desacuerdo |  497 | 16.98 |   17.08 |  75.11
-    4 |                     De acuerdo |  646 | 22.07 |   22.21 |  97.32
-    5 |          Totalmente de acuerdo |   78 |  2.66 |    2.68 | 100.00
- &lt;NA&gt; |                           &lt;NA&gt; |   18 |  0.61 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>mtalento)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Recompensa: talento (x) &lt;numeric&gt; 
-# total N=2927 valid N=2907 mean=2.74 sd=1.06
-
-Value |                          Label |    N | Raw % | Valid % | Cum. %
-------------------------------------------------------------------------
- -999 |          No Responde (no leer) |    0 |  0.00 |    0.00 |   0.00
- -888 |              No Sabe (no leer) |    0 |  0.00 |    0.00 |   0.00
-    1 |       Totalmente en desacuerdo |  288 |  9.84 |    9.91 |   9.91
-    2 |                  En desacuerdo | 1163 | 39.73 |   40.01 |  49.91
-    3 | Ni de acuerdo ni en desacuerdo |  559 | 19.10 |   19.23 |  69.14
-    4 |                     De acuerdo |  814 | 27.81 |   28.00 |  97.14
-    5 |          Totalmente de acuerdo |   83 |  2.84 |    2.86 | 100.00
- &lt;NA&gt; |                           &lt;NA&gt; |   20 |  0.68 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>pmerit)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Meritocracia promedio (x) &lt;numeric&gt; 
-# total N=2927 valid N=2898 mean=2.65 sd=0.97
-
-  Value |                          Label |    N | Raw % | Valid % | Cum. %
---------------------------------------------------------------------------
--999.00 |          No Responde (no leer) |    0 |  0.00 |    0.00 |   0.00
--888.00 |              No Sabe (no leer) |    0 |  0.00 |    0.00 |   0.00
-   1.00 |       Totalmente en desacuerdo |  243 |  8.30 |    8.39 |   8.39
-   1.50 |                            1.5 |   79 |  2.70 |    2.73 |  11.11
-   2.00 |                  En desacuerdo | 1041 | 35.57 |   35.92 |  47.03
-   2.50 |                            2.5 |  222 |  7.58 |    7.66 |  54.69
-   3.00 | Ni de acuerdo ni en desacuerdo |  536 | 18.31 |   18.50 |  73.19
-   3.50 |                            3.5 |  169 |  5.77 |    5.83 |  79.02
-   4.00 |                     De acuerdo |  528 | 18.04 |   18.22 |  97.24
-   4.50 |                            4.5 |   38 |  1.30 |    1.31 |  98.55
-   5.00 |          Totalmente de acuerdo |   42 |  1.43 |    1.45 | 100.00
-   &lt;NA&gt; |                           &lt;NA&gt; |   29 |  0.99 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
-</div>
-</div>
-<div class="alert alert-info">
-<p><strong>Sobre generación de índices</strong>: en este caso aplicamos un promedio simple de dos items, pero hay ciertas consideraciones adicionales a tener cuando existen casos perdidos y también cuando son más de 2 items. Para esto, revisar guía sobre <a href="https://multivariada.netlify.app/assignment/11-code/">índices y transformación de variables</a></p>
-</div>
-<section id="educación" class="level4">
-<h4 class="anchored" data-anchor-id="educación">4.2. Educación</h4>
-<ul>
-<li>[<code>m01</code>] = ¿Cuál es su nivel educacional? Indique el tipo de estudio actual (si estudia actualmente) o el último tipo aprobado (si no estudia actualmente).</li>
-</ul>
-<p><em>a. Descriptivo</em></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>m01)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Nivel educacional (x) &lt;numeric&gt; 
-# total N=2927 valid N=2927 mean=4.57 sd=26.34
-
-Value |                                       Label |   N | Raw % | Valid % | Cum. %
-------------------------------------------------------------------------------------
- -999 |                       No Responde (no leer) |   2 |  0.07 |    0.07 |   0.07
- -888 |                           No Sabe (no leer) |   0 |  0.00 |    0.00 |   0.07
-    1 |                                Sin estudios |  37 |  1.26 |    1.26 |   1.33
-    2 |  Educacion Basica o Preparatoria incompleta | 322 | 11.00 |   11.00 |  12.33
-    3 |    Educacion Basica o Preparatoria completa | 297 | 10.15 |   10.15 |  22.48
-    4 |    Educacion Media o Humanidades incompleta | 394 | 13.46 |   13.46 |  35.94
-    5 |      Educacion Media o Humanidades completa | 857 | 29.28 |   29.28 |  65.22
-    6 |                 Tecnica Superior incompleta | 102 |  3.48 |    3.48 |  68.71
-    7 |                   Tecnica Superior completa | 381 | 13.02 |   13.02 |  81.72
-    8 |                    Universitaria incompleta | 186 |  6.35 |    6.35 |  88.08
-    9 |                      Universitaria completa | 303 | 10.35 |   10.35 |  98.43
-   10 | Estudios de posgrado (magister o doctorado) |  46 |  1.57 |    1.57 | 100.00
- &lt;NA&gt; |                                        &lt;NA&gt; |   0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
-</div>
-</div>
-<p><em>b. Recodificación</em></p>
-<ul>
-<li>Datos perdidos:</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>m01 <span class="ot">&lt;-</span> <span class="fu">recode</span>(proc_elsoc<span class="sc">$</span>m01, <span class="st">"c(-888,-999)=NA"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ul>
-<li>Valores</li>
-</ul>
-<p><strong>Recodificación de acuerdo a las categorías <a href="http://uis.unesco.org/sites/default/files/documents/isced-2011-sp.pdf">CINE 2011 (UNESCO)</a></strong></p>
-<pre><code>1.  Sin estudios                                = [CINE 0   ] =  1
-2.  Educacion Basica o Preparatoria incompleta  = [CINE 0   ] =  1
-3.  Educacion Basica o Preparatoria completa    = [CINE 1,2 ] =  2
-4.  Educacion Media o Humanidades incompleta    = [CINE 3   ] =  3
-5.  Educacion Media o Humanidades completa      = [CINE 3   ] =  3
-6.  Tecnico Superior incompleta                 = [CINE 5   ] =  4
-7.  Tecnico Superior completa                   = [CINE 5   ] =  4
-8.  Universitaria incompleta                    = [CINE 6   ] =  5
-9.  Universitaria completa                      = [CINE 6   ] =  6
-10. Estudios de posgrado (magister o doctorado) = [CINE 7, 8] =  6</code></pre>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># recodificacion usando funcion 'recode' de la libreria car</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>m01 <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">recode</span>(proc_elsoc<span class="sc">$</span>m01, <span class="st">"c(1,2)=1; c(3)=2;c(4,5)=3;c(6,7)=4;c(8,9,10)=5"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Comprobar con un nuevo descriptivo:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>m01)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Nivel educacional (x) &lt;numeric&gt; 
-# total N=2927 valid N=2925 mean=3.18 sd=1.21
-
-Value |                                       Label |    N | Raw % | Valid % | Cum. %
--------------------------------------------------------------------------------------
- -999 |                       No Responde (no leer) |    0 |  0.00 |    0.00 |   0.00
- -888 |                           No Sabe (no leer) |    0 |  0.00 |    0.00 |   0.00
-    1 |                                Sin estudios |  359 | 12.27 |   12.27 |  12.27
-    2 |  Educacion Basica o Preparatoria incompleta |  297 | 10.15 |   10.15 |  22.43
-    3 |    Educacion Basica o Preparatoria completa | 1251 | 42.74 |   42.77 |  65.20
-    4 |    Educacion Media o Humanidades incompleta |  483 | 16.50 |   16.51 |  81.71
-    5 |      Educacion Media o Humanidades completa |  535 | 18.28 |   18.29 | 100.00
-    6 |                 Tecnica Superior incompleta |    0 |  0.00 |    0.00 | 100.00
-    7 |                   Tecnica Superior completa |    0 |  0.00 |    0.00 | 100.00
-    8 |                    Universitaria incompleta |    0 |  0.00 |    0.00 | 100.00
-    9 |                      Universitaria completa |    0 |  0.00 |    0.00 | 100.00
-   10 | Estudios de posgrado (magister o doctorado) |    0 |  0.00 |    0.00 | 100.00
- &lt;NA&gt; |                                        &lt;NA&gt; |    2 |  0.07 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
-</div>
-</div>
-<p>Se observa que los valores coinciden con la recodificación (los casos se acumulan entre las categorías 1 y 5), pero las etiquetas ahora no coinciden; se soluciona en el siguiente paso.</p>
-<p><em>c.&nbsp;Etiquetado</em></p>
-<p>Para re-etiquetar valores usamos la función <code>set_labels</code>, de la librería <code>sjlabelled</code></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>m01 <span class="ot">&lt;-</span> <span class="fu">set_labels</span>(proc_elsoc<span class="sc">$</span>m01,</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">labels=</span><span class="fu">c</span>( <span class="st">"Primaria incompleta menos"</span><span class="ot">=</span><span class="dv">1</span>,</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Primaria y secundaria baja"</span><span class="ot">=</span><span class="dv">2</span>,</span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Secundaria alta"</span><span class="ot">=</span><span class="dv">3</span>,</span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Terciaria ciclo corto"</span><span class="ot">=</span><span class="dv">4</span>,</span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Terciaria y Postgrado"</span><span class="ot">=</span><span class="dv">5</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Luego renombramos la variable con un nombre más sustantivo</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc <span class="ot">&lt;-</span> <span class="fu">rename</span>(proc_elsoc,<span class="st">"edcine"</span><span class="ot">=</span>m01)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Además de cambiar el nombre, queremos cambiar la etiqueta de la variable.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_label</span>(proc_elsoc<span class="sc">$</span>edcine)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Nivel educacional"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>edcine <span class="ot">&lt;-</span> <span class="fu">set_label</span>(<span class="at">x =</span> proc_elsoc<span class="sc">$</span>edcine,<span class="at">label =</span> <span class="st">"Educación"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-</section>
-<section id="estatus-subjetivo" class="level3">
-<h3 class="anchored" data-anchor-id="estatus-subjetivo">4.3. Estatus subjetivo</h3>
-<p><em>a. Descriptivo</em></p>
-<ul>
-<li>[<code>d01_01</code>]: “Estatus Social Subjetivo: Donde se ubicaria ud. en la sociedad chilena” (0 = el nivel mas bajo; 10 = el nivel mas alto)</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>d01_01)</span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(proc_elsoc<span class="sc">$</span>d01_01)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Estatus Social Subjetivo: Donde se ubicaria ud. en la sociedad chilena (x) &lt;numeric&gt; 
-# total N=2927 valid N=2927 mean=0.63 sd=57.67
-
-Value |                 Label |   N | Raw % | Valid % | Cum. %
---------------------------------------------------------------
- -999 | No Responde (no leer) |   1 |  0.03 |    0.03 |   0.03
- -888 |     No Sabe (no leer) |  11 |  0.38 |    0.38 |   0.41
-    0 |   0 El nivel mas bajo |  44 |  1.50 |    1.50 |   1.91
-    1 |                     1 |  84 |  2.87 |    2.87 |   4.78
-    2 |                     2 | 207 |  7.07 |    7.07 |  11.86
-    3 |                     3 | 439 | 15.00 |   15.00 |  26.85
-    4 |                     4 | 677 | 23.13 |   23.13 |  49.98
-    5 |                     5 | 975 | 33.31 |   33.31 |  83.29
-    6 |                     6 | 310 | 10.59 |   10.59 |  93.88
-    7 |                     7 | 116 |  3.96 |    3.96 |  97.85
-    8 |                     8 |  37 |  1.26 |    1.26 |  99.11
-    9 |                     9 |   4 |  0.14 |    0.14 |  99.25
-   10 |  10 El nivel mas alto |  22 |  0.75 |    0.75 | 100.00
- &lt;NA&gt; |                  &lt;NA&gt; |   0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;
-     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
--999.0000    3.0000    5.0000    0.6338    5.0000   10.0000 </code></pre>
-</div>
-</div>
-<p><em>b. Recodificación</em></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>d01_01 <span class="ot">&lt;-</span> <span class="fu">recode</span>(proc_elsoc<span class="sc">$</span>d01_01, <span class="st">"c(-888,-999)=NA"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><em>c.&nbsp;Etiquetado</em></p>
-<ul>
-<li>Cambio de nombre de variable a etiqueta más sustantiva ess (estatus social subjetivo)</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc <span class="ot">&lt;-</span> proc_elsoc <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="st">"ess"</span><span class="ot">=</span>d01_01) <span class="co"># estatus social subjetivo</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Además de cambiar el nombre, queremos cambiar la etiqueta de la variable.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_label</span>(proc_elsoc<span class="sc">$</span>ess)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Estatus Social Subjetivo: Donde se ubicaria ud. en la sociedad chilena"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>ess <span class="ot">&lt;-</span> <span class="fu">set_label</span>(<span class="at">x =</span> proc_elsoc<span class="sc">$</span>ess,<span class="at">label =</span> <span class="st">"Estatus Social Subjetivo"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="sexo" class="level3">
-<h3 class="anchored" data-anchor-id="sexo">4.4. Sexo</h3>
-<ul>
-<li>[<code>m0_sexo</code>] = Indicar el sexo del entrevistado.</li>
-</ul>
-<p><em>a. Descriptivo</em></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>m0_sexo)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Sexo del entrevistado (x) &lt;numeric&gt; 
-# total N=2927 valid N=2927 mean=1.60 sd=0.49
-
-Value |  Label |    N | Raw % | Valid % | Cum. %
-------------------------------------------------
-    1 | Hombre | 1163 | 39.73 |   39.73 |  39.73
-    2 |  Mujer | 1764 | 60.27 |   60.27 | 100.00
- &lt;NA&gt; |   &lt;NA&gt; |    0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
-</div>
-</div>
-<p><em>b. Recodificación</em></p>
-<p>En general esta variable no tiene problemas de casos perdidos ni de etiquetas, pero de todas maneras vamos a hacer un cambio de acuerdo a convenciones en análisis de datos, donde por lo general hombres tienen valor 0 y mujeres 1:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>m0_sexo <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">recode</span>(proc_elsoc<span class="sc">$</span>m0_sexo, <span class="st">"1=0;2=1"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><em>c.&nbsp;Etiquetado</em></p>
-<p>Y ahora cambiamos las etiquetas de acuerdo a la recodificación anterior:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>m0_sexo <span class="ot">&lt;-</span> <span class="fu">set_labels</span>(proc_elsoc<span class="sc">$</span>m0_sexo,</span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">labels=</span><span class="fu">c</span>( <span class="st">"Hombre"</span><span class="ot">=</span><span class="dv">0</span>,</span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Mujer"</span><span class="ot">=</span><span class="dv">1</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>También el nombre de la variable a algo más simple:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc <span class="ot">&lt;-</span> <span class="fu">rename</span>(proc_elsoc,<span class="st">"sexo"</span><span class="ot">=</span>m0_sexo)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Además de cambiar el nombre, queremos cambiar la etiqueta de la variable.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_label</span>(proc_elsoc<span class="sc">$</span>sexo)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Sexo del entrevistado"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>sexo <span class="ot">&lt;-</span> <span class="fu">set_label</span>(<span class="at">x =</span> proc_elsoc<span class="sc">$</span>sexo,<span class="at">label =</span> <span class="st">"Sexo"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Revisar con un nuevo descriptivo:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>sexo)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Sexo (x) &lt;numeric&gt; 
-# total N=2927 valid N=2927 mean=0.60 sd=0.49
-
-Value |  Label |    N | Raw % | Valid % | Cum. %
-------------------------------------------------
-    0 | Hombre | 1163 | 39.73 |   39.73 |  39.73
-    1 |  Mujer | 1764 | 60.27 |   60.27 | 100.00
- &lt;NA&gt; |   &lt;NA&gt; |    0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
-</div>
-</div>
-</section>
-<section id="edad" class="level3">
-<h3 class="anchored" data-anchor-id="edad">4.5 Edad</h3>
-<ul>
-<li>[<code>m0_edad</code>] = ¿Cuáles su edad? (años cumplidos).</li>
-</ul>
-<p><em>a. Descriptivo</em></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(proc_elsoc<span class="sc">$</span>m0_edad)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Edad del entrevistado (x) &lt;numeric&gt; 
-# total N=2927 valid N=2927 mean=46.09 sd=15.29
-
-Value |                 Label |  N | Raw % | Valid % | Cum. %
--------------------------------------------------------------
- -999 | No Responde (no leer) |  0 |  0.00 |    0.00 |   0.00
- -888 |     No Sabe (no leer) |  0 |  0.00 |    0.00 |   0.00
-   18 |                    18 | 19 |  0.65 |    0.65 |   0.65
-   19 |                    19 | 32 |  1.09 |    1.09 |   1.74
-   20 |                    20 | 26 |  0.89 |    0.89 |   2.63
-   21 |                    21 | 39 |  1.33 |    1.33 |   3.96
-   22 |                    22 | 49 |  1.67 |    1.67 |   5.64
-   23 |                    23 | 44 |  1.50 |    1.50 |   7.14
-   24 |                    24 | 51 |  1.74 |    1.74 |   8.88
-   25 |                    25 | 46 |  1.57 |    1.57 |  10.45
-   26 |                    26 | 44 |  1.50 |    1.50 |  11.96
-   27 |                    27 | 51 |  1.74 |    1.74 |  13.70
-   28 |                    28 | 58 |  1.98 |    1.98 |  15.68
-   29 |                    29 | 47 |  1.61 |    1.61 |  17.29
-   30 |                    30 | 66 |  2.25 |    2.25 |  19.54
-   31 |                    31 | 48 |  1.64 |    1.64 |  21.18
-   32 |                    32 | 64 |  2.19 |    2.19 |  23.37
-   33 |                    33 | 55 |  1.88 |    1.88 |  25.25
-   34 |                    34 | 55 |  1.88 |    1.88 |  27.13
-   35 |                    35 | 67 |  2.29 |    2.29 |  29.42
-   36 |                    36 | 70 |  2.39 |    2.39 |  31.81
-   37 |                    37 | 46 |  1.57 |    1.57 |  33.38
-   38 |                    38 | 57 |  1.95 |    1.95 |  35.33
-   39 |                    39 | 37 |  1.26 |    1.26 |  36.59
-   40 |                    40 | 57 |  1.95 |    1.95 |  38.54
-   41 |                    41 | 58 |  1.98 |    1.98 |  40.52
-   42 |                    42 | 67 |  2.29 |    2.29 |  42.81
-   43 |                    43 | 54 |  1.84 |    1.84 |  44.65
-   44 |                    44 | 45 |  1.54 |    1.54 |  46.19
-   45 |                    45 | 53 |  1.81 |    1.81 |  48.00
-   46 |                    46 | 77 |  2.63 |    2.63 |  50.63
-   47 |                    47 | 56 |  1.91 |    1.91 |  52.55
-   48 |                    48 | 72 |  2.46 |    2.46 |  55.01
-   49 |                    49 | 53 |  1.81 |    1.81 |  56.82
-   50 |                    50 | 69 |  2.36 |    2.36 |  59.17
-   51 |                    51 | 55 |  1.88 |    1.88 |  61.05
-   52 |                    52 | 69 |  2.36 |    2.36 |  63.41
-   53 |                    53 | 57 |  1.95 |    1.95 |  65.36
-   54 |                    54 | 76 |  2.60 |    2.60 |  67.95
-   55 |                    55 | 72 |  2.46 |    2.46 |  70.41
-   56 |                    56 | 76 |  2.60 |    2.60 |  73.01
-   57 |                    57 | 53 |  1.81 |    1.81 |  74.82
-   58 |                    58 | 57 |  1.95 |    1.95 |  76.77
-   59 |                    59 | 44 |  1.50 |    1.50 |  78.27
-   60 |                    60 | 57 |  1.95 |    1.95 |  80.22
-   61 |                    61 | 33 |  1.13 |    1.13 |  81.35
-   62 |                    62 | 33 |  1.13 |    1.13 |  82.47
-   63 |                    63 | 49 |  1.67 |    1.67 |  84.15
-   64 |                    64 | 39 |  1.33 |    1.33 |  85.48
-   65 |                    65 | 60 |  2.05 |    2.05 |  87.53
-   66 |                    66 | 39 |  1.33 |    1.33 |  88.86
-   67 |                    67 | 39 |  1.33 |    1.33 |  90.19
-   68 |                    68 | 35 |  1.20 |    1.20 |  91.39
-   69 |                    69 | 32 |  1.09 |    1.09 |  92.48
-   70 |                    70 | 37 |  1.26 |    1.26 |  93.75
-   71 |                    71 | 29 |  0.99 |    0.99 |  94.74
-   72 |                    72 | 28 |  0.96 |    0.96 |  95.70
-   73 |                    73 | 42 |  1.43 |    1.43 |  97.13
-   74 |                    74 | 39 |  1.33 |    1.33 |  98.46
-   75 |                    75 | 37 |  1.26 |    1.26 |  99.73
-   77 |                    77 |  1 |  0.03 |    0.03 |  99.76
-   78 |                    78 |  3 |  0.10 |    0.10 |  99.86
-   80 |                    80 |  1 |  0.03 |    0.03 |  99.90
-   81 |                    81 |  1 |  0.03 |    0.03 |  99.93
-   88 |                    88 |  2 |  0.07 |    0.07 | 100.00
- &lt;NA&gt; |                  &lt;NA&gt; |  0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
-</div>
-</div>
-<p><em>b. Recodificación</em>: no es necesario en este caso</p>
-<p><em>c.&nbsp;Etiquetado</em></p>
-<p>Cambio del nombre de la variable a algo más simple:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc <span class="ot">&lt;-</span> <span class="fu">rename</span>(proc_elsoc,<span class="st">"edad"</span><span class="ot">=</span>m0_edad)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Además de cambiar el nombre, queremos cambiar la etiqueta de la variable.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_label</span>(proc_elsoc<span class="sc">$</span>edad)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Edad del entrevistado"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc<span class="sc">$</span>edad <span class="ot">&lt;-</span> <span class="fu">set_label</span>(<span class="at">x =</span> proc_elsoc<span class="sc">$</span>edad,<span class="at">label =</span> <span class="st">"Edad"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><br></p>
-<div class="alert alert-info">
-<p><strong>Recodificación de variables y casos perdidos de un conjunto de variables</strong>: <br></p>
-<ul>
-<li>Recodificación</li>
-</ul>
-<p>Ejemplo: queremos recodificar un conjunto de variables que están medidas en la misma escala (ej: likert 1 a 5 muy en desacuerdo a muy de acuerdo) y pasarlas a dos categorías, donde 1 a 3 es bajo y 4 a 5 es alto:</p>
-<pre><code>data_cohes &lt;-  data_cohes %&gt;% select(var1:var5) %&gt;%
-  rec(rec = "1,2,3=1; 4,5=2",
-  val.labels = c("bajo", "alto"))</code></pre>
-<p>En este caso se generarán en la misma base nuevas variables dicotomizadas con el mismo nombre más un sufijo <code>_r</code>. Si alternativamente se quiere reemplazar la variable recodificada en la misma variable (no recomendado) entonces agregar la opción <code>suffix = ""</code></p>
-<ul>
-<li>Casos perdidos</li>
-</ul>
-<p>Es muy común que una base de datos defina un mismo valor(es) para los casos perdidos, como por ejemplo -99. Para esto se puede utilizar la función <code>set_na</code>, por ejemplo :</p>
-<pre><code>data_cohes &lt;- data_cohes %&gt;%
-  set_na(pcohes01:pcohes12, na = c(-9:-1)) </code></pre>
-<p>donde pcohes01:pcohes12 establece el rango de variables en la base a ser recodificados, y en <code>na=</code> se establecen los valores que pasan a NA.</p>
-</div>
-</section>
-</section>
-<section id="generación-de-base-de-datos-procesada-para-el-análisis" class="level2">
-<h2 class="anchored" data-anchor-id="generación-de-base-de-datos-procesada-para-el-análisis">5. Generación de base de datos procesada para el análisis</h2>
-<p>Antes de guardar la base procesada, revisamos nuevamente todas las variables con una tabla descriptiva general mediante la función <code>stargazer</code> (de la librería homónima)</p>
-<p>Primero vamos a reformatear el objeto proc_elsoc como base de datos (as.data.frame), paso necesario para que sea reconocido como tal por <code>stargazer</code></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>proc_elsoc <span class="ot">&lt;-</span><span class="fu">as.data.frame</span>(proc_elsoc)</span>
-<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(proc_elsoc, <span class="at">type=</span><span class="st">"text"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>test_ej1 <span class="ot">&lt;-</span> <span class="fu">t.test</span>(issp_subset<span class="sc">$</span>educyrs <span class="sc">~</span> issp_subset<span class="sc">$</span>sex, </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">alternative =</span> <span class="st">"greater"</span>,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>test_ej1</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-===========================================
-Statistic   N    Mean  St. Dev.  Min   Max 
--------------------------------------------
-mesfuerzo 2,909 2.573   1.047     1     5  
-mtalento  2,907 2.739   1.060     1     5  
-ess       2,915 4.330   1.567     0    10  
-edcine    2,925 3.184   1.207     1     5  
-sexo      2,927 0.603   0.489     0     1  
-edad      2,927 46.091  15.287   18    88  
-pmerit    2,898 2.654   0.969   1.000 5.000
--------------------------------------------</code></pre>
+    Welch Two Sample t-test
+
+data:  issp_subset$educyrs by issp_subset$sex
+t = 2.3652, df = 1258.1, p-value = 0.009085
+alternative hypothesis: true difference in means between group 1 and group 2 is greater than 0
+95 percent confidence interval:
+ 0.1700565       Inf
+sample estimates:
+mean in group 1 mean in group 2 
+       11.08940        10.53011 </code></pre>
 </div>
 </div>
-<p>Si se desea modificar las columnas que aparecen en la tabla se puede ocupar la opción <code>summary.stat</code>, donde se pueden especificar:</p>
-<ul>
-<li>“max” maximum</li>
-<li>“mean” mean</li>
-<li>“median” median</li>
-<li>“min” minimum</li>
-<li>“n” number of observations</li>
-<li>“p25” 25th percentile</li>
-<li>“p75” 75th percentile</li>
-<li>“sd” standard deviation</li>
-</ul>
-<p>Por ejemplo, si quiero una tabla solo con promedio, n, sd y p75: <code>stargazer(data, type="text", summary.stat = c("mean", "n", "sd", "p75"))</code></p>
-<ul>
-<li>Guardar base de datos procesada: en carpeta local</li>
-</ul>
-<p>::: {.callout-tip}La ruta hacia su carpeta local si está trabajando en windows debería ser algo como “C:/Users/Lenovo/Clases/y aquí nombre del archivo a grabar:::</p>
-<p>El comando para guardar es <code>save</code>:</p>
+<p>También podemos visualizarlo en una tabla más amable.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(proc_elsoc,<span class="at">file =</span> <span class="st">"[ruta hacia carpeta local en su computador]/ELSOC_ess_merit2016.RData"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(flextable)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'flextable' was built under R version 4.4.1</code></pre>
 </div>
-<p>En este caso, seguimos una estructura de carpetas de datos, separando en una carpeta los datos originales, y en otra (proc) los datos procesados:</p>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'flextable'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:kableExtra':
+
+    as_image, footnote</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:purrr':
+
+    compose</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rempsyc)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>stats.table <span class="ot">&lt;-</span> <span class="fu">tidy</span>(test_ej1, <span class="at">conf_int =</span> T)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">nice_table</span>(stats.table, <span class="at">broom =</span> <span class="st">"t.test"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-b1ef06c2{table-layout:auto;}.cl-b1eb55e0{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-b1eb55ea{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-b1eb55eb{font-family:'Times New Roman';font-size:7.2pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;top:3.6pt;}.cl-b1ecf026{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-b1ecf030{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-b1ecffc6{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-b1ecffd0{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-b1ecffd1{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-b1ef06c2"><thead><tr style="overflow-wrap:break-word;"><th class="cl-b1ecffc6"><p class="cl-b1ecf026"><span class="cl-b1eb55e0">Method</span></p></th><th class="cl-b1ecffc6"><p class="cl-b1ecf026"><span class="cl-b1eb55e0">Alternative</span></p></th><th class="cl-b1ecffc6"><p class="cl-b1ecf026"><span class="cl-b1eb55e0">Mean 1</span></p></th><th class="cl-b1ecffc6"><p class="cl-b1ecf026"><span class="cl-b1eb55e0">Mean 2</span></p></th><th class="cl-b1ecffc6"><p class="cl-b1ecf026"><span class="cl-b1eb55ea">M</span><span class="cl-b1eb55eb">1</span><span class="cl-b1eb55e0"> - </span><span class="cl-b1eb55ea">M</span><span class="cl-b1eb55eb">2</span></p></th><th class="cl-b1ecffc6"><p class="cl-b1ecf026"><span class="cl-b1eb55ea">t</span></p></th><th class="cl-b1ecffc6"><p class="cl-b1ecf026"><span class="cl-b1eb55ea">df</span></p></th><th class="cl-b1ecffc6"><p class="cl-b1ecf026"><span class="cl-b1eb55ea">p</span></p></th><th class="cl-b1ecffc6"><p class="cl-b1ecf026"><span class="cl-b1eb55e0">95% CI</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-b1ecffd0"><p class="cl-b1ecf030"><span class="cl-b1eb55e0">Welch Two Sample t-test</span></p></td><td class="cl-b1ecffd1"><p class="cl-b1ecf026"><span class="cl-b1eb55e0">greater</span></p></td><td class="cl-b1ecffd1"><p class="cl-b1ecf026"><span class="cl-b1eb55e0">11.09</span></p></td><td class="cl-b1ecffd1"><p class="cl-b1ecf026"><span class="cl-b1eb55e0">10.53</span></p></td><td class="cl-b1ecffd1"><p class="cl-b1ecf026"><span class="cl-b1eb55e0">0.56</span></p></td><td class="cl-b1ecffd1"><p class="cl-b1ecf026"><span class="cl-b1eb55e0">2.37</span></p></td><td class="cl-b1ecffd1"><p class="cl-b1ecf026"><span class="cl-b1eb55e0">1,258.13</span></p></td><td class="cl-b1ecffd1"><p class="cl-b1ecf026"><span class="cl-b1eb55e0">.009**</span></p></td><td class="cl-b1ecffd1"><p class="cl-b1ecf026"><span class="cl-b1eb55e0">[0.17, Inf]</span></p></td></tr></tbody></table></div>
+</div>
+</div>
+<p>Visualicemos la distribución de esta prueba y su zona de rechazo.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(proc_elsoc,<span class="at">file =</span> <span class="st">"assignment/data/proc/ELSOC_ess_merit2016.RData"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>gginference<span class="sc">::</span><span class="fu">ggttest</span>(test_ej1)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in geom_text(aes(x = ub, y = -0.02), label = round(ub, 3), vjust = 0.3): All aesthetics have length 1, but the data has 10000 rows.
+ℹ Please consider using `annotate()` or provide this layer with data containing
+  a single row.</code></pre>
 </div>
-<div class="alert alert-info">
-<p><strong>De rutas, estructura de carpetas y otros </strong></p>
-<ul>
-<li><p><strong>Encontrando la ruta a carpeta local</strong>: lo más fácil es crear la carpeta donde se desean guardar los datos desde el administrador de archivos del computador. Luego, posicionarse con el cursor sobre la carpeta y seleccionar “Propiedades”, en la ventana emergente debería aparecer la ruta hacia la carpeta en “Ubicación”. Copiar esa ruta y agregar al final el nombre de la carpeta (separada por slash)</p></li>
-<li><p><strong>Sobre los “slashes” (<code>\</code> o <code>/</code>)</strong>: en la ruta las carpetas y el archivo final aparecen separados por slashes, que según el sistema utilizado pueden ser <em>slash</em> (<code>/</code>) o <em>backslash</em> (<code>\</code>). En R por defecto se usa <em>slash</em>, pero en Windows <em>backslash</em>, por lo que si se usa Windows hay que reemplazarlos por <em>backslash</em> o también puede ser por un doble <em>slash</em> (<code>//</code>).</p></li>
-<li><p>Por temas de compatibilidad general, en las rutas se recomienda evitar tildes, eñes, espacios, mayúsculas y guiones bajos (_).</p></li>
-<li><p><strong>Estructura de carpetas</strong>: para mantener el orden se sugiere seguir un protocolo de estructura de carpetas de proyecto, para lo que recomendamos el protocolo <a href="https://lisa-coes.com/ipo-protocol/">IPO</a>, y que se adapta al flujo de trabajo presentado al principio de este práctico. Básicamente son tres carpetas: <strong>input</strong>, <strong>procesamiento</strong>, <strong>output</strong>. En la carpeta input crear la subcarpeta data-orig para guardar datos originales, y data-proc para los procesados. En procesamiento se guardan los archivos de código y en output las tablas y los gráficos.</p></li>
-</ul>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01-practico_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
-</section>
-</section>
-<section id="archivo-de-código" class="level1">
-<h1>Archivo de código</h1>
-<p>El archivo de código R de esta práctica se puede descargar <a href="https://raw.githubusercontent.com/juancarloscastillo/multivariada/master/static/assignment/practica_1.R">aquí</a></p>
-</section>
-<section id="bonus-track-flujo-de-trabajo-reproducible" class="level1">
-<h1>Bonus track: flujo de trabajo reproducible</h1>
-<p>(del curso Ciencia Social Abierta)</p>
-<section id="video" class="level2">
-<h2 class="anchored" data-anchor-id="video">Video</h2>
-<div style="width: 100%; height: 600px; overflow: hidden;">
-<video style="width: 100%;" controls="">
-<source src="https://www.dropbox.com/s/v3cp7scz5vqsp2o/sesion7.webm?raw=1">
-</video>
 </div>
-<section id="foro" class="level1">
-<h1>Foro</h1>
-<script src="https://giscus.app/client.js" data-repo="cursos-metodos-facso/multinivel" data-repo-id="MDEwOlJlcG9zaXRvcnkyMDA3MTE2MDk=" data-category="Q&amp;A" data-category-id="DIC_kwDOC_aduc4CYhjI" data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="es" crossorigin="anonymous" async="">
-</script>
+</div>
+<p><strong>5. Interpretación</strong></p>
+<p>La prueba T que evalúa la diferencia de medias entre la cantidad de años de educación y el sexo sugiere que el efecto es positivo y estadísticamente signficativo (diferencia = 0,56, t = 2,37, p &lt; .05). El valor <span class="math inline">\(p\)</span> indica que la probabilidad de observar una diferencia de esta magnitud, o mayor, bajo la suposición de <span class="math inline">\(H_{0}\)</span> es menor al 5%. Por tanto, con un 95% de confianza, rechazamos la <span class="math inline">\(H_{0}\)</span> ya que existe evidencia a favor de nuestra <span class="math inline">\(H_{A}\)</span> respecto a que la cantidad de años de educación de los hombres es mayor a la cantidad de años de educación de las mujeres.</p>
+</section>
+<section id="ejercicio-2" class="level1">
+<h1>Ejercicio 2</h1>
+<p>En este ejercicio evaluaremos la siguiente pregunta: <em>¿Es el estatus social subjetivo de las mujeres en edad de jubilación menor al estatus social subjetivo de las mujeres que aún no llegan a esta edad?</em> Por ende, usaremos <strong>prueba <span class="math inline">\(t\)</span></strong> para diferencia de medias.</p>
+<p>Utilice la bbdd <code>issp</code> y seleccione las variables <code>sex</code>, <code>age</code> y <code>topbot</code> (estatus social subjetivo). Luego, filtra por <code>sexo == 2</code> para quedarse solo con mujeres y genera una nueva variable <code>jubilada</code> que agrupe en “No” a las menores de 60 años y en “Si” a las mayores de 60 años. Luego, elimina los casos pérdidos con <code>na.omit()</code>.</p>
+<p>Genere una tabla de descriptivos de el estatus social subjetivo (<code>topbot</code>) según si las observaciones están o no en edad de jubilación (<code>topbot</code>). Presente cantidad de observaciones por categoría, media y desviación estándar.</p>
+<p>Una ayuda con el procesamiento (solo esta vez)…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>issp_jub <span class="ot">&lt;-</span> issp <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(sex, age, topbot) <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(sex<span class="sc">==</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">jubilada =</span> <span class="fu">case_when</span>(age<span class="sc">&lt;</span><span class="dv">60</span><span class="sc">~</span><span class="st">"No"</span>,</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>                                age<span class="sc">&gt;=</span><span class="dv">60</span><span class="sc">~</span><span class="st">"Si"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">na.omit</span>()</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>issp_jub <span class="sc">%&gt;%</span> </span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(jubilada) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">Obs. =</span> <span class="fu">n</span>(),</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>                   <span class="at">Media =</span> <span class="fu">mean</span>(topbot, <span class="at">na.rm =</span> T),</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>                   <span class="at">DS =</span> <span class="fu">sd</span>(topbot, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable</span>(<span class="at">format =</span> <span class="st">"markdown"</span>) <span class="co"># hacemos la tabla</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">jubilada</th>
+<th style="text-align: right;">Obs.</th>
+<th style="text-align: right;">Media</th>
+<th style="text-align: right;">DS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">No</td>
+<td style="text-align: right;">653</td>
+<td style="text-align: right;">4.105666</td>
+<td style="text-align: right;">1.608885</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Si</td>
+<td style="text-align: right;">214</td>
+<td style="text-align: right;">3.738318</td>
+<td style="text-align: right;">1.727091</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Ahora vamos con los <a href="https://correlacional.netlify.app/slides/05-inferencia4.html#33">5 pasos de la inferencia</a></p>
+<p><strong>1. Formulación de hipótesis</strong></p>
+<p>El primer paso es traducir nuestra pregunta a una hipótesis estadística contrastable. Para ello: a) elija el tipo de hipótesis a plantear ¿direccional o no direccional? y b) especifique la hipótesis nula (<span class="math inline">\(H_0\)</span>) e hipótesis alternativa (<span class="math inline">\(H_A\)</span>).</p>
+<p><strong>Pasos 2, 3 y 4 de una vez con R</strong></p>
+<p>Siguiendo el ejemplo del Ejercicio 1, utilice el software para generar los estadísticos correspondientes. Contraste sus hipótesis considerando un 95% de confianza.</p>
+<p><strong>5. Interpretación</strong></p>
+<p>Interprete los resultados obtenidos: ¿es posible rechazar la hipótesis planteada?</p>
+<blockquote class="blockquote">
+<p>La prueba T que evalúa la diferencia de medias…</p>
+</blockquote>
+</section>
+<section id="ejercicio-3" class="level1">
+<h1>Ejercicio 3</h1>
+<p>En este ejercicio tomamos de ejemplo una pregunta clásica en ciencias sociales: <em>¿el ingreso de las personas está relacionado a su nivel educacional?</em>. Para responder esta pregunta vamos a usar una prueba <span class="math inline">\(t\)</span> de contraste de medias para dos muestras independientes.</p>
+<p>Esta vez les dejaremos el procesamiento a ustedes. Utilice la bbdd <code>issp</code> y seleccione las variables <code>income</code> (ingreso en deciles) y <code>educyrs</code> y elimine los datos perdidos. Luego, considerando educación media como 13 años, genere una nueva variable <code>educacion</code> que agrupe 13 años o menos en “media o menos” y otro como “educación superior” que agrupe a quienes han estudiado más de 13 años. Luego, genere una tabla de descriptivos de los ingresos en deciles (<code>income</code>) según si las personas cuentan con educación universitaria o no (<code>educacion</code>). Presente cantidad de observaciones por categoría, media y desviación estándar.</p>
+<section id="formulación-de-hipótesis" class="level2">
+<h2 class="anchored" data-anchor-id="formulación-de-hipótesis">1. Formulación de hipótesis</h2>
+<p>El primer paso es traducir nuestra pregunta a una hipótesis estadística contrastable. Para ello: a) elija el tipo de hipótesis a plantear ¿direccional o no direccional? y b) especifique la hipótesis nula (<span class="math inline">\(H_0\)</span>) e hipótesis alternativa (<span class="math inline">\(H_A\)</span>).</p>
+</section>
+<section id="pasos-2-3-y-4-de-una-vez-con-r" class="level2">
+<h2 class="anchored" data-anchor-id="pasos-2-3-y-4-de-una-vez-con-r">Pasos 2, 3 y 4 de una vez con R</h2>
+<p>Siguiendo el ejemplo del Ejercicio 1, utilice el <em>software</em> para generar los estadísticos correspondientes. Contraste sus hipótesis considerando un 95% de confianza y un 99% de confianza. Comente las diferencias en el paso 5.</p>
+</section>
+<section id="interpretación" class="level2">
+<h2 class="anchored" data-anchor-id="interpretación">5. Interpretación</h2>
+<p>Interprete los resultados obtenidos: ¿es posible rechazar la hipótesis nula? ¿a raíz de qué información llega a la conclusión? ¿qué diferencia observa al aplicar la prueba con ambos niveles de confianza (95% y 99%)?</p>
+</section>
+</section>
+<section id="resumen" class="level1">
+<h1>Resumen</h1>
+<p>Hoy pudimos aprender y recordar:</p>
+<ol type="1">
+<li>Qué es la distribución normal</li>
+<li>Cómo calcular e interpretar intervalos de confianza</li>
+<li>Cómo calcular e interpretar test de hipótesis</li>
+</ol>
 
 
 </section>
-</section></section></main></div>
 
-
-
- <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1467,17 +1220,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
- <!-- /content -->
+</div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Content <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2023 by <a href="https://www.jc-castillo.com">Juan Castillo</a> <br> All content licensed under a <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> <i class="fa-brands fa-creative-commons-nc" aria-label="creative-commons-nc"></i> <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)</a></p>
+<p>Content <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> 2025 by <a href="https://www.jc-castillo.com">Juan Castillo</a> <br> All content licensed under a <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> <i class="fa-brands fa-creative-commons-nc" aria-label="creative-commons-nc"></i> <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)</a></p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
     <div class="nav-footer-right">
-<p>Made with <i class="fa-brands fa-r-project" aria-label="r-project"></i> and <a href="https://quarto.org/">Quarto</a><br> <a href="https://github.com/cursos-metodos-facso/multinivel">View the source at <i class="fa-brands fa-github" aria-label="github"></i> GitHub</a></p>
+<p>Made with <i class="fa-brands fa-r-project" aria-label="r-project"></i> and <a href="https://quarto.org/">Quarto</a><br> <a href="https://github.com/cursos-metodos-facso/multinivel-facso">View the source at <i class="fa-brands fa-github" aria-label="github"></i> GitHub</a></p>
 </div>
   </div>
 </footer>

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://multinivel.netlify.app/assignment/01-practico.html</loc>
-    <lastmod>2023-08-16T15:39:33.000Z</lastmod>
+    <loc>https://multinivel.netlify.app/assignment/04-practico.html</loc>
+    <lastmod>2023-09-17T01:27:41.000Z</lastmod>
   </url>
   <url>
-    <loc>https://multinivel.netlify.app/assignment/06-practico.html</loc>
-    <lastmod>2023-10-13T12:56:20.000Z</lastmod>
+    <loc>https://multinivel.netlify.app/assignment/02-practico.html</loc>
+    <lastmod>2023-08-25T12:55:36.000Z</lastmod>
   </url>
   <url>
-    <loc>https://multinivel.netlify.app/assignment/05-practico.html</loc>
-    <lastmod>2023-09-29T11:14:49.000Z</lastmod>
+    <loc>https://multinivel.netlify.app/assignment/03-practico.html</loc>
+    <lastmod>2023-08-31T21:16:58.000Z</lastmod>
   </url>
   <url>
     <loc>https://multinivel.netlify.app/example/cace.html</loc>
@@ -18,7 +18,7 @@
   </url>
   <url>
     <loc>https://multinivel.netlify.app/index.html</loc>
-    <lastmod>2025-03-11T00:28:58.885Z</lastmod>
+    <lastmod>2025-03-13T17:03:52.672Z</lastmod>
   </url>
   <url>
     <loc>https://multinivel.netlify.app/schedule.html</loc>
@@ -109,15 +109,15 @@
     <lastmod>2023-09-15T22:07:16.000Z</lastmod>
   </url>
   <url>
-    <loc>https://multinivel.netlify.app/assignment/03-practico.html</loc>
-    <lastmod>2023-08-31T21:16:58.000Z</lastmod>
+    <loc>https://multinivel.netlify.app/assignment/01-practico.html</loc>
+    <lastmod>2025-03-13T14:06:06.778Z</lastmod>
   </url>
   <url>
-    <loc>https://multinivel.netlify.app/assignment/02-practico.html</loc>
-    <lastmod>2023-08-25T12:55:36.000Z</lastmod>
+    <loc>https://multinivel.netlify.app/assignment/05-practico.html</loc>
+    <lastmod>2023-09-29T11:14:49.000Z</lastmod>
   </url>
   <url>
-    <loc>https://multinivel.netlify.app/assignment/04-practico.html</loc>
-    <lastmod>2023-09-17T01:27:41.000Z</lastmod>
+    <loc>https://multinivel.netlify.app/assignment/06-practico.html</loc>
+    <lastmod>2023-10-13T12:56:20.000Z</lastmod>
   </url>
 </urlset>
