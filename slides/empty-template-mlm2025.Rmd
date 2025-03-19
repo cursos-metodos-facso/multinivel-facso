@@ -1,0 +1,91 @@
+---
+title: "Modelos Multinivel"
+author: ".small[Juan Carlos Castillo <br><br> Departamento de Sociología - UCH / COES <br><br>]"
+date: "1er Sem 2025"
+output:
+  xaringan::moon_reader:
+    css: "css/custom_2020.css"
+    includes:
+      after_body: "insert-logo.html"     
+    lib_dir: libs
+    nature:
+      ratio: '16:9'
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      beforeInit: "css/macros.js"
+    seal: false # esto omite title slide automática
+---
+class: front
+
+
+```{r setup, include=FALSE, cache = FALSE}
+require("knitr")
+pacman::p_load(RefManageR)
+bib <- ReadBib("../files/bib/electivomultinivel.bib", check = FALSE)
+opts_chunk$set(warning=FALSE,
+             message=FALSE,
+             echo=FALSE,
+             cache = FALSE, fig.width=7, fig.height=5.2)
+pacman::p_load(flipbookr, tidyverse)
+```
+
+
+ 
+```{r xaringanExtra, include=FALSE}
+xaringanExtra::use_xaringan_extra(c("tile_view", "animate_css"))
+xaringanExtra::use_scribble()
+```
+
+.pull-left-wide[
+# Modelos multinivel]
+
+.pull-right-narrow[![:scale 85%](img/logo.png)]
+
+## Unidades en contexto
+
+----
+.pull-left[
+
+## Juan Carlos Castillo
+## Sociología FACSO - UChile
+## 1er Sem 2025
+## [.yellow[multinivel-facso.netlify.app]](multinivel-facso.netlify.app)
+]
+    
+
+.pull-right-narrow[
+.center[
+.content-block-gray[
+## Sesión X: 
+# **.white[nombre sesión]**]
+]
+]
+---
+
+layout: true
+class: animated, fadeIn
+
+---
+
+
+---
+class: front
+.pull-left-wide[
+# Modelos multinivel]
+
+.pull-right-narrow[![:scale 85%](img/logo.png)]
+
+## Unidades en contexto
+
+----
+.pull-left[
+
+## Juan Carlos Castillo
+## Sociología FACSO - UChile
+## 1er Sem 2025 
+## [.yellow[multinivel-facso.netlify.app]](https://multinivel-facso.netlify.app)
+]
+    
+
+]

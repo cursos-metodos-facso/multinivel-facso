@@ -1,6 +1,6 @@
 ---
-title: "Presentación"
-date: "2023-08-18"
+title: "2. Repaso regresión"
+date: "2025-03-20"
 lang: es
 website:
   comments:
@@ -8,7 +8,10 @@ website:
       repo: cursos-metodos-facso/multinivel
 ---
 
-En esta sesión se desarrolla el [práctico 1](/assignment/01-practico.html) de manera autónoma.
+<iframe src=/slides/02-regresion.html height="550" width=100% allowfullscreen="true">
+</iframe> 
+
+
 
 
 # Foro

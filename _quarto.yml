@@ -100,8 +100,8 @@ website:
           contents:
             - text: "1: Repaso inferencia"
               file: assignment/01-practico.qmd
-            # - text: "2: Datos y estimaciones en dos niveles"
-            #   file: assignment/02-practico.qmd
+            - text: "2: Datos y estimaciones en dos niveles"
+              file: assignment/02-practico.qmd
             # - text: "3: Estimación modelos multinivel con lmer en R"
             #   file: assignment/03-practico.qmd
             # - text: "4: Combinando datos de distintos niveles"
