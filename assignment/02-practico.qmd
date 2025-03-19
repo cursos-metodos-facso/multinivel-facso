@@ -1,6 +1,6 @@
 ---
 title: "Práctica 2. Datos y estimaciones en dos niveles"
-date: "2023-08-25"
+date: "2025-03-20"
 lang: es
 website:
   comments:
@@ -19,7 +19,9 @@ opts_chunk$set(warning=FALSE,
 
 ## Objetivo de la práctica
 
-Preparar y manipular datos a distintos niveles y comprender la diferencia de estimaciones a distintos niveles.
+- Repasar contenidos relacionados con la estimación de regresión lineal
+
+- Preparar y manipular datos a distintos niveles y comprender la diferencia de estimaciones a distintos niveles.
 
 
 # Instalación de librerías
@@ -76,7 +78,19 @@ names(mlm) # Muestra los nombres de las variables en la base
 ## Seleccionar variables de interes
 
 ```{r}
-mlm=mlm %>% select(minority,female,ses,mathach,size,sector,pracad,disclim,himinty,mnses,schoolid) %>% as.data.frame()
+mlm=mlm %>% select(minority,
+                   female,
+                   ses,
+                   mathach,
+                   size,
+                   sector,
+                   pracad,
+                   disclim,
+                   himinty,
+                   mnses,
+                   schoolid) %>% 
+  as.data.frame()
+
 dim(mlm)
 head(mlm) # Muestra los primeros 10 casos para cada variable
 summary(mlm) # Descriptivos generales (evaluación de datos perdidos)
@@ -96,8 +110,10 @@ stargazer(mlm, title = "Descriptivos generales", type='text')
 stargazer(mlm, title = "Descriptivos generales", type='html')
 ```
 
-:::
+::: callout-note 
+
 Para que se pueda obtener la tabla en html se debe agregar en las opciones del chunk en R `results='asis'`
+
 :::
 
 
@@ -115,12 +131,6 @@ summary(mlm2)
 hist(mlm$mathach, xlim = c(0,30))
 ```
 
-```{r}
-summary(mlm$mathach)
-scatterplot(mlm$mathach ~ mlm$ses, data=mlm, xlab="SES", ylab="Math Score", main="Math on SES", smooth=FALSE)
-
-```
-
 ## Matriz de correlaciones de un subset de variables
 
 ```{r}
@@ -128,6 +138,152 @@ cormat=mlm %>% select(mathach,ses,sector,size) %>% cor()
 round(cormat, digits=2)
 corrplot.mixed(cormat)
 ```
+
+# Repaso de regresión lineal
+
+## Medias condicionales
+
+Antes de avanzar desde la correlación al método de regresión es importante conocer el concepto de **media condicional**.
+
+Imaginemos un juego de tacataca con dos variables: cantidad de juegos previos y puntos obtenidos en un partido. En estas variables, el promedio de puntos es 4. Es decir, si conocemos a algún individuo que pertence al grupo de “datos”, sabemos que su puntaje se encuentra probablemente cercano a 4. ¿Podemos mejorar nuestra estimación utilizando el puntaje de X? Si el sujeto nos dice que ha jugado antes 6 veces, probablemente vamos a estimar un puntaje superior de puntos, tal vez más cercano a 6.
+
+Lo que estamos haciendo es utilizar la información que conocemos de X para dar una estimación de Y, que sea más precisa que el promedio bruto.
+
+![](https://version2024--r-data-analisis.netlify.app/practicos/files/img/condmeans.png)
+
+Mirando el gráfico de nube de puntos, sabemos que tres personas han jugado antes una vez, pero una de ellas tuvo 2 puntos, otra 3 y otra 4. Con estos datos podemos calcular la media de Y para X=1, que sería igual a 3. En otras palabras, la media condicional de Y cuando X=1 es 3. Con esto, uno podría calcular la media condicional para cada punto de X y hacer una estimación más precisa de Y. Sin embargo, este proceso todavía no nos permite generalizar más eficientemte la relación entre X e Y.
+
+¿Cuántos puntos (Y) se obtienen según la experiencia previa de juego (X)? Esta pregunta nos conduce al cálculo de una recta que atraviese los puntos y que generalice la relación entre X e Y.
+
+## Residuos
+
+En el gráfico anterior vemos que la línea resume la relación entre X e Y, pero claramente es una simplificación que no abarca toda la variabilidad de los datos.
+
+Por ejemplo, para el sujeto cuya experiencia es haber jugado 1 vez y luego gana 3 puntos, esta línea predice exáctamente su puntaje basada en su experiencia. Sin embargo, el sujeto que ha jugado 3 veces y saca 6 puntos se encuentra más lejos de la línea y por lo tanto esta línea o "modelo predictivo" no representa tan bien su puntaje. A esto se refieren los *residuos*, que es la diferencia entre el valor predicho (o $\widehat{Y}$) y el observado $Y$, siendo los valores predichos de Y los que pasan por la recta a la altura de cada valor de X. Por lo tanto, la mejor recta será aquella que minimice al máximo los residuos.
+
+![](https://version2024--r-data-analisis.netlify.app/practicos/files/img/fig2-4woo.png)
+
+El sentido de la recta que resume de mejor manera la relación entre dos variables es que **minimice la suma de todos los residuos**. ¿Cómo realizar este procedimiento?
+
+- Para realizar la suma de los residuos estos se elevan al cuadrado, lo que se denomina **Suma de residuos al cuadrado** o $SS_{residual}$. Se eleva al cuadrado ya que como hay residuos positivos y negativos, unos cancelarían a otros y la suma seía 0, tal como sucede en la formula de la varianza.
+
+- De la infinita cantidad de rectas que se pueden trazar, siempre hay una que tiene un valor menor de $SS_{residual}$. Este procedimiento es el que da nombre al proceso de estimación: mínimos (residuos) cuadrados ordinarios, o *OLS* (Ordinary Least Squares).
+
+¿Cómo funciona esto con nuestro ejemplo?
+
+```{r}
+summary(mlm$mathach)
+scatterplot(mlm$mathach ~ mlm$ses, data=mlm, xlab="SES", ylab="Math Score", main="Math on SES", smooth=FALSE)
+
+```
+
+Con el gráfico anterior podemos notar que, si bien existe una asociación positiva entre el nivel socioeconómico y el logro en la prueba de matemáticas, existe una gran cantidad de 'puntos' que quedan fuera de la recta de regresión (residuos).
+
+## Modelo de regresión y cálculo de parámetros
+
+El modelo de regresión se representa con una ecuación de la recta, o recta de regresión. Esta recta representa los valores predichos para Y según los distintos valores de X:
+
+
+$$
+\widehat{Y} = b_{0} + b_{1}X
+$$ {#eq-reg}
+
+Donde
+
+- $\widehat{Y}$ es el valor estimado/predicho de $Y$
+- $b_{0}$ es el **intercepto** de la recta (el valor de Y cuando X es 0)
+- $b_{1}$ es el **coeficiente de regresión**, que nos dice cuánto aumenta Y por cada punto que aumenta X (pendiente)
+
+## Cálculo de los parámetros del modelo de regresión
+
+$b_{1}$, o comunmente llamado "beta de regresión" se obtiene de la siguiente manera:
+
+$$
+b_{1} = \frac{\text{Cov}(X,Y)}{\text{Var}(X)}
+$$ {#eq-beta}
+
+En términos más suntantivos se puede entender como qué parte de la covariación que hay entre X e Y se relaciona con (la varianza de) X. Especificando la fórmula:
+
+$$
+b_{1} = \frac{\frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{n-1}}{\frac{\sum_{i=1}^{n}(x_i - \bar{x})^2}{n-1}}
+$$ {#eq-beta2}
+
+Y simplificando
+
+$$
+b_{1} = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^{n}(x_i - \bar{x})^2}
+$$ {#eq-beta3}
+
+Como sabemos, la base para todos estos cálculos es el valor de cada variable menos su promedio. Vamos a crear un vector en nuestra base de datos difx=$x-\bar{x}$ y dify=$y-\bar{y}$
+
+```{r}
+mlm$difx=mlm$ses-mean(mlm$ses)
+mlm$dify=mlm$mathach-mean(mlm$mathach)
+```
+
+Y ahora con esto podemos obtener la diferencia de productos cruzados dif_cru=$(x-\bar{x})*(y-\bar{y})$, así como la diferencia de X de su promedio al cuadrado SSx=$(x-\bar{x})^2$
+
+```{r}
+mlm$difcru=mlm$difx*mlm$dify
+mlm$difx2=mlm$difx^2
+```
+
+Y con esto podemos obtener la suma de productos cruzados y la suma de cuadrados de X
+
+```{r}
+sum(mlm$difcru)
+sum(mlm$difx2)
+```
+Reemplazando en la fórmula
+
+$$b_{1}=\frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})} {\sum_{i=1}^{n}(x_i - \bar{x})(x_i - \bar{x})}=\frac{13892.89}{4363.522}=3.18$$
+
+Y con esto podemos obtener el valor de $b_{0}$
+
+$$b_{0}=\bar{Y}-b_{1}\bar{X}$$
+$$b_{0}=12.748-(0.0001 * 3.18)=12.747$$
+
+Completando la ecuación:
+
+$$\bar{Y}=12.747+3.18X$$
+
+Esto nos permite estimar el valor de $Y$ (o su media condicional) basado en el puntaje $X$.
+Por ejemplo, cuál es el valor estimado de $Y$ dado $X=5$?
+
+## Estimación del modelo de regresión simple en **R**
+
+La función para estimar regresión en `R` es `lm` (linear model). Su forma general es:
+
+```
+objeto=lm(dependiente ~ independiente, data=datos)
+```
+
+Donde
+
+- objeto: el nombre (cualquiera) que le damos al objeto donde se guardan los resultados de la estimación
+- dependiente / independiente: los nombres de las variables en los datos
+- data = el nombre del objeto de nuestros datos en R
+
+Ejemplo con nuestros datos:
+
+```{r}
+reg <- lm(mathach~ses, data=mlm)
+```
+
+Con esta operación ya estimamos nuestra primera regresión simple. Para ver la estimación de los parámetros principales (intercepto y pendiente) simplemente ejecutamos el nombre del objeto:
+
+```{r}
+reg
+```
+
+Y obtenemos los valores que calculamos previamente.
+
+Podemos tener un output en un formato más apropiado utilizando la librería stargazer
+
+```{r}
+stargazer(reg, type = "text")
+```
+
 
 # Estimación de regresiones
 
