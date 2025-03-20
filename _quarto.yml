@@ -72,8 +72,8 @@ website:
           contents:
             - text: "Sesión 1"
               file: content/01-content.qmd
-            # - text: "Sesión 2"
-            #   file: content/02-content.qmd
+            - text: "Sesión 2"
+              file: content/02-content.qmd
             # - text: "Sesión 3"
             #   file: content/03-content.qmd
             # - text: "Sesión 4"

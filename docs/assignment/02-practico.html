@@ -104,6 +104,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <meta property="og:title" content="Práctica 2. Datos y estimaciones en dos niveles – Modelos Multinivel">
 <meta property="og:description" content="">
@@ -114,7 +143,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta property="og:image:width" content="521">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -144,7 +173,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Clases</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../assignment/index.html"> 
+    <a class="nav-link active" href="../assignment/index.html" aria-current="page"> 
 <span class="menu-text">Prácticos</span></a>
   </li>  
   <li class="nav-item">
@@ -166,10 +195,67 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignment/01-practico.html">Guías</a></li><li class="breadcrumb-item"><a href="../assignment/02-practico.html">2: Datos y estimaciones en dos niveles</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Sobre prácticos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Instrucciones generales</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Guías</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/01-practico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1: Repaso inferencia</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/02-practico.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">2: Datos y estimaciones en dos niveles</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -188,6 +274,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#tabla-descriptiva-con-stargazer" id="toc-tabla-descriptiva-con-stargazer" class="nav-link" data-scroll-target="#tabla-descriptiva-con-stargazer">Tabla descriptiva con stargazer:</a></li>
   <li><a href="#exploración-visual-de-datos" id="toc-exploración-visual-de-datos" class="nav-link" data-scroll-target="#exploración-visual-de-datos">Exploración visual de datos</a></li>
   <li><a href="#matriz-de-correlaciones-de-un-subset-de-variables" id="toc-matriz-de-correlaciones-de-un-subset-de-variables" class="nav-link" data-scroll-target="#matriz-de-correlaciones-de-un-subset-de-variables">Matriz de correlaciones de un subset de variables</a></li>
+  </ul></li>
+  <li><a href="#repaso-de-regresión-lineal" id="toc-repaso-de-regresión-lineal" class="nav-link" data-scroll-target="#repaso-de-regresión-lineal">Repaso de regresión lineal</a>
+  <ul class="collapse">
+  <li><a href="#medias-condicionales" id="toc-medias-condicionales" class="nav-link" data-scroll-target="#medias-condicionales">Medias condicionales</a></li>
+  <li><a href="#residuos" id="toc-residuos" class="nav-link" data-scroll-target="#residuos">Residuos</a></li>
+  <li><a href="#modelo-de-regresión-y-cálculo-de-parámetros" id="toc-modelo-de-regresión-y-cálculo-de-parámetros" class="nav-link" data-scroll-target="#modelo-de-regresión-y-cálculo-de-parámetros">Modelo de regresión y cálculo de parámetros</a></li>
+  <li><a href="#cálculo-de-los-parámetros-del-modelo-de-regresión" id="toc-cálculo-de-los-parámetros-del-modelo-de-regresión" class="nav-link" data-scroll-target="#cálculo-de-los-parámetros-del-modelo-de-regresión">Cálculo de los parámetros del modelo de regresión</a></li>
+  <li><a href="#estimación-del-modelo-de-regresión-simple-en-r" id="toc-estimación-del-modelo-de-regresión-simple-en-r" class="nav-link" data-scroll-target="#estimación-del-modelo-de-regresión-simple-en-r">Estimación del modelo de regresión simple en <strong>R</strong></a></li>
   </ul></li>
   <li><a href="#estimación-de-regresiones" id="toc-estimación-de-regresiones" class="nav-link" data-scroll-target="#estimación-de-regresiones">Estimación de regresiones</a>
   <ul class="collapse">
@@ -210,7 +304,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1 class="title display-7">Práctica 2. Datos y estimaciones en dos niveles</h1>
 
 <div class="date-block bg-assignment text-white p-2">
-  <p class="date">Correspondiente a la sesión del viernes, 25 de agosto de 2023</p>
+  <p class="date">Correspondiente a la sesión del jueves, 20 de marzo de 2025</p>
 </div>
 </header>
 
@@ -219,7 +313,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Presentación</h1>
 <section id="objetivo-de-la-práctica" class="level2">
 <h2 class="anchored" data-anchor-id="objetivo-de-la-práctica">Objetivo de la práctica</h2>
-<p>Preparar y manipular datos a distintos niveles y comprender la diferencia de estimaciones a distintos niveles.</p>
+<ul>
+<li><p>Repasar contenidos relacionados con la estimación de regresión lineal</p></li>
+<li><p>Preparar y manipular datos a distintos niveles y comprender la diferencia de estimaciones a distintos niveles.</p></li>
+</ul>
 </section>
 </section>
 <section id="instalación-de-librerías" class="level1">
@@ -285,8 +382,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="seleccionar-variables-de-interes" class="level2">
 <h2 class="anchored" data-anchor-id="seleccionar-variables-de-interes">Seleccionar variables de interes</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mlm<span class="ot">=</span>mlm <span class="sc">%&gt;%</span> <span class="fu">select</span>(minority,female,ses,mathach,size,sector,pracad,disclim,himinty,mnses,schoolid) <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(mlm)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mlm<span class="ot">=</span>mlm <span class="sc">%&gt;%</span> <span class="fu">select</span>(minority,</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                   female,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                   ses,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                   mathach,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                   size,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                   sector,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                   pracad,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                   disclim,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>                   himinty,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>                   mnses,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>                   schoolid) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(mlm)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 7185   11</code></pre>
 </div>
@@ -619,7 +728,19 @@ schoolid
 </td>
 </tr>
 </tbody></table>
-<p>::: Para que se pueda obtener la tabla en html se debe agregar en las opciones del chunk en R <code>results='asis'</code> :::</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Para que se pueda obtener la tabla en html se debe agregar en las opciones del chunk en R <code>results='asis'</code></p>
+</div>
+</div>
 <p><strong>Datos perdidos</strong>: crear una nueva base sin missing values (Listwise Deletion) (solo recomendado para objetos que contienen las variables a incluir en el modelo)</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>mlm2<span class="ot">=</span><span class="fu">na.omit</span>(mlm) <span class="co">#Sacar missing data</span></span>
@@ -639,13 +760,20 @@ schoolid
 </div>
 </div>
 </div>
+</section>
+<section id="matriz-de-correlaciones-de-un-subset-de-variables" class="level2">
+<h2 class="anchored" data-anchor-id="matriz-de-correlaciones-de-un-subset-de-variables">Matriz de correlaciones de un subset de variables</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mlm<span class="sc">$</span>mathach)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>cormat<span class="ot">=</span>mlm <span class="sc">%&gt;%</span> <span class="fu">select</span>(mathach,ses,sector,size) <span class="sc">%&gt;%</span> <span class="fu">cor</span>()</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(cormat, <span class="at">digits=</span><span class="dv">2</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
- -2.832   7.275  13.131  12.748  18.317  24.993 </code></pre>
+<pre><code>        mathach   ses sector  size
+mathach    1.00  0.36   0.20 -0.05
+ses        0.36  1.00   0.19 -0.07
+sector     0.20  0.19   1.00 -0.42
+size      -0.05 -0.07  -0.42  1.00</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scatterplot</span>(mlm<span class="sc">$</span>mathach <span class="sc">~</span> mlm<span class="sc">$</span>ses, <span class="at">data=</span>mlm, <span class="at">xlab=</span><span class="st">"SES"</span>, <span class="at">ylab=</span><span class="st">"Math Score"</span>, <span class="at">main=</span><span class="st">"Math on SES"</span>, <span class="at">smooth=</span><span class="cn">FALSE</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot.mixed</span>(cormat)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -655,25 +783,154 @@ schoolid
 </div>
 </div>
 </section>
-<section id="matriz-de-correlaciones-de-un-subset-de-variables" class="level2">
-<h2 class="anchored" data-anchor-id="matriz-de-correlaciones-de-un-subset-de-variables">Matriz de correlaciones de un subset de variables</h2>
+</section>
+<section id="repaso-de-regresión-lineal" class="level1">
+<h1>Repaso de regresión lineal</h1>
+<section id="medias-condicionales" class="level2">
+<h2 class="anchored" data-anchor-id="medias-condicionales">Medias condicionales</h2>
+<p>Antes de avanzar desde la correlación al método de regresión es importante conocer el concepto de <strong>media condicional</strong>.</p>
+<p>Imaginemos un juego de tacataca con dos variables: cantidad de juegos previos y puntos obtenidos en un partido. En estas variables, el promedio de puntos es 4. Es decir, si conocemos a algún individuo que pertence al grupo de “datos”, sabemos que su puntaje se encuentra probablemente cercano a 4. ¿Podemos mejorar nuestra estimación utilizando el puntaje de X? Si el sujeto nos dice que ha jugado antes 6 veces, probablemente vamos a estimar un puntaje superior de puntos, tal vez más cercano a 6.</p>
+<p>Lo que estamos haciendo es utilizar la información que conocemos de X para dar una estimación de Y, que sea más precisa que el promedio bruto.</p>
+<p><img src="https://version2024--r-data-analisis.netlify.app/practicos/files/img/condmeans.png" class="img-fluid"></p>
+<p>Mirando el gráfico de nube de puntos, sabemos que tres personas han jugado antes una vez, pero una de ellas tuvo 2 puntos, otra 3 y otra 4. Con estos datos podemos calcular la media de Y para X=1, que sería igual a 3. En otras palabras, la media condicional de Y cuando X=1 es 3. Con esto, uno podría calcular la media condicional para cada punto de X y hacer una estimación más precisa de Y. Sin embargo, este proceso todavía no nos permite generalizar más eficientemte la relación entre X e Y.</p>
+<p>¿Cuántos puntos (Y) se obtienen según la experiencia previa de juego (X)? Esta pregunta nos conduce al cálculo de una recta que atraviese los puntos y que generalice la relación entre X e Y.</p>
+</section>
+<section id="residuos" class="level2">
+<h2 class="anchored" data-anchor-id="residuos">Residuos</h2>
+<p>En el gráfico anterior vemos que la línea resume la relación entre X e Y, pero claramente es una simplificación que no abarca toda la variabilidad de los datos.</p>
+<p>Por ejemplo, para el sujeto cuya experiencia es haber jugado 1 vez y luego gana 3 puntos, esta línea predice exáctamente su puntaje basada en su experiencia. Sin embargo, el sujeto que ha jugado 3 veces y saca 6 puntos se encuentra más lejos de la línea y por lo tanto esta línea o “modelo predictivo” no representa tan bien su puntaje. A esto se refieren los <em>residuos</em>, que es la diferencia entre el valor predicho (o <span class="math inline">\(\widehat{Y}\)</span>) y el observado <span class="math inline">\(Y\)</span>, siendo los valores predichos de Y los que pasan por la recta a la altura de cada valor de X. Por lo tanto, la mejor recta será aquella que minimice al máximo los residuos.</p>
+<p><img src="https://version2024--r-data-analisis.netlify.app/practicos/files/img/fig2-4woo.png" class="img-fluid"></p>
+<p>El sentido de la recta que resume de mejor manera la relación entre dos variables es que <strong>minimice la suma de todos los residuos</strong>. ¿Cómo realizar este procedimiento?</p>
+<ul>
+<li><p>Para realizar la suma de los residuos estos se elevan al cuadrado, lo que se denomina <strong>Suma de residuos al cuadrado</strong> o <span class="math inline">\(SS_{residual}\)</span>. Se eleva al cuadrado ya que como hay residuos positivos y negativos, unos cancelarían a otros y la suma seía 0, tal como sucede en la formula de la varianza.</p></li>
+<li><p>De la infinita cantidad de rectas que se pueden trazar, siempre hay una que tiene un valor menor de <span class="math inline">\(SS_{residual}\)</span>. Este procedimiento es el que da nombre al proceso de estimación: mínimos (residuos) cuadrados ordinarios, o <em>OLS</em> (Ordinary Least Squares).</p></li>
+</ul>
+<p>¿Cómo funciona esto con nuestro ejemplo?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>cormat<span class="ot">=</span>mlm <span class="sc">%&gt;%</span> <span class="fu">select</span>(mathach,ses,sector,size) <span class="sc">%&gt;%</span> <span class="fu">cor</span>()</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(cormat, <span class="at">digits=</span><span class="dv">2</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mlm<span class="sc">$</span>mathach)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>        mathach   ses sector  size
-mathach    1.00  0.36   0.20 -0.05
-ses        0.36  1.00   0.19 -0.07
-sector     0.20  0.19   1.00 -0.42
-size      -0.05 -0.07  -0.42  1.00</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ -2.832   7.275  13.131  12.748  18.317  24.993 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot.mixed</span>(cormat)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scatterplot</span>(mlm<span class="sc">$</span>mathach <span class="sc">~</span> mlm<span class="sc">$</span>ses, <span class="at">data=</span>mlm, <span class="at">xlab=</span><span class="st">"SES"</span>, <span class="at">ylab=</span><span class="st">"Math Score"</span>, <span class="at">main=</span><span class="st">"Math on SES"</span>, <span class="at">smooth=</span><span class="cn">FALSE</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
 <p><img src="02-practico_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
+</div>
+</div>
+<p>Con el gráfico anterior podemos notar que, si bien existe una asociación positiva entre el nivel socioeconómico y el logro en la prueba de matemáticas, existe una gran cantidad de ‘puntos’ que quedan fuera de la recta de regresión (residuos).</p>
+</section>
+<section id="modelo-de-regresión-y-cálculo-de-parámetros" class="level2">
+<h2 class="anchored" data-anchor-id="modelo-de-regresión-y-cálculo-de-parámetros">Modelo de regresión y cálculo de parámetros</h2>
+<p>El modelo de regresión se representa con una ecuación de la recta, o recta de regresión. Esta recta representa los valores predichos para Y según los distintos valores de X:</p>
+<p><span id="eq-reg"><span class="math display">\[
+\widehat{Y} = b_{0} + b_{1}X
+\tag{1}\]</span></span></p>
+<p>Donde</p>
+<ul>
+<li><span class="math inline">\(\widehat{Y}\)</span> es el valor estimado/predicho de <span class="math inline">\(Y\)</span></li>
+<li><span class="math inline">\(b_{0}\)</span> es el <strong>intercepto</strong> de la recta (el valor de Y cuando X es 0)</li>
+<li><span class="math inline">\(b_{1}\)</span> es el <strong>coeficiente de regresión</strong>, que nos dice cuánto aumenta Y por cada punto que aumenta X (pendiente)</li>
+</ul>
+</section>
+<section id="cálculo-de-los-parámetros-del-modelo-de-regresión" class="level2">
+<h2 class="anchored" data-anchor-id="cálculo-de-los-parámetros-del-modelo-de-regresión">Cálculo de los parámetros del modelo de regresión</h2>
+<p><span class="math inline">\(b_{1}\)</span>, o comunmente llamado “beta de regresión” se obtiene de la siguiente manera:</p>
+<p><span id="eq-beta"><span class="math display">\[
+b_{1} = \frac{\text{Cov}(X,Y)}{\text{Var}(X)}
+\tag{2}\]</span></span></p>
+<p>En términos más suntantivos se puede entender como qué parte de la covariación que hay entre X e Y se relaciona con (la varianza de) X. Especificando la fórmula:</p>
+<p><span id="eq-beta2"><span class="math display">\[
+b_{1} = \frac{\frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{n-1}}{\frac{\sum_{i=1}^{n}(x_i - \bar{x})^2}{n-1}}
+\tag{3}\]</span></span></p>
+<p>Y simplificando</p>
+<p><span id="eq-beta3"><span class="math display">\[
+b_{1} = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^{n}(x_i - \bar{x})^2}
+\tag{4}\]</span></span></p>
+<p>Como sabemos, la base para todos estos cálculos es el valor de cada variable menos su promedio. Vamos a crear un vector en nuestra base de datos difx=<span class="math inline">\(x-\bar{x}\)</span> y dify=<span class="math inline">\(y-\bar{y}\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>mlm<span class="sc">$</span>difx<span class="ot">=</span>mlm<span class="sc">$</span>ses<span class="sc">-</span><span class="fu">mean</span>(mlm<span class="sc">$</span>ses)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>mlm<span class="sc">$</span>dify<span class="ot">=</span>mlm<span class="sc">$</span>mathach<span class="sc">-</span><span class="fu">mean</span>(mlm<span class="sc">$</span>mathach)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Y ahora con esto podemos obtener la diferencia de productos cruzados dif_cru=<span class="math inline">\((x-\bar{x})*(y-\bar{y})\)</span>, así como la diferencia de X de su promedio al cuadrado SSx=<span class="math inline">\((x-\bar{x})^2\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>mlm<span class="sc">$</span>difcru<span class="ot">=</span>mlm<span class="sc">$</span>difx<span class="sc">*</span>mlm<span class="sc">$</span>dify</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>mlm<span class="sc">$</span>difx2<span class="ot">=</span>mlm<span class="sc">$</span>difx<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Y con esto podemos obtener la suma de productos cruzados y la suma de cuadrados de X</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(mlm<span class="sc">$</span>difcru)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 13892.89</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(mlm<span class="sc">$</span>difx2)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4363.522</code></pre>
+</div>
+</div>
+<p>Reemplazando en la fórmula</p>
+<p><span class="math display">\[b_{1}=\frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})} {\sum_{i=1}^{n}(x_i - \bar{x})(x_i - \bar{x})}=\frac{13892.89}{4363.522}=3.18\]</span></p>
+<p>Y con esto podemos obtener el valor de <span class="math inline">\(b_{0}\)</span></p>
+<p><span class="math display">\[b_{0}=\bar{Y}-b_{1}\bar{X}\]</span> <span class="math display">\[b_{0}=12.748-(0.0001 * 3.18)=12.747\]</span></p>
+<p>Completando la ecuación:</p>
+<p><span class="math display">\[\bar{Y}=12.747+3.18X\]</span></p>
+<p>Esto nos permite estimar el valor de <span class="math inline">\(Y\)</span> (o su media condicional) basado en el puntaje <span class="math inline">\(X\)</span>. Por ejemplo, cuál es el valor estimado de <span class="math inline">\(Y\)</span> dado <span class="math inline">\(X=5\)</span>?</p>
+</section>
+<section id="estimación-del-modelo-de-regresión-simple-en-r" class="level2">
+<h2 class="anchored" data-anchor-id="estimación-del-modelo-de-regresión-simple-en-r">Estimación del modelo de regresión simple en <strong>R</strong></h2>
+<p>La función para estimar regresión en <code>R</code> es <code>lm</code> (linear model). Su forma general es:</p>
+<pre><code>objeto=lm(dependiente ~ independiente, data=datos)</code></pre>
+<p>Donde</p>
+<ul>
+<li>objeto: el nombre (cualquiera) que le damos al objeto donde se guardan los resultados de la estimación</li>
+<li>dependiente / independiente: los nombres de las variables en los datos</li>
+<li>data = el nombre del objeto de nuestros datos en R</li>
+</ul>
+<p>Ejemplo con nuestros datos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>reg <span class="ot">&lt;-</span> <span class="fu">lm</span>(mathach<span class="sc">~</span>ses, <span class="at">data=</span>mlm)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Con esta operación ya estimamos nuestra primera regresión simple. Para ver la estimación de los parámetros principales (intercepto y pendiente) simplemente ejecutamos el nombre del objeto:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>reg</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = mathach ~ ses, data = mlm)
+
+Coefficients:
+(Intercept)          ses  
+     12.747        3.184  </code></pre>
+</div>
+</div>
+<p>Y obtenemos los valores que calculamos previamente.</p>
+<p>Podemos tener un output en un formato más apropiado utilizando la librería stargazer</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(reg, <span class="at">type =</span> <span class="st">"text"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+===============================================
+                        Dependent variable:    
+                    ---------------------------
+                              mathach          
+-----------------------------------------------
+ses                          3.184***          
+                              (0.097)          
+                                               
+Constant                     12.747***         
+                              (0.076)          
+                                               
+-----------------------------------------------
+Observations                   7,185           
+R2                             0.130           
+Adjusted R2                    0.130           
+Residual Std. Error      6.416 (df = 7183)     
+F Statistic         1,074.695*** (df = 1; 7183)
+===============================================
+Note:               *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
 </div>
 </div>
 </section>
@@ -683,12 +940,12 @@ size      -0.05 -0.07  -0.42  1.00</code></pre>
 <section id="nivel-1" class="level2">
 <h2 class="anchored" data-anchor-id="nivel-1">Nivel 1</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>reg1<span class="ot">&lt;-</span> <span class="fu">lm</span>(mathach<span class="sc">~</span><span class="dv">1</span>, <span class="at">data=</span>mlm)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>reg2<span class="ot">&lt;-</span> <span class="fu">lm</span>(mathach<span class="sc">~</span>ses, <span class="at">data=</span>mlm)</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>reg3<span class="ot">&lt;-</span> <span class="fu">lm</span>(mathach<span class="sc">~</span>ses<span class="sc">+</span>female, <span class="at">data=</span>mlm)</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">&lt;-</span> <span class="fu">lm</span>(mathach<span class="sc">~</span>ses<span class="sc">+</span>female<span class="sc">+</span>sector, <span class="at">data=</span>mlm)</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>reg5<span class="ot">&lt;-</span> <span class="fu">lm</span>(mathach<span class="sc">~</span>ses<span class="sc">+</span>female<span class="sc">+</span>sector<span class="sc">+</span>minority, <span class="at">data=</span>mlm)</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg5)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>reg1<span class="ot">&lt;-</span> <span class="fu">lm</span>(mathach<span class="sc">~</span><span class="dv">1</span>, <span class="at">data=</span>mlm)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>reg2<span class="ot">&lt;-</span> <span class="fu">lm</span>(mathach<span class="sc">~</span>ses, <span class="at">data=</span>mlm)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>reg3<span class="ot">&lt;-</span> <span class="fu">lm</span>(mathach<span class="sc">~</span>ses<span class="sc">+</span>female, <span class="at">data=</span>mlm)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>reg4<span class="ot">&lt;-</span> <span class="fu">lm</span>(mathach<span class="sc">~</span>ses<span class="sc">+</span>female<span class="sc">+</span>sector, <span class="at">data=</span>mlm)</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>reg5<span class="ot">&lt;-</span> <span class="fu">lm</span>(mathach<span class="sc">~</span>ses<span class="sc">+</span>female<span class="sc">+</span>sector<span class="sc">+</span>minority, <span class="at">data=</span>mlm)</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg5)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -714,7 +971,7 @@ F-statistic: 440.1 on 4 and 7180 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(reg5, <span class="at">title =</span> <span class="st">"Regresión datos individuales"</span>, <span class="at">type=</span><span class="st">'text'</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(reg5, <span class="at">title =</span> <span class="st">"Regresión datos individuales"</span>, <span class="at">type=</span><span class="st">'text'</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Regresión datos individuales
@@ -752,19 +1009,19 @@ Note:               *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
 <section id="diagnóstico-de-residuos-con-librería-car" class="level2">
 <h2 class="anchored" data-anchor-id="diagnóstico-de-residuos-con-librería-car">Diagnóstico de residuos (con librería <code>car</code>)</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">influenceIndexPlot</span>(reg5, <span class="at">vars=</span><span class="fu">c</span>(<span class="st">"Cook"</span>, <span class="st">"Studentized"</span>, <span class="st">"hat"</span>), <span class="at">id.n=</span><span class="dv">5</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">influenceIndexPlot</span>(reg5, <span class="at">vars=</span><span class="fu">c</span>(<span class="st">"Cook"</span>, <span class="st">"Studentized"</span>, <span class="st">"hat"</span>), <span class="at">id.n=</span><span class="dv">5</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02-practico_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="02-practico_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">influencePlot</span>(reg5, <span class="at">id.n=</span><span class="dv">3</span>) <span class="co"># el tama~no de los circulos se refiere a la D de Cook</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">influencePlot</span>(reg5, <span class="at">id.n=</span><span class="dv">3</span>) <span class="co"># el tama~no de los circulos se refiere a la D de Cook</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02-practico_files/figure-html/unnamed-chunk-13-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="02-practico_files/figure-html/unnamed-chunk-19-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -797,15 +1054,15 @@ Note:               *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
 <li><p>agregamos (colapsamos) todas <code>summarise_all</code> por el promedio <code>funs(mean)</code></p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>agg_mlm<span class="ot">=</span>mlm <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(schoolid) <span class="sc">%&gt;%</span> <span class="fu">summarise_all</span>(<span class="fu">funs</span>(mean)) <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(agg_mlm, <span class="at">type =</span> <span class="st">"text"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>agg_mlm<span class="ot">=</span>mlm <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(schoolid) <span class="sc">%&gt;%</span> <span class="fu">summarise_all</span>(<span class="fu">funs</span>(mean)) <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(agg_mlm, <span class="at">type =</span> <span class="st">"text"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="comparando-regresiones" class="level2">
 <h2 class="anchored" data-anchor-id="comparando-regresiones">Comparando regresiones</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>reg5_agg<span class="ot">&lt;-</span> <span class="fu">lm</span>(mathach<span class="sc">~</span>ses<span class="sc">+</span>female<span class="sc">+</span>sector<span class="sc">+</span>minority, <span class="at">data=</span>agg_mlm)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(reg5,reg5_agg, <span class="at">title =</span> <span class="st">"Comparación de modelos"</span>,<span class="at">column.labels=</span><span class="fu">c</span>(<span class="st">"Individual"</span>,<span class="st">"Agregado"</span>), <span class="at">type =</span><span class="st">'text'</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>reg5_agg<span class="ot">&lt;-</span> <span class="fu">lm</span>(mathach<span class="sc">~</span>ses<span class="sc">+</span>female<span class="sc">+</span>sector<span class="sc">+</span>minority, <span class="at">data=</span>agg_mlm)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(reg5,reg5_agg, <span class="at">title =</span> <span class="st">"Comparación de modelos"</span>,<span class="at">column.labels=</span><span class="fu">c</span>(<span class="st">"Individual"</span>,<span class="st">"Agregado"</span>), <span class="at">type =</span><span class="st">'text'</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Comparación de modelos

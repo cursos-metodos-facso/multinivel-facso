@@ -603,9 +603,15 @@ $$1=\frac{SS_{reg}}{SS_{tot}}+\frac{SS_{error}}{SS_{tot}}$$
 
 $$\frac{SS_{reg}}{SS_{tot}}= 1- \frac{SS_{error}}{SS_{tot}}=R^2$$
 
-<br>
+---
+.pull-left[
+## Una parte de la variación de Y se relaciona con la variación de X: $R^2$ 
+]
 
-### .center[¿Qué quiere decir esto?]
+.pull-right[
+![](images/plotreg.png)
+]
+
 
 ---
 # Sobre relación entre correlación y regresión (simple)
