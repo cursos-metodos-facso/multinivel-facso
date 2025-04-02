@@ -1,6 +1,6 @@
 ---
 title: "Práctica 3. Estimación modelos multinivel con lmer en R"
-date: "2023-09-01"
+date: "2025-04-03"
 lang: es
 website:
   comments:
@@ -19,8 +19,8 @@ opts_chunk$set(warning=FALSE,
 
 En esta práctica:
 
-- correlación intra clase
-- modelos con efectos aleatorios
+- Correlación intra clase
+- Modelos con efectos aleatorios
 
 
 # 1. Cargar/instalar librerías
@@ -40,7 +40,7 @@ Para esta práctica utilizaremos la librería <tt>`lme4`</tt>, en particular la 
 
 # 2. Leer datos base High School and Beyond (HSB)**
 
-Como en sesión anterior
+Como en la sesión anterior
 
 ```{r echo=TRUE}
 mlm = read_dta("http://www.stata-press.com/data/mlmus3/hsb.dta")
@@ -69,7 +69,9 @@ Variables relevantes para ejercicios:
 Seleccionar variables
 
 ```{r}
-mlm=mlm %>% select(minority,female,ses,mathach,size,sector,pracad,disclim,himinty,mnses,schoolid) %>% as.data.frame()
+mlm = mlm %>% 
+  select(minority,female,ses,mathach,size,sector,pracad,disclim,himinty,mnses,schoolid) %>%
+  as.data.frame()
 names(mlm)
 ```
 
@@ -77,7 +79,6 @@ names(mlm)
 #Tabla estadisticos descriptivos
 stargazer(mlm,title="Estadísticos descriptivos", type = "text")
 ```
-
 
 # 3. Modelos 
 
@@ -89,8 +90,7 @@ summary(results_0)
 screenreg(results_0) # de library texreg
 ```
 
-
-En este modelo es posible identificar $\gamma_{00}$ (intercept - fixed effects), así como también los **componentes la varianza**:
+En este modelo es posible identificar $\gamma_{00}$ (intercept - fixed effects), así como también los **componentes de la varianza**:
 
 - $\tau_{00}$ (Var:id) 
 - $\sigma^2$ (Var:Residual). 
@@ -99,6 +99,12 @@ Con estos últimos coeficientes aleatorios es posible calcular la correlación i
 
 Correlación intra-clase = ICC = $\rho=\frac{\tau_{00}}{\tau_{00}+\sigma^2}$
 
+::: callout-note
+
+La correlación intraclase indica la proporción de la varianza de la variable dependiente que se asocia a la pertenencia a unidades de nivel 2
+
+:::
+
 ```{r}
 # Cálculo directo en R:
 8.614/(8.614+39.148) # calculo ICC 
@@ -106,6 +112,8 @@ Correlación intra-clase = ICC = $\rho=\frac{\tau_{00}}{\tau_{00}+\sigma^2}$
 # O de manera directa con funcion ICC de reghelper
 reghelper::ICC(results_0)
 ```
+
+En este ejemplo, el 18% de la varianza de la variable dependiente se asocia a la pertenencia a una escuela
 
 ## Modelo 1: Predictores de nivel individual
 
@@ -127,25 +135,6 @@ screenreg(results_2)
 results_3 = lmer(mathach ~ 1 + ses + female + sector + mnses + (1 | schoolid), data = mlm)
 screenreg(results_3)
 ```
-
-## Modelo 4: Pendiente aleatoria
-
-```{r}
-results_4 = lmer(mathach ~ 1 + ses + female + mnses + sector + (1 + ses | schoolid), data = mlm)
-screenreg(results_4)
-```
-
-## Modelo 5: Interacción entre niveles
-
-$mathach= \gamma_{00}(intercepto)+\gamma_{10}ses_{ij}+
-$\gamma_{01}sector_j+\gamma_{11}ses_{ij} *sector{j}+$
-$\mu_{0j}(intercepto)+\mu_{1j}ses_{ij}+ r_{ij}$
-
-```{r}
-results_5 = lmer(mathach ~ 1 + female + ses*sector + mnses + (1 + ses | schoolid), data = mlm)
-screenreg(results_5)
-```
-
 
 # Comparación individual, agregado y multinivel
 
