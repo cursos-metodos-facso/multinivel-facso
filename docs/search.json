@@ -60,35 +60,60 @@
     "href": "assignment/03-practico.html",
     "title": "Práctica 3. Estimación modelos multinivel con lmer en R",
     "section": "",
-    "text": "En esta práctica:"
+    "text": "En esta práctica:",
+    "crumbs": [
+      "Prácticos",
+      "Guías",
+      "3: Estimación modelos multinivel con lmer en R"
+    ]
   },
   {
     "objectID": "assignment/03-practico.html#modelo-0-null-model",
     "href": "assignment/03-practico.html#modelo-0-null-model",
     "title": "Práctica 3. Estimación modelos multinivel con lmer en R",
     "section": "Modelo 0: Null model",
-    "text": "Modelo 0: Null model\n\nresults_0 = lmer(mathach ~ 1 + (1 | schoolid), data = mlm)\nsummary(results_0)\n\nLinear mixed model fit by REML ['lmerMod']\nFormula: mathach ~ 1 + (1 | schoolid)\n   Data: mlm\n\nREML criterion at convergence: 47116.8\n\nScaled residuals: \n    Min      1Q  Median      3Q     Max \n-3.0631 -0.7539  0.0267  0.7606  2.7426 \n\nRandom effects:\n Groups   Name        Variance Std.Dev.\n schoolid (Intercept)  8.614   2.935   \n Residual             39.148   6.257   \nNumber of obs: 7185, groups:  schoolid, 160\n\nFixed effects:\n            Estimate Std. Error t value\n(Intercept)  12.6370     0.2444   51.71\n\nscreenreg(results_0) # de library texreg\n\n\n========================================\n                           Model 1      \n----------------------------------------\n(Intercept)                    12.64 ***\n                               (0.24)   \n----------------------------------------\nAIC                         47122.79    \nBIC                         47143.43    \nLog Likelihood             -23558.40    \nNum. obs.                    7185       \nNum. groups: schoolid         160       \nVar: schoolid (Intercept)       8.61    \nVar: Residual                  39.15    \n========================================\n*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05\n\n\nEn este modelo es posible identificar \\(\\gamma_{00}\\) (intercept - fixed effects), así como también los componentes la varianza:\n\n\\(\\tau_{00}\\) (Var:id)\n\\(\\sigma^2\\) (Var:Residual).\n\nCon estos últimos coeficientes aleatorios es posible calcular la correlación intraclase (\\(\\rho\\)).\nCorrelación intra-clase = ICC = \\(\\rho=\\frac{\\tau_{00}}{\\tau_{00}+\\sigma^2}\\)\n\n# Cálculo directo en R:\n8.614/(8.614+39.148) # calculo ICC \n\n[1] 0.1803526\n\n# O de manera directa con funcion ICC de reghelper\nreghelper::ICC(results_0)\n\n[1] 0.1803518"
+    "text": "Modelo 0: Null model\n\nresults_0 = lmer(mathach ~ 1 + (1 | schoolid), data = mlm)\nsummary(results_0)\n\nLinear mixed model fit by REML ['lmerMod']\nFormula: mathach ~ 1 + (1 | schoolid)\n   Data: mlm\n\nREML criterion at convergence: 47116.8\n\nScaled residuals: \n    Min      1Q  Median      3Q     Max \n-3.0631 -0.7539  0.0267  0.7606  2.7426 \n\nRandom effects:\n Groups   Name        Variance Std.Dev.\n schoolid (Intercept)  8.614   2.935   \n Residual             39.148   6.257   \nNumber of obs: 7185, groups:  schoolid, 160\n\nFixed effects:\n            Estimate Std. Error t value\n(Intercept)  12.6370     0.2444   51.71\n\nscreenreg(results_0) # de library texreg\n\n\n========================================\n                           Model 1      \n----------------------------------------\n(Intercept)                    12.64 ***\n                               (0.24)   \n----------------------------------------\nAIC                         47122.79    \nBIC                         47143.43    \nLog Likelihood             -23558.40    \nNum. obs.                    7185       \nNum. groups: schoolid         160       \nVar: schoolid (Intercept)       8.61    \nVar: Residual                  39.15    \n========================================\n*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05\n\n\nEn este modelo es posible identificar \\(\\gamma_{00}\\) (intercept - fixed effects), así como también los componentes de la varianza:\n\n\\(\\tau_{00}\\) (Var:id)\n\\(\\sigma^2\\) (Var:Residual).\n\nCon estos últimos coeficientes aleatorios es posible calcular la correlación intraclase (\\(\\rho\\)).\nCorrelación intra-clase = ICC = \\(\\rho=\\frac{\\tau_{00}}{\\tau_{00}+\\sigma^2}\\)\n\n\n\n\n\n\nNota\n\n\n\nLa correlación intraclase indica la proporción de la varianza de la variable dependiente que se asocia a la pertenencia a unidades de nivel 2\n\n\n\n# Cálculo directo en R:\n8.614/(8.614+39.148) # calculo ICC \n\n[1] 0.1803526\n\n# O de manera directa con funcion ICC de reghelper\nreghelper::ICC(results_0)\n\n[1] 0.1803518\n\n\nEn este ejemplo, el 18% de la varianza de la variable dependiente se asocia a la pertenencia a una escuela",
+    "crumbs": [
+      "Prácticos",
+      "Guías",
+      "3: Estimación modelos multinivel con lmer en R"
+    ]
   },
   {
     "objectID": "assignment/03-practico.html#modelo-1-predictores-de-nivel-individual",
     "href": "assignment/03-practico.html#modelo-1-predictores-de-nivel-individual",
     "title": "Práctica 3. Estimación modelos multinivel con lmer en R",
     "section": "Modelo 1: Predictores de nivel individual",
-    "text": "Modelo 1: Predictores de nivel individual\n\nresults_1 = lmer(mathach ~ 1 + ses + female + (1 | schoolid), data = mlm)\nscreenreg(results_1, naive=TRUE)\n\n\n========================================\n                           Model 1      \n----------------------------------------\n(Intercept)                    13.28 ***\n                               (0.20)   \nses                             2.36 ***\n                               (0.11)   \nfemale                         -1.19 ***\n                               (0.17)   \n----------------------------------------\nAIC                         46605.73    \nBIC                         46640.13    \nLog Likelihood             -23297.86    \nNum. obs.                    7185       \nNum. groups: schoolid         160       \nVar: schoolid (Intercept)       4.49    \nVar: Residual                  36.81    \n========================================\n*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05"
+    "text": "Modelo 1: Predictores de nivel individual\n\nresults_1 = lmer(mathach ~ 1 + ses + female + (1 | schoolid), data = mlm)\nscreenreg(results_1, naive=TRUE)\n\n\n========================================\n                           Model 1      \n----------------------------------------\n(Intercept)                    13.28 ***\n                               (0.20)   \nses                             2.36 ***\n                               (0.11)   \nfemale                         -1.19 ***\n                               (0.17)   \n----------------------------------------\nAIC                         46605.73    \nBIC                         46640.13    \nLog Likelihood             -23297.86    \nNum. obs.                    7185       \nNum. groups: schoolid         160       \nVar: schoolid (Intercept)       4.49    \nVar: Residual                  36.81    \n========================================\n*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05",
+    "crumbs": [
+      "Prácticos",
+      "Guías",
+      "3: Estimación modelos multinivel con lmer en R"
+    ]
   },
   {
     "objectID": "assignment/03-practico.html#modelo-2-predictores-nivel-2",
     "href": "assignment/03-practico.html#modelo-2-predictores-nivel-2",
     "title": "Práctica 3. Estimación modelos multinivel con lmer en R",
     "section": "Modelo 2: Predictores nivel 2",
-    "text": "Modelo 2: Predictores nivel 2\n\nresults_2 = lmer(mathach ~ 1 + sector + mnses + (1 | schoolid), data = mlm)\nscreenreg(results_2)\n\n\n========================================\n                           Model 1      \n----------------------------------------\n(Intercept)                    12.13 ***\n                               (0.20)   \nsector                          1.23 ***\n                               (0.31)   \nmnses                           5.33 ***\n                               (0.37)   \n----------------------------------------\nAIC                         46956.50    \nBIC                         46990.90    \nLog Likelihood             -23473.25    \nNum. obs.                    7185       \nNum. groups: schoolid         160       \nVar: schoolid (Intercept)       2.31    \nVar: Residual                  39.16    \n========================================\n*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05"
+    "text": "Modelo 2: Predictores nivel 2\n\nresults_2 = lmer(mathach ~ 1 + sector + mnses + (1 | schoolid), data = mlm)\nscreenreg(results_2)\n\n\n========================================\n                           Model 1      \n----------------------------------------\n(Intercept)                    12.13 ***\n                               (0.20)   \nsector                          1.23 ***\n                               (0.31)   \nmnses                           5.33 ***\n                               (0.37)   \n----------------------------------------\nAIC                         46956.50    \nBIC                         46990.90    \nLog Likelihood             -23473.25    \nNum. obs.                    7185       \nNum. groups: schoolid         160       \nVar: schoolid (Intercept)       2.31    \nVar: Residual                  39.16    \n========================================\n*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05",
+    "crumbs": [
+      "Prácticos",
+      "Guías",
+      "3: Estimación modelos multinivel con lmer en R"
+    ]
   },
   {
     "objectID": "assignment/03-practico.html#modelo-3-predictores-individuales-y-grupales",
     "href": "assignment/03-practico.html#modelo-3-predictores-individuales-y-grupales",
     "title": "Práctica 3. Estimación modelos multinivel con lmer en R",
     "section": "Modelo 3: Predictores individuales y grupales",
-    "text": "Modelo 3: Predictores individuales y grupales\n\nresults_3 = lmer(mathach ~ 1 + ses + female + sector + mnses + (1 | schoolid), data = mlm)\nscreenreg(results_3)\n\n\n========================================\n                           Model 1      \n----------------------------------------\n(Intercept)                    12.74 ***\n                               (0.21)   \nses                             2.15 ***\n                               (0.11)   \nfemale                         -1.20 ***\n                               (0.16)   \nsector                          1.25 ***\n                               (0.30)   \nmnses                           3.07 ***\n                               (0.37)   \n----------------------------------------\nAIC                         46515.61    \nBIC                         46563.77    \nLog Likelihood             -23250.80    \nNum. obs.                    7185       \nNum. groups: schoolid         160       \nVar: schoolid (Intercept)       2.15    \nVar: Residual                  36.80    \n========================================\n*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05"
+    "text": "Modelo 3: Predictores individuales y grupales\n\nresults_3 = lmer(mathach ~ 1 + ses + female + sector + mnses + (1 | schoolid), data = mlm)\nscreenreg(results_3)\n\n\n========================================\n                           Model 1      \n----------------------------------------\n(Intercept)                    12.74 ***\n                               (0.21)   \nses                             2.15 ***\n                               (0.11)   \nfemale                         -1.20 ***\n                               (0.16)   \nsector                          1.25 ***\n                               (0.30)   \nmnses                           3.07 ***\n                               (0.37)   \n----------------------------------------\nAIC                         46515.61    \nBIC                         46563.77    \nLog Likelihood             -23250.80    \nNum. obs.                    7185       \nNum. groups: schoolid         160       \nVar: schoolid (Intercept)       2.15    \nVar: Residual                  36.80    \n========================================\n*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05",
+    "crumbs": [
+      "Prácticos",
+      "Guías",
+      "3: Estimación modelos multinivel con lmer en R"
+    ]
   },
   {
     "objectID": "assignment/03-practico.html#modelo-4-pendiente-aleatoria",
@@ -333,9 +358,14 @@
   {
     "objectID": "content/03-content.html",
     "href": "content/03-content.html",
-    "title": "Presentación",
+    "title": "Taller Git & Github",
     "section": "",
-    "text": "Documento de presentación\n\n\n\n\nForo"
+    "text": "Documento de presentación\n\n\n\n\nForo",
+    "crumbs": [
+      "Clases",
+      "Sesiones",
+      "Sesión 3"
+    ]
   },
   {
     "objectID": "content/05-content.html",

@@ -1,6 +1,6 @@
 ---
-title: "Presentación"
-date: "2023-08-25"
+title: "Taller Git & Github"
+date: "2025-03-27"
 lang: es
 website:
   comments:
@@ -10,7 +10,7 @@ website:
 
 # Documento de presentación
 
-<iframe src=/slides/03-primera_est.html height="550" width=100% allowfullscreen="true">
+<iframe src=/slides/taller-git-uch/index.html height="550" width=100% allowfullscreen="true">
 </iframe> 
 
 
