@@ -10,7 +10,7 @@ website:
 
 # Documento de presentación
 
-<iframe src=/slides/taller-git-uch/index.html height="550" width=100% allowfullscreen="true">
+<iframe src="https://martin-venegas-m.github.io/taller-git-uch/#1" height="550" width=100% allowfullscreen="true">
 </iframe> 
 
 

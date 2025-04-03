@@ -116,20 +116,6 @@
     ]
   },
   {
-    "objectID": "assignment/03-practico.html#modelo-4-pendiente-aleatoria",
-    "href": "assignment/03-practico.html#modelo-4-pendiente-aleatoria",
-    "title": "Práctica 3. Estimación modelos multinivel con lmer en R",
-    "section": "Modelo 4: Pendiente aleatoria",
-    "text": "Modelo 4: Pendiente aleatoria\n\nresults_4 = lmer(mathach ~ 1 + ses + female + mnses + sector + (1 + ses | schoolid), data = mlm)\nscreenreg(results_4)\n\n\n============================================\n                               Model 1      \n--------------------------------------------\n(Intercept)                        12.65 ***\n                                   (0.21)   \nses                                 2.16 ***\n                                   (0.12)   \nfemale                             -1.19 ***\n                                   (0.16)   \nmnses                               3.07 ***\n                                   (0.38)   \nsector                              1.43 ***\n                                   (0.30)   \n--------------------------------------------\nAIC                             46514.33    \nBIC                             46576.24    \nLog Likelihood                 -23248.16    \nNum. obs.                        7185       \nNum. groups: schoolid             160       \nVar: schoolid (Intercept)           2.22    \nVar: schoolid ses                   0.42    \nCov: schoolid (Intercept) ses       0.27    \nVar: Residual                      36.59    \n============================================\n*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05"
-  },
-  {
-    "objectID": "assignment/03-practico.html#modelo-5-interacción-entre-niveles",
-    "href": "assignment/03-practico.html#modelo-5-interacción-entre-niveles",
-    "title": "Práctica 3. Estimación modelos multinivel con lmer en R",
-    "section": "Modelo 5: Interacción entre niveles",
-    "text": "Modelo 5: Interacción entre niveles\n\\(mathach= \\gamma_{00}(intercepto)+\\gamma_{10}ses_{ij}+\\){01}sector_j+{11}ses_{ij} *sector{j}+$ \\(\\mu_{0j}(intercepto)+\\mu_{1j}ses_{ij}+ r_{ij}\\)\n\nresults_5 = lmer(mathach ~ 1 + female + ses*sector + mnses + (1 + ses | schoolid), data = mlm)\nscreenreg(results_5)\n\n\n============================================\n                               Model 1      \n--------------------------------------------\n(Intercept)                        12.81 ***\n                                   (0.21)   \nfemale                             -1.18 ***\n                                   (0.16)   \nses                                 2.73 ***\n                                   (0.14)   \nsector                              1.29 ***\n                                   (0.29)   \nmnses                               3.04 ***\n                                   (0.37)   \nses:sector                         -1.31 ***\n                                   (0.21)   \n--------------------------------------------\nAIC                             46482.91    \nBIC                             46551.71    \nLog Likelihood                 -23231.45    \nNum. obs.                        7185       \nNum. groups: schoolid             160       \nVar: schoolid (Intercept)           2.11    \nVar: schoolid ses                   0.03    \nCov: schoolid (Intercept) ses       0.17    \nVar: Residual                      36.60    \n============================================\n*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05"
-  },
-  {
     "objectID": "example/cace.html",
     "href": "example/cace.html",
     "title": "Complier average treatment effects",
