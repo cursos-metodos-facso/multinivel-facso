@@ -1,7 +1,7 @@
 ---
 title: "Modelos Multinivel"
 author: ".small[Juan Carlos Castillo <br><br> Departamento de Sociología - UCH / COES <br><br>]"
-date: "2do Sem 2023"
+date: "1er Sem 2025"
 output:
   xaringan::moon_reader:
     css: "css/custom_2020.css"
@@ -10,7 +10,7 @@ output:
     lib_dir: libs
     nature:
       ratio: '16:9'
-      highlightStyle: tomorrow-night-blue
+      highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
       beforeInit: "css/macros.js"
@@ -47,15 +47,15 @@ xaringanExtra::use_scribble()
 
 ## Juan Carlos Castillo
 ## Sociología FACSO - UChile
-## 2do Sem 2023 
-## [.yellow[multinivel-facso.netlify.com]](https://multinivel-facso.netlify.com)
+## 1er Sem 2025
+## [.yellow[multinivel-facso.netlify.app]](https://multinivel-facso.netlify.app/)
 ]
     
 
 .pull-right-narrow[
 .center[
 .content-block-gray[
-## Sesión 3: 
+## Sesión 4: 
 ## **.yellow[Estimación en distintos niveles]**]
 ]
 ]
@@ -69,23 +69,15 @@ class: middle
 
 #  - Lectura: Finch cap. 2: Introduction to Multilevel Data Structure
 <br>
-# - Práctico: Preparación de datos con R
----
-class: roja right
-
-# Contenidos
-
-
-## .yellow[1- Resumen sesión anterior]
-
-## 2- Regresión y residuos en contexto
-
-## 3- Estimación con variables agregadas
-
-
+# - [Práctica 3. Estimación modelos multinivel con lmer en R](https://multinivel-facso.netlify.app/assignment/03-practico)
 
 ---
-# Resumen: Investigación sociológica y contexto
+class: roja
+
+# Sobre el CONTEXTO
+
+---
+# Investigación sociológica y contexto
 
 ![](images/macromicro.jpg)
 .right[
@@ -104,267 +96,193 @@ class: roja right
 | 5   | 2   | 1      | 4      | 6      | 8      |
 | 6   | 2   | 7      | 5      | 6      | 8      |
 
+
 ---
-## Problemas asociados a la inferencia con datos anidados
+class: roja, middle, center
+
+# Posibles problemas de inferencia con datos jerarquicos
+
+---
+# Problemas asociados a la inferencia y el contexto
 
 --
 
-### Falacia ecológica:
+## Falacia ecológica:
 
 - Conclusiones erradas acerca de individuos basados en datos de contexto
 
 --
 
-### Falacia individualista:
+## Falacia individualista:
 
 -   Conclusiones erradas acerca de contextos basados en datos de individuos
 
 
 ---
-.pull-left-narrow[
+# Ejemplo falacia ecológica
+
+Relación entre estatus socioeconómico e intención de voto
+
+
+![:scale 50%](images/fal1.jpg)
+
+---
 # Falacia ecológica
+
+![:scale 50%](images/fal2.jpg)
+
+---
+# Falacia ecológica
+
+![:scale 50%](images/fal3.jpg)
+
+---
+# Falacia ecológica
+
+![:scale 50%](images/fal4.jpg)
+
+---
+# Falacia ecológica
+
+![:scale 50%](images/fal5.png)
+
+---
+# Implicancias falacia ecológica
+
+-   Relaciones individuales y contextuales no necesariamente van en la misma dirección (lineal)
+
+--
+
+-   Falacias también pueden ocurrir en la otra dirección (falacia individualista)
+
+--
+
+-   Por lo tanto la inferencia ecológica (contextual) no se corresponde necesariamente con la inferencia individual
+
+--
+
+-   Distinguir ambos niveles es clave para estimación multinivel
+
+---
+# Referencias 
+
+
+-   Blakely, T. A., & Woodward, A. J. (2000). Ecological effects in multi-level studies. Journal of Epidemiology and Community Health, 54(5), 367–374.
+
+-   Robinson W S 1950. Ecological correlations and the behavior of individuals. American Sociological Review 15: 351–57
+
+---
+# Contexto e implicancias teóricas
+
+.pull-left-narrow[
+En el planteamiento de una investigación con hipótesis multinivel, es
+relevante definir:]
+
+.pull-right-wide[
+.content-box-red[
+-   Qué es el contexto
+
+-   Cuáles son los elementos principales del contexto a considerar en las hipótesis
+
+-   Cómo se relacionan variables del contexto con variables individuales (hipótesis)
+]]
+---
+# Contexto e implicancias estadísticas
+
+.pull-left-narrow[
+Los modelos multinivel tienen dos sentidos principales a nivel estadístico:
 ]
 
 .pull-right-wide[
-![](images/fal5.png)
-]
+.content-box-green[
+1. .red[Corregir estimaciones] con variables individuales cuando existe dependencia contextual (disminuye el error)
+
+2.  Hacen posible .red[contrastar hipótesis que abarcan relaciones entre niveles], e incluir el contexto en el modelamiento estadístico
+]]
+---
+class:roja, center, middle
+
+# Modelos multinivel
+
+---
+## Modelos multinivel
+
+-   **Definición minimalista**: modelos de regresión que incluyen variables individuales y contextuales
+
+-   Otras versiones/denominaciones: 
+  - modelos jerárquicos
+  - modelos mixtos
+  - modelos contextuales
+  - modelos con efectos aleatorios
+
+---
+## Tipos generales de problemas multinivel
+
+Tres tipos de preguntas básicas, ejemplo educación:
+
+1.  ¿Existen diferencias de rendimiento académico de los alumnos entre escuelas?
+
+2.  ¿Tienen estas diferencias relación con variables de la escuela?
+
+3.  Las características de los estudiantes, ¿poseen un efecto distinto en rendimiento de acuerdo a características de las escuelas?
 
 ---
 # Formas de estimación multinivel
 
-Modelo multinivel con predictores individuales (x)  y contextuales (z)
+Base: modelo de regresión simple (no multinivel)
+
+![:scale 60%](images/mod1.png)
+
+
+---
+# Formas de estimación multinivel
+
+Predictor(es) individual(es) - (asumiendo contexto)
+
+![:scale 60%](images/mod2.png)
+
+---
+# Formas de estimación multinivel
+
+Predictor(es) contextual(es)
+
+![:scale 60%](../images/mod3.png)
+
+---
+# Formas de estimación multinivel
+
+Modelo multinivel con predictores individuales y contextuales
 
 ![:scale 60%](images/mod4.png)
 
 ---
-class: roja right
+# Formas de estimación multinivel
 
-# Contenidos
+Modelo multinivel con interacción entre niveles
 
-
-## 1- Resumen sesión anterior
-
-## .yellow[2- Regresión y residuos en contexto]
-
-## 3- Estimación con variables agregadas
-
-
+![:scale 60%](images/mod5.png)
 
 ---
-# Objetivos del modelo de regresión
 
+## De la Práctica 2: [Datos y estimación en 2 niveles](https://multinivel-facso.netlify.app/assignment/02-practico)
 
-1 - Conocer la .red[variación] de una variable (dependiente, Y) de acuerdo a la variación de otra variable (independiente, X):
+- concepto de datos individuales y datos agregados
 
-  -   Ej: En qué medida el puntaje PSU influye en el éxito académico en la universidad? ...
-
-
----
-# Objetivos del modelo de regresión
-
-
-2 -  .red[Estimar] el valor de una variable de acuerdo al valor de otra
-(predicción)
-
-  -   Ej: Si una persona obtiene 600 puntos en la PSU, que promedio de notas en la universidad es probable que obtenga? 
-  
-(Atención: predicción no implica explicación)
-  
----
-# Objetivos del modelo de regresión
-
-3 - Establecer en que medida esta asociación es .red[estadísticamente significativa] (inferencia)
-
+- regresión en cada nivel de manera independiente
 
 ---
-## Bases 
 
-$$\begin{aligned}
-Varianza=\sigma^2 &= \frac{\sum_{i=1}^{n}(x_i - \bar{x})(x_i - \bar{x})} {n-1} =\frac{\sum_{i=1}^{n}(x_i - \bar{x})^2} {n-1} \\ \\
-Covarianza= 
-cov(x,y) &= \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})} {n-1}
-\\ \\
-Correlación=r &= \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})} {(n-1)\sigma_x \sigma_y }
-\end{aligned}$$
-
-
----
-# Regresión
-
-.pull-left-wide[
--   La (co) variación general de Y respecto a X se puede expresar en una
-ecuación de la recta = modelo de regresión
-
--   Para estimar la “mejor recta” se utiliza la *recta de mínimos
-cuadrados* (OLS – Ordinary Least Squares)
-
-- OLS es un estimador que minimiza la suma de
-los cuadrados de las distancias entre las observaciones y la recta
-en el eje vertical
-]
-
-.pull-right-narrow[
-![](images/ci_resid.png)
-]
-
----
-# Ecuación de regresión
-
-### $$Y=a+\beta X + e$$
-
---
-
--   $a$= intercepto (o $\beta_0$), el valor de Y cuando X es 0
-
---
-
--   $b$= pendiente (coeficiente de regresión), es el valor que me permite
-estimar el puntaje de Y mediante el puntaje de X
-
---
-
--   $e$= residuo, da cuenta de las fuentes de variabilidad distintas de X en la predicción de Y. O sea, es la parte de Y que no es explicada por X.
-
-
----
-# Coeficientes de regresión
-
-Estimación de los coeficientes de la ecuación:
-
-$$\begin{aligned}
-b=\frac{\Sigma xy}{\Sigma x^2}&=\frac{\Sigma((x-\bar{x})(y-\bar{y}))}{\Sigma (x-\bar{x})} \\ \\
-a&=\bar{Y}-b \bar{X} \\ \\
-{Y}^{\prime }&=a+bX
-\end{aligned}$$
-
-
---
--   La ecuación de regresión permite predecir valores de Y para cada valor de X
-
----
-# Descomposición de Y
-
-.center[
-![:scale 70%](images/resid_3.JPG)
-]
-
-\begin{align*}
-SS_{tot}&=SS_{reg} + SS_{error} \\ 
-\Sigma(y_i - \bar{y})^2&=\Sigma (\hat{y}_i-\bar{y})^2 +\Sigma(y_i-\hat{y}_i)^2
-\end{align*}
-
----
-# Descomposición de Y
-
-$$\begin{aligned}
-Y&=\bar{Y}+({Y}^{\prime}-\bar{Y})+(Y-{Y}^{\prime})\\\\
-Y-\bar{Y}&=({Y}^{\prime}-\bar{Y}) + (Y-{Y}^{\prime}) \\\\
-\Sigma(y_i - \bar{y})^2 &=\Sigma (\bar{y}-\hat{y}_i)^2 + \Sigma(y_i-\hat{y}_i)^2 \\\\
-SS_{tot}&=SS_{reg}+SS_{error}
-\end{aligned}$$
-
-
----
-# Descomposición de Y
-
-
-$$SS_{tot}=SS_{reg}+SS_{error}$$
-
-$$\frac{SS_{tot}}{SS_{tot}}=\frac{SS_{reg}}{SS_{tot}}+\frac{SS_{error}}{SS_{tot}}$$
-
-$$1= \frac{SS_{reg}}{SS_{tot}} + \frac{SS_{error}}{SS_{tot}} \\
-\frac{SS_{reg}}{SS_{tot}}= ?$$
-
---
-
-$$R^2$$
-
----
-class: roja, middle, center
-
-# Regresión con más de 1 nivel
-
-
----
-## Residuos y dependencia contextual
-
-![:scale 50%](images/res_mul1.png)
-
----
-## Residuos y dependencia contextual
-
-![:scale 50%](images/res_mul2.png)
----
-## Residuos y dependencia contextual
-
-![:scale 50%](images/res_mul3.png)
-
----
-## Residuos y dependencia contextual
-
-![:scale 50%](images/res_mul4.png)
-
----
-# Implicancias para el modelo de regresión:
-
--   Situaciones en que los residuos son distintos de manera sistemática de acuerdo a variables contextuales: .red[dependencia (contextual) de los residuos]
-
-- Si un modelo de regresión de 1 nivel se aplica en situaciones de dependiencia contextual, entonces puede aumentar el error en la estimación
-
----
-# Alternativas
-
--   Descomposición de la varianza de los residuos *entre* y
-*dentro* los grupos= en distintos niveles = **multinivel**.
-
--   En concreto, se agrega un término de error adicional al modelo:
-$\mu_{0j}$
-
--   Este término de error se expresa como un **efecto aleatorio** (como opuesto a *efecto fijo*)
-
-
----
-## Regresión a distintos niveles
-
-![:scale 95%](images/paramet.JPG)
-
----
-## Modelo con coeficientes aleatorios (RCM)
-
--   Random Coefficients Models (RCM) o Mixed (effects) Models
-
--   Forma de estimación de modelos multinivel
-
--   Idea base: se agrega un parámetro *aleatorio* al modelo, es decir, que posee variación en relación a unidades de nivel 2.
-
----
-class: roja right
-
-# Contenidos
-
-
-## 1- Resumen sesión anterior
-
-## 2- Regresión y residuos en contexto
-
-## .yellow[3- Estimación con variables agregadas]
----
-## Práctica: High School & Beyond (HSB) data
-
+.medium[
   -   High School & Beyond (HSB) es una muestra representativa nacional de educación secundaria publica y católica de USA implementada por el National Center for Education Statistics (NCES).
 
 -   Más información en [https://nces.ed.gov/surveys/hsb/](http://nces.ed.gov/surveys/hsb)
 
 -   Level 1 variables:
-
   -   minority, etnicidad (1 = minority, 0 =other)
-
   -   female, student gender (1 = female, 0 = male)
-
   -   ses, (medida estandarizada de nivel socioeconómico en base a variables como educación de los padres, ocupación e ingreso)
-
   -   **mathach**, logro en matemática (_math achievement_)
-
+]
 ---
 ## Práctica: High School & Beyond (HSB) data
 
@@ -514,25 +432,7 @@ corrplot.mixed(cormat)
 ---
 ## Datos agregados
 
-- Datos nivel 2:
-  - propios/idiosincráticos (ej: tamaño)
-  - agregados: generados a partir de datos nivel 1
-
---
-- Una de las particularidades de los métodos multinivel es que permiten estimar y comparar efectos de la misma variable individual y agregada
-
-- Ejemplo:
-  - nivel socioeconómico individual
-  - nivel socioeconómico de la escuela
-
-
---
-
-- Para ello, se procede a "agregar", generando una base de datos a nivel 2
-
-
----
-## Datos agregados
+- Se procede a "agregar", generando una base de datos a nivel 2
 
 - Usando la funcion `group_by` (agrupar por) de la librería `dplyr`
 
@@ -605,10 +505,75 @@ class: roja, middle, center
 # ¿Qué problema puede haber al estimar un mismo modelo para variables individuales y agregadas?
 
 
+
+
+
+
+---
+class: roja, middle, center
+
+# Regresión con más de 1 nivel
+
+
+---
+## Residuos y dependencia contextual
+
+![:scale 50%](images/res_mul1.png)
+
+---
+## Residuos y dependencia contextual
+
+![:scale 50%](images/res_mul2.png)
+---
+## Residuos y dependencia contextual
+
+![:scale 50%](images/res_mul3.png)
+
+---
+## Residuos y dependencia contextual
+
+![:scale 50%](images/res_mul4.png)
+
+---
+# Implicancias para el modelo de regresión:
+
+-   Situaciones en que los residuos son distintos de manera sistemática de acuerdo a variables contextuales: .red[dependencia (contextual) de los residuos]
+
+- Si un modelo de regresión de 1 nivel se aplica en situaciones de dependiencia contextual, entonces puede aumentar el error en la estimación
+
+---
+# Alternativas
+
+-   Descomposición de la varianza de los residuos *entre* y
+*dentro* los grupos= en distintos niveles = **multinivel**.
+
+-   En concreto, se agrega un término de error adicional al modelo:
+$\mu_{0j}$
+
+-   Este término de error se expresa como un **efecto aleatorio** (como opuesto a *efecto fijo*)
+
+
+---
+## Regresión a distintos niveles
+
+![:scale 95%](images/paramet.JPG)
+
+---
+## Modelo con coeficientes aleatorios (RCM)
+
+-   Random Coefficients Models (RCM) o Mixed (effects) Models
+
+-   Forma de estimación de modelos multinivel
+
+-   Idea base: se agrega un parámetro *aleatorio* al modelo, es decir, que posee variación en relación a unidades de nivel 2.
+
+
+
 ---
 class: front
 .pull-left-wide[
-# Modelos multinivel]
+# Modelos multinivel
+]
 
 .pull-right-narrow[![:scale 85%](img/logo.png)]
 
@@ -619,13 +584,7 @@ class: front
 
 ## Juan Carlos Castillo
 ## Sociología FACSO - UChile
-## 2do Sem 2023 
-## [.yellow[multinivel-facso.netlify.com]](https://multinivel-facso.netlify.com)
+## 1er Sem 2025 
+## [.yellow[multinivel-facso.netlify.app]](https://multinivel-facso.netlify.app)
 ]
-    
 
-.pull-right-narrow[
-.center[
-
-]
-]

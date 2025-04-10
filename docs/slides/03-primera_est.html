@@ -35,15 +35,15 @@ class: front
 
 ## Juan Carlos Castillo
 ## Sociología FACSO - UChile
-## 2do Sem 2023 
-## [.yellow[multinivel-facso.netlify.com]](https://multinivel-facso.netlify.com)
+## 1er Sem 2025
+## [.yellow[multinivel-facso.netlify.app]](multinivel-facso.netlify.app)
 ]
     
 
 .pull-right-narrow[
 .center[
 .content-block-gray[
-## Sesión 3: 
+## Sesión 4: 
 ## **.yellow[Estimación en distintos niveles]**]
 ]
 ]
@@ -57,7 +57,8 @@ class: middle
 
 #  - Lectura: Finch cap. 2: Introduction to Multilevel Data Structure
 &lt;br&gt;
-# - Práctico: Preparación de datos con R
+# - [Práctica 3. Estimación modelos multinivel con lmer en R](https://multinivel-facso.netlify.app/assignment/03-practico)
+
 ---
 class: roja right
 
@@ -266,77 +267,8 @@ SS_{tot}&amp;=SS_{reg}+SS_{error}
 --
 
 `$$R^2$$`
-
 ---
-class: roja, middle, center
 
-# Regresión con más de 1 nivel
-
-
----
-## Residuos y dependencia contextual
-
-![:scale 50%](images/res_mul1.png)
-
----
-## Residuos y dependencia contextual
-
-![:scale 50%](images/res_mul2.png)
----
-## Residuos y dependencia contextual
-
-![:scale 50%](images/res_mul3.png)
-
----
-## Residuos y dependencia contextual
-
-![:scale 50%](images/res_mul4.png)
-
----
-# Implicancias para el modelo de regresión:
-
--   Situaciones en que los residuos son distintos de manera sistemática de acuerdo a variables contextuales: .red[dependencia (contextual) de los residuos]
-
-- Si un modelo de regresión de 1 nivel se aplica en situaciones de dependiencia contextual, entonces puede aumentar el error en la estimación
-
----
-# Alternativas
-
--   Descomposición de la varianza de los residuos *entre* y
-*dentro* los grupos= en distintos niveles = **multinivel**.
-
--   En concreto, se agrega un término de error adicional al modelo:
-`\(\mu_{0j}\)`
-
--   Este término de error se expresa como un **efecto aleatorio** (como opuesto a *efecto fijo*)
-
-
----
-## Regresión a distintos niveles
-
-![:scale 95%](images/paramet.JPG)
-
----
-## Modelo con coeficientes aleatorios (RCM)
-
--   Random Coefficients Models (RCM) o Mixed (effects) Models
-
--   Forma de estimación de modelos multinivel
-
--   Idea base: se agrega un parámetro *aleatorio* al modelo, es decir, que posee variación en relación a unidades de nivel 2.
-
----
-class: roja right
-
-# Contenidos
-
-
-## 1- Resumen sesión anterior
-
-## 2- Regresión y residuos en contexto
-
-## .yellow[3- Estimación con variables agregadas]
----
 ## Práctica: High School &amp; Beyond (HSB) data
 
   -   High School &amp; Beyond (HSB) es una muestra representativa nacional de educación secundaria publica y católica de USA implementada por el National Center for Education Statistics (NCES).
@@ -722,10 +654,85 @@ class: roja, middle, center
 # ¿Qué problema puede haber al estimar un mismo modelo para variables individuales y agregadas?
 
 
+
+
+
+
+---
+class: roja, middle, center
+
+# Regresión con más de 1 nivel
+
+
+---
+## Residuos y dependencia contextual
+
+![:scale 50%](images/res_mul1.png)
+
+---
+## Residuos y dependencia contextual
+
+![:scale 50%](images/res_mul2.png)
+---
+## Residuos y dependencia contextual
+
+![:scale 50%](images/res_mul3.png)
+
+---
+## Residuos y dependencia contextual
+
+![:scale 50%](images/res_mul4.png)
+
+---
+# Implicancias para el modelo de regresión:
+
+-   Situaciones en que los residuos son distintos de manera sistemática de acuerdo a variables contextuales: .red[dependencia (contextual) de los residuos]
+
+- Si un modelo de regresión de 1 nivel se aplica en situaciones de dependiencia contextual, entonces puede aumentar el error en la estimación
+
+---
+# Alternativas
+
+-   Descomposición de la varianza de los residuos *entre* y
+*dentro* los grupos= en distintos niveles = **multinivel**.
+
+-   En concreto, se agrega un término de error adicional al modelo:
+`\(\mu_{0j}\)`
+
+-   Este término de error se expresa como un **efecto aleatorio** (como opuesto a *efecto fijo*)
+
+
+---
+## Regresión a distintos niveles
+
+![:scale 95%](images/paramet.JPG)
+
+---
+## Modelo con coeficientes aleatorios (RCM)
+
+-   Random Coefficients Models (RCM) o Mixed (effects) Models
+
+-   Forma de estimación de modelos multinivel
+
+-   Idea base: se agrega un parámetro *aleatorio* al modelo, es decir, que posee variación en relación a unidades de nivel 2.
+
+---
+class: roja right
+
+# Contenidos
+
+
+## 1- Resumen sesión anterior
+
+## 2- Regresión y residuos en contexto
+
+## .yellow[3- Estimación con variables agregadas]
+
 ---
 class: front
 .pull-left-wide[
-# Modelos multinivel]
+# Modelos multinivel
+]
 
 .pull-right-narrow[![:scale 85%](img/logo.png)]
 
@@ -736,23 +743,17 @@ class: front
 
 ## Juan Carlos Castillo
 ## Sociología FACSO - UChile
-## 2do Sem 2023 
-## [.yellow[multinivel-facso.netlify.com]](https://multinivel-facso.netlify.com)
+## 1er Sem 2025 
+## [.yellow[multinivel-facso.netlify.app]](https://multinivel-facso.netlify.app)
 ]
-    
 
-.pull-right-narrow[
-.center[
-
-]
-]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script src="css/macros.js"></script>
 <script>var slideshow = remark.create({
 "ratio": "16:9",
-"highlightStyle": "tomorrow-night-blue",
+"highlightStyle": "github",
 "highlightLines": true,
 "countIncrementalSlides": false
 });

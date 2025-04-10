@@ -1,6 +1,6 @@
 ---
 title: "Presentación"
-date: "2023-09-08"
+date: "2025-04-10"
 lang: es
 website:
   comments:
@@ -10,7 +10,7 @@ website:
 
 # Documento de presentación
 
-<iframe src=/slides/05-ajuste_reporte.html height="550" width=100% allowfullscreen="true">
+<iframe src=/slides/05-varianzasICC.html height="550" width=100% allowfullscreen="true">
 </iframe> 
 
 # Video de la sesion

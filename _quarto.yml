@@ -76,10 +76,10 @@ website:
               file: content/02-content.qmd
             - text: "Sesión 3"
               file: content/03-content.qmd
-            # - text: "Sesión 4"
-            #   file: content/04-content.qmd
-            # - text: "Sesión 5"
-            #   file: content/05-content.qmd
+            - text: "Sesión 4"
+              file: content/04-content.qmd
+            - text: "Sesión 5"
+              file: content/05-content.qmd
             # - text: "Sesión 6"
             #   file: content/06-content.qmd
             # - text: "Sesión 7"

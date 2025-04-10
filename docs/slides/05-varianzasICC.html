@@ -36,15 +36,15 @@ class: front
 ## Juan Carlos Castillo
 ## Sociología FACSO - UChile
 ## 1er Sem 2025
-## [.yellow[multinivel-facso.netlify.app]](multinivel-facso.netlify.app)
+## [.yellow[multinivel-facso.netlify.app]](https://multinivel-facso.netlify.app/)
 ]
     
 
 .pull-right-narrow[
 .center[
 .content-block-gray[
-## Sesión 4: 
-## **.yellow[Estimación en distintos niveles]**]
+## Sesión 5: 
+## **.yellow[Correlación intra clase y estimación MLM]**]
 ]
 ]
 ---
@@ -55,530 +55,71 @@ class: animated, fadeIn
 ---
 class: middle
 
-#  - Lectura: Finch cap. 2: Introduction to Multilevel Data Structure
+#  - Lectura: Finch cap. 3: Fitting Two-Level Models in R
 &lt;br&gt;
-# - [Práctica 3. Estimación modelos multinivel con lmer en R](https://multinivel-facso.netlify.app/assignment/03-practico)
-
+# - Práctico
 ---
 class: roja right
 
+.pull-left-narrow[
 # Contenidos
-
+]
 
 ## .yellow[1- Resumen sesión anterior]
 
-## 2- Regresión y residuos en contexto
+## 2- Modelos y pasos
 
-## 3- Estimación con variables agregadas
+## 3- Correlación intra-clase
 
-
-
----
-# Resumen: Investigación sociológica y contexto
-
-![](images/macromicro.jpg)
-.right[
-(adaptado de Coleman, 1986)]
+## 4- Estimación en R
 
 ---
-# Datos anidados / con estructura jerárquica
-----
+## Residuos y dependencia contextual
 
-| IDi | IDg | var_i1 | var_i2 | var_g1 | var_g2 |
-|-----|-----|--------|--------|--------|--------|
-| 1   | 1   | 8      | 7      | 4      | 1      |
-| 2   | 1   | 5      | 5      | 4      | 1      |
-| 3   | 1   | 3      | 1      | 4      | 1      |
-| 4   | 2   | 3      | 2      | 6      | 8      |
-| 5   | 2   | 1      | 4      | 6      | 8      |
-| 6   | 2   | 7      | 5      | 6      | 8      |
+![:scale 50%](images/res_mul2.png)
+---
+## Residuos y dependencia contextual
+
+![:scale 50%](images/res_mul3.png)
 
 ---
-## Problemas asociados a la inferencia con datos anidados
+## Residuos y dependencia contextual
 
---
-
-### Falacia ecológica:
-
-- Conclusiones erradas acerca de individuos basados en datos de contexto
-
---
-
-### Falacia individualista:
-
--   Conclusiones erradas acerca de contextos basados en datos de individuos
-
+![:scale 50%](images/res_mul4.png)
 
 ---
-.pull-left-narrow[
-# Falacia ecológica
-]
+## Modelo con coeficientes aleatorios (RCM)
 
-.pull-right-wide[
-![](images/fal5.png)
-]
+-   Random Coefficients Models (RCM) o Mixed (effects) Models
 
----
-# Formas de estimación multinivel
+-   Forma de estimación de modelos multinivel
 
-Modelo multinivel con predictores individuales (x)  y contextuales (z)
-
-![:scale 60%](images/mod4.png)
-
----
-class: roja right
-
-# Contenidos
-
-
-## 1- Resumen sesión anterior
-
-## .yellow[2- Regresión y residuos en contexto]
-
-## 3- Estimación con variables agregadas
-
-
-
----
-# Objetivos del modelo de regresión
-
-
-1 - Conocer la .red[variación] de una variable (dependiente, Y) de acuerdo a la variación de otra variable (independiente, X):
-
-  -   Ej: En qué medida el puntaje PSU influye en el éxito académico en la universidad? ...
-
-
----
-# Objetivos del modelo de regresión
-
-
-2 -  .red[Estimar] el valor de una variable de acuerdo al valor de otra
-(predicción)
-
-  -   Ej: Si una persona obtiene 600 puntos en la PSU, que promedio de notas en la universidad es probable que obtenga? 
-  
-(Atención: predicción no implica explicación)
-  
----
-# Objetivos del modelo de regresión
-
-3 - Establecer en que medida esta asociación es .red[estadísticamente significativa] (inferencia)
-
-
----
-## Bases 
-
-`$$\begin{aligned}
-Varianza=\sigma^2 &amp;= \frac{\sum_{i=1}^{n}(x_i - \bar{x})(x_i - \bar{x})} {n-1} =\frac{\sum_{i=1}^{n}(x_i - \bar{x})^2} {n-1} \\ \\
-Covarianza= 
-cov(x,y) &amp;= \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})} {n-1}
-\\ \\
-Correlación=r &amp;= \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})} {(n-1)\sigma_x \sigma_y }
-\end{aligned}$$`
-
-
----
-# Regresión
-
-.pull-left-wide[
--   La (co) variación general de Y respecto a X se puede expresar en una
-ecuación de la recta = modelo de regresión
-
--   Para estimar la “mejor recta” se utiliza la *recta de mínimos
-cuadrados* (OLS – Ordinary Least Squares)
-
-- OLS es un estimador que minimiza la suma de
-los cuadrados de las distancias entre las observaciones y la recta
-en el eje vertical
-]
-
-.pull-right-narrow[
-![](images/ci_resid.png)
-]
-
----
-# Ecuación de regresión
-
-### `$$Y=a+\beta X + e$$`
-
---
-
--   `\(a\)`= intercepto (o `\(\beta_0\)`), el valor de Y cuando X es 0
-
---
-
--   `\(b\)`= pendiente (coeficiente de regresión), es el valor que me permite
-estimar el puntaje de Y mediante el puntaje de X
-
---
-
--   `\(e\)`= residuo, da cuenta de las fuentes de variabilidad distintas de X en la predicción de Y. O sea, es la parte de Y que no es explicada por X.
-
-
----
-# Coeficientes de regresión
-
-Estimación de los coeficientes de la ecuación:
-
-`$$\begin{aligned}
-b=\frac{\Sigma xy}{\Sigma x^2}&amp;=\frac{\Sigma((x-\bar{x})(y-\bar{y}))}{\Sigma (x-\bar{x})} \\ \\
-a&amp;=\bar{Y}-b \bar{X} \\ \\
-{Y}^{\prime }&amp;=a+bX
-\end{aligned}$$`
-
-
---
--   La ecuación de regresión permite predecir valores de Y para cada valor de X
-
----
-# Descomposición de Y
-
-.center[
-![:scale 70%](images/resid_3.JPG)
-]
-
-`\begin{align*}
-SS_{tot}&amp;=SS_{reg} + SS_{error} \\ 
-\Sigma(y_i - \bar{y})^2&amp;=\Sigma (\hat{y}_i-\bar{y})^2 +\Sigma(y_i-\hat{y}_i)^2
-\end{align*}`
-
----
-# Descomposición de Y
-
-`$$\begin{aligned}
-Y&amp;=\bar{Y}+({Y}^{\prime}-\bar{Y})+(Y-{Y}^{\prime})\\\\
-Y-\bar{Y}&amp;=({Y}^{\prime}-\bar{Y}) + (Y-{Y}^{\prime}) \\\\
-\Sigma(y_i - \bar{y})^2 &amp;=\Sigma (\bar{y}-\hat{y}_i)^2 + \Sigma(y_i-\hat{y}_i)^2 \\\\
-SS_{tot}&amp;=SS_{reg}+SS_{error}
-\end{aligned}$$`
-
-
----
-# Descomposición de Y
-
-
-`$$SS_{tot}=SS_{reg}+SS_{error}$$`
-
-`$$\frac{SS_{tot}}{SS_{tot}}=\frac{SS_{reg}}{SS_{tot}}+\frac{SS_{error}}{SS_{tot}}$$`
-
-`$$1= \frac{SS_{reg}}{SS_{tot}} + \frac{SS_{error}}{SS_{tot}} \\
-\frac{SS_{reg}}{SS_{tot}}= ?$$`
-
---
-
-`$$R^2$$`
----
-
-## Práctica: High School &amp; Beyond (HSB) data
-
-  -   High School &amp; Beyond (HSB) es una muestra representativa nacional de educación secundaria publica y católica de USA implementada por el National Center for Education Statistics (NCES).
-
--   Más información en [https://nces.ed.gov/surveys/hsb/](http://nces.ed.gov/surveys/hsb)
-
--   Level 1 variables:
-
-  -   minority, etnicidad (1 = minority, 0 =other)
-
-  -   female, student gender (1 = female, 0 = male)
-
-  -   ses, (medida estandarizada de nivel socioeconómico en base a variables como educación de los padres, ocupación e ingreso)
-
-  -   **mathach**, logro en matemática (_math achievement_)
-
----
-## Práctica: High School &amp; Beyond (HSB) data
-
--   Level 2 variables:
-
-  -   size (matricula)
-
-  -   sector (1 = Catholic, 0 = public)
-
-  -   pracad (proportion of students in the academic track)
-
-  -   disclim (a scale measuring disciplinary climate)
-
-  -   himnty (1 = more than 40% minority enrollment, 0 = less than 40%)
-
-  -   meanses (mean of the SES values for the students in this school who are included in the level-1 file)
-
--  **Cluster variable**= id (school id)
-
-
----
-## Librerías y datos
-
-
-```r
-pacman::p_load(
-haven,  # lectura de datos formato externo
-car, # varias funciones, ej scatterplot
-dplyr, # varios gestión de datos
-stargazer, # tablas
-corrplot, # correlaciones
-ggplot2, # gráficos
-lme4) # multilevel
-```
-
-.medium[
-
-```r
-mlm &lt;-read_dta("http://www.stata-press.com/data/mlmus3/hsb.dta") # datos
-```
-]
-
----
-## Ajuste datos
-
-.medium[
-
-```r
-dim(mlm)
-```
-
-```
-## [1] 7185   26
-```
-
-```r
-names(mlm)
-```
-
-```
-##  [1] "minority" "female"   "ses"      "mathach"  "size"    
-##  [6] "sector"   "pracad"   "disclim"  "himinty"  "schoolid"
-## [11] "mean"     "sd"       "sdalt"    "junk"     "sdalt2"  
-## [16] "num"      "se"       "sealt"    "sealt2"   "t2"      
-## [21] "t2alt"    "pickone"  "mmses"    "mnses"    "xb"      
-## [26] "resid"
-```
-]
+-   Idea base: se agrega un parámetro *aleatorio* `\(\mu_j\)` al modelo, es decir, que posee variación en relación a unidades de nivel 2.
 
 ---
 
-# Seleccionar variables de interés
 
-
-```r
-mlm=mlm %&gt;% select(
-  minority,female,ses,mathach, # nivel 1
-  size, sector,mnses,schoolid) %&gt;%  # nivel 2
-  as.data.frame()
-```
-
-
----
-## Nota: sobre `%&gt;%`
-
-- `%&gt;%` es conocido como "pipe operator", operador pipa o simplemente pipa
-
-- proviene de la librería `magrittr`, que es utilizada en `dplyr`
-
-- objetivo: hacer más fácil y eficiente el código, incorporando varias funciones en una sola línea / comando
-
-- avanza desde lo más general a lo más específico
-
-
----
-## Descriptivos generales
-
-.pull-left-narrow[
-.medium[
-
-```r
-stargazer(
-  as.data.frame(mlm),
-  title = "Descriptivos generales", 
-  type='text')
-```
-]
-]
-
-.pull-right-wide[
-.small[
-
-```
-## 
-## Descriptivos generales
-## =================================================
-## Statistic   N     Mean    St. Dev.   Min    Max  
-## -------------------------------------------------
-## minority  7,185   0.275     0.446     0      1   
-## female    7,185   0.528     0.499     0      1   
-## ses       7,185  0.0001     0.779   -3.758 2.692 
-## mathach   7,185  12.748     6.878   -2.832 24.993
-## size      7,185 1,056.862  604.172   100   2,713 
-## sector    7,185   0.493     0.500     0      1   
-## mnses     7,185  0.0001     0.414   -1.194 0.825 
-## schoolid  7,185 5,277.898 2,499.578 1,224  9,586 
-## -------------------------------------------------
-```
-
-]
-]
----
-## Descriptivos generales
-
-
-```r
-hist(mlm$mathach, xlim = c(0,30))
-```
-
-![](03-primera_est_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
-
----
-## Descriptivos generales
-
-.pull-left[
-
-```r
-scatterplot(mlm$mathach ~ 
-  mlm$ses,
-  data=mlm, 
-  xlab="SES", 
-  ylab="Math Score",
-  main="Math on SES", 
-  smooth=FALSE)
-```
-]
-
-.pull-right[
-![](03-primera_est_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
-]
----
-## Descriptivos generales
-
-.medium[
-
-```r
-cormat=mlm %&gt;%
-  select(mathach,ses,sector,size, mnses) %&gt;%
-  cor()
-round(cormat, digits=2)
-```
-
-```
-##         mathach   ses sector  size mnses
-## mathach    1.00  0.36   0.20 -0.05  0.34
-## ses        0.36  1.00   0.19 -0.07  0.53
-## sector     0.20  0.19   1.00 -0.42  0.36
-## size      -0.05 -0.07  -0.42  1.00 -0.13
-## mnses      0.34  0.53   0.36 -0.13  1.00
-```
-]
----
-## Descriptivos generales
-
-
-```r
-corrplot.mixed(cormat)
-```
-
-![](03-primera_est_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
-
----
-## Datos agregados
-
-- Datos nivel 2:
-  - propios/idiosincráticos (ej: tamaño)
-  - agregados: generados a partir de datos nivel 1
-
---
-- Una de las particularidades de los métodos multinivel es que permiten estimar y comparar efectos de la misma variable individual y agregada
-
-- Ejemplo:
-  - nivel socioeconómico individual
-  - nivel socioeconómico de la escuela
-
-
---
-
-- Para ello, se procede a "agregar", generando una base de datos a nivel 2
-
-
----
-## Datos agregados
-
-- Usando la funcion `group_by` (agrupar por) de la librería `dplyr`
-
-- Se agrupa por la variable **cluster**, que identifica a las unidades de nivel 2 (en este caso, `schoolid`)
-- Por defecto se hace con el promedio, pero se pueden hacer otras funciones como contar, porcentajes, mediana, etc.
-
-
----
-# Generando base de datos agregados
-
-
-```r
-agg_mlm=mlm %&gt;% group_by(schoolid) %&gt;%
-  summarise_all(funs(mean)) %&gt;% as.data.frame()
-```
-
-  - generamos el objeto `agg_mlm` desde el objeto `mlm`
-
-  - agrupando por la variable cluster `schoolid`
-
-  - agregamos (colapsamos) todas `summarise_all` por el promedio `funs(mean)`
-
----
-## Datos agregados
-
-.medium[
-
-```r
-stargazer(agg_mlm, type = "text")
-```
-
-```
-## 
-## ===============================================
-## Statistic  N    Mean    St. Dev.   Min    Max  
-## -----------------------------------------------
-## schoolid  160 5,309.994 2,547.683 1,224  9,586 
-## minority  160   0.275     0.301   0.000  1.000 
-## female    160   0.519     0.256   0.000  1.000 
-## ses       160  -0.006     0.414   -1.194 0.825 
-## mathach   160  12.621     3.118   4.240  19.719
-## size      160 1,097.825  629.506   100   2,713 
-## sector    160   0.438     0.498     0      1   
-## mnses     160  -0.006     0.414   -1.194 0.825 
-## -----------------------------------------------
-```
-]
-
----
 ## Comparación Modelos
 
 - Modelo con datos individuales
 
 
-```r
+``` r
 reg&lt;- lm(mathach~ses+female+sector, data=mlm)
 ```
 
 - Modelo con datos agregados
 
 
-```r
+``` r
 reg_agg&lt;- lm(mathach~ses+female+sector, data=agg_mlm)
-```
-
----
-
-- Generación tabla
-
-
-```r
-stargazer(reg,reg_agg,
-  column.labels=c("Individual","Agregado"),
-  type ='text')
 ```
 
 ---
 ## Comparación Modelos
 .small[
 
-```r
+``` r
 pacman::p_load(sjPlot,sjmisc,sjlabelled)
 tab_model(reg, reg_agg, show.ci=F, show.se = T, dv.labels = c("Individual", "Agregado"))
 ```
@@ -647,6 +188,115 @@ tab_model(reg, reg_agg, show.ci=F, show.se = T, dv.labels = c("Individual", "Agr
 
 &lt;/table&gt;
 ]
+---
+## Implicancias estimación individual/agregada
+
+- diferencias entre los coeficientes: riesgo de falacia ecológica / individualista
+
+  - inflación de errores estándar para variables nivel 1 estimadas como agregadas, ej: female agregado (riesgo error tipo II)
+
+  - contracción de errores estándar para variables nivel 2 estimadas como individuales, ej: sector individual (error tipo I)
+---
+class: middle
+
+## Alternativa: 
+  # Modelo que ajuste errores estándar según el tipo de variable nivel 1 y nivel 2 
+  # = MULTINIVEL
+
+---
+class: roja right
+
+.pull-left-narrow[
+# Contenidos
+]
+
+## 1- Resumen sesión anterior
+
+## 2- .yellow[Modelos y pasos]
+
+## 3- Correlación intra-clase
+
+## 4- Estimación en R
+
+
+---
+# Pasos (usuales) en la estimación del modelo
+ 
+ 0  Modelo nulo
+
+1.  Modelo con variables individuales
+
+2.  Modelo con variables contextuales
+
+3.  Modelo con variables individuales y contextuales
+
+4.  Modelo con pendiente (individual) aleatoria
+
+5.  Modelo con variables individuales, contextuales e interacción entre
+    niveles (cross-level interaction)
+    
+---
+## Parámetros y sentido de la estimación
+
+![:scale 90%](images/paramet.JPG)
+---
+## 0.Modelo nulo
+
+![:scale 60%](images/model_0.JPG)
+
+---
+## 1.Modelo con variable independiente individual
+
+![:scale 70%](images/model_1.JPG)
+
+---
+## 2.Modelo con variable independiente grupal
+
+![:scale 80%](images/model_2.JPG)
+
+---
+## 3.Modelo con variable independiente individual y grupal
+
+![:scale 80%](images/model_3.JPG)
+
+---
+## 4.Modelo con pendiente aleatoria
+
+![:scale 80%](images/model_4.JPG)
+
+---
+## 4.Modelo con pendiente aleatoria
+
+![image](images/random2.jpg)
+
+---
+## 5.Modelo con interacción entre niveles
+
+![:scale 80%](images/model_5.JPG)
+
+---
+## 5.Modelo con interacción entre niveles
+
+
+"La relación entre X e Y varía entre contextos, y esta variación se asocia a una característica del contexto"
+
+- *Ej*: la influencia del nivel socioeconómico en rendimiento en lenguaje es moderada por la presencia de bibliotecas en las escuelas
+
+---
+class: roja right
+
+.pull-left-narrow[
+# Contenidos
+]
+
+## 1- Resumen sesión anterior
+
+## 2- Modelos y pasos
+
+## 3- .yellow[Correlación intra-clase]
+
+## 4- Estimación en R
+
 
 ---
 class: roja, middle, center
@@ -654,79 +304,132 @@ class: roja, middle, center
 # ¿Qué problema puede haber al estimar un mismo modelo para variables individuales y agregadas?
 
 
+---
+# Descomposición de la varianza
+
+ Idea base de modelos multinivel: .red[la varianza de la variable dependiente se puede descomponer en distintos niveles]:
+
+  - varianza Nivel 1: dentro o "within", en relación al promedio individual
+
+  - varianza Nivel 2: entre o "between", en relación al promedio de los grupos
+  
+  - varianza Nivel `\(j\)` ...
+
+---
+.pull-left-narrow[# Descomposición de la varianza
+]
+
+.pull-right-wide[
+
+![](images/withinbetween2.png)
 
 
+`$$var_{tot}=var_{dentro}+var_{entre}$$`
+]
+
+---
+class: middle
+
+.pull-left-narrow[
+# Varianzas y predictores]
+
+
+
+![](images/var_pred.png)
+
+---
+# Componentes de la varianza
+
+-   Los efectos aleatorios asumen una varianza (estimada) en base a una
+    distribución normal
+
+-   Permiten calcular la correlación intra-clase y distintas medidas de ajuste de los modelos
+
+---
+# Componentes de la varianza
+
+  -   `\(var \ r_{ij}=\sigma^2\)` (varianza residuos nivel individual)
+  
+  -   `\(var \ \mu_{0j}= \tau_{00} = \tau_0^2\)` (varianza asociada a
+    intercepto aleatorio)
+  
+  -   `\(var \ \mu_{1j}= \tau_{11} = \tau_1^2\)` (varianza asociada a
+    pendiente aleatoria)
+  
+  -   `\(cov (\tau_{00},\tau_{11})= \tau_{01}\)` (covarianza entre intercepto
+    y pendiente)
+
+---
+# Componentes de la varianza
+
+![:scale 60%](images/tau00.png)
+---
+# Componentes de la varianza
+
+
+![:scale 60%](images/taus.png)
+
+  
+---
+## Correlación intra clase: ICC
+
+-   La correlación intra-clase ( `\(\rho\)` ) indica qué porcentaje de la
+    varianza de la variable dependiente se debe a pertenencia a unidades     de nivel 2
+
+-   Descomposición de la varianza en modelo nulo=
+    `\(Var\ y=\tau_{00} + \sigma^2\)`
+
+-   Es decir, parte de la varianza se debe a los individuos ( `\(\sigma^2\)` )
+    y parte al grupo ( `\(\tau_{00}\)` )
+
+---
+## Correlación intra clase: ICC
+
+-   Correlación intra-clase = ICC =
+
+
+# `$$\rho=\frac{\tau_{00}}{\tau_{00}+\sigma^2}$$`
+
+-   Una ICC **baja** indica baja variabilidad de la
+    variable dependiente entre unidades de nivel 2, y por lo tanto, menores posibilidades de dar cuenta (*explicar*) de esa varianza con
+    predictores de nivel 2.
 
 
 ---
 class: roja, middle, center
 
-# Regresión con más de 1 nivel
+# Correlación intra-clase
 
+## "Proporción de la varianza de la variable dependiente que se asocia a la pertenencia a unidades de nivel 2"
 
----
-## Residuos y dependencia contextual
-
-![:scale 50%](images/res_mul1.png)
-
----
-## Residuos y dependencia contextual
-
-![:scale 50%](images/res_mul2.png)
----
-## Residuos y dependencia contextual
-
-![:scale 50%](images/res_mul3.png)
-
----
-## Residuos y dependencia contextual
-
-![:scale 50%](images/res_mul4.png)
-
----
-# Implicancias para el modelo de regresión:
-
--   Situaciones en que los residuos son distintos de manera sistemática de acuerdo a variables contextuales: .red[dependencia (contextual) de los residuos]
-
-- Si un modelo de regresión de 1 nivel se aplica en situaciones de dependiencia contextual, entonces puede aumentar el error en la estimación
-
----
-# Alternativas
-
--   Descomposición de la varianza de los residuos *entre* y
-*dentro* los grupos= en distintos niveles = **multinivel**.
-
--   En concreto, se agrega un término de error adicional al modelo:
-`\(\mu_{0j}\)`
-
--   Este término de error se expresa como un **efecto aleatorio** (como opuesto a *efecto fijo*)
-
-
----
-## Regresión a distintos niveles
-
-![:scale 95%](images/paramet.JPG)
-
----
-## Modelo con coeficientes aleatorios (RCM)
-
--   Random Coefficients Models (RCM) o Mixed (effects) Models
-
--   Forma de estimación de modelos multinivel
-
--   Idea base: se agrega un parámetro *aleatorio* al modelo, es decir, que posee variación en relación a unidades de nivel 2.
 
 ---
 class: roja right
 
+.pull-left-narrow[
 # Contenidos
-
+]
 
 ## 1- Resumen sesión anterior
 
-## 2- Regresión y residuos en contexto
+## 2- Modelos y pasos
 
-## .yellow[3- Estimación con variables agregadas]
+## 3- Correlación intra-clase
+
+## 4- .yellow[Estimación en R]
+
+
+---
+# [Práctica 3. Estimación modelos multinivel con lmer en R](https://multinivel-facso.netlify.app/assignment/03-practico)
+
+-   función lmer (linear mixed effects) - librería lme4
+
+-   forma general:
+
+    -   `objeto &lt;- lmer (depvar ~ predictor_1 + predictor_2 + predictor_n + (1 | cluster), data=data)`
+
+    -   el objeto contiene la información de la estimación; para ver un resumen, `summary(objeto)`, y de manera más presentable,`screenreg(objeto)`
+
 
 ---
 class: front
