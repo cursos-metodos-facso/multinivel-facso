@@ -6,14 +6,14 @@
       version="2.0">
 <channel>
 <title>Noticias y mensajes importantes Estadística Correlacional</title>
-<link>https://multinivel.netlify.app/news/</link>
-<atom:link href="https://multinivel.netlify.app/news/index.xml" rel="self" type="application/rss+xml"/>
+<link>https://multinivel-facso.netlify.app/news/</link>
+<atom:link href="https://multinivel-facso.netlify.app/news/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.5.57</generator>
 <lastBuildDate>Thu, 24 Apr 2025 04:00:00 GMT</lastBuildDate>
 <item>
   <title>Informaciones por acá</title>
-  <link>https://multinivel.netlify.app/news/2025-04-23_inicio.html</link>
+  <link>https://multinivel-facso.netlify.app/news/2025-04-23_inicio.html</link>
   <description><![CDATA[ 
 
 <div class="back-nav"><a href="../news/">← News</a></div>
@@ -27,13 +27,13 @@
 
  ]]></description>
   <category>info</category>
-  <guid>https://multinivel.netlify.app/news/2025-04-23_inicio.html</guid>
+  <guid>https://multinivel-facso.netlify.app/news/2025-04-23_inicio.html</guid>
   <pubDate>Thu, 24 Apr 2025 04:00:00 GMT</pubDate>
-  <media:content url="https://multinivel.netlify.app/files/img/logo.png" medium="image" type="image/png" height="151" width="144"/>
+  <media:content url="https://multinivel-facso.netlify.app/files/img/logo.png" medium="image" type="image/png" height="151" width="144"/>
 </item>
 <item>
   <title>Github Classroom</title>
-  <link>https://multinivel.netlify.app/news/2025-04-24_githubclassrooom.html</link>
+  <link>https://multinivel-facso.netlify.app/news/2025-04-24_githubclassrooom.html</link>
   <description><![CDATA[ 
 
 <div class="back-nav"><a href="../news/">← News</a></div>
@@ -47,13 +47,13 @@
 
  ]]></description>
   <category>info</category>
-  <guid>https://multinivel.netlify.app/news/2025-04-24_githubclassrooom.html</guid>
+  <guid>https://multinivel-facso.netlify.app/news/2025-04-24_githubclassrooom.html</guid>
   <pubDate>Thu, 24 Apr 2025 04:00:00 GMT</pubDate>
   <media:content url="https://github.blog/wp-content/uploads/2019/08/github-classroom-1200-630.png" medium="image" type="image/png"/>
 </item>
 <item>
   <title>Texto apoyo multinivel</title>
-  <link>https://multinivel.netlify.app/news/2025-04-24_nuevo-texto.html</link>
+  <link>https://multinivel-facso.netlify.app/news/2025-04-24_nuevo-texto.html</link>
   <description><![CDATA[ 
 
 <div class="back-nav"><a href="../news/">← News</a></div>
@@ -70,9 +70,9 @@
 
  ]]></description>
   <category>info</category>
-  <guid>https://multinivel.netlify.app/news/2025-04-24_nuevo-texto.html</guid>
+  <guid>https://multinivel-facso.netlify.app/news/2025-04-24_nuevo-texto.html</guid>
   <pubDate>Thu, 24 Apr 2025 04:00:00 GMT</pubDate>
-  <media:content url="https://multinivel.netlify.app/news/images/roback&amp;legler.png" medium="image" type="image/png" height="113" width="144"/>
+  <media:content url="https://multinivel-facso.netlify.app/news/images/roback&amp;legler.png" medium="image" type="image/png" height="113" width="144"/>
 </item>
 </channel>
 </rss>

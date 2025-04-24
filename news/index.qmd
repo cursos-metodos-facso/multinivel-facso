@@ -13,7 +13,7 @@ listing:
   sort-ui: true
   date-format: "dddd MMMM D, YYYY [at] h:mm A"
   feed: 
-    title: "Noticias y mensajes importantes Estadística Correlacional"
+    title: "Noticias y mensajes importantes Modelos Multinivel"
 #    description: "Updates and FAQs for PMAP 8521 at Georgia State University"
   categories: false
 page-layout: full
@@ -47,11 +47,11 @@ Puedes usar un lector de feeds como [Feedly](https://feedly.com/) o un servicio 
 ::: {.grid}
 
 ::: {.g-col-12 .g-col-md-2}
-<p class="download-btn"><a class="btn btn-danger btn-sm" href="`r feed_url`" role="button">{{< fa square-rss >}} RSS</a></p>
+<p class="download-btn"><a class="btn btn-danger btn-sm" href="https://multinivel-facso.netlify.app/news/index.xml" role="button">{{< fa square-rss >}} RSS</a></p>
 :::
 
 ::: {.g-col-12 .g-col-md-10}
-<p><input class="form-control" type="text" value="`r feed_url`" onclick="this.select()" readonly></p>
+<p><input class="form-control" type="text" value="https://multinivel-facso.netlify.app/news/index.xml" onclick="this.select()" readonly></p>
 :::
 
 :::
