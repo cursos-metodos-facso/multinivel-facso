@@ -1,8 +1,18 @@
 [
   {
+    "listing": "/index.html",
+    "items": [
+      "/news/2025-04-23_inicio.html",
+      "/news/2025-04-24_githubclassrooom.html",
+      "/news/2025-04-24_nuevo-texto.html"
+    ]
+  },
+  {
     "listing": "/news/index.html",
     "items": [
-      "/news/2023-01-09_welcome.html"
+      "/news/2025-04-23_inicio.html",
+      "/news/2025-04-24_githubclassrooom.html",
+      "/news/2025-04-24_nuevo-texto.html"
     ]
   }
 ]

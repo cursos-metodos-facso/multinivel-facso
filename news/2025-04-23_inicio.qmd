@@ -1,0 +1,9 @@
+---
+title: "Informaciones por acá"
+date: "2025-04-24"
+categories: [info]
+image: /files/img/logo.png
+---
+
+Estimad_s estudiantes, acá en esta pestaña quedará registro de las informaciones y actualizaciones del curso. De todas maneras se enviará link por correo a UCursos cuando haya noticias relevantes.
+

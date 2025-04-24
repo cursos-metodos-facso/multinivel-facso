@@ -44,6 +44,8 @@ website:
     pinned: true
     background: "#1a0b36"
     right:
+      - text: "Informaciones"
+        file: news/index.qmd
       - syllabus.qmd
       - schedule.qmd
       - text: "Clases"

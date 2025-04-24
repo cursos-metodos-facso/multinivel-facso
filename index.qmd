@@ -11,6 +11,12 @@ format:
     template-partials:
       - html/home/title-block.html
 course-logo: /files/img/logo.png
+listing:
+  id: informaciones
+  contents: "news/2025*.qmd"
+  type: grid
+  sort: "date desc"
+  categories: false
 ---
 
 ```{r set-dependencies, include=FALSE}
@@ -21,9 +27,6 @@ withr::with_dir(here::here(), {
   targets::tar_load(xaringan_pdfs)
 })
 ```
-
-
-
 
 
 ::: {.home}
@@ -73,3 +76,10 @@ withr::with_dir(here::here(), {
 
 :::
 :::
+
+## Últimas informaciones
+
+::: {#informaciones}
+:::
+
+-> ir a la [página de Informaciones](/news/index.qmd) del sitio.

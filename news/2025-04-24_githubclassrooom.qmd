@@ -1,0 +1,12 @@
+---
+title: "Github Classroom"
+date: "2025-04-24"
+categories: [info]
+image: "https://github.blog/wp-content/uploads/2019/08/github-classroom-1200-630.png"
+---
+
+Se encuentra disponible un [tutorial de Github Classroom](/assignment/classroom.html) para que puedan revisar cómo funciona la plataforma y cómo se entregan los trabajos. También el link está disponible en la pestaña de [Trabajos](/trabajos.html). 
+
+
+
+

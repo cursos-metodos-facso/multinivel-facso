@@ -1,5 +1,5 @@
 ---
-title: "Noticias"
+title: "Informaciones"
 lang: es
 listing:
   id: "news-table"
@@ -26,6 +26,8 @@ format:
       - ../html/news-default/title-block.html
 ---
 
+Acá las principales informaciones y actualizaciones del curso.
+
 ```{r get-vars, include=FALSE}
 base_url <- yaml::read_yaml(here::here("_quarto.yml"))$website$`site-url`
 feed_name <- "news/index.xml"
@@ -40,6 +42,8 @@ feed_url <- paste0(base_url, "/", feed_name)
 ## Suscribirse!
 
 Puedes usar un lector de feeds como [Feedly](https://feedly.com/) o un servicio [RSS-to-email](https://www.google.com/search?q=rss+to+email)  como [Blogtrottr](https://blogtrottr.com/) para suscribirte a cualquiera de estos mensajes. 
+:::
+
 ::: {.grid}
 
 ::: {.g-col-12 .g-col-md-2}
@@ -52,4 +56,3 @@ Puedes usar un lector de feeds como [Feedly](https://feedly.com/) o un servicio 
 
 :::
 
-:::

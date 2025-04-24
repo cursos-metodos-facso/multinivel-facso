@@ -113,6 +113,11 @@ c) Considerando todo lo anterior, ¿qué nota final consideraría justa para mí
 - En caso de atraso por enfermedad presentar certificado médico a secretarı́a de carrera.
 - En el marco de ciencia abierta que promueve el curso, los documentos del trabajo, código y presentaciones serán puestos a disposición de todos los participantes.
 
+# Github Classroom
+
+Las entregas y revisiones de trabajos del curso operarán en la plataforma Github Classroom. Esto nos permitirá una revisión más apropiada del código y de los contenidos de los trabajos, y dar retroalimentación más específica a cada grupo. Se puede acceder a un tutorial [aquí](/assignment/classroom.html).
+
+
 # Foro de preguntas sobre el trabajo
 
 <script src="https://giscus.app/client.js"

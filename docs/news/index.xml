@@ -10,10 +10,10 @@
 <atom:link href="https://multinivel.netlify.app/news/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.5.57</generator>
-<lastBuildDate>Mon, 07 Aug 2023 04:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 24 Apr 2025 04:00:00 GMT</lastBuildDate>
 <item>
-  <title>Bienvenid_s a clases!</title>
-  <link>https://multinivel.netlify.app/news/2023-01-09_welcome.html</link>
+  <title>Informaciones por acá</title>
+  <link>https://multinivel.netlify.app/news/2025-04-23_inicio.html</link>
   <description><![CDATA[ 
 
 <div class="back-nav"><a href="../news/">← News</a></div>
@@ -21,14 +21,58 @@
 
 
 
-<p>Hola a todos!</p>
+<p>Estimad_s estudiantes, acá en esta pestaña quedará registro de las informaciones y actualizaciones del curso. De todas maneras se enviará link por correo a UCursos cuando haya noticias relevantes.</p>
 
 
 
  ]]></description>
-  <category>comenzando</category>
-  <guid>https://multinivel.netlify.app/news/2023-01-09_welcome.html</guid>
-  <pubDate>Mon, 07 Aug 2023 04:00:00 GMT</pubDate>
+  <category>info</category>
+  <guid>https://multinivel.netlify.app/news/2025-04-23_inicio.html</guid>
+  <pubDate>Thu, 24 Apr 2025 04:00:00 GMT</pubDate>
+  <media:content url="https://multinivel.netlify.app/files/img/logo.png" medium="image" type="image/png" height="151" width="144"/>
+</item>
+<item>
+  <title>Github Classroom</title>
+  <link>https://multinivel.netlify.app/news/2025-04-24_githubclassrooom.html</link>
+  <description><![CDATA[ 
+
+<div class="back-nav"><a href="../news/">← News</a></div>
+
+
+
+
+<p>Se encuentra disponible un <a href="../assignment/classroom.html">tutorial de Github Classroom</a> para que puedan revisar cómo funciona la plataforma y cómo se entregan los trabajos. También el link está disponible en la pestaña de <a href="../trabajos.html">Trabajos</a>.</p>
+
+
+
+ ]]></description>
+  <category>info</category>
+  <guid>https://multinivel.netlify.app/news/2025-04-24_githubclassrooom.html</guid>
+  <pubDate>Thu, 24 Apr 2025 04:00:00 GMT</pubDate>
+  <media:content url="https://github.blog/wp-content/uploads/2019/08/github-classroom-1200-630.png" medium="image" type="image/png"/>
+</item>
+<item>
+  <title>Texto apoyo multinivel</title>
+  <link>https://multinivel.netlify.app/news/2025-04-24_nuevo-texto.html</link>
+  <description><![CDATA[ 
+
+<div class="back-nav"><a href="../news/">← News</a></div>
+
+
+
+
+<p>Se ha agregado un nuevo texto de apoyo para el curso, es un <a href="../files/readings/Roback&amp;Legler2020BeyondMultipleLinearRegression-Chapter8Multilevel.pdf">capítulo de libro de Roback &amp; Legler</a> que incluye una introducción a los modelos multinivel y un ejemplo práctico. El texto está disponible en la pestaña de <a href="../schedule.html">programación</a>, en la lectura correspondiente a la asesoría programada de hoy 24 de Abril.</p>
+<ul>
+<li></li>
+</ul>
+
+
+
+ ]]></description>
+  <category>info</category>
+  <guid>https://multinivel.netlify.app/news/2025-04-24_nuevo-texto.html</guid>
+  <pubDate>Thu, 24 Apr 2025 04:00:00 GMT</pubDate>
+  <media:content url="https://multinivel.netlify.app/news/images/roback&amp;legler.png" medium="image" type="image/png" height="113" width="144"/>
 </item>
 </channel>
 </rss>
