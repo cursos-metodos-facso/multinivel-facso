@@ -1,0 +1,25 @@
+---
+title: "Inscripción de trabajos"
+date: "2025-04-15"
+categories: [info]
+image: /news/images/trabajos.png
+---
+
+![image](/news/images/trabajos.png)
+
+Estimad_s estudiantes,
+
+va link para que puedan inscribir sus grupos y temas de trabajo:
+
+[https://docs.google.com/spreadsheets/d/1OrNK7LvUUHxycBssIpeyZ1Ro-eOtwRqyIjK458zH_yw/edit?gid=0#gid=0](https://docs.google.com/spreadsheets/d/1OrNK7LvUUHxycBssIpeyZ1Ro-eOtwRqyIjK458zH_yw/edit?gid=0#gid=0)
+
+Al respecto:
+
+- lo ideal es que puedan hacerlo hasta el jueves en la mañana, así el jueves en la tarde les podemos comentar/dar retroalimentación sobre sus temas y datos, para que así puedan avanzar.
+
+- para que no se repitan los temas/trabajos, la idea es que los grupos utilicen bases de datos distintas, para que se fijen al momento de la inscripción.
+
+- si algún grupo quiere juntarse a resolver dudas sobre el trabajo o sobre el curso estaremos disponibles el jueves en horario de clases (probablemente sea online dada la toma que comenzó hoy). Para esto, nos escriben un correo y fijamos horario para la reunión.
+
+- como señalamos en clases, la idea es utilizar Github para que ustedes puedan versionar y subir sus trabajos a un repositorio, donde podamos además revisar y comentar más eficientemente. Para ello, vamos a utilizar Github Classroom, dejaremos un tutorial sobre esto pronto en el sitio web del curso.
+

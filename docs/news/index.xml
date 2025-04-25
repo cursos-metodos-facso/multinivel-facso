@@ -62,9 +62,6 @@
 
 
 <p>Se ha agregado un nuevo texto de apoyo para el curso, es un <a href="../files/readings/Roback&amp;Legler2020BeyondMultipleLinearRegression-Chapter8Multilevel.pdf">capítulo de libro de Roback &amp; Legler</a> que incluye una introducción a los modelos multinivel y un ejemplo práctico. El texto está disponible en la pestaña de <a href="../schedule.html">programación</a>, en la lectura correspondiente a la asesoría programada de hoy 24 de Abril.</p>
-<ul>
-<li></li>
-</ul>
 
 
 
@@ -73,6 +70,41 @@
   <guid>https://multinivel-facso.netlify.app/news/2025-04-24_nuevo-texto.html</guid>
   <pubDate>Thu, 24 Apr 2025 04:00:00 GMT</pubDate>
   <media:content url="https://multinivel-facso.netlify.app/news/images/roback&amp;legler.png" medium="image" type="image/png" height="113" width="144"/>
+</item>
+<item>
+  <title>Inscripción de trabajos</title>
+  <link>https://multinivel-facso.netlify.app/news/2025-04-15_trabajos.html</link>
+  <description><![CDATA[ 
+
+<div class="back-nav"><a href="../news/">← News</a></div>
+
+
+
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://multinivel-facso.netlify.app/news/images/trabajos.png" class="img-fluid figure-img"></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+<p>Estimad_s estudiantes,</p>
+<p>va link para que puedan inscribir sus grupos y temas de trabajo:</p>
+<p><a href="https://docs.google.com/spreadsheets/d/1OrNK7LvUUHxycBssIpeyZ1Ro-eOtwRqyIjK458zH_yw/edit?gid=0#gid=0">https://docs.google.com/spreadsheets/d/1OrNK7LvUUHxycBssIpeyZ1Ro-eOtwRqyIjK458zH_yw/edit?gid=0#gid=0</a></p>
+<p>Al respecto:</p>
+<ul>
+<li><p>lo ideal es que puedan hacerlo hasta el jueves en la mañana, así el jueves en la tarde les podemos comentar/dar retroalimentación sobre sus temas y datos, para que así puedan avanzar.</p></li>
+<li><p>para que no se repitan los temas/trabajos, la idea es que los grupos utilicen bases de datos distintas, para que se fijen al momento de la inscripción.</p></li>
+<li><p>si algún grupo quiere juntarse a resolver dudas sobre el trabajo o sobre el curso estaremos disponibles el jueves en horario de clases (probablemente sea online dada la toma que comenzó hoy). Para esto, nos escriben un correo y fijamos horario para la reunión.</p></li>
+<li><p>como señalamos en clases, la idea es utilizar Github para que ustedes puedan versionar y subir sus trabajos a un repositorio, donde podamos además revisar y comentar más eficientemente. Para ello, vamos a utilizar Github Classroom, dejaremos un tutorial sobre esto pronto en el sitio web del curso.</p></li>
+</ul>
+
+
+
+ ]]></description>
+  <category>info</category>
+  <guid>https://multinivel-facso.netlify.app/news/2025-04-15_trabajos.html</guid>
+  <pubDate>Tue, 15 Apr 2025 04:00:00 GMT</pubDate>
+  <media:content url="https://multinivel-facso.netlify.app/news/images/trabajos.png" medium="image" type="image/png" height="93" width="144"/>
 </item>
 </channel>
 </rss>

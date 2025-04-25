@@ -176,7 +176,7 @@
     "href": "index.html#últimas-informaciones",
     "title": "\n            Modelos Multinivel\n        ",
     "section": "Últimas informaciones",
-    "text": "Últimas informaciones\n\n\n\n\n\n\n\n\n\n\nInformaciones por acá\n\n\n\n\n\n\n\n\n\nApr 24, 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nGithub Classroom\n\n\n\n\n\n\n\n\n\nApr 24, 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTexto apoyo multinivel\n\n\nTexto apoyo multinivel\n\n\n\n\n\n\nApr 24, 2025\n\n\n\n\n\n\n\n\nNo matching items\n\n\n-&gt; ir a la página de Informaciones del sitio."
+    "text": "Últimas informaciones\n\n\n\n\n\n\n\n\n\n\nInformaciones por acá\n\n\n\n\n\n\n\n\n\nApr 24, 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nGithub Classroom\n\n\n\n\n\n\n\n\n\nApr 24, 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTexto apoyo multinivel\n\n\n\n\n\n\n\n\n\nApr 24, 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInscripción de trabajos\n\n\n\n\n\n\n\n\n\nApr 15, 2025\n\n\n\n\n\n\n\n\nNo matching items\n\n\n-&gt; ir a la página de Informaciones del sitio."
   },
   {
     "objectID": "schedule.html",
@@ -197,7 +197,7 @@
     "href": "news/index.html",
     "title": "Informaciones",
     "section": "",
-    "text": "Acá las principales informaciones y actualizaciones del curso.\n\n\n   \n     \n     \n       Ordenar por\n       Por defecto\n         \n          Fecha - Menos reciente\n        \n         \n          Fecha - Más reciente\n        \n         \n          Título\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nFecha\n\n\nTítulo\n\n\nCategorías\n\n\n\n\n\n\njueves abril 24, 2025 at 12:00 AM\n\n\nInformaciones por acá\n\n\ninfo\n\n\n\n\njueves abril 24, 2025 at 12:00 AM\n\n\nGithub Classroom\n\n\ninfo\n\n\n\n\njueves abril 24, 2025 at 12:00 AM\n\n\nTexto apoyo multinivel\n\n\ninfo\n\n\n\n\n\nNo hay resultados\n\n\n\n\n\n\n\n\nSuscribirse!\n\n\n\nPuedes usar un lector de feeds como Feedly o un servicio RSS-to-email como Blogtrottr para suscribirte a cualquiera de estos mensajes.\n\n\n\n\n\n RSS"
+    "text": "Acá las principales informaciones y actualizaciones del curso.\n\n\n   \n     \n     \n       Ordenar por\n       Por defecto\n         \n          Fecha - Menos reciente\n        \n         \n          Fecha - Más reciente\n        \n         \n          Título\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nFecha\n\n\nTítulo\n\n\nCategorías\n\n\n\n\n\n\njueves abril 24, 2025 at 12:00 AM\n\n\nInformaciones por acá\n\n\ninfo\n\n\n\n\njueves abril 24, 2025 at 12:00 AM\n\n\nGithub Classroom\n\n\ninfo\n\n\n\n\njueves abril 24, 2025 at 12:00 AM\n\n\nTexto apoyo multinivel\n\n\ninfo\n\n\n\n\nmartes abril 15, 2025 at 12:00 AM\n\n\nInscripción de trabajos\n\n\ninfo\n\n\n\n\n\nNo hay resultados\n\n\n\n\n\n\n\n\nSuscribirse!\n\n\n\nPuedes usar un lector de feeds como Feedly o un servicio RSS-to-email como Blogtrottr para suscribirte a cualquiera de estos mensajes.\n\n\n\n\n\n RSS"
   },
   {
     "objectID": "assignment/07-practico.html",
@@ -828,5 +828,12 @@
       "Guías",
       "2: Datos y estimaciones en dos niveles"
     ]
+  },
+  {
+    "objectID": "news/2025-04-15_trabajos.html",
+    "href": "news/2025-04-15_trabajos.html",
+    "title": "Inscripción de trabajos",
+    "section": "",
+    "text": "← News\n\n\n\n\n\n\n\nimage\n\n\nEstimad_s estudiantes,\nva link para que puedan inscribir sus grupos y temas de trabajo:\nhttps://docs.google.com/spreadsheets/d/1OrNK7LvUUHxycBssIpeyZ1Ro-eOtwRqyIjK458zH_yw/edit?gid=0#gid=0\nAl respecto:\n\nlo ideal es que puedan hacerlo hasta el jueves en la mañana, así el jueves en la tarde les podemos comentar/dar retroalimentación sobre sus temas y datos, para que así puedan avanzar.\npara que no se repitan los temas/trabajos, la idea es que los grupos utilicen bases de datos distintas, para que se fijen al momento de la inscripción.\nsi algún grupo quiere juntarse a resolver dudas sobre el trabajo o sobre el curso estaremos disponibles el jueves en horario de clases (probablemente sea online dada la toma que comenzó hoy). Para esto, nos escriben un correo y fijamos horario para la reunión.\ncomo señalamos en clases, la idea es utilizar Github para que ustedes puedan versionar y subir sus trabajos a un repositorio, donde podamos además revisar y comentar más eficientemente. Para ello, vamos a utilizar Github Classroom, dejaremos un tutorial sobre esto pronto en el sitio web del curso."
   }
 ]

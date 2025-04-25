@@ -3,13 +3,7 @@ title: "Texto apoyo multinivel"
 date: "2025-04-24"
 categories: [info]
 image: /news/images/roback&legler.png
-description: "Texto apoyo multinivel"
 ---
-
-
 Se ha agregado un nuevo texto de apoyo para el curso, es un [capítulo de libro de Roback & Legler](/files/readings/Roback&Legler2020BeyondMultipleLinearRegression-Chapter8Multilevel.pdf) que incluye una introducción a los modelos multinivel y un ejemplo práctico. El texto está disponible en la pestaña de [programación](/schedule.html), en la lectura correspondiente a la asesoría programada de hoy 24 de Abril.
 
-
-
-- 
 
