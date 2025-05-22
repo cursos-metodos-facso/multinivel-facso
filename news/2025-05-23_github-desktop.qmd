@@ -7,6 +7,6 @@ image: /news/images/desktop.png
 
 ![](/news/images/desktop.png)
 
-Tenemos **tutorial** para utilizar Github Desktop, se encuentra en la sección de Github de la pestaña de [Trabajos](/trabajos.html) de esta página.
+Tenemos **tutorial** para utilizar Github Desktop, se encuentra en la sección de Github de la pestaña de [Trabajos](/trabajos.html) de esta página. Y link directo [acá](/assignment/desktop.html)
 
 

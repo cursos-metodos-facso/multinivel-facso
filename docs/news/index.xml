@@ -10,7 +10,49 @@
 <atom:link href="https://multinivel-facso.netlify.app/news/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.5.57</generator>
-<lastBuildDate>Thu, 24 Apr 2025 04:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 22 May 2025 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Tutorial Github Desktop</title>
+  <link>https://multinivel-facso.netlify.app/news/2025-05-23_github-desktop.html</link>
+  <description><![CDATA[ 
+
+<div class="back-nav"><a href="../news/">← News</a></div>
+
+
+
+
+<p><img src="https://multinivel-facso.netlify.app/news/images/desktop.png" class="img-fluid"></p>
+<p>Tenemos <strong>tutorial</strong> para utilizar Github Desktop, se encuentra en la sección de Github de la pestaña de <a href="../trabajos.html">Trabajos</a> de esta página. Y link directo <a href="../assignment/desktop.html">acá</a></p>
+
+
+
+ ]]></description>
+  <category>info</category>
+  <guid>https://multinivel-facso.netlify.app/news/2025-05-23_github-desktop.html</guid>
+  <pubDate>Thu, 22 May 2025 04:00:00 GMT</pubDate>
+  <media:content url="https://multinivel-facso.netlify.app/news/images/desktop.png" medium="image" type="image/png" height="72" width="144"/>
+</item>
+<item>
+  <title>Video tutorial Github classroom</title>
+  <link>https://multinivel-facso.netlify.app/news/2025-05-23_video-tutorial-classroom.html</link>
+  <description><![CDATA[ 
+
+<div class="back-nav"><a href="../news/">← News</a></div>
+
+
+
+
+<p><img src="https://multinivel-facso.netlify.app/news/images/video-classroom.png" class="img-fluid"></p>
+<p>Tenemos <strong>video tutorial</strong> para esto, al final del tutorial de Github Classroom que se encuentra en la sección de Github de la pestaña de <a href="../trabajos.html">Trabajos</a> de esta página. Acá <a href="../assignment/classroom.html#video-tutorial">link directo.</a></p>
+
+
+
+ ]]></description>
+  <category>info</category>
+  <guid>https://multinivel-facso.netlify.app/news/2025-05-23_video-tutorial-classroom.html</guid>
+  <pubDate>Thu, 22 May 2025 04:00:00 GMT</pubDate>
+  <media:content url="https://multinivel-facso.netlify.app/news/images/video-classroom.png" medium="image" type="image/png" height="90" width="144"/>
+</item>
 <item>
   <title>Informaciones por acá</title>
   <link>https://multinivel-facso.netlify.app/news/2025-04-23_inicio.html</link>
