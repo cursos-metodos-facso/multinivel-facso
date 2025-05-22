@@ -1,6 +1,6 @@
 ---
-title: "Presentaciones de trabajos"
-date: "2023-10-06"
+title: "Predicción de efectos aleatorios e interacción entre niveles"
+date: "2025-05-22"
 lang: es
 website:
   comments:
@@ -8,7 +8,10 @@ website:
       repo: cursos-metodos-facso/multinivel
 ---
 
-# Hoy sesión de presentación de avances de trabajos.
+# Documento de presentación
+
+<iframe src=/slides/07-random_effects-interactions.html height="550" width=100% allowfullscreen="true">
+</iframe> 
 
 # Foro
 

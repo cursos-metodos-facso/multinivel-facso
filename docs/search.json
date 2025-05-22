@@ -284,9 +284,14 @@
   {
     "objectID": "content/07-content.html",
     "href": "content/07-content.html",
-    "title": "Presentaciones de trabajos",
+    "title": "Predicción de efectos aleatorios e interacción entre niveles",
     "section": "",
-    "text": "Hoy sesión de presentación de avances de trabajos.\n\n\nForo"
+    "text": "Documento de presentación\n\n\n\n\nForo",
+    "crumbs": [
+      "Clases",
+      "Sesiones",
+      "Sesión 7"
+    ]
   },
   {
     "objectID": "content/05-content.html",
@@ -401,7 +406,7 @@
     "href": "content/06-content.html",
     "title": "Presentación",
     "section": "",
-    "text": "Documento de presentación\n\n\n\n\nVideo de la sesión\n(audio comienza al minuto)\n\n&lt;source src=“  Your browser does not support the video tag.\n\n\n\nForo",
+    "text": "Documento de presentación\n\n\n\n\nVideo de la sesión\n\n\nYour browser does not support the video tag. \n(audio comienza al minuto)\n\n\nForo",
     "crumbs": [
       "Clases",
       "Sesiones",

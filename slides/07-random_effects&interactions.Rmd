@@ -74,6 +74,8 @@ class: roja right
 
 ## 2- Predicción de efectos aleatorios
 
+## 3- Interacción entre niveles
+
 
 ```{r echo=FALSE}
 pacman::p_load(
@@ -230,22 +232,25 @@ class: roja right
 
 ## .yellow[2- Predicción de efectos aleatorios]
 
+## 3- Interacción entre niveles
 
 ---
 # Modelo con coeficientes aleatorios
 
--   El modelo permite la estimación de coeficientes fijos y aleatorios
+-   El modelo multinivel (con efectos aleatorios - random effects o mixed model) permite la estimación de coeficientes **.green[fijos]** y **.red[aleatorios]**
 
--   Fijos: los mismos para todos los casos
+--
 
--   Aleatorios: distintos entre grupos, pero iguales dentro de cada grupo
+  -   **.green[Fijos]**: los mismos para todos los casos
+
+  -   **.red[Aleatorios]**: distintos entre grupos, pero iguales dentro de cada grupo
 
 ---
 # Modelo con coeficientes aleatorios (2)
 
-- En general, se utiliza el termino .roja[efectos aleatorios] para el modelo nulo, y .red[coeficientes aleatorios] para modelos con pendiente aleatoria.
+- En general, se utiliza el termino .orange[efectos aleatorios] para el modelo nulo, y .blue[coeficientes aleatorios] para modelos con pendiente aleatoria.
 
--   En este curso, vamos a utilizar “efecto” para referirnos a las
+-   En este curso, vamos a utilizar **“efecto”** para referirnos a las
     desviaciones de cada grupo, y “coeficientes” para la estimación
     total del grupo (coeficiente=efecto fijo + efecto aleatorio)
 
@@ -326,8 +331,9 @@ Por lo tanto, el "intercepto" (y/o pendiente) para cada grupo es una .roja[estim
 .medium[
 -   En esta estimación subyace la idea del **“shrinkage”** (reducción)
 
--   Los coeficientes de regresión OLS de cada grupo son reducidos en la
-    dirección del coeficiente promedio para todos los grupos
+-   Los coeficientes de regresión OLS de cada grupo son reducidos en la dirección del coeficiente promedio para todos los grupos
+
+--
 
 -   El grado de “reducción” depende del tamaño del grupo y de la
     distancia entre el promedio del grupo y el promedio general, es
@@ -392,7 +398,7 @@ ranef(results_0)
 
 
 ---
-## Coeficientes de regresión - predicción con efectos fijos
+## Coeficientes de regresión - predicción con intercepto aleatorio + efectos fijos predictores
 .small[
 ```{r}
 results_4 = lmer(mathach ~ 1 + ses + female + mnses + sector + (1 | schoolid), data=mlm)
@@ -455,9 +461,9 @@ class: roja right
 
 ## 1- Resumen sesión anterior
 
-## .yellow[2- Interacción entre niveles]
+## 2- Interacción entre niveles
 
-
+## .yellow[3- Interacción entre niveles]
 ---
 # Interacciones entre niveles: bases
 
@@ -488,6 +494,44 @@ class: middle center
 ![:scale 100%](img/interaction.png)
 
 Si la interacción es significativa quiere decir que las **diferencias entre pendientes** son distintas de cero
+
+---
+# Interacción en regresión OLS (un nivel)
+
+$$
+y(izq-der)_i = \beta_0 + \beta_1 \cdot \text{sexo}_i + \beta_2 \cdot \text{edad}_i + \beta_3 \cdot (\text{sexo}_i \cdot \text{edad}_i) + \varepsilon_i
+$$
+--
+
+donde,
+
+.medium[
+- $y(izq-dir)_i$: posición ideológica izquierda-derecha del individuo $i$.
+- $\beta_0$: intercepto del modelo.
+- $\text{sexo}_i$: variable indicadora del sexo del individuo $i$ (por ejemplo, $0 = \text{mujer},\ 1 = \text{hombre}$).
+- $\text{edad}_i$: edad del individuo $i$.
+- $\text{sexo}_i \cdot \text{edad}_i$: interacción entre sexo y edad.
+- $\beta_1$, $\beta_2$, $\beta_3$: coeficientes de regresión que indican el efecto de cada variable sobre $y_i$.
+- $\varepsilon_i$: término de error aleatorio para el individuo $i$.
+]
+
+---
+# Modelo con pendiente aleatoria
+
+![:scale 80%](https://multinivel-facso.netlify.app/slides/images/model_4.JPG)
+
+
+---
+# Pendiente aleatoria
+
+![](https://multinivel-facso.netlify.app/slides/images/random2.jpg)
+
+---
+# Interacción entre niveles
+
+![](https://multinivel-facso.netlify.app/slides/images/model_5.JPG)
+
+
 
 ---
 # Interacciones entre niveles en MLM
