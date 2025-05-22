@@ -15,8 +15,13 @@ website:
 
 # Video de la sesion
 
-Proximamente aquí
-
+<iframe width="560" height="315" 
+  src="https://www.youtube.com/watch?si=c57V5RaZMn9nSVQ2&v=p6fxxD8_VMw&feature=youtu.be" 
+  title="YouTube video player" 
+  frameborder="0" 
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+  allowfullscreen>
+</iframe>
 
 
 # Foro

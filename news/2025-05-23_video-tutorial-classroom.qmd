@@ -1,0 +1,12 @@
+---
+title: "Video tutorial Github classroom"
+date: "2025-05-22"
+categories: [info]
+image: /news/images/video-classroom.png
+---
+
+![](/news/images/video-classroom.png)
+
+Tenemos **video tutorial** para esto, al final del tutorial de Github Classroom que se encuentra en la sección de Github de la pestaña de [Trabajos](/trabajos.html) de esta página. Acá [link directo.](/assignment/classroom.html#video-tutorial)
+
+

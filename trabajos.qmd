@@ -115,7 +115,11 @@ c) Considerando todo lo anterior, ¿qué nota final consideraría justa para mí
 
 # Github Classroom
 
-Las entregas y revisiones de trabajos del curso operarán en la plataforma Github Classroom. Esto nos permitirá una revisión más apropiada del código y de los contenidos de los trabajos, y dar retroalimentación más específica a cada grupo. Se puede acceder a un tutorial [aquí](/assignment/classroom.html).
+Las entregas y revisiones de trabajos del curso operarán en la plataforma Github Classroom. Esto nos permitirá una revisión más apropiada del código y de los contenidos de los trabajos, y dar retroalimentación más específica a cada grupo. Se puede acceder a un tutorial [aquí](/assignment/classroom.html). Incluye un video al final.
+
+# Github Desktop
+
+Si bien es posible utilizar Github desde RStudio, existen mejores herramientas para esto. La más usada es Github Desktop, se recomienda. Acá un un [tutorial](/assignment/desktop.html). 
 
 
 # Foro de preguntas sobre el trabajo

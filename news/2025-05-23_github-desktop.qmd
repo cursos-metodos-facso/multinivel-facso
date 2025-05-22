@@ -1,0 +1,12 @@
+---
+title: "Tutorial Github Desktop"
+date: "2025-05-22"
+categories: [info]
+image: /news/images/desktop.png
+---
+
+![](/news/images/desktop.png)
+
+Tenemos **tutorial** para utilizar Github Desktop, se encuentra en la sección de Github de la pestaña de [Trabajos](/trabajos.html) de esta página.
+
+

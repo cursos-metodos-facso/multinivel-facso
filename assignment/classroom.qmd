@@ -65,6 +65,11 @@ Una vez aceptada la tarea deberían poder acceder a su repositorio asignado a su
 
 Una vez dentro del repositorio y añadidos tod-s los integrantes del grupo, deben clonar el repositorio cada un- en sus computadores y comenzar a desarrollar el trabajo.
 
+## Video Tutorial
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/p6fxxD8_VMw?si=EvgNvUf2yJrwbsxH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+Acá [link directo a youtube.](https://www.youtube.com/watch?v=p6fxxD8_VMw)
 
 # Foro
 
