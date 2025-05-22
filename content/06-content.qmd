@@ -13,15 +13,16 @@ website:
 <iframe src=/slides/06-ajuste_reporte.html height="550" width=100% allowfullscreen="true">
 </iframe> 
 
-# Video de la sesion
+# Video de la sesión
 
-<iframe width="560" height="315" 
-  src="https://www.youtube.com/watch?si=c57V5RaZMn9nSVQ2&v=p6fxxD8_VMw&feature=youtu.be" 
-  title="YouTube video player" 
-  frameborder="0" 
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-  allowfullscreen>
-</iframe>
+(audio comienza al minuto)
+
+<video width="640" height="360" controls>
+  <source src="<video width="640" height="360" controls>
+  <source src="https://dl.dropboxusercontent.com/scl/fi/j2jqle07xcv8h2b5ulnin/clase6_ajuste-reporte.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 
 
 # Foro
