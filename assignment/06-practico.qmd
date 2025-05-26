@@ -1,6 +1,6 @@
 ---
-title: "Interacción entre niveles"
-date: "2023-10-13"
+title: "Práctica 6: Interacción entre niveles"
+date: "2025-05-26"
 lang: es
 number-sections: true
 website:
@@ -72,7 +72,7 @@ anova(reg_mlm3b,reg_mlm3a)
 
 ```{r}
 reg_mlm3c = lmer(mathach ~ 1 + ses + sector_f + ses*sector_f + mnses +  (1 + ses | schoolid), data=mlm)
-screenreg(c(reg_mlm3a,reg_mlm3b, reg_mlm3c))
+htmlreg(c(reg_mlm3a,reg_mlm3b, reg_mlm3c)) # screenreg() para visualización en R
 
 ```
 
@@ -85,7 +85,7 @@ plot_model(reg_mlm3c, type = "int")
 
 # Ejemplo Aguinis
 
-- Link a paper [aquí](https://multinivel.netlify.com/readings/aguinis2013crosslevel.pdf)
+- Link a paper [aquí](https://multinivel.netlify.app/readings/aguinis2013crosslevel.pdf)
 
 - Planteamiento general:
 
@@ -126,7 +126,7 @@ positive leadership climate.
 ## Datos
 
 ```{r}
-exdata=read.csv("https://multinivel.netlify.com/practicas/data/aguinis_JOM.csv", header = TRUE, sep = ",")
+exdata=read.csv("https://multinivel.netlify.app/practicas/data/aguinis_JOM.csv", header = TRUE, sep = ",")
 stargazer(exdata, type = "text")
 ```
 

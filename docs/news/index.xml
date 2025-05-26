@@ -10,7 +10,32 @@
 <atom:link href="https://multinivel-facso.netlify.app/news/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.5.57</generator>
-<lastBuildDate>Thu, 22 May 2025 04:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 26 May 2025 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Nuevos ejercicios prácticos</title>
+  <link>https://multinivel-facso.netlify.app/news/2025-05-26_nuevas-practicas.html</link>
+  <description><![CDATA[ 
+
+<div class="back-nav"><a href="../news/">← News</a></div>
+
+
+
+
+<p>Se han agregado 3 ejercicios prácticos nuevos, ya disponibles en la sección <a href="..\assignment/">Prácticos</a>. Estos prácticos fueron suspendidos debido a la toma y existen contenidos que pueden ser útiles para la realización del Trabajo 1.</p>
+<ul>
+<li><p><a href="..\assignment/04-practico.html">Práctico 4</a> - Combinando datos de distintos niveles: En este práctico se utiliza la base de datos de ISSP 2009 y la base Quality of Goverment. El objetivo es vincular ambas bases a través de la variable de identificación de países.</p></li>
+<li><p><a href="..\assignment/05-practico.html">Práctico 5</a> - Predicción de efectos aleatorios: En este práctico se revisan los principales códigos y procesos para la estimación de efectos aleatorios. En la sección final se incluyen gráficos de efectos aleatorios.</p></li>
+<li><p><a href="..\assignment/06-practico.html">Práctico 6</a> - Interacción entre niveles: En este práctico se revisan dos ejercicios para la estimación de efectos de interacción entre niveles. El primer ejemplo es con los datos de High School and Beyond (HSB) y el segundo ejemplo es con datos del paper de Aguinis, et al.&nbsp;(2013).</p></li>
+</ul>
+
+
+
+ ]]></description>
+  <category>info</category>
+  <guid>https://multinivel-facso.netlify.app/news/2025-05-26_nuevas-practicas.html</guid>
+  <pubDate>Mon, 26 May 2025 04:00:00 GMT</pubDate>
+  <media:content url="https://multinivel-facso.netlify.app/news/images/interac.png" medium="image" type="image/png" height="144" width="144"/>
+</item>
 <item>
   <title>Tutorial Github Desktop</title>
   <link>https://multinivel-facso.netlify.app/news/2025-05-23_github-desktop.html</link>
@@ -22,7 +47,7 @@
 
 
 <p><img src="https://multinivel-facso.netlify.app/news/images/desktop.png" class="img-fluid"></p>
-<p>Tenemos <strong>tutorial</strong> para utilizar Github Desktop, se encuentra en la sección de Github de la pestaña de <a href="../trabajos.html">Trabajos</a> de esta página. Y link directo <a href="../assignment/desktop.html">acá</a></p>
+<p>Tenemos <strong>tutorial</strong> para utilizar Github Desktop, se encuentra en la sección de Github de la pestaña de <a href="..\trabajos.html">Trabajos</a> de esta página. Y link directo <a href="..\assignment/desktop.html">acá</a></p>
 
 
 
@@ -43,7 +68,7 @@
 
 
 <p><img src="https://multinivel-facso.netlify.app/news/images/video-classroom.png" class="img-fluid"></p>
-<p>Tenemos <strong>video tutorial</strong> para esto, al final del tutorial de Github Classroom que se encuentra en la sección de Github de la pestaña de <a href="../trabajos.html">Trabajos</a> de esta página. Acá <a href="../assignment/classroom.html#video-tutorial">link directo.</a></p>
+<p>Tenemos <strong>video tutorial</strong> para esto, al final del tutorial de Github Classroom que se encuentra en la sección de Github de la pestaña de <a href="..\trabajos.html">Trabajos</a> de esta página. Acá <a href="..\assignment/classroom.html#video-tutorial">link directo.</a></p>
 
 
 
@@ -83,7 +108,7 @@
 
 
 
-<p>Se encuentra disponible un <a href="../assignment/classroom.html">tutorial de Github Classroom</a> para que puedan revisar cómo funciona la plataforma y cómo se entregan los trabajos. También el link está disponible en la pestaña de <a href="../trabajos.html">Trabajos</a>.</p>
+<p>Se encuentra disponible un <a href="..\assignment/classroom.html">tutorial de Github Classroom</a> para que puedan revisar cómo funciona la plataforma y cómo se entregan los trabajos. También el link está disponible en la pestaña de <a href="..\trabajos.html">Trabajos</a>.</p>
 
 
 
@@ -91,7 +116,7 @@
   <category>info</category>
   <guid>https://multinivel-facso.netlify.app/news/2025-04-24_githubclassrooom.html</guid>
   <pubDate>Thu, 24 Apr 2025 04:00:00 GMT</pubDate>
-  <media:content url="https://github.blog/wp-content/uploads/2019/08/github-classroom-1200-630.png" medium="image" type="image/png"/>
+  <media:content url="https://multinivel-facso.netlify.app/news/images/classroom.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
   <title>Texto apoyo multinivel</title>
@@ -103,7 +128,7 @@
 
 
 
-<p>Se ha agregado un nuevo texto de apoyo para el curso, es un <a href="../files/readings/Roback&amp;Legler2020BeyondMultipleLinearRegression-Chapter8Multilevel.pdf">capítulo de libro de Roback &amp; Legler</a> que incluye una introducción a los modelos multinivel y un ejemplo práctico. El texto está disponible en la pestaña de <a href="../schedule.html">programación</a>, en la lectura correspondiente a la asesoría programada de hoy 24 de Abril.</p>
+<p>Se ha agregado un nuevo texto de apoyo para el curso, es un <a href="..\files/readings/Roback&amp;Legler2020BeyondMultipleLinearRegression-Chapter8Multilevel.pdf">capítulo de libro de Roback &amp; Legler</a> que incluye una introducción a los modelos multinivel y un ejemplo práctico. El texto está disponible en la pestaña de <a href="..\schedule.html">programación</a>, en la lectura correspondiente a la asesoría programada de hoy 24 de Abril.</p>
 
 
 
