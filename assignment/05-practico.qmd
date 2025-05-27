@@ -1,12 +1,12 @@
 ---
-title: "Práctica 5: Predicción de efectos aleatorios"
-date: "2025-05-26"
+title: "Predicción de efectos aleatorios"
+date: "2023-09-29"
 lang: es
 number-sections: true
 website:
   comments:
     giscus:
-      repo: cursos-metodos-facso/multinivel-facso
+      repo: cursos-metodos-facso/multinivel
 ---
 
 ```{r setup, include=FALSE, cache = FALSE}
@@ -49,10 +49,10 @@ $y_{ij}=\gamma_{00}+\gamma_{10}X_{ij}+\mu_{0j}+\mu_{1j}X_{ij}+ r_{ij}$
 
 ```{r results='asis' }
 reg_mlm0=lmer(mathach ~ 1 + ( 1 | schoolid), data = mlm)
-reg_mlm1=lmer(mathach ~ 1 + ses + ( 1 | schoolid), data = mlm)
+reg_mlm1=lmer(mathach ~ 1 + ses + sector +( 1 | schoolid), data = mlm)
 
-reg_mlm2=lmer(mathach ~ 1 + ses + (1 +ses | schoolid), data=mlm)
-htmlreg(list(reg_mlm1, reg_mlm2), doctype = FALSE) # para ver en la consola utilizar screenreg()
+reg_mlm2 = lmer(mathach ~ 1 + ses + (1 +ses | schoolid), data=mlm)
+htmlreg(reg_mlm2, doctype = FALSE)
 ```
 
 En este modelo vemos la estimación de efectos fijos y aleatorios: fijo para intercepto y pendiente, y aleatorios para intercepto y pendiente. Para poder ver el resultado de la estimación, se puede realizar la predicción de los efectos aleatorios y gráficos.

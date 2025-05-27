@@ -1,12 +1,12 @@
 ---
-title: "Práctica 4: Combinando datos de distintos niveles"
-date: "2025-05-26"
+title: "Combinando datos de distintos niveles"
+date: "2023-09-08"
 lang: es
 number-sections: true
 website:
   comments:
     giscus:
-      repo: cursos-metodos-facso/multinivel-facso
+      repo: cursos-metodos-facso/multinivel
 ---
 
 ```{r setup, include=FALSE, cache = FALSE}
@@ -24,7 +24,7 @@ Desde un punto de vista operativo, las variables de nivel dos se pueden clasific
 
   a) Las que se pueden generar a partir desde los datos individuales (como por ejemplo, promedio/porcentaje de una variable de nivel 1)
 
-  b) Las que provienen de fuentes externas a los datos individuales (ej: datos administrativos, nivel de democracia de un país, nivel de vulnerabilidad de una escuela, índice GINI, etc.)
+  b) Las que provienen de fuentes externas a los datos individuales (ej: datos administrativos, nivel de democracia de un país, nivel de vulnerabilidad de una escuela, etc.)
 
 Para los ejemplos vamos a trabajar con la base de datos de ISSP 2009 (www.issp.org), modulo desigualdad económica (datos originales: ZA5400_v4-0-0.dta), y luego con la base del Quality of Government (http://qog.pol.gu.se/) 
 
@@ -37,7 +37,7 @@ Primero cargamos la base de la encuesta ISSP desigualdad (mayor información sob
 pacman::p_load(haven,descr,sjmisc,dplyr,sjPlot, ggplot2)
 
 # Data ISSP (original)
-issp2009 <- read_dta("https://github.com/cursos-metodos-facso/multinivel-facso/raw/refs/heads/main/assignment/data/ZA5400_v4-0-0.dta")
+issp2009 <- read_dta("https://multinivel-facso.netlify.app/assignment/data/ZA5400_v4-0-0.dta")
 names(issp2009)
 names(issp2009) <- tolower(names(issp2009)) # cambia a minúsculas
 ```
@@ -88,8 +88,7 @@ Y ahora recodificaciones y limpieza de perdidos
 
 # Generando datos nivel 2 a partir de datos individuales
 
-En este caso se habla también de datos "agregados" o "colapsados".
-
+En este caso se habla también de datos "agregados" o "colapsados". 
 Para agregar, utilizaremos primero una función simple para hacerlo en base al promedio
 
 Por ejemplo, agregar a la base de datos el promedio de edad por país (v5)
@@ -152,7 +151,7 @@ box_age + geom_boxplot() +
 Para esto usaremos la base del Quality of Government Indicators (QoG).
 
 ```{r eval=FALSE}
-qog=read_stata("https://github.com/cursos-metodos-facso/multinivel-facso/raw/refs/heads/main/assignment/data/qog_bas_ts_jan23_stata14.dta")
+qog=read_stata("https://multinivel-facso.netlify.app/assignment/data/qog_bas_ts_jan23_stata14.dta")
 ```
 
 
@@ -206,7 +205,7 @@ Acá se pueden producir dos situaciones:
 
 a. ambas bases identifican de la misma manera a las unidades de nivel 2, es decir, en ambas existe una columna que tiene el mismo nombre y donde cada código o nombre se corresponde de manera exacta entre ambas bases. Este es el caso más favorable y se puede proceder directamente a la combinación de las bases
 
-b. no existe un identificador único en ambas bases para las unidades de nivel 2. Por ejemplo, si son países, puede que estos se identifiquen por un código diferente, o que sus nombres en algunos casos se escriban distinto (ej: con/sin tilde, distintos idiomas,etc). Si este es el caso, la opción más básica y trabajosa es la "manual", es decir, generar una variable en alguna de las bases de datos a combinar que posea valores idénticos a los de la otra base de datos.
+b. no existe un identificador único en ambas bases para las unidades de nivel 2. Por ejemplo, si son países, puede que estos se identifiquen por un código diferente, o que sus nombres en algunos casos se escriban distinto (ej: con/sin acento, distintos idiomas,etc). Si este es el caso, la opción más básica y trabajosa es la "manual", es decir, generar una variable en alguna de las bases de datos a combinar que posea valores idénticos a los de la otra base de datos.
 
 Veamos qué sucede en nuestro ejemplo. En la base ISSP la variable de identificación de país es v5, que posee un código y un valor:
 

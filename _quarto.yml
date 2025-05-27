@@ -106,12 +106,12 @@ website:
               file: assignment/02-practico.qmd
             - text: "3: Estimación modelos multinivel con lmer en R"
               file: assignment/03-practico.qmd
-            - text: "4: Combinando datos de distintos niveles"
-              file: assignment/04-practico.qmd
-            - text: "5: Efectos aleatorios"
-              file: assignment/05-practico.qmd
-            - text: "6: Interacción entre niveles"
-              file: assignment/06-practico.qmd
+            # - text: "4: Combinando datos de distintos niveles"
+            #   file: assignment/04-practico.qmd
+            # - text: "5: Efectos aleatorios"
+            #   file: assignment/05-practico.qmd
+            # - text: "6: Interacción entre niveles"
+            #   file: assignment/06-practico.qmd
             # - text: "7: Centrado"
             #   file: assignment/07-practico.qmd
   page-footer:
