@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -70,6 +104,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <meta property="og:title" content="Centrado – Modelos Multinivel">
 <meta property="og:description" content="">
@@ -80,7 +143,7 @@ ul.task-list li input[type="checkbox"] {
 <meta property="og:image:width" content="521">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -114,7 +177,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Clases</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../assignment/index.html"> 
+    <a class="nav-link active" href="../assignment/index.html" aria-current="page"> 
 <span class="menu-text">Prácticos</span></a>
   </li>  
   <li class="nav-item">
@@ -136,17 +199,135 @@ ul.task-list li input[type="checkbox"] {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignment/01-practico.html">Guías</a></li><li class="breadcrumb-item"><a href="../assignment/07-practico.html">7: Centrado</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Sobre prácticos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Instrucciones generales</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Guías</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/01-practico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1: Repaso inferencia</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/02-practico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2: Datos y estimaciones en dos niveles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/03-practico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3: Estimación modelos multinivel con lmer en R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/04-practico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4: Combinando datos de distintos niveles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/05-practico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5: Efectos aleatorios</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/06-practico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6: Interacción entre niveles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/07-practico.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">7: Centrado</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">En esta página</h2>
    
   <ul>
-  <li><a href="#foro" id="toc-foro" class="nav-link active" data-scroll-target="#foro">Foro</a></li>
+  <li><a href="#centrado-de-variables" id="toc-centrado-de-variables" class="nav-link active" data-scroll-target="#centrado-de-variables">Centrado de variables</a>
+  <ul class="collapse">
+  <li><a href="#esta-práctica" id="toc-esta-práctica" class="nav-link" data-scroll-target="#esta-práctica">Esta práctica</a></li>
+  <li><a href="#modelos-contextuales-un-punto-de-partida" id="toc-modelos-contextuales-un-punto-de-partida" class="nav-link" data-scroll-target="#modelos-contextuales-un-punto-de-partida">Modelos contextuales: un punto de partida</a></li>
+  <li><a href="#datos-de-ejemplo" id="toc-datos-de-ejemplo" class="nav-link" data-scroll-target="#datos-de-ejemplo">Datos de ejemplo</a></li>
+  <li><a href="#centrado" id="toc-centrado" class="nav-link" data-scroll-target="#centrado">Centrado</a></li>
+  <li><a href="#centrado-en-la-media-general-gmc" id="toc-centrado-en-la-media-general-gmc" class="nav-link" data-scroll-target="#centrado-en-la-media-general-gmc">Centrado en la Media General (GMC)</a>
+  <ul class="collapse">
+  <li><a href="#la-mecánica-del-centrado-gmc" id="toc-la-mecánica-del-centrado-gmc" class="nav-link" data-scroll-target="#la-mecánica-del-centrado-gmc">La Mecánica del Centrado GMC</a></li>
+  <li><a href="#correlaciones-entre-puntaje-bruto-y-gmc" id="toc-correlaciones-entre-puntaje-bruto-y-gmc" class="nav-link" data-scroll-target="#correlaciones-entre-puntaje-bruto-y-gmc">Correlaciones entre Puntaje Bruto y GMC</a></li>
+  <li><a href="#tabla-de-correlaciones" id="toc-tabla-de-correlaciones" class="nav-link" data-scroll-target="#tabla-de-correlaciones">Tabla de Correlaciones</a></li>
+  <li><a href="#estimaciones-del-modelo-con-puntaje-bruto-y-gmc" id="toc-estimaciones-del-modelo-con-puntaje-bruto-y-gmc" class="nav-link" data-scroll-target="#estimaciones-del-modelo-con-puntaje-bruto-y-gmc">Estimaciones del Modelo con Puntaje Bruto y GMC</a></li>
+  <li><a href="#otra-perspectiva-del-centrado-en-la-media-general-estimaciones-por-grupo" id="toc-otra-perspectiva-del-centrado-en-la-media-general-estimaciones-por-grupo" class="nav-link" data-scroll-target="#otra-perspectiva-del-centrado-en-la-media-general-estimaciones-por-grupo">Otra Perspectiva del Centrado en la Media General – Estimaciones por Grupo</a></li>
+  </ul></li>
+  <li><a href="#centrado-en-la-media-del-grupo-cmc" id="toc-centrado-en-la-media-del-grupo-cmc" class="nav-link" data-scroll-target="#centrado-en-la-media-del-grupo-cmc">Centrado en la Media del Grupo (CMC)</a></li>
+  <li><a href="#centrado-en-la-media-del-grupo-con-nuestros-datos" id="toc-centrado-en-la-media-del-grupo-con-nuestros-datos" class="nav-link" data-scroll-target="#centrado-en-la-media-del-grupo-con-nuestros-datos">Centrado en la Media del Grupo con Nuestros Datos</a>
+  <ul class="collapse">
+  <li><a href="#correlación-y-método-de-centrado" id="toc-correlación-y-método-de-centrado" class="nav-link" data-scroll-target="#correlación-y-método-de-centrado">Correlación y Método de Centrado</a></li>
+  <li><a href="#modelando-datos-cmc-por-grupo" id="toc-modelando-datos-cmc-por-grupo" class="nav-link" data-scroll-target="#modelando-datos-cmc-por-grupo">Modelando Datos CMC por Grupo</a></li>
+  <li><a href="#modelo-multinivel-con-datos-cmc" id="toc-modelo-multinivel-con-datos-cmc" class="nav-link" data-scroll-target="#modelo-multinivel-con-datos-cmc">Modelo Multinivel con Datos CMC</a></li>
+  <li><a href="#revisitando-el-modelo-contextual" id="toc-revisitando-el-modelo-contextual" class="nav-link" data-scroll-target="#revisitando-el-modelo-contextual">Revisitando el Modelo Contextual</a></li>
+  </ul></li>
+  <li><a href="#el-factor-que-complica-interacciones" id="toc-el-factor-que-complica-interacciones" class="nav-link" data-scroll-target="#el-factor-que-complica-interacciones">El Factor que Complica: Interacciones</a>
+  <ul class="collapse">
+  <li><a href="#interacciones-en-el-nivel-1-l1" id="toc-interacciones-en-el-nivel-1-l1" class="nav-link" data-scroll-target="#interacciones-en-el-nivel-1-l1">Interacciones en el Nivel 1 (L1)</a></li>
+  <li><a href="#graficando-interacciones" id="toc-graficando-interacciones" class="nav-link" data-scroll-target="#graficando-interacciones">Graficando Interacciones</a></li>
+  </ul></li>
+  <li><a href="#interacciones-entre-niveles-cross-level-interactions" id="toc-interacciones-entre-niveles-cross-level-interactions" class="nav-link" data-scroll-target="#interacciones-entre-niveles-cross-level-interactions">Interacciones Entre Niveles (Cross-level Interactions)</a></li>
+  <li><a href="#qué-método-de-centrado-usar" id="toc-qué-método-de-centrado-usar" class="nav-link" data-scroll-target="#qué-método-de-centrado-usar">¿Qué Método de Centrado Usar?</a></li>
+  <li><a href="#resumen-sobre-el-centrado" id="toc-resumen-sobre-el-centrado" class="nav-link" data-scroll-target="#resumen-sobre-el-centrado">Resumen sobre el Centrado</a></li>
+  </ul></li>
+  <li><a href="#foro" id="toc-foro" class="nav-link" data-scroll-target="#foro">Foro</a></li>
   </ul>
 </nav>
     </div>
@@ -157,12 +338,2900 @@ ul.task-list li input[type="checkbox"] {
 <h1 class="title display-7">Centrado</h1>
 
 <div class="date-block bg-assignment text-white p-2">
-  <p class="date">Correspondiente a la sesión del viernes, 20 de octubre de 2023</p>
+  <p class="date">Correspondiente a la sesión del jueves, 29 de mayo de 2025</p>
 </div>
 </header>
 
 
-<p>Para este práctico revisar el siguiente capítulo con ejercicios de centrado: <a href="https://commresearch.arizona.edu/classes/comm640/640_Book/docs/centering-in-multilevel-models.html">Centering in Multilevel Models</a>.</p>
+<p>Este práctico es una versión traducida de: <a href="https://commresearch.arizona.edu/classes/comm640/640_Book/docs/centering-in-multilevel-models.html">Centering in Multilevel Models</a>.</p>
+<section id="centrado-de-variables" class="level1">
+<h1>Centrado de variables</h1>
+<section id="esta-práctica" class="level2">
+<h2 class="anchored" data-anchor-id="esta-práctica">Esta práctica</h2>
+<p>En este práctico, abordaremos algunos conceptos adicionales en los modelos multinivel:</p>
+<ul>
+<li><p>La importancia del centrado de variables</p></li>
+<li><p>Distinguir los efectos <em>dentro de los grupos</em> de los efectos <em>entre grupos</em></p></li>
+</ul>
+<p>Al final, la agrupación (clustering) nos acerca a comprender qué nos dicen las interacciones entre niveles</p>
+</section>
+<section id="modelos-contextuales-un-punto-de-partida" class="level2">
+<h2 class="anchored" data-anchor-id="modelos-contextuales-un-punto-de-partida">Modelos contextuales: un punto de partida</h2>
+<p>Los modelos contextuales utilizan el predictor tanto en el nivel 1 (L1) como en el nivel 2 (L2).</p>
+<p>Este tipo de modelos se usa para evaluar efectos “contextuales”:</p>
+<ul>
+<li><p>En general, un efecto contextual compara el efecto de un predictor medido a nivel individual sobre un resultado individual con el efecto de la media del predictor sobre ese mismo resultado.</p></li>
+<li><p>Consideremos el efecto de las tareas escolares: ¿el logro en matemáticas de un estudiante es una función de su propia cantidad de tareas o de cuánta tarea hace en promedio toda la clase?</p></li>
+<li><p>El problema es que el puntaje de cada estudiante en una clase o grupo determinado se utiliza para calcular la media; es decir, ambos no son ortogonales (no son independientes entre sí).</p></li>
+</ul>
+<p>Los modelos contextuales son útiles para evaluar los efectos del centrado.</p>
+</section>
+<section id="datos-de-ejemplo" class="level2">
+<h2 class="anchored" data-anchor-id="datos-de-ejemplo">Datos de ejemplo</h2>
+<p>Los datos provienen de Kreft y Leeuw, y pueden encontrarse en el sitio web de IDRE</p>
+<p>El logro en matemáticas es la variable dependiente, y los estudiantes están anidados dentro de escuelas.</p>
+<p>Las horas de tarea son el predictor de nivel 1 (L1)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, lme4, texreg, gt)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>school0 <span class="ot">&lt;-</span> foreign<span class="sc">::</span><span class="fu">read.dta</span>(<span class="st">"https://stats.idre.ucla.edu/stat/stata/examples/mlm_imm/imm10.dta"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>school0[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="fu">c</span>(<span class="st">"schid"</span>,<span class="st">"schnum"</span>, <span class="st">"stuid"</span>,<span class="st">"math"</span>,<span class="st">"homework"</span>)]</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   schid schnum stuid math homework
+1   7472      1     3   48        1
+2   7472      1     8   48        0
+3   7472      1    13   53        0
+4   7472      1    17   42        1
+5   7472      1    27   43        2
+6   7472      1    28   57        1
+7   7472      1    30   33        5
+8   7472      1    36   64        1
+9   7472      1    37   36        1
+10  7472      1    42   56        2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(school0[<span class="fu">c</span>(<span class="st">"math"</span>,<span class="st">"homework"</span>)], <span class="at">fast =</span> <span class="cn">TRUE</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         vars   n  mean    sd median min max range skew kurtosis   se
+math        1 260 51.30 11.14   49.5  31  71    40 0.11     -1.2 0.69
+homework    2 260  2.02  1.55    1.0   0   7     7 0.82     -0.3 0.10</code></pre>
+</div>
+</div>
+</section>
+<section id="centrado" class="level2">
+<h2 class="anchored" data-anchor-id="centrado">Centrado</h2>
+<p>En algunos casos, podríamos desear centrar nuestras variables predictoras/independientes.</p>
+<p>Hemos hablado sobre problemas de interpretación (por ejemplo, cuando cero no es un valor plausible), pero existen otras razones.</p>
+<p>Para centrar una variable, se resta un valor dado (usualmente una media) de los puntajes originales de la variable.</p>
+<ul>
+<li>El centrado alterará el significado de ciertos parámetros, incluyendo el intercepto y algunas pendientes (dependiendo del método de centrado).</li>
+</ul>
+<p>Dos métodos relevantes de centrado son:</p>
+<ul>
+<li><p>Centrado en la media general / Centrado por una constante (GMC)</p></li>
+<li><p>Centrado en la media del grupo (CMC)</p></li>
+</ul>
+</section>
+<section id="centrado-en-la-media-general-gmc" class="level2">
+<h2 class="anchored" data-anchor-id="centrado-en-la-media-general-gmc">Centrado en la Media General (GMC)</h2>
+<p>Quizás la forma más familiar de centrar los datos sería restar la media general a cada observación.</p>
+<ul>
+<li>La media general es la media de cada variable X considerando todas las observaciones, sin importar la unidad de muestreo.</li>
+</ul>
+<p>Nuestra ecuación de regresión para el modelo contextual que predice los puntajes en matemáticas según las horas de tarea se convierte en:</p>
+<p><span class="math display">\[
+Y_{is} = \gamma_{00} + \gamma_{01}(X_{is} - \bar{X}_g) + \gamma_{10}(\bar{X}_s - \bar{X}_g) + U_{0s} + e_{is}
+\]</span>ₛ</p>
+<p>El intercepto ahora refleja el valor predicho de Y para un estudiante que (siguiendo nuestro ejemplo):</p>
+<ul>
+<li><p>Tiene un puntaje en tarea igual a la media general</p></li>
+<li><p>Asiste a una escuela con un promedio de tarea igual a la media general</p></li>
+</ul>
+<p>¿Dónde has visto antes la parte de la fórmula que está entre paréntesis?</p>
+<ul>
+<li>¡Es justamente lo que hace que el cero tenga sentido!</li>
+</ul>
+<p>La pendiente fija γ₀₁ ahora representa el cambio en Y por cada unidad en que el estudiante está por sobre la media general en tarea.</p>
+<p>La pendiente fija γ₁₀ ahora representa el cambio en Y por cada unidad en que el promedio de tarea de una escuela está por sobre la media general.</p>
+<p>El intercepto representa el valor esperado de Y cuando el predictor está en su valor de media general (es decir, cero tras el centrado).</p>
+<p>Ten en cuenta que el GMC produce interceptos de nivel 2 que están ajustados por los predictores de nivel 1.</p>
+<ul>
+<li>Las diferencias en el predictor dentro de los grupos son modificadas como resultado del GMC.</li>
+</ul>
+<p>Las varianzas del intercepto y las pendientes se interpretan en los valores medios del/los predictor(es).</p>
+<section id="la-mecánica-del-centrado-gmc" class="level3">
+<h3 class="anchored" data-anchor-id="la-mecánica-del-centrado-gmc">La Mecánica del Centrado GMC</h3>
+<p>El código para el GMC está más abajo.</p>
+<ul>
+<li><p>Centro la variable “tarea” (homework) en ambos niveles.</p></li>
+<li><p>En el nivel 2, probablemente el cero no tiene sentido (suponiendo que es imposible que todos los estudiantes no hagan tarea). Si el cero tuviera sentido, entonces podría considerar no centrar la variable.</p></li>
+</ul>
+<p>Ten en cuenta que el centrado se hace primero en el nivel 1 antes de pasar al nivel 2 (con group_by).</p>
+<p>Un estudiante con un puntaje determinado en tarea tendrá el mismo valor centrado en la media general (GMC) que otro estudiante con ese mismo puntaje en una escuela diferente.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#process data</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>school1 <span class="ot">&lt;-</span> school0 <span class="sc">%&gt;%</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(<span class="st">"schid"</span>,<span class="st">"schnum"</span>, <span class="st">"stuid"</span>,<span class="st">"math"</span>,<span class="st">"homework"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">home.gmc =</span> homework<span class="sc">-</span><span class="fu">mean</span>(homework), <span class="co">#Centrar un predictor en la media general</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">home.c.alt =</span> <span class="fu">scale</span>(homework, <span class="at">center=</span>T, <span class="at">scale=</span>F), <span class="co">#Otra forma de hacer el centrado en la media general (GMC)</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">homework.gm =</span> <span class="fu">mean</span>(homework)) <span class="sc">%&gt;%</span>  <span class="co">#gObtener la media general y agregarla a cada observación</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>           <span class="fu">group_by</span>(schnum) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>           <span class="fu">mutate</span>(<span class="at">mean.g.home =</span> <span class="fu">mean</span>(homework), <span class="co">#Obtener la media del grupo para el predictor</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>                  <span class="at">meanhome.gmc =</span> mean.g.home <span class="sc">-</span> homework.gm) <span class="sc">%&gt;%</span> <span class="co">#Centrar el predictor de nivel 2 (L2)</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>           <span class="fu">ungroup</span>()</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>school1 <span class="sc">%&gt;%</span> </span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>schid) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">30</span><span class="sc">:</span><span class="dv">35</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate_if</span>(is.numeric, round, <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    gt<span class="sc">::</span><span class="fu">gt</span>() </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="kcqkqgcwnj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kcqkqgcwnj table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#kcqkqgcwnj thead, #kcqkqgcwnj tbody, #kcqkqgcwnj tfoot, #kcqkqgcwnj tr, #kcqkqgcwnj td, #kcqkqgcwnj th {
+  border-style: none;
+}
+
+#kcqkqgcwnj p {
+  margin: 0;
+  padding: 0;
+}
+
+#kcqkqgcwnj .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#kcqkqgcwnj .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#kcqkqgcwnj .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#kcqkqgcwnj .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#kcqkqgcwnj .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#kcqkqgcwnj .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kcqkqgcwnj .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#kcqkqgcwnj .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#kcqkqgcwnj .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#kcqkqgcwnj .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#kcqkqgcwnj .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#kcqkqgcwnj .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#kcqkqgcwnj .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#kcqkqgcwnj .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#kcqkqgcwnj .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#kcqkqgcwnj .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#kcqkqgcwnj .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#kcqkqgcwnj .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#kcqkqgcwnj .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kcqkqgcwnj .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#kcqkqgcwnj .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#kcqkqgcwnj .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#kcqkqgcwnj .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kcqkqgcwnj .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#kcqkqgcwnj .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#kcqkqgcwnj .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kcqkqgcwnj .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kcqkqgcwnj .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#kcqkqgcwnj .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kcqkqgcwnj .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#kcqkqgcwnj .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kcqkqgcwnj .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#kcqkqgcwnj .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kcqkqgcwnj .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#kcqkqgcwnj .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kcqkqgcwnj .gt_left {
+  text-align: left;
+}
+
+#kcqkqgcwnj .gt_center {
+  text-align: center;
+}
+
+#kcqkqgcwnj .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#kcqkqgcwnj .gt_font_normal {
+  font-weight: normal;
+}
+
+#kcqkqgcwnj .gt_font_bold {
+  font-weight: bold;
+}
+
+#kcqkqgcwnj .gt_font_italic {
+  font-style: italic;
+}
+
+#kcqkqgcwnj .gt_super {
+  font-size: 65%;
+}
+
+#kcqkqgcwnj .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#kcqkqgcwnj .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#kcqkqgcwnj .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#kcqkqgcwnj .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#kcqkqgcwnj .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#kcqkqgcwnj .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#kcqkqgcwnj .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#kcqkqgcwnj .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#kcqkqgcwnj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="schnum" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">schnum</th>
+<th id="stuid" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">stuid</th>
+<th id="math" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">math</th>
+<th id="homework" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">homework</th>
+<th id="home.gmc" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">home.gmc</th>
+<th id="home.c.alt" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">home.c.alt</th>
+<th id="homework.gm" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">homework.gm</th>
+<th id="mean.g.home" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">mean.g.home</th>
+<th id="meanhome.gmc" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">meanhome.gmc</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="schnum">1</td>
+<td class="gt_row gt_right" headers="stuid">3</td>
+<td class="gt_row gt_right" headers="math">48</td>
+<td class="gt_row gt_right" headers="homework">1</td>
+<td class="gt_row gt_right" headers="home.gmc">-1.02</td>
+<td class="gt_row gt_center" headers="home.c.alt">-1.02</td>
+<td class="gt_row gt_right" headers="homework.gm">2.02</td>
+<td class="gt_row gt_right" headers="mean.g.home">1.39</td>
+<td class="gt_row gt_right" headers="meanhome.gmc">-0.63</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="schnum">1</td>
+<td class="gt_row gt_right" headers="stuid">8</td>
+<td class="gt_row gt_right" headers="math">48</td>
+<td class="gt_row gt_right" headers="homework">0</td>
+<td class="gt_row gt_right" headers="home.gmc">-2.02</td>
+<td class="gt_row gt_center" headers="home.c.alt">-2.02</td>
+<td class="gt_row gt_right" headers="homework.gm">2.02</td>
+<td class="gt_row gt_right" headers="mean.g.home">1.39</td>
+<td class="gt_row gt_right" headers="meanhome.gmc">-0.63</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="schnum">1</td>
+<td class="gt_row gt_right" headers="stuid">13</td>
+<td class="gt_row gt_right" headers="math">53</td>
+<td class="gt_row gt_right" headers="homework">0</td>
+<td class="gt_row gt_right" headers="home.gmc">-2.02</td>
+<td class="gt_row gt_center" headers="home.c.alt">-2.02</td>
+<td class="gt_row gt_right" headers="homework.gm">2.02</td>
+<td class="gt_row gt_right" headers="mean.g.home">1.39</td>
+<td class="gt_row gt_right" headers="meanhome.gmc">-0.63</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="schnum">1</td>
+<td class="gt_row gt_right" headers="stuid">17</td>
+<td class="gt_row gt_right" headers="math">42</td>
+<td class="gt_row gt_right" headers="homework">1</td>
+<td class="gt_row gt_right" headers="home.gmc">-1.02</td>
+<td class="gt_row gt_center" headers="home.c.alt">-1.02</td>
+<td class="gt_row gt_right" headers="homework.gm">2.02</td>
+<td class="gt_row gt_right" headers="mean.g.home">1.39</td>
+<td class="gt_row gt_right" headers="meanhome.gmc">-0.63</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="schnum">1</td>
+<td class="gt_row gt_right" headers="stuid">27</td>
+<td class="gt_row gt_right" headers="math">43</td>
+<td class="gt_row gt_right" headers="homework">2</td>
+<td class="gt_row gt_right" headers="home.gmc">-0.02</td>
+<td class="gt_row gt_center" headers="home.c.alt">-0.02</td>
+<td class="gt_row gt_right" headers="homework.gm">2.02</td>
+<td class="gt_row gt_right" headers="mean.g.home">1.39</td>
+<td class="gt_row gt_right" headers="meanhome.gmc">-0.63</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="schnum">2</td>
+<td class="gt_row gt_right" headers="stuid">29</td>
+<td class="gt_row gt_right" headers="math">35</td>
+<td class="gt_row gt_right" headers="homework">1</td>
+<td class="gt_row gt_right" headers="home.gmc">-1.02</td>
+<td class="gt_row gt_center" headers="home.c.alt">-1.02</td>
+<td class="gt_row gt_right" headers="homework.gm">2.02</td>
+<td class="gt_row gt_right" headers="mean.g.home">2.35</td>
+<td class="gt_row gt_right" headers="meanhome.gmc">0.33</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="schnum">2</td>
+<td class="gt_row gt_right" headers="stuid">31</td>
+<td class="gt_row gt_right" headers="math">42</td>
+<td class="gt_row gt_right" headers="homework">4</td>
+<td class="gt_row gt_right" headers="home.gmc">1.98</td>
+<td class="gt_row gt_center" headers="home.c.alt">1.98</td>
+<td class="gt_row gt_right" headers="homework.gm">2.02</td>
+<td class="gt_row gt_right" headers="mean.g.home">2.35</td>
+<td class="gt_row gt_right" headers="meanhome.gmc">0.33</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="schnum">2</td>
+<td class="gt_row gt_right" headers="stuid">34</td>
+<td class="gt_row gt_right" headers="math">41</td>
+<td class="gt_row gt_right" headers="homework">4</td>
+<td class="gt_row gt_right" headers="home.gmc">1.98</td>
+<td class="gt_row gt_center" headers="home.c.alt">1.98</td>
+<td class="gt_row gt_right" headers="homework.gm">2.02</td>
+<td class="gt_row gt_right" headers="mean.g.home">2.35</td>
+<td class="gt_row gt_right" headers="meanhome.gmc">0.33</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="schnum">2</td>
+<td class="gt_row gt_right" headers="stuid">38</td>
+<td class="gt_row gt_right" headers="math">31</td>
+<td class="gt_row gt_right" headers="homework">3</td>
+<td class="gt_row gt_right" headers="home.gmc">0.98</td>
+<td class="gt_row gt_center" headers="home.c.alt">0.98</td>
+<td class="gt_row gt_right" headers="homework.gm">2.02</td>
+<td class="gt_row gt_right" headers="mean.g.home">2.35</td>
+<td class="gt_row gt_right" headers="meanhome.gmc">0.33</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="schnum">2</td>
+<td class="gt_row gt_right" headers="stuid">44</td>
+<td class="gt_row gt_right" headers="math">41</td>
+<td class="gt_row gt_right" headers="homework">2</td>
+<td class="gt_row gt_right" headers="home.gmc">-0.02</td>
+<td class="gt_row gt_center" headers="home.c.alt">-0.02</td>
+<td class="gt_row gt_right" headers="homework.gm">2.02</td>
+<td class="gt_row gt_right" headers="mean.g.home">2.35</td>
+<td class="gt_row gt_right" headers="meanhome.gmc">0.33</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="schnum">2</td>
+<td class="gt_row gt_right" headers="stuid">54</td>
+<td class="gt_row gt_right" headers="math">32</td>
+<td class="gt_row gt_right" headers="homework">1</td>
+<td class="gt_row gt_right" headers="home.gmc">-1.02</td>
+<td class="gt_row gt_center" headers="home.c.alt">-1.02</td>
+<td class="gt_row gt_right" headers="homework.gm">2.02</td>
+<td class="gt_row gt_right" headers="mean.g.home">2.35</td>
+<td class="gt_row gt_right" headers="meanhome.gmc">0.33</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="correlaciones-entre-puntaje-bruto-y-gmc" class="level3">
+<h3 class="anchored" data-anchor-id="correlaciones-entre-puntaje-bruto-y-gmc">Correlaciones entre Puntaje Bruto y GMC</h3>
+<p>Examinemos la matriz de correlaciones.</p>
+<ul>
+<li>Esto da una idea de lo que cambia o, más exactamente, de lo que no cambia con el centrado en la media general (GMC).</li>
+</ul>
+<p>Si las correlaciones no cambian, entonces los coeficientes de regresión tampoco cambiarán.</p>
+<ul>
+<li>Pero fíjate en el intercepto cuando lleguemos a él.</li>
+</ul>
+</section>
+<section id="tabla-de-correlaciones" class="level3">
+<h3 class="anchored" data-anchor-id="tabla-de-correlaciones">Tabla de Correlaciones</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Mean</th>
+<th>SD</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1. Math</td>
+<td>51.30</td>
+<td>11.14</td>
+<td>–</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>2. Homework</td>
+<td>2.02</td>
+<td>1.55</td>
+<td>.50**</td>
+<td>–</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>3. Home.gmc</td>
+<td>-0.00</td>
+<td>1.55</td>
+<td>.50**</td>
+<td>1.00**</td>
+<td>–</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>4. Mean.g.home</td>
+<td>2.02</td>
+<td>0.84</td>
+<td>.53**</td>
+<td>.54**</td>
+<td>.54**</td>
+<td>–</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>5. Meanhome.gmc</td>
+<td>-0.00</td>
+<td>0.84</td>
+<td>.53**</td>
+<td>.54**</td>
+<td>.54**</td>
+<td>1.00**</td>
+<td>–</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Nota</strong>: *p &lt; .05. **p &lt; .01.</p>
+</section>
+<section id="estimaciones-del-modelo-con-puntaje-bruto-y-gmc" class="level3">
+<h3 class="anchored" data-anchor-id="estimaciones-del-modelo-con-puntaje-bruto-y-gmc">Estimaciones del Modelo con Puntaje Bruto y GMC</h3>
+<p>El modelo incluye versiones de la variable “tarea” (homework) tanto en nivel 1 como en nivel 2.</p>
+<p>Los valores de los interceptos cambian.</p>
+<p>Observa que los coeficientes de regresión y las estimaciones de varianza aleatoria no cambian.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span><span class="fu">lmer</span>(math <span class="sc">~</span> homework <span class="sc">+</span> mean.g.home <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schnum), <span class="at">data=</span>school1)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span><span class="fu">lmer</span>(math <span class="sc">~</span> home.gmc <span class="sc">+</span> meanhome.gmc <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schnum), <span class="at">data=</span>school1)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>sjPlot<span class="sc">::</span><span class="fu">tab_model</span>(model1, model2, <span class="at">dv.labels =</span> <span class="fu">c</span>(<span class="st">"Raw Score Model"</span>,<span class="st">"GMC Model"</span>),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">show.ci =</span> <span class="cn">FALSE</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table style="border-collapse:collapse; border:none;">
+<tbody><tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
+<th colspan="2" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">Raw Score Model</th>
+<th colspan="2" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">GMC Model</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">Predictors</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">p</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">p</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">39.75</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">50.21</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">homework</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">2.14</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">mean g home</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">3.04</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.211</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">home gmc</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">2.14</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">meanhome gmc</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">3.04</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.211</td>
+</tr>
+<tr>
+<td colspan="5" style="font-weight:bold; text-align:left; padding-top:.8em;">Random Effects</td>
+</tr>
+
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">σ<sup>2</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">64.57</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">64.57</td>
+</tr>
+
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">τ<sub>00</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">23.10 <sub>schnum</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">23.10 <sub>schnum</sub></td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">ICC</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.26</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.26</td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">N</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">10 <sub>schnum</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">10 <sub>schnum</sub></td>
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">Observations</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="2">260</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="2">260</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">Marginal R<sup>2</sup> / Conditional R<sup>2</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.233 / 0.435</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.233 / 0.435</td>
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+<p>Interpretaciones del Modelo con Puntaje Bruto:</p>
+<ul>
+<li><p>El intercepto del modelo con puntaje bruto (γ₀₀ = 39.75)</p></li>
+<li><p>Este valor es el logro académico predicho para un estudiante que tiene:</p>
+<ul>
+<li><p>Un valor cero en su tarea individual (Xᵢₛ)</p></li>
+<li><p>Un valor cero en el promedio de tareas de su escuela (X̄ₛ = 0)</p></li>
+</ul></li>
+<li><p>Un promedio de tareas (por escuela) de cero parece poco plausible.</p></li>
+<li><p>¡Imagina un mundo perfecto en el que todos los estudiantes hagan al menos algo de tarea!</p></li>
+</ul>
+<p>Interpretaciones del Modelo con Puntaje GMC</p>
+<p>El intercepto es γ₀₀ = 50.21</p>
+<ul>
+<li><p>Este valor es el logro académico predicho para un estudiante que tiene:</p>
+<ul>
+<li><p>Un puntaje promedio en tareas (Xᵢₛ)</p></li>
+<li><p>Un promedio de tareas en su escuela (nivel 2) igual a cero (X̄ₛ = 0)</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="otra-perspectiva-del-centrado-en-la-media-general-estimaciones-por-grupo" class="level3">
+<h3 class="anchored" data-anchor-id="otra-perspectiva-del-centrado-en-la-media-general-estimaciones-por-grupo">Otra Perspectiva del Centrado en la Media General – Estimaciones por Grupo</h3>
+<p>Aquí tienes una ilustración muy interesante de lo que ocurre con los interceptos y pendientes para los datos sin centrar (puntaje bruto) y con centrado en la media general (GMC).</p>
+<p>Observa que en los modelos GMC los interceptos están “ajustados” en relación con la media general de la variable “tarea”.</p>
+<ul>
+<li>Otra forma de pensar esto es que los puntajes ya no representan las mismas relaciones dentro de los grupos (en este caso, escuelas) cuando se utiliza GMC.</li>
+</ul>
+<p>Las pendientes, sin embargo, no han cambiado.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>school1 <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>(<span class="sc">-</span>schnum) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fit =</span> <span class="fu">map</span>(data, <span class="sc">~</span> <span class="fu">lm</span>(math <span class="sc">~</span> homework, <span class="at">data=</span>.)),</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">fit.c =</span> <span class="fu">map</span>(data, <span class="sc">~</span> <span class="fu">lm</span>(math <span class="sc">~</span> home.gmc, <span class="at">data=</span>.)),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">results =</span> <span class="fu">map</span>(fit, broom<span class="sc">::</span>tidy),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">results.c =</span> <span class="fu">map</span>(fit.c, broom<span class="sc">::</span>tidy)) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(results, results.c) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(schnum, term, estimate, term1, estimate1 ) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="st">"schnum"</span>, </span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from=</span><span class="fu">c</span>(<span class="st">"estimate"</span>, <span class="st">"estimate1"</span>), </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>              <span class="at">names_from=</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>                <span class="st">"term"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Intercept =</span> <span class="st">"estimate_(Intercept)"</span>, <span class="at">Slope=</span>estimate_homework,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">Intercept.gmc =</span> <span class="st">"estimate1_(Intercept)"</span>, <span class="at">Slope.gmc=</span>estimate1_homework)<span class="sc">%&gt;%</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.numeric, round, <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="dbzabdffzq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dbzabdffzq table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#dbzabdffzq thead, #dbzabdffzq tbody, #dbzabdffzq tfoot, #dbzabdffzq tr, #dbzabdffzq td, #dbzabdffzq th {
+  border-style: none;
+}
+
+#dbzabdffzq p {
+  margin: 0;
+  padding: 0;
+}
+
+#dbzabdffzq .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#dbzabdffzq .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#dbzabdffzq .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#dbzabdffzq .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#dbzabdffzq .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#dbzabdffzq .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dbzabdffzq .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#dbzabdffzq .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#dbzabdffzq .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#dbzabdffzq .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#dbzabdffzq .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#dbzabdffzq .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#dbzabdffzq .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#dbzabdffzq .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#dbzabdffzq .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#dbzabdffzq .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#dbzabdffzq .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#dbzabdffzq .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#dbzabdffzq .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dbzabdffzq .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#dbzabdffzq .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#dbzabdffzq .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#dbzabdffzq .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dbzabdffzq .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#dbzabdffzq .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#dbzabdffzq .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dbzabdffzq .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dbzabdffzq .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#dbzabdffzq .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dbzabdffzq .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#dbzabdffzq .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dbzabdffzq .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#dbzabdffzq .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dbzabdffzq .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#dbzabdffzq .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dbzabdffzq .gt_left {
+  text-align: left;
+}
+
+#dbzabdffzq .gt_center {
+  text-align: center;
+}
+
+#dbzabdffzq .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#dbzabdffzq .gt_font_normal {
+  font-weight: normal;
+}
+
+#dbzabdffzq .gt_font_bold {
+  font-weight: bold;
+}
+
+#dbzabdffzq .gt_font_italic {
+  font-style: italic;
+}
+
+#dbzabdffzq .gt_super {
+  font-size: 65%;
+}
+
+#dbzabdffzq .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#dbzabdffzq .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#dbzabdffzq .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#dbzabdffzq .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#dbzabdffzq .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#dbzabdffzq .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#dbzabdffzq .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#dbzabdffzq .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#dbzabdffzq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="schnum" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">schnum</th>
+<th id="Intercept" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Intercept</th>
+<th id="Slope" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Slope</th>
+<th id="Intercept.gmc" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Intercept.gmc</th>
+<th id="Slope.gmc" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Slope.gmc</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="schnum">1</td>
+<td class="gt_row gt_right" headers="Intercept">50.68</td>
+<td class="gt_row gt_right" headers="Slope">-3.55</td>
+<td class="gt_row gt_right" headers="Intercept.gmc">43.49</td>
+<td class="gt_row gt_right" headers="Slope.gmc">-3.55</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="schnum">2</td>
+<td class="gt_row gt_right" headers="Intercept">49.01</td>
+<td class="gt_row gt_right" headers="Slope">-2.92</td>
+<td class="gt_row gt_right" headers="Intercept.gmc">43.10</td>
+<td class="gt_row gt_right" headers="Slope.gmc">-2.92</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="schnum">3</td>
+<td class="gt_row gt_right" headers="Intercept">38.75</td>
+<td class="gt_row gt_right" headers="Slope">7.91</td>
+<td class="gt_row gt_right" headers="Intercept.gmc">54.75</td>
+<td class="gt_row gt_right" headers="Slope.gmc">7.91</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="schnum">4</td>
+<td class="gt_row gt_right" headers="Intercept">34.39</td>
+<td class="gt_row gt_right" headers="Slope">5.59</td>
+<td class="gt_row gt_right" headers="Intercept.gmc">45.71</td>
+<td class="gt_row gt_right" headers="Slope.gmc">5.59</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="schnum">5</td>
+<td class="gt_row gt_right" headers="Intercept">53.94</td>
+<td class="gt_row gt_right" headers="Slope">-4.72</td>
+<td class="gt_row gt_right" headers="Intercept.gmc">44.39</td>
+<td class="gt_row gt_right" headers="Slope.gmc">-4.72</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="schnum">6</td>
+<td class="gt_row gt_right" headers="Intercept">49.26</td>
+<td class="gt_row gt_right" headers="Slope">-2.49</td>
+<td class="gt_row gt_right" headers="Intercept.gmc">44.23</td>
+<td class="gt_row gt_right" headers="Slope.gmc">-2.49</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="schnum">7</td>
+<td class="gt_row gt_right" headers="Intercept">59.21</td>
+<td class="gt_row gt_right" headers="Slope">1.09</td>
+<td class="gt_row gt_right" headers="Intercept.gmc">61.42</td>
+<td class="gt_row gt_right" headers="Slope.gmc">1.09</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="schnum">8</td>
+<td class="gt_row gt_right" headers="Intercept">36.06</td>
+<td class="gt_row gt_right" headers="Slope">6.50</td>
+<td class="gt_row gt_right" headers="Intercept.gmc">49.20</td>
+<td class="gt_row gt_right" headers="Slope.gmc">6.50</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="schnum">9</td>
+<td class="gt_row gt_right" headers="Intercept">38.52</td>
+<td class="gt_row gt_right" headers="Slope">5.86</td>
+<td class="gt_row gt_right" headers="Intercept.gmc">50.38</td>
+<td class="gt_row gt_right" headers="Slope.gmc">5.86</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="schnum">10</td>
+<td class="gt_row gt_right" headers="Intercept">37.71</td>
+<td class="gt_row gt_right" headers="Slope">6.34</td>
+<td class="gt_row gt_right" headers="Intercept.gmc">50.53</td>
+<td class="gt_row gt_right" headers="Slope.gmc">6.34</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="centrado-en-la-media-del-grupo-cmc" class="level2">
+<h2 class="anchored" data-anchor-id="centrado-en-la-media-del-grupo-cmc">Centrado en la Media del Grupo (CMC)</h2>
+<p>Otro método importante de centrado es el centrado en la media del grupo (CMC).</p>
+<ul>
+<li>A cada persona se le resta el promedio del grupo en esa variable independiente dada.</li>
+</ul>
+<p>El modelo con X centrada en la media del grupo en el nivel 1 (L1) y centrada en la media general en el nivel 2 (L2) es:</p>
+<p><span class="math display">\[
+Y_{is} = \gamma_{00} + \gamma_{01}(X_{is} - \bar{X}_s) + \gamma_{10}(\bar{X}_s - \bar{X}_g) + U_{0s} + e_{is}
+\]</span></p>
+<p>donde:</p>
+<ul>
+<li><p><span class="math inline">\(\gamma_{01}(X_{is} - \bar{X}_s)\)</span> representa un aumento (o disminución) de una unidad respecto a la media del grupo</p></li>
+<li><p><span class="math inline">\(\gamma_{10}(\bar{X}_s - \bar{X}_g)\)</span> sigue siendo la media a nivel de escuela (L2) del predictor</p></li>
+</ul>
+<p>Cuatro características importantes del CMC:</p>
+<ol type="1">
+<li><p>Preserva la posición relativa de los puntajes dentro de los grupos</p></li>
+<li><p>La media de cada grupo en el predictor es 0</p></li>
+<li><p>Dado que no hay variación entre grupos para el predictor centrado en la media del grupo, se ha creado efectivamente un predictor dentro de los grupos (¡y ya sabemos lo que eso significa!)</p></li>
+<li><p>Por lo tanto, el CMC aísla o elimina el efecto de la variable de nivel 2 – el efecto es puramente de nivel 1</p></li>
+</ol>
+</section>
+<section id="centrado-en-la-media-del-grupo-con-nuestros-datos" class="level2">
+<h2 class="anchored" data-anchor-id="centrado-en-la-media-del-grupo-con-nuestros-datos">Centrado en la Media del Grupo con Nuestros Datos</h2>
+<p>Aquí resto la media de tareas de la escuela a las tareas de cada estudiante.</p>
+<p>Vuelve a revisar las correlaciones… ¿qué ha cambiado?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>school2 <span class="ot">&lt;-</span> school1 <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>home.c.alt) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(schnum) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">home.cmc =</span> homework<span class="sc">-</span><span class="fu">mean</span>(homework)) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>school2 <span class="sc">%&gt;%</span> </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(math, homework, home.gmc, home.cmc, mean.g.home, meanhome.gmc) <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">30</span><span class="sc">:</span><span class="dv">35</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 11 × 6
+    math homework home.gmc home.cmc mean.g.home meanhome.gmc
+   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;
+ 1    48        1  -1.02     -0.391        1.39       -0.632
+ 2    48        0  -2.02     -1.39         1.39       -0.632
+ 3    53        0  -2.02     -1.39         1.39       -0.632
+ 4    42        1  -1.02     -0.391        1.39       -0.632
+ 5    43        2  -0.0231    0.609        1.39       -0.632
+ 6    35        1  -1.02     -1.35         2.35        0.327
+ 7    42        4   1.98      1.65         2.35        0.327
+ 8    41        4   1.98      1.65         2.35        0.327
+ 9    31        3   0.977     0.65         2.35        0.327
+10    41        2  -0.0231   -0.35         2.35        0.327
+11    32        1  -1.02     -1.35         2.35        0.327</code></pre>
+</div>
+</div>
+<ul>
+<li>Tabla de Correlaciones</li>
+</ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Mean</th>
+<th>SD</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1. Math</td>
+<td>51.30</td>
+<td>11.14</td>
+<td>–</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>2. Homework</td>
+<td>2.02</td>
+<td>1.55</td>
+<td>.50**</td>
+<td>–</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>3. Home.gmc</td>
+<td>-0.00</td>
+<td>1.55</td>
+<td>.50**</td>
+<td>1.00**</td>
+<td>–</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>4. Home.cmc</td>
+<td>-0.00</td>
+<td>1.30</td>
+<td>.25**</td>
+<td>.84**</td>
+<td>.84**</td>
+<td>–</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>5. Mean.g.home</td>
+<td>2.02</td>
+<td>0.84</td>
+<td>.53**</td>
+<td>.54**</td>
+<td>.54**</td>
+<td>.00</td>
+<td>–</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>6. Meanhome.gmc</td>
+<td>-0.00</td>
+<td>0.84</td>
+<td>.53**</td>
+<td>.54**</td>
+<td>.54**</td>
+<td>.00</td>
+<td>1.00**</td>
+<td>–</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Nota</strong>: *p &lt; .05. **p &lt; .01.</p>
+<section id="correlación-y-método-de-centrado" class="level3">
+<h3 class="anchored" data-anchor-id="correlación-y-método-de-centrado">Correlación y Método de Centrado</h3>
+<p>Correlaciones de la tarea del estudiante (<span class="math inline">\(X_{is}\)</span>) con:</p>
+<ul>
+<li><p>Promedio de tarea de la escuela (<span class="math inline">\(\bar{X}_s\)</span>): 0.54</p></li>
+<li><p>Promedio de tarea de la escuela después del centrado en la media general (<span class="math inline">\(X_{is} - \bar{X}_s\)</span>): 0.54</p></li>
+</ul>
+<p>Correlaciones de la tarea del estudiante después del centrado en la media del grupo (<span class="math inline">\(X_{is} - \bar{X}_s\)</span>) con:</p>
+<ul>
+<li><p>Promedio de tarea de la escuela (<span class="math inline">\(\bar{X}_s\)</span>): 0</p></li>
+<li><p>Promedio de tarea de la escuela después del centrado en la media general (<span class="math inline">\(\bar{X}_s - \bar{X}_g\)</span>): 0</p></li>
+</ul>
+<p>El efecto del predictor cambia debido a la correlación entre el promedio de tarea de la escuela y la tarea del estudiante.</p>
+</section>
+<section id="modelando-datos-cmc-por-grupo" class="level3">
+<h3 class="anchored" data-anchor-id="modelando-datos-cmc-por-grupo">Modelando Datos CMC por Grupo</h3>
+<p>Vamos a obtener nuevamente las estimaciones por grupo.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>school2 <span class="sc">%&gt;%</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>(<span class="sc">-</span>schnum) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fit =</span> <span class="fu">map</span>(data, <span class="sc">~</span> <span class="fu">lm</span>(math <span class="sc">~</span> homework, <span class="at">data=</span>.)),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">fit.c =</span> <span class="fu">map</span>(data, <span class="sc">~</span> <span class="fu">lm</span>(math <span class="sc">~</span> home.gmc, <span class="at">data=</span>.)),</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">fit.cmc =</span> <span class="fu">map</span>(data, <span class="sc">~</span> <span class="fu">lm</span>(math <span class="sc">~</span> home.cmc, <span class="at">data=</span>.)),</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">results =</span> <span class="fu">map</span>(fit, broom<span class="sc">::</span>tidy),</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">results.c =</span> <span class="fu">map</span>(fit.c, broom<span class="sc">::</span>tidy),</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">results.cmc =</span> <span class="fu">map</span>(fit.cmc, broom<span class="sc">::</span>tidy)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(results, results.c, results.cmc) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(schnum, term, estimate, estimate1, estimate2) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="st">"schnum"</span>, </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from=</span><span class="fu">c</span>(<span class="st">"estimate"</span>, <span class="st">"estimate1"</span>, <span class="st">"estimate2"</span>), </span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>              <span class="at">names_from=</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>                <span class="st">"term"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Intercept =</span> <span class="st">"estimate_(Intercept)"</span>, <span class="at">Slope=</span>estimate_homework,</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>         <span class="at">Intercept.gmc =</span> <span class="st">"estimate1_(Intercept)"</span>, <span class="at">Slope.gmc=</span>estimate1_homework,</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">Intercept.cmc =</span> <span class="st">"estimate2_(Intercept)"</span>, <span class="at">Slope.cmc=</span>estimate2_homework) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.numeric, round, <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="shroflcxpg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#shroflcxpg table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#shroflcxpg thead, #shroflcxpg tbody, #shroflcxpg tfoot, #shroflcxpg tr, #shroflcxpg td, #shroflcxpg th {
+  border-style: none;
+}
+
+#shroflcxpg p {
+  margin: 0;
+  padding: 0;
+}
+
+#shroflcxpg .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#shroflcxpg .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#shroflcxpg .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#shroflcxpg .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#shroflcxpg .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#shroflcxpg .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#shroflcxpg .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#shroflcxpg .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#shroflcxpg .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#shroflcxpg .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#shroflcxpg .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#shroflcxpg .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#shroflcxpg .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#shroflcxpg .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#shroflcxpg .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#shroflcxpg .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#shroflcxpg .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#shroflcxpg .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#shroflcxpg .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#shroflcxpg .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#shroflcxpg .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#shroflcxpg .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#shroflcxpg .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#shroflcxpg .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#shroflcxpg .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#shroflcxpg .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#shroflcxpg .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#shroflcxpg .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#shroflcxpg .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#shroflcxpg .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#shroflcxpg .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#shroflcxpg .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#shroflcxpg .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#shroflcxpg .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#shroflcxpg .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#shroflcxpg .gt_left {
+  text-align: left;
+}
+
+#shroflcxpg .gt_center {
+  text-align: center;
+}
+
+#shroflcxpg .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#shroflcxpg .gt_font_normal {
+  font-weight: normal;
+}
+
+#shroflcxpg .gt_font_bold {
+  font-weight: bold;
+}
+
+#shroflcxpg .gt_font_italic {
+  font-style: italic;
+}
+
+#shroflcxpg .gt_super {
+  font-size: 65%;
+}
+
+#shroflcxpg .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#shroflcxpg .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#shroflcxpg .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#shroflcxpg .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#shroflcxpg .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#shroflcxpg .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#shroflcxpg .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#shroflcxpg .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#shroflcxpg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="schnum" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">schnum</th>
+<th id="Intercept" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Intercept</th>
+<th id="Slope" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Slope</th>
+<th id="Intercept.gmc" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Intercept.gmc</th>
+<th id="Slope.gmc" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Slope.gmc</th>
+<th id="Intercept.cmc" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Intercept.cmc</th>
+<th id="Slope.cmc" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Slope.cmc</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="schnum">1</td>
+<td class="gt_row gt_right" headers="Intercept">50.68</td>
+<td class="gt_row gt_right" headers="Slope">-3.55</td>
+<td class="gt_row gt_right" headers="Intercept.gmc">43.49</td>
+<td class="gt_row gt_right" headers="Slope.gmc">-3.55</td>
+<td class="gt_row gt_right" headers="Intercept.cmc">45.74</td>
+<td class="gt_row gt_right" headers="Slope.cmc">-3.55</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="schnum">2</td>
+<td class="gt_row gt_right" headers="Intercept">49.01</td>
+<td class="gt_row gt_right" headers="Slope">-2.92</td>
+<td class="gt_row gt_right" headers="Intercept.gmc">43.10</td>
+<td class="gt_row gt_right" headers="Slope.gmc">-2.92</td>
+<td class="gt_row gt_right" headers="Intercept.cmc">42.15</td>
+<td class="gt_row gt_right" headers="Slope.cmc">-2.92</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="schnum">3</td>
+<td class="gt_row gt_right" headers="Intercept">38.75</td>
+<td class="gt_row gt_right" headers="Slope">7.91</td>
+<td class="gt_row gt_right" headers="Intercept.gmc">54.75</td>
+<td class="gt_row gt_right" headers="Slope.gmc">7.91</td>
+<td class="gt_row gt_right" headers="Intercept.cmc">53.25</td>
+<td class="gt_row gt_right" headers="Slope.cmc">7.91</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="schnum">4</td>
+<td class="gt_row gt_right" headers="Intercept">34.39</td>
+<td class="gt_row gt_right" headers="Slope">5.59</td>
+<td class="gt_row gt_right" headers="Intercept.gmc">45.71</td>
+<td class="gt_row gt_right" headers="Slope.gmc">5.59</td>
+<td class="gt_row gt_right" headers="Intercept.cmc">43.55</td>
+<td class="gt_row gt_right" headers="Slope.cmc">5.59</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="schnum">5</td>
+<td class="gt_row gt_right" headers="Intercept">53.94</td>
+<td class="gt_row gt_right" headers="Slope">-4.72</td>
+<td class="gt_row gt_right" headers="Intercept.gmc">44.39</td>
+<td class="gt_row gt_right" headers="Slope.gmc">-4.72</td>
+<td class="gt_row gt_right" headers="Intercept.cmc">49.86</td>
+<td class="gt_row gt_right" headers="Slope.cmc">-4.72</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="schnum">6</td>
+<td class="gt_row gt_right" headers="Intercept">49.26</td>
+<td class="gt_row gt_right" headers="Slope">-2.49</td>
+<td class="gt_row gt_right" headers="Intercept.gmc">44.23</td>
+<td class="gt_row gt_right" headers="Slope.gmc">-2.49</td>
+<td class="gt_row gt_right" headers="Intercept.cmc">46.40</td>
+<td class="gt_row gt_right" headers="Slope.cmc">-2.49</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="schnum">7</td>
+<td class="gt_row gt_right" headers="Intercept">59.21</td>
+<td class="gt_row gt_right" headers="Slope">1.09</td>
+<td class="gt_row gt_right" headers="Intercept.gmc">61.42</td>
+<td class="gt_row gt_right" headers="Slope.gmc">1.09</td>
+<td class="gt_row gt_right" headers="Intercept.cmc">62.82</td>
+<td class="gt_row gt_right" headers="Slope.cmc">1.09</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="schnum">8</td>
+<td class="gt_row gt_right" headers="Intercept">36.06</td>
+<td class="gt_row gt_right" headers="Slope">6.50</td>
+<td class="gt_row gt_right" headers="Intercept.gmc">49.20</td>
+<td class="gt_row gt_right" headers="Slope.gmc">6.50</td>
+<td class="gt_row gt_right" headers="Intercept.cmc">49.67</td>
+<td class="gt_row gt_right" headers="Slope.cmc">6.50</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="schnum">9</td>
+<td class="gt_row gt_right" headers="Intercept">38.52</td>
+<td class="gt_row gt_right" headers="Slope">5.86</td>
+<td class="gt_row gt_right" headers="Intercept.gmc">50.38</td>
+<td class="gt_row gt_right" headers="Slope.gmc">5.86</td>
+<td class="gt_row gt_right" headers="Intercept.cmc">46.33</td>
+<td class="gt_row gt_right" headers="Slope.cmc">5.86</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="schnum">10</td>
+<td class="gt_row gt_right" headers="Intercept">37.71</td>
+<td class="gt_row gt_right" headers="Slope">6.34</td>
+<td class="gt_row gt_right" headers="Intercept.gmc">50.53</td>
+<td class="gt_row gt_right" headers="Slope.gmc">6.34</td>
+<td class="gt_row gt_right" headers="Intercept.cmc">47.85</td>
+<td class="gt_row gt_right" headers="Slope.cmc">6.34</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="modelo-multinivel-con-datos-cmc" class="level3">
+<h3 class="anchored" data-anchor-id="modelo-multinivel-con-datos-cmc">Modelo Multinivel con Datos CMC</h3>
+<p>Los efectos aleatorios no cambian entre los modelos.</p>
+<p>Compara las estimaciones de efectos fijos entre los modelos.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>model3<span class="ot">&lt;-</span><span class="fu">lmer</span>(math <span class="sc">~</span> home.cmc <span class="sc">+</span> meanhome.gmc <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schnum), <span class="at">data=</span>school2)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="do">## summary(m3)</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>sjPlot<span class="sc">::</span><span class="fu">tab_model</span>(model1, model2, model3, <span class="at">dv.labels =</span> <span class="fu">c</span>(<span class="st">"Raw Score Model"</span>,<span class="st">"GMC Model"</span>,<span class="st">"CMC Model"</span>), <span class="at">show.ci =</span> <span class="cn">FALSE</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table style="border-collapse:collapse; border:none;">
+<tbody><tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
+<th colspan="2" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">Raw Score Model</th>
+<th colspan="2" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">GMC Model</th>
+<th colspan="2" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">CMC Model</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">Predictors</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">p</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">p</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col7">p</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">39.75</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">50.21</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">50.21</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">homework</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">2.14</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">mean g home</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">3.04</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.211</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">home gmc</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">2.14</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">meanhome gmc</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">3.04</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.211</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">5.17</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"><strong>0.031</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">home cmc</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">2.14</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td colspan="7" style="font-weight:bold; text-align:left; padding-top:.8em;">Random Effects</td>
+</tr>
+
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">σ<sup>2</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">64.57</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">64.57</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">64.57</td>
+</tr>
+
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">τ<sub>00</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">23.10 <sub>schnum</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">23.10 <sub>schnum</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">23.10 <sub>schnum</sub></td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">ICC</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.26</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.26</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.26</td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">N</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">10 <sub>schnum</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">10 <sub>schnum</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">10 <sub>schnum</sub></td>
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">Observations</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="2">260</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="2">260</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="2">260</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">Marginal R<sup>2</sup> / Conditional R<sup>2</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.233 / 0.435</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.233 / 0.435</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.233 / 0.435</td>
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+<p>γ₀₀ (50.21) es ahora el valor predicho para un estudiante que:</p>
+<ul>
+<li><p>Tiene una cantidad de tarea igual al promedio de su escuela</p></li>
+<li><p>Asiste a una escuela con un promedio de tarea igual a la media general en tarea</p></li>
+</ul>
+<p>γ₀₁ (5.17) es ahora el aumento en Y por cada unidad de tarea que el estudiante está por sobre el <strong>promedio de su escuela</strong></p>
+<p>γ₁₀ (2.14) es ahora el aumento en Y por cada unidad en que el promedio de tarea de la escuela está por sobre la <strong>media general</strong></p>
+</section>
+<section id="revisitando-el-modelo-contextual" class="level3">
+<h3 class="anchored" data-anchor-id="revisitando-el-modelo-contextual">Revisitando el Modelo Contextual</h3>
+<p>El centrado en la media del grupo (CMC) efectivamente hace que las versiones de nivel 1 (L1) y nivel 2 (L2) del predictor sean <strong>ortogonales</strong> (ver la matriz de correlación más arriba).</p>
+<p>La pendiente para el promedio de tarea de la escuela cambió de <strong>3.04</strong> en los modelos sin centrado o con centrado en la media general (GMC) a <strong>5.17</strong> en el modelo con centrado en la media del grupo.</p>
+<p><strong>Recuerda</strong>: las pendientes en regresión dependen de las otras variables en el modelo.</p>
+<ul>
+<li><p>Si las variables independientes están correlacionadas, los coeficientes de regresión cambiarán.</p></li>
+<li><p>Cambiamos: <span class="math display">\[ X_{is} \quad \text{a} \quad X_{is} - \bar{X}_s \]</span></p></li>
+</ul>
+<p>El problema está en los tipos de información contenidos en ( X_{is} ):</p>
+<ul>
+<li><p>Contiene tanto información de <strong>nivel 1</strong> como de <strong>nivel 2</strong>, porque la tarea de cada estudiante está relacionada con el promedio de tarea de su escuela.</p></li>
+<li><p>El coeficiente correspondiente (<strong>3.04</strong>) representa el efecto adicional del promedio de tarea de la escuela al controlar por la tarea del estudiante.</p></li>
+</ul>
+<p>La tarea del estudiante centrada en la media del grupo contiene solo información de nivel 1:</p>
+<ul>
+<li><p>restamos la componente grupal de los puntajes originales.</p></li>
+<li><p>Recuerda esta parte cuando lleguemos a las estructuras correlacionales de datos diádicos o grupales.</p></li>
+</ul>
+</section>
+</section>
+<section id="el-factor-que-complica-interacciones" class="level2">
+<h2 class="anchored" data-anchor-id="el-factor-que-complica-interacciones">El Factor que Complica: Interacciones</h2>
+<p>No hemos hablado mucho sobre las interacciones, pero son importantes en muchos modelos.</p>
+<p>El <strong>centrado influye en las interacciones</strong> de dos maneras:</p>
+<ul>
+<li>En la <strong>interpretación de las estimaciones</strong><br>
+</li>
+<li>En las <strong>correlaciones entre predictores</strong> (lo cual influye en los errores estándar)</li>
+</ul>
+<p>Las interacciones pueden darse dentro de un mismo nivel (L1 o L2) o ser <strong>entre niveles</strong> (L1 × L2).</p>
+<p>Según Hox (p.&nbsp;53): Si hay una interacción, entonces el coeficiente de regresión de una de las variables directas es el valor esperado de esa pendiente de regresión <strong>cuando la otra variable es igual a cero</strong>, y viceversa.</p>
+<p>Esto significa que <strong>el valor cero debe tener un significado interpretable</strong>.</p>
+<p>Seguimos teniendo las <strong>dos opciones de centrado</strong>, pero estas se vuelven un poco más complejas cuando hay interacciones involucradas.</p>
+<section id="interacciones-en-el-nivel-1-l1" class="level3">
+<h3 class="anchored" data-anchor-id="interacciones-en-el-nivel-1-l1">Interacciones en el Nivel 1 (L1)</h3>
+<p>Volvamos al conjunto de datos de logro en matemáticas, pero esta vez nos centraremos en usar <strong>tareas</strong> (homework) y <strong>raza (blanco)</strong> como predictores, ambos del <strong>nivel 1 (L1)</strong>.</p>
+<p>Observa en el ejemplo a continuación que centro la variable de tarea en la media del grupo, pero <strong>no</strong> la variable dummy de raza/blanco (Podría hacerlo, pero el significado cambia de formas que podrían no ser útiles — ver Hox y Enders &amp; Tofighi).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>school3 <span class="ot">&lt;-</span> school0 <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">home.gmc =</span> homework<span class="sc">-</span><span class="fu">mean</span>(homework))</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>model4 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> homework <span class="sc">+</span> white <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schid), <span class="at">data=</span>school3)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>model5 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> homework <span class="sc">*</span> white <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schid), <span class="at">data=</span>school3)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>model6 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> home.gmc <span class="sc">*</span> white <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schid), <span class="at">data=</span>school3)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>sjPlot<span class="sc">::</span><span class="fu">tab_model</span>(model4, model5, model6, <span class="at">dv.labels =</span> <span class="fu">c</span>(<span class="st">"No Interaction"</span>,<span class="st">"Interaction Raw"</span>,<span class="st">"Interaction/Centered"</span>), <span class="at">show.se =</span> T, <span class="at">show.ci =</span> F)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table style="border-collapse:collapse; border:none;">
+<tbody><tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">No Interaction</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">Interaction Raw</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">Interaction/Centered</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">Predictors</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">std. Error</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">p</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">std. Error</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col7">p</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col8">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col9">std. Error</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  0">p</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">42.57</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">2.00</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">45.43</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">2.41</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"><strong>&lt;0.001</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">47.00</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">1.87</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0"><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">homework</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">2.20</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.38</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.77</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.78</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">0.323</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8"></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9"></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0"></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">white</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">3.60</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">1.61</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>0.026</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.06</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">2.38</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">0.979</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">3.54</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">1.59</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0"><strong>0.027</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">homework × white</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">1.78</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.86</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"><strong>0.039</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8"></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9"></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0"></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">home gmc</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">0.77</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">0.78</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">0.323</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">home gmc × white</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">1.78</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">0.86</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0"><strong>0.039</strong></td>
+</tr>
+<tr>
+<td colspan="10" style="font-weight:bold; text-align:left; padding-top:.8em;">Random Effects</td>
+</tr>
+
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">σ<sup>2</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">63.87</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">63.12</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">63.12</td>
+</tr>
+
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">τ<sub>00</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">21.35 <sub>schid</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">20.35 <sub>schid</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">20.35 <sub>schid</sub></td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">ICC</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.25</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.24</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.24</td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">N</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">10 <sub>schid</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">10 <sub>schid</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">10 <sub>schid</sub></td>
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">Observations</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">260</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">260</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">260</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">Marginal R<sup>2</sup> / Conditional R<sup>2</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.148 / 0.361</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.159 / 0.364</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.159 / 0.364</td>
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+<p>Siguiendo a Hox, podemos expresar el Modelo 6 de la siguiente forma:</p>
+<p><span class="math display">\[
+\text{math} = 47 + 3.54 \cdot \text{race} + 0.77 \cdot \text{homework} + 1.78 \cdot \text{race} \cdot \text{homework}
+\]</span></p>
+<ul>
+<li><p>El intercepto representa el valor para niños no blancos con la cantidad promedio de tarea; el coeficiente de interacción se multiplica por dos ceros, así que no afecta directamente la interpretación del intercepto.</p></li>
+<li><p>Un cambio de <strong>una unidad en homework</strong> produce un cambio de <strong>0.77</strong> en el logro en matemáticas.</p></li>
+<li><p>Un cambio de <strong>una unidad en race</strong> (donde los niños blancos están codificados como 1) produce una diferencia o aumento de <strong>3.54</strong> en el logro en matemáticas.</p></li>
+<li><p>El término de interacción <strong>funciona solo cuando race = 1</strong> (niño blanco) y hay un valor distinto de 0 para homework.</p>
+<ul>
+<li><p>Con <code>white = 1</code> y <code>homework = 1</code>, hay una diferencia de <span class="math display">\[ 1.78 \cdot 1 = 1.78 \]</span> entre niños blancos y no blancos en logro matemático <strong>para 1 hora de tarea por sobre la media</strong>.</p></li>
+<li><p>Con <code>white = 1</code> y <code>homework = 2</code>, la diferencia es: <span class="math display">\[ 1.78 \cdot 2 = 3.56 \]</span> en logro matemático <strong>para 2 horas de tarea por sobre la media</strong>.</p></li>
+<li><p><strong>Repite el mismo razonamiento para otros valores de homework.</strong></p></li>
+<li><p>Y no olvides considerar los efectos principales: <strong>también importan</strong>.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="graficando-interacciones" class="level3">
+<h3 class="anchored" data-anchor-id="graficando-interacciones">Graficando Interacciones</h3>
+<p>Cuando se tiene un predictor categórico, se <strong>grafican las pendientes para cada grupo</strong>.</p>
+<p>El paquete <code>interactions</code> hace que esto sea bastante sencillo.</p>
+<ul>
+<li>Podemos ver que el efecto de un aumento en la tarea es <strong>más pronunciado para los niños blancos</strong>.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>interactions<span class="sc">::</span><span class="fu">interact_plot</span>(model6, <span class="at">pred =</span> home.gmc, <span class="at">modx =</span> white)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07-practico_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Con predictores continuos, usualmente tenemos un <strong>rango de valores del moderador</strong> para elegir:</p>
+<ul>
+<li><p>En algunos casos, hay <strong>valores teóricos</strong> a utilizar, o bien investigaciones previas sugieren valores apropiados.</p></li>
+<li><p>En otros casos, tenemos que usar algo un poco más artificial (por ejemplo, ±1 desviación estándar).</p></li>
+<li><p>Aquí utilizo <strong>nivel socioeconómico (SES)</strong> (que parece estar estandarizado).</p></li>
+<li><p>Observa que la <strong>interacción no es significativa</strong>, y el gráfico correspondiente de las pendientes lo refleja.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>model7 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> home.gmc <span class="sc">*</span> ses <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schid), <span class="at">data=</span>school3)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>sjPlot<span class="sc">::</span><span class="fu">tab_model</span>(model7)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table style="border-collapse:collapse; border:none;">
+<tbody><tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">math</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">Predictors</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">CI</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">p</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">50.62</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">48.39&nbsp;–&nbsp;52.85</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">home gmc</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">1.96</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">1.22&nbsp;–&nbsp;2.71</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">ses</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">3.82</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">2.41&nbsp;–&nbsp;5.23</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">home gmc × ses</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.05</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.68&nbsp;–&nbsp;0.78</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.890</td>
+</tr>
+<tr>
+<td colspan="4" style="font-weight:bold; text-align:left; padding-top:.8em;">Random Effects</td>
+</tr>
+
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">σ<sup>2</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">60.92</td>
+</tr>
+
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">τ<sub>00</sub> <sub>schid</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">9.48</td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">ICC</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.13</td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">N <sub>schid</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">10</td>
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">Observations</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">260</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">Marginal R<sup>2</sup> / Conditional R<sup>2</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.314 / 0.407</td>
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>interactions<span class="sc">::</span><span class="fu">interact_plot</span>(model7, <span class="at">pred =</span> home.gmc, <span class="at">modx =</span> ses)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07-practico_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="interacciones-entre-niveles-cross-level-interactions" class="level2">
+<h2 class="anchored" data-anchor-id="interacciones-entre-niveles-cross-level-interactions">Interacciones Entre Niveles (Cross-level Interactions)</h2>
+<p>Una <strong>interacción entre niveles</strong>, como su nombre lo indica, es un término de interacción basado en <strong>dos predictores</strong> (por ahora), uno en el <strong>nivel 1 (L1)</strong> y otro en el <strong>nivel 2 (L2)</strong>.</p>
+<p>El <strong>centrado influye</strong> tanto en las <strong>estimaciones de la interacción</strong> como en su <strong>interpretación</strong>.</p>
+<ul>
+<li>Interacciones entre Niveles como Predictores de Pendientes Aleatorias</li>
+</ul>
+<p>Las <strong>interacciones entre niveles (L1 × L2)</strong> funcionan como <strong>predictores de pendientes aleatorias</strong> en modelos multinivel (MLM).</p>
+<p>Te ahorraré las fórmulas, pero puedes consultarlas en Hox, Capítulo 2.</p>
+<p>Revisión (dentro del contexto del MLM):</p>
+<ul>
+<li><p>Un <strong>predictor de nivel 1 (L1)</strong> se utiliza para predecir resultados de nivel 1<br>
+</p></li>
+<li><p>Un <strong>predictor de nivel 2 (L2)</strong> se utiliza para predecir interceptos de nivel 2</p>
+<pre><code>- Recuerda: los **predictores de nivel 2** varían **entre grupos**, pero **no dentro** de los grupos.</code></pre></li>
+<li><p>Una <strong>interacción L1 × L2</strong> representa, conceptualmente, las <strong>pendientes (L1)</strong> para cada grupo (L2).<br>
+</p></li>
+<li><p>Por lo tanto, la interacción <strong>L1 × L2</strong> es el <strong>predictor de las pendientes aleatorias</strong> (es decir, los valores de pendiente específicos de cada grupo).</p></li>
+</ul>
+<p>Importante: el <strong>centrado en la media del grupo (CMC)</strong> de la variable L1 garantiza la <strong>ortogonalidad</strong> entre esa variable y la de nivel 2 (L2).</p>
+<p>Presta atención al <strong>cambio en la varianza del intercepto a nivel de escuela</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>school3 <span class="ot">&lt;-</span> school3 <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(schnum) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">home.cmc =</span> homework<span class="sc">-</span><span class="fu">mean</span>(homework)) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>model8.gmc <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> home.gmc <span class="sc">*</span> public <span class="sc">+</span> (home.gmc<span class="sc">||</span>schid), <span class="at">data=</span>school3,<span class="at">REML=</span><span class="cn">FALSE</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>model8.cmc <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> home.cmc <span class="sc">*</span> public <span class="sc">+</span> (home.cmc<span class="sc">||</span>schid), <span class="at">data=</span>school3, <span class="at">REML=</span><span class="cn">FALSE</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>sjPlot<span class="sc">::</span><span class="fu">tab_model</span>(model8.gmc, model8.cmc, <span class="at">show.dev=</span>T, <span class="at">show.ci =</span> F, <span class="at">show.se =</span> T,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>                  <span class="at">dv.labels =</span> <span class="fu">c</span>(<span class="st">"GMC Model"</span>,<span class="st">"CMC Model"</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table style="border-collapse:collapse; border:none;">
+<tbody><tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">GMC Model</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">CMC Model</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">Predictors</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">std. Error</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">p</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">std. Error</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col7">p</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">61.42</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">3.27</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">62.82</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">2.80</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">home gmc</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">1.09</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">4.27</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.798</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">public</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-13.83</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">3.48</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-15.60</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">2.98</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">home gmc × public</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">1.14</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">4.52</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.801</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">home cmc</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">1.09</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">4.48</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">0.807</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">home cmc × public</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">1.06</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">4.74</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">0.823</td>
+</tr>
+<tr>
+<td colspan="7" style="font-weight:bold; text-align:left; padding-top:.8em;">Random Effects</td>
+</tr>
+
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">σ<sup>2</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">43.24</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">43.14</td>
+</tr>
+
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">τ<sub>00</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">9.69 <sub>schid</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">7.21 <sub>schid</sub></td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">τ<sub>11</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">17.98 <sub>schid.home.gmc</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">19.85 <sub>schid.home.cmc</sub></td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">ρ<sub>01</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">&nbsp;</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">&nbsp;</td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">ρ<sub>01</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">&nbsp;</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">&nbsp;</td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">ICC</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.18</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.14</td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">N</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">10 <sub>schid</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">10 <sub>schid</sub></td>
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">Observations</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">260</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">260</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">Marginal R<sup>2</sup> / Conditional R<sup>2</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.517 / 0.606</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.508 / 0.579</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">Deviance</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">1762.721</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">1759.945</td>
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+</section>
+<section id="qué-método-de-centrado-usar" class="level2">
+<h2 class="anchored" data-anchor-id="qué-método-de-centrado-usar">¿Qué Método de Centrado Usar?</h2>
+<p>Según Enders y Tofighi:</p>
+<ol type="1">
+<li>El <strong>centrado en la media del grupo (CMC)</strong> (Enders y Tofighi lo llaman <em>“centering within cluster”</em> o <strong>CWC</strong>) es apropiado cuando la <strong>asociación entre X e Y en el Nivel 1 (L1)</strong> es de interés sustantivo.</li>
+</ol>
+<ul>
+<li>CMC <strong>elimina el efecto del grupo/diada</strong> de las estimaciones a nivel 1.</li>
+</ul>
+<p>2- El <strong>centrado en la media general (GMC)</strong> (Enders y Tofighi lo llaman <em>“centering at the grand mean”</em> o <strong>CGM</strong>) es apropiado cuando el <strong>interés principal está en un predictor de Nivel 2 (L2)</strong> y se desea controlar por covariables de Nivel 1.</p>
+<ul>
+<li><p>GMC <strong>no controla</strong> por el efecto del grupo/diada sobre las variables de L1.</p></li>
+<li><p>Los <strong>predictores de L1 contienen información tanto de nivel 1 como de nivel 2</strong>.</p></li>
+</ul>
+<ol start="3" type="1">
+<li><strong>Tanto GMC como CMC</strong> pueden ser usados para examinar la <strong>influencia diferencial</strong> de una variable en el Nivel 1 y Nivel 2.</li>
+</ol>
+<ul>
+<li>Esto se refiere a los <strong>modelos contextuales</strong>.</li>
+</ul>
+<ol start="4" type="1">
+<li><strong>CMC es preferible</strong> para examinar <strong>interacciones entre niveles</strong> y <strong>entre pares de variables de Nivel 1</strong>. <strong>GMC es apropiado</strong> para <strong>interacciones entre variables de Nivel 2</strong>.</li>
+</ol>
+</section>
+<section id="resumen-sobre-el-centrado" class="level2">
+<h2 class="anchored" data-anchor-id="resumen-sobre-el-centrado">Resumen sobre el Centrado</h2>
+<p>La <strong>escala de las variables</strong> puede llevar a valores de parámetros que no sean plausibles.</p>
+<ul>
+<li>A veces, el centrado cambia la <strong>interpretación</strong> (como en el <strong>centrado en la media general</strong>)<br>
+</li>
+<li>A veces, cambia la <strong>inferencia</strong> (como en el <strong>centrado en la media del grupo</strong>)</li>
+</ul>
+<p>El centrado ayuda a:</p>
+<ul>
+<li>Hacer que las <strong>estimaciones de los parámetros</strong> sean más comprensibles<br>
+</li>
+<li>Facilitar la <strong>estimación de efectos aleatorios</strong> en ciertos tipos de modelos<br>
+</li>
+<li><strong>Diferenciar tipos de efectos</strong>, especialmente en el <strong>centrado en la media del grupo</strong></li>
+</ul>
+</section>
+</section>
 <section id="foro" class="level1">
 <h1>Foro</h1>
 <script src="https://giscus.app/client.js" data-repo="cursos-metodos-facso/multinivel" data-repo-id="MDEwOlJlcG9zaXRvcnkyMDA3MTE2MDk=" data-category="Q&amp;A" data-category-id="DIC_kwDOC_aduc4CYhjI" data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="es" crossorigin="anonymous" async="">

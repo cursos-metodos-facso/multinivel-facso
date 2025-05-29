@@ -112,8 +112,8 @@ website:
               file: assignment/05-practico.qmd
             - text: "6: Interacción entre niveles"
               file: assignment/06-practico.qmd
-            # - text: "7: Centrado"
-            #   file: assignment/07-practico.qmd
+            - text: "7: Centrado"
+              file: assignment/07-practico.qmd
   page-footer:
     left: |
       Content {{< fa brands creative-commons >}} {{< var course.copyright_year >}} by [{{< var instructor.name_no_title >}}]({{< var instructor.url >}}) <br>
