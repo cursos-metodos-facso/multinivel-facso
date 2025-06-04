@@ -8,27 +8,8 @@ website:
       repo: cursos-metodos-facso/multinivel
 ---
 
-# Documento de presentación
+# Documento de presentación: influyentes, categóricas y 3 (o más) niveles
 
-<iframe src=/slides/09centering.html height="550" width=100% allowfullscreen="true">
+<iframe src=/slides/09extensiones.html height="550" width=100% allowfullscreen="true">
 </iframe> 
-
-
-# Foro
-
-<script src="https://giscus.app/client.js"
-        data-repo="cursos-metodos-facso/multinivel", 
-        data-repo-id="MDEwOlJlcG9zaXRvcnkyMDA3MTE2MDk="
-        data-category="Q&A"
-        data-category-id="DIC_kwDOC_aduc4CYhjI"
-        data-mapping="title"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="light"
-        data-lang="es"
-        crossorigin="anonymous"
-        async>
-</script>
 

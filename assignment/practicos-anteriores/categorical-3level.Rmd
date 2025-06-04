@@ -1,0 +1,329 @@
+---
+title: "Modelos multinivel para variables categóricas y más de dos niveles"
+author: "Juan Carlos Castillo"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
+```
+
+Cargar paquetes
+```{r}
+pacman::p_load(car, # función recode
+                stargazer, # tablas latex
+                lme4, # multilevel
+                lattice, # dotplot
+                sjPlot, # multilevel plots
+                dplyr,
+                doBy, # agregar datos
+                VGAM, # predict logit
+                texreg,
+                nlme,
+                dplyr,
+                sjmisc,
+                sjPlot)
+```
+
+Establecer directorio de trabajo (setwd(....))
+
+```{r echo=FALSE, include=FALSE}
+setwd("/media/ntfs/Dropbox/cursos 2/isuc/multinivel/2017/sesiones/7. Categorical & 3 level/practica")
+```
+
+### 1. Ejemplo de regresión logística (simple,1 nivel)
+
+Ejemplo basado en Finch et al 2014, cap 7.
+
+- Dependiente: diagnóstico de enfermedad (arteria coronaria)
+- Independiente: tiempo de caminata hasta fatigarse
+- Pregunta: en qué medida la fatiga al caminar puede predecir enfermedad coronaria?
+
+### Leer y explorar los datos
+
+```{r}
+data=read.csv("CoronaryArtery.csv")
+names(data)
+```
+
+```{r}
+summary(data)
+```
+
+```{r results='asis'}
+stargazer(data,title="Estadísticos descriptivos", type = "html", digits=2)
+```
+
+
+### Recodificar datos de variable dependiente
+```{r}
+data$group=rec(data$group, rec="1=0;2=1")
+attach(data)
+
+## Estimar modelo
+
+coronary.logistic=glm(as.factor(group)~time, family = binomial, data = data)
+stargazer(coronary.logistic, type = "text")
+```
+
+```{r}
+#odds ratios
+exp(coef(coronary.logistic))
+```
+
+Interpretación
+
+-	 General: mientras menos tiempo camina, más probable que tenga enfermedad coronaria
+-	 Logit: Por cada segundo que camina, el log de los odds de enfermedad coronaria disminuye en 0.0165
+-   Transformando el logit $e^{(-0.0165)}$=0.984: por cada segundo adicional antes de fatigarse, los odds estimados de tener un ataque al corazón se multiplican por 0.984
+-   Por cada minuto adicional antes de fatigarse, los odds de tener problemas cardiacos disminuyen en $exp^{(0.0165*60)}$=0.378
+
+
+### Multinivel Logístico
+
+	- Datos: Bangladesh Demographic and Health Survey 2004 Dataset (LEMMA 2011)
+	- Variable dependiente: recepción de atención profesional prenatal (antemed), mujeres de 13 a 49 años
+	- mage: edad madre
+	- magec: edad madre centrada
+	- urban: territorio urbano
+	- Cluster: comunidad (comm)
+
+### Datos
+```{r}
+mydata <- read.table("7.1.txt", header = TRUE, sep = ",")
+names(mydata)
+dim(mydata)
+```
+
+```{r}
+# Seleccionar variables a utilizar
+
+mydata = mydata %>% select(comm, antemed, 
+                magec, mage, urban)
+names(mydata)
+summary(mydata[2:3])
+
+mydata_agg = mydata %>% group_by(comm) %>%
+            summarise_all(funs(mean)) %>% as.data.frame()
+
+summary(mydata_agg)
+```
+
+
+```{r}
+stargazer(mydata_agg, type="text")
+str(mydata_agg)
+
+```
+
+
+### Casos nivel 2
+```{r}
+casesL2 = mydata %>% select(comm, antemed) %>% group_by(comm) %>%     mutate(antemed.length=length(antemed)) # numero de casos por comunidad
+
+summary(casesL2)
+
+```
+
+Especificar modelo de intercepto aleatorio
+```{r}
+fit <- glmer(antemed ~ (1 | comm), family = binomial, data = mydata)
+summary(fit)
+
+stargazer(fit,type = "text") # lamentable no incluye random effects
+```
+```{r results='asis'}
+htmlreg(fit)
+```
+
+
+Interpretación:
+
+- Los log-odds de recibir cuidado prenatal en una comunidad "promedio" (con $\mu_{0j}=0$) se estima como $\beta_0=0.148$
+- El intercepto para una comunidad $_j$ es 0.148+$\mu_{0j}$
+- La varianza de $\mu_{0j}$ es $\sigma^2_{uj}$=1.464
+
+### Ajuste
+Para evaluar el ajuste, una posibilidad es comparar con un modelo logístico sin efectos aleatorios
+```{r}
+fita <- glm(antemed ~ 1, data = mydata, family = binomial("logit"))
+anova(fit,fita)
+```
+
+Dado que el test es signifícativo, existe evidencia de que la varianza entre comunidades no es cero.
+
+### Correlación intra-clase
+
+Para el cálculo de la correlación intra-clase hay que considerar el escalamiento de la varianza de los residuos
+a nivel individual. Para el caso de un modelo probit equivale a 1, mientras que para un logit=3.29
+```{r}
+(icc=1.46/(3.29+1.46))
+```
+
+### Caterpillar plot
+```{r}
+sjp.glmer(fit, sort.est = "sort.all",facet.grid = FALSE)
+```
+
+### Probabilidades predichas del modelo
+
+Asumiendo que $\mu_{0j}$ sigue una distribución normal, se esperaría que aproximadamente el 95 \% de las comunidades tuvieran un valor de $\mu_{0j}$ entre dos desviaciones estándar del promedio, es decir:
+
+```{r}
+2*sqrt(1.464) # valor de 2 desviaciones estandar
+exp(-0.148-2.419)/(1+exp(-0.148-2.419)) # bajo la media
+exp(-0.148+2.419)/(1+exp(-0.148+2.419)) # sobre la media
+
+```
+Por lo tanto, se espera que la proporción de ser atendida  varíe entre 0.07 y 0.9 para el 95\% de las comunidades
+
+El siguiente modelo agrega edad maternal (magec) como variable explicativa.
+
+```{r warning=FALSE}
+fit2 <- glmer(antemed ~ magec + (1 | comm), family = binomial("logit"), data = mydata)
+summary(fit2)
+```
+
+Notar que existen escasas diferencias en la varianza entre comunidades comparado con el modelo anterior, sugiriendo que la distribución de la edad maternal es similar entre las comunidades.
+
+### Plot probabilidades predichas para modelo con predictor nivel 1
+
+```{r}
+
+predprob <- fitted(fit2)
+predlogit <- logit(predprob)
+datapred <- unique(data.frame(cbind(predlogit = predlogit,
+            comm = mydata$comm, mage = mydata$mage)))
+
+xyplot(predlogit ~ mage, data = datapred, groups = comm,
+       type = c("p", "l", "g"), col = "blue", xlim = c(9, 51),
+       ylim = c(-4, 4))
+
+
+```
+
+### Random slope model
+
+```{r}
+fit_rs <- glmer(antemed ~ magec + (1 + magec | comm), 
+          data = mydata, family = binomial("logit"))
+summary(fit_rs)
+
+```
+
+Evaluación de ajuste del modelo con pendiente aleatoria en relación a uno con pendiente fija
+
+```{r}
+anova(fit_rs,fit2)
+```
+
+### Agregando variable nivel 2 e interacción
+
+```{r}
+fit_l2 <- glmer(antemed ~ magec + urban + (1 | comm), 
+          data = mydata, family = binomial("logit"))
+summary(fit_l2)
+
+fit_int <- glmer(antemed ~ magec + urban + magec*urban + (1 + magec | comm), data = mydata, family = binomial("logit"))
+summary(fit_int)
+```
+
+
+##  Modelos de 3 niveles
+Ejemplo Finch Cap. 4, pag. 80
+
+Lectura y limpieza datos (Achieve, base de datos de estudiantes en clases en escuelas)
+
+```{r results="hide"}
+Achieve <- read.csv("Achieve.csv")
+names(Achieve)
+
+myvars <- c("geread", # puntaje en lectura
+            "gevocab", #puntaje en vocabulario
+            "gender", # genero
+            "clenroll", # tamaño de los cursos
+            "cenroll", # tamaño del colegio
+            "class", # id cursos
+            "school", # id escuelas
+            "corp" # id distritos
+            ) # seleccionar variables
+Achieve <- Achieve[myvars] # definir data con variables seleccionadas
+names(Achieve)
+attach(Achieve)
+
+# para descriptivos por nivel
+length(unique(school)) # Número escuelas
+length(unique(class)) # Número (máximo) salas clases por escuela
+Achieve$class2=(school*10000)+class # id único por clase
+length(unique(Achieve$class2)) 
+
+AchieveL2 = Achieve %>% group_by(class2) %>% 
+            summarise_all(funs(mean))
+AchieveL2 = as.data.frame(AchieveL2) # para stargazer
+AchieveL3 = Achieve %>% group_by(school) %>% 
+            summarise_all(funs(mean))
+AchieveL3 = as.data.frame(AchieveL3) 
+```
+
+Algunos descriptivos
+
+```{r results='asis'}
+stargazer(Achieve[c("geread", "gevocab","gender")],title="Estadísticos descriptivos L1", type = "html")
+
+stargazer(AchieveL2[c("clenroll","class")],title="Estadísticos descriptivos L2", type = "html")
+
+stargazer(AchieveL3[c("cenroll","school")],title="Estadísticos descriptivos L3", type = "html")
+
+```
+
+```{r results='hide'}
+table(Achieve$school, Achieve$class) # cursos por escuela y N
+```
+
+
+Modelo Nulo
+```{r}
+Model4.7 <- lmer(geread~1+(1|school/class), data = Achieve)
+summary(Model4.7)
+
+```
+
+Análisis modelo nulo
+
+- Deviance con modelo sin multilevel (para contraste con nulo): requiere estimación de nulo con <tt>`lme`</tt> por compatibilidad
+
+```{r results='hide'}
+Model4.7.2 <- lme(fixed=geread~1,random=~1|school/class2, data = Achieve,method = "ML")
+summary(Model4.7)
+interceptOnly <-gls(geread~1, data = Achieve, method = "ML")
+
+```
+
+```{r}
+anova(interceptOnly, Model4.7.2)
+```
+
+- Correlación intra-clase
+```{r results='hide'}
+0.273/(0.273+4.847) # Correlación intra clase de class
+0.312/(0.312 + 0.273 + 4.847) # Correlación intra clase de schools
+
+```
+
+Modelos con predictores
+```{r results='hide'}
+Model4.8 <- lmer( geread~gevocab+clenroll+cenroll+(1|school/class), data = Achieve)
+
+```
+
+Cuatro niveles
+```{r results='hide'}
+Model4.10 <- lmer( geread~1+(1|corp/school/class), data = Achieve)
+```
+
+Pendiente aleatoria
+```{r results='hide'}
+Model4.11  <-  lmer( geread~gevocab+gender+(gender|school/class), data = Achieve)
+
+```
+

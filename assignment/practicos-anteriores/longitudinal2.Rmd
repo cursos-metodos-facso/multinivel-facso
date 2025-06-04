@@ -1,0 +1,127 @@
+---
+title: 'Análisis Longitudinal II: Estimación'
+author: "Juan Carlos Castillo"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = T)
+```
+
+Sesión basada principalmente en Singer \& Willett ALDA (Applied Longitudinal Data Analysis), capítulos 2 \& 3
+
+Cargar paquetes
+```{r}
+pacman::p_load(
+haven,
+lme4,
+dplyr,
+lattice,
+texreg
+)
+
+```
+
+
+
+## Ejemplo Singer & Willett cap. 3
+
+- Datos: estudio sobre efecto de intervencíon temprana en habilidades cognitivas
+- 3 mediciones a 103 niños de familias de bajos ingresos
+- A los 6 meses, la mitad (58) fue asignado a una intervención de estimulación cognitiva
+- Mediciones a los 12,18 y 24 meses
+- Variable dependiente: puntaje en habilidades cognitivas (cog)
+
+
+Lectura de datos
+
+```{r include=FALSE}
+setwd("/media/ntfs/Dropbox/cursos 2/isuc/multinivel/2017/sesiones/9. longitudinal II/practica")
+```
+
+```{r}
+early.int<-read_stata("earlyint_pp.dta")
+summary(early.int)
+```
+
+Exploración con casos seleccionados
+
+```{r}
+early.int$id
+early.int %>% group_by(id) %>% summarise(mean(program))
+
+early.int1 <- early.int %>% filter(id >= 68 & id <=75 | id >= 902 & id <=906)
+
+early.int1
+```
+
+```{r results='hide'}
+xyplot(cog~age | id, data=early.int1, 
+  panel = function(x, y){
+    panel.xyplot(x, y)
+    panel.lmline(x, y)
+  }, ylim=c(50, 150), as.table=T)
+```
+
+Estimación de modelo lineal por id y plot
+```{r}
+fit <- by(early.int, early.int$id, function(data) fitted.values(lm(cog ~ age, data=data)))  
+fit1 <- unlist(fit)
+names(fit1) <- NULL
+
+#plotting the linear fit by id
+xyplot(cog ~ age, groups=id, data=early.int, type="r", ylim=c(50,150))
+```
+
+Plot según participación en programa de estimulación de habilidades cognitivas
+
+```{r}
+#plotting the linear fit by idm program = 0
+early.int0=subset(early.int, program<1)
+xyplot(cog ~ age, groups=id, data=early.int0, type="r", ylim=c(50,150), main = "Program=0")
+
+#plotting the linear fit by idm program = 1
+early.int01=subset(early.int, program>0)
+xyplot(cog ~ age, groups=id, data=early.int01, type="r", ylim=c(50,150), main = "Program=1")
+
+```
+
+Estimación multinivel
+
+```{r}
+results0 <- lmer(cog ~ 1 + (1|id), data=early.int, REML=FALSE)
+
+varcomp=as.data.frame(VarCorr(results0)) # entrega matriz componentes varianza como base de datos
+tau00=varcomp[1,4]
+sigma2=varcomp[2,4]
+icc=tau00/(tau00+sigma2)
+icc
+```
+
+
+Modelos con variable nivel 2, variable nivel 1 e interacción
+
+```{r results='hide'}
+results1 <- lmer(cog ~ 1 + program + (1|id), data=early.int, REML=FALSE)
+summary(results1)
+
+results2 <- lmer(cog ~ 1 + program + time+  (1|id), data=early.int, REML=FALSE)
+summary(results2)
+
+results3 <- lmer(cog ~ time*program + (time|id), data=early.int, REML=FALSE)
+summary(results3)
+```
+
+```{r results='asis'}
+htmlreg(list(results0, results1,results2, results3))
+
+```
+
+
+Gráfico de interacción
+```{r}
+a<-fitted.values (results3)
+interaction.plot(early.int$age, early.int$program, a, xlab="AGE", ylab="COG", 
+                 ylim=c(50, 150), lwd=4, lty=1, col=4:5)
+```
+
