@@ -21,7 +21,7 @@ knitr::opts_knit$set(root.dir = here::here())
 ## Introducción análisis longitudinal
 
 ```{r}
-pacman::p_load(tidyr,plyr,stargazer,readr, sjPlot)
+pacman::p_load(tidyr,plyr, dplyr, lattice, stargazer,readr, sjPlot)
 ```
 
 Datos
@@ -34,13 +34,9 @@ Datos
 
 Lectura datos nivel-persona
 
-```{r, include=FALSE}
-setwd("/media/ntfs/Dropbox/cursos 2/isuc/multinivel/2017/sesiones/8. influential y longitudinal 1/practica")
-```
-
 
 ```{r}
-tolerance  <- read.csv("tolerance1.txt")
+tolerance  <- read.csv("https://github.com/cursos-metodos-facso/multinivel-facso/raw/refs/heads/main/assignment/data/tolerance1.txt")
 print(tolerance,row.names=FALSE)
 ```
 
@@ -49,15 +45,20 @@ print(tolerance,row.names=FALSE)
 stargazer(tolerance, type="text")
 ```
 
-Transformación datos período-persona función <tt>`gather`</tt> de la librería <tt>`tidyr`</tt>
+Transformación datos período-persona función <tt>`pivot_longer()`</tt> de la librería <tt>`tidyr`</tt>
 
 
 ```{r results='hide'}
 attach(tolerance)
 
 # Pasar a long
-tolerance.pp= gather(tolerance, variable, value, tol11:tol15, factor_key = T)  # paquete tidyr
-
+tolerance.pp <- pivot_longer(
+  data = tolerance,
+  cols = tol11:tol15,
+  names_to = "variable",
+  values_to = "value",
+  names_transform = list(variable = as.factor)
+)
 ```
 
 
@@ -260,18 +261,14 @@ texreg
 - Datos: estudio sobre efecto de intervencíon temprana en habilidades cognitivas
 - 3 mediciones a 103 niños de familias de bajos ingresos
 - A los 6 meses, la mitad (58) fue asignado a una intervención de estimulación cognitiva
-- Mediciones a los 12,18 y 24 meses
+- Mediciones a los 12, 18 y 24 meses
 - Variable dependiente: puntaje en habilidades cognitivas (cog)
 
 
 Lectura de datos
 
-```{r include=FALSE}
-setwd("/media/ntfs/Dropbox/cursos 2/isuc/multinivel/2017/sesiones/9. longitudinal II/practica")
-```
-
 ```{r}
-early.int<-read_stata("earlyint_pp.dta")
+early.int<-read_stata("https://github.com/cursos-metodos-facso/multinivel-facso/raw/refs/heads/main/assignment/data/earlyint_pp.dta")
 summary(early.int)
 ```
 
@@ -322,11 +319,7 @@ Estimación multinivel
 ```{r}
 results0 <- lmer(cog ~ 1 + (1|id), data=early.int, REML=FALSE)
 
-varcomp=as.data.frame(VarCorr(results0)) # entrega matriz componentes varianza como base de datos
-tau00=varcomp[1,4]
-sigma2=varcomp[2,4]
-icc=tau00/(tau00+sigma2)
-icc
+reghelper::ICC(results0)
 ```
 
 

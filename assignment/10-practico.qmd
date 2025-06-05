@@ -24,13 +24,10 @@ pacman::p_load(car, # función recode
                 dplyr,
                 sjmisc,
                 sjPlot)
+
+options(scipen = 999) # para desactivar notacion cientifica
 ```
 
-Establecer directorio de trabajo (setwd(....))
-
-```{r echo=FALSE, include=FALSE}
-setwd("/media/ntfs/Dropbox/cursos 2/isuc/multinivel/2017/sesiones/7. Categorical & 3 level/practica")
-```
 
 ### 1. Ejemplo de regresión logística (simple,1 nivel)
 
@@ -43,7 +40,7 @@ Ejemplo basado en Finch et al 2014, cap 7.
 ### Leer y explorar los datos
 
 ```{r}
-data=read.csv("CoronaryArtery.csv")
+data=read.csv("https://github.com/cursos-metodos-facso/multinivel-facso/raw/refs/heads/main/assignment/data/CoronaryArtery.csv")
 names(data)
 ```
 
@@ -91,7 +88,7 @@ Interpretación
 
 ### Datos
 ```{r}
-mydata <- read.table("7.1.txt", header = TRUE, sep = ",")
+mydata <- read.table("https://github.com/cursos-metodos-facso/multinivel-facso/raw/refs/heads/main/assignment/data/7.1.txt", header = TRUE, sep = ",")
 names(mydata)
 dim(mydata)
 ```
@@ -99,8 +96,9 @@ dim(mydata)
 ```{r}
 # Seleccionar variables a utilizar
 
-mydata = mydata %>% select(comm, antemed, 
-                magec, mage, urban)
+mydata = mydata %>% select(comm, antemed,
+                           magec, mage, urban)
+
 names(mydata)
 summary(mydata[2:3])
 
@@ -163,7 +161,15 @@ a nivel individual. Para el caso de un modelo probit equivale a 1, mientras que 
 
 ### Caterpillar plot
 ```{r}
-sjp.glmer(fit, sort.est = "sort.all",facet.grid = FALSE)
+plot_model(fit,
+           type = "re",            # efectos aleatorios
+           sort.est = "sort.all",  # ordena todos los niveles
+           grid = FALSE,
+           show.values = FALSE,    # evita los números solapados
+           show.p = FALSE,         # no muestra p-values
+           value.offset = 0.3,     # (si activas valores)
+           title = "Random effects of (Intercept)",
+           vline.color = "gray")   # línea vertical de referencia
 ```
 
 ### Probabilidades predichas del modelo
@@ -236,7 +242,7 @@ Ejemplo Finch Cap. 4, pag. 80
 Lectura y limpieza datos (Achieve, base de datos de estudiantes en clases en escuelas)
 
 ```{r results="hide"}
-Achieve <- read.csv("Achieve.csv")
+Achieve <- read.csv("https://github.com/cursos-metodos-facso/multinivel-facso/raw/refs/heads/main/assignment/data/Achieve.csv")
 names(Achieve)
 
 myvars <- c("geread", # puntaje en lectura
@@ -326,6 +332,9 @@ Pendiente aleatoria
 ```{r results='hide'}
 Model4.11  <-  lmer( geread~gevocab+gender+(gender|school/class), data = Achieve)
 
+```
+```{r results='asis'}
+htmlreg(list(Model4.8, Model4.10, Model4.11))
 ```
 
 
