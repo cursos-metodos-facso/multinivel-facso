@@ -80,7 +80,7 @@ Genera objeto estex.m23 para futuras estimaciones de influencia
 
 DFBETAS
 
-```{r results='hide'}
+```{r}
 dfbetas(estex.m23) 
 dfbetas(estex.m23,parameters=c(2,3))
 
@@ -89,9 +89,6 @@ dfbetas(estex.m23,parameters=c(2,3))
 dfbeta_estex.m32=as.data.frame(dfbetas(estex.m23))
 
 dfbeta_estex.m32 %>%  filter(homework > 0.417 | structure > 0.417 )
-
-
-
 ```
 
 
@@ -126,8 +123,13 @@ Para la variable structure, se muestran las primeras 10 filas, y se establece un
 datab=filter(school23,school.ID!=7472)
 
 m23b <- lmer(math ~ homework + structure + (1 | school.ID),data=datab) 
-summary(m23b)
 ```
+```{r}
+sjPlot::tab_model(m23, m23b, 
+                  show.ci = FALSE,
+                  dv.labels = c("Modelo original", "Modelo sin influyentes"))
+```
+
 
 ¿Qué diferencia hay entre el modelo con y sin la observación influyente de nivel 2?
 

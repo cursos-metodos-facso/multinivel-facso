@@ -116,10 +116,10 @@ website:
               file: assignment/07-practico.qmd
             - text: "8: Observaciones influyentes"
               file: assignment/08-practico.qmd
-            - text: "9: Análisis longitudinal"
+            - text: "9: Logística y tres niveles"
               file: assignment/09-practico.qmd
-            - text: "10: Logística y tres niveles"
-              file: assignment/10-practico.qmd
+            # - text: "10: Análisis longitudinal"
+            #   file: assignment/10-practico.qmd
   page-footer:
     left: |
       Content {{< fa brands creative-commons >}} {{< var course.copyright_year >}} by [{{< var instructor.name_no_title >}}]({{< var instructor.url >}}) <br>
