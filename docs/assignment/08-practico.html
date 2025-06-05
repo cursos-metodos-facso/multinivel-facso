@@ -8,7 +8,7 @@
 
 <meta name="description" content="Modelos Multinivel">
 
-<title>Instrucciones generales – Modelos Multinivel</title>
+<title>Observaciones influyentes – Modelos Multinivel</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -71,7 +105,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<meta property="og:title" content="Instrucciones generales – Modelos Multinivel">
+<meta property="og:title" content="Observaciones influyentes – Modelos Multinivel">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://multinivel-facso.netlify.app/files/img/logo-multinivel.png">
 <meta property="og:site_name" content="Modelos Multinivel">
@@ -141,7 +175,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignment/index.html">Sobre prácticos</a></li><li class="breadcrumb-item"><a href="../assignment/index.html">Instrucciones generales</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignment/01-practico.html">Guías</a></li><li class="breadcrumb-item"><a href="../assignment/08-practico.html">8: Observaciones influyentes</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -164,7 +198,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../assignment/index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../assignment/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Instrucciones generales</span></a>
   </div>
 </li>
@@ -223,7 +257,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../assignment/08-practico.html" class="sidebar-item-text sidebar-link">
+  <a href="../assignment/08-practico.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">8: Observaciones influyentes</span></a>
   </div>
 </li>
@@ -245,12 +279,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">En esta página</h2>
    
   <ul>
-  <li><a href="#descripción" id="toc-descripción" class="nav-link active" data-scroll-target="#descripción">Descripción</a></li>
-  <li><a href="#trabajo-con-software-r" id="toc-trabajo-con-software-r" class="nav-link" data-scroll-target="#trabajo-con-software-r">Trabajo con software R</a></li>
-  <li><a href="#sobre-errores-y-consultas-sobre-problemas-con-r-y-ejecución-de-código" id="toc-sobre-errores-y-consultas-sobre-problemas-con-r-y-ejecución-de-código" class="nav-link" data-scroll-target="#sobre-errores-y-consultas-sobre-problemas-con-r-y-ejecución-de-código">Sobre errores y consultas sobre problemas con R y ejecución de código</a>
-  <ul class="collapse">
-  <li><a href="#installR" id="toc-installR" class="nav-link" data-scroll-target="#installR">Instalación de R &amp; RStudio</a></li>
-  </ul></li>
+  <li><a href="#casos-influyentes-multinivel" id="toc-casos-influyentes-multinivel" class="nav-link active" data-scroll-target="#casos-influyentes-multinivel">1. Casos influyentes Multinivel</a></li>
+  <li><a href="#foro" id="toc-foro" class="nav-link" data-scroll-target="#foro">Foro</a></li>
   </ul>
 </nav>
     </div>
@@ -258,79 +288,306 @@ ul.task-list li input[type="checkbox"] {
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header">
-<h1 class="title display-7">Instrucciones generales</h1>
+<h1 class="title display-7">Observaciones influyentes</h1>
 
+<div class="date-block bg-assignment text-white p-2">
+  <p class="date">Correspondiente a la sesión del jueves, 5 de junio de 2025</p>
+</div>
 </header>
 
 
-<section id="descripción" class="level2">
-<h2 class="anchored" data-anchor-id="descripción">Descripción</h2>
-<ul>
-<li><p>Los prácticos consisten en el desarrollo de una guía práctica (por lo general cada semana) donde se aplican y profundizan los contenidos de las clases, y donde también se abordan otras temáticas relacionadas al manejo y repote de datos. La organización semestras se puede revisar en la <a href="../schedule.html">planificación del curso</a>.</p></li>
-<li><p>El trabajo con estas guías se organiza en los siguientes momentos:</p>
-<ul>
-<li>cada estudiante realiza la guía de manera autónoma durante la semana</li>
-<li>en caso de dudas que surjan durante la semana se recomienda preguntar en el foro de Giscus al final del práctico, para lo cual se requiere tener cuenta en <a href="https://github.com">Github</a>. La cuenta gratis y fácil de obtener, y el servicio muy útil. Si se quiere saber en qué consiste se recomienda revisar la siguiente <a href="https://cienciasocialabierta.netlify.app/class/09-class/">clase del curso Ciencia Social Abierta</a></li>
-</ul></li>
-<li><p>En las prácticas vamos a trabajar con el software R, Versión 4.3.1.</p></li>
-</ul>
-</section>
-<section id="trabajo-con-software-r" class="level2">
-<h2 class="anchored" data-anchor-id="trabajo-con-software-r">Trabajo con software R</h2>
-<p>Para los análisis estadísticos de este curso usamos el programa R, en parte porque es gratuito, pero la principal razón es que es de código abierto. Esto quiere decir que cualquier persona puede revisar cómo está hecho y aportar con modificaciones y procedimientos nuevos, como son las librerías que realizan funciones específicas.</p>
-<p>El carácter de apertura de R posee muchas ventajas, pero también conlleva complicaciones. Se actualiza permanentemente, así como también las librerías, y esto puede generar problemas de compatibilidad y de fallas en ejecución del código de análisis.</p>
-<p>Para minimizar estos posibles problemas en este curso, vamos a:</p>
-<ul>
-<li>trabajar con la misma y última versión de R, que es la 4.3</li>
-<li>evitar uso de tilde, ñ, espacios y mayúsculas tanto en carpetas y archivos, así como también en los nombres de las variables</li>
-</ul>
-</section>
-<section id="sobre-errores-y-consultas-sobre-problemas-con-r-y-ejecución-de-código" class="level2">
-<h2 class="anchored" data-anchor-id="sobre-errores-y-consultas-sobre-problemas-con-r-y-ejecución-de-código">Sobre errores y consultas sobre problemas con R y ejecución de código</h2>
-<p>En caso de problemas con ejecución de código, se sugiere intentar solucionarlo autónomamente por no más de 10 minutos, si los problemas siguen entonces consultar.</p>
-<p>Se sugiere que las consultas sobre problemas en la ejecución del código y otros se realicen en los foros al final de los prácticos correspondientes (en Giscus), para lo cual se requiere solo habilitar una cuenta en Github. Al hacer la consulta, adjuntar la siguiente información:</p>
-<ol type="1">
-<li>Código completo hasta que se produce el problema</li>
-<li>Indicar línea del código donde se produce el problema</li>
-<li>Adjuntar el resultado del output de la información de la sesión (<code>sessionInfo()</code>)</li>
-</ol>
-<section id="installR" class="level3">
-<h3 class="anchored" data-anchor-id="installR">Instalación de R &amp; RStudio</h3>
-<p>Para esta versión del curso vamos a trabajar con el programa R Version 4.3 y con RStudio, que ofrece un entorno más amigable para trabajar con R.</p>
-<p>Para <strong>instalar R</strong>: ir a <a href="https://cran.r-project.org/index.html">https://cran.r-project.org/index.html</a> y bajar/instalar la versión correspondiente a la plataforma utilizada (Windows, Mac o Linux)</p>
-<p>Para instalar <strong>RStudio</strong>: ir a <a href="https://rstudio.com/products/rstudio/">https://rstudio.com/products/rstudio/</a> y bajar/instalar RStudio desktop, Open Source License (libre).</p>
-<p>En caso de dudas se puede revisar el siguiente <strong>video tutorial</strong> de instalación de R &amp; RStudio, preparado por Julio Iturra (apoyo docente) del curso Estadística Multivariada 2020:</p>
-<div style="width: 100%; height: 600px; overflow: hidden;">
-<video style="width: 100%;" controls="">
-<source src="https://www.dropbox.com/s/goofz32r5htw6pt/tutorialR-4.0.mp4?raw=1" type="video/mp4">
-</video>
+<section id="casos-influyentes-multinivel" class="level2">
+<h2 class="anchored" data-anchor-id="casos-influyentes-multinivel">1. Casos influyentes Multinivel</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(influence.ME,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>               lattice, <span class="co"># dotplot</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>               dplyr,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>               texreg,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>               stargazer,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>               tidyr</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                )</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Si por alguna razón se prefiere trabajar sin descargar, también se puede utilizar RCloud, abajo un tutorial preparado por Valentina Andrade para el curso de Estadística Multivariada:</p>
-<div style="width: 100%; height: 600px; overflow: hidden;">
-<video style="width: 100%;" controls="">
-<source src="https://www.dropbox.com/s/6nqm99dqnjvtmry/rcloud.mp4?raw=1" type="video/mp4">
-</video>
-</div>
-<section id="codigoR" class="level3">
-<h3 class="anchored" data-anchor-id="codigoR">Sobre el trabajo en hojas de código en RStudio</h3>
+<p>Datos (incluidos en el paquete influence.ME)</p>
 <ul>
-<li><p>El trabajo de análisis en RStudio se efectua en una <em>hoja de código</em> (o R script o sintaxis, o para los usuarios de Stata la <em>do-file</em>), que es donde se anotan los comandos y funciones. Para abrir una hoja, en RStudio ir a File &gt; New File &gt; R Script (o ctrl+shift+N),y aparecerá un panel con una pestaña “Untitled” (sin título). Esta es la hoja de código donde se anotan los comandos.</p></li>
-<li><p>Los contenidos de las hojas de código son básicamente 2:</p>
+<li>23 escuelas, 519 individuos</li>
+<li>variables principales:
 <ul>
-<li>comandos o funciones: se escriben en la hoja, y para ejecutarlos se debe posicionar el cursor en la línea respectiva y ctrl+enter, el resultado aparecerá en el panel de resultados o <em>Consola</em>.</li>
-<li>texto: para escribir títulos, comentarios, y todo lo que permita entender qué se está haciendo, al principio de la línea respectiva escribir el signo <code>#</code></li>
+<li>Dependiente: rendimiento en matemática</li>
+<li>Independiente L1: homework, tiempo realizando tareas</li>
+<li>Independiente L2: structure, grado de estructura de las clases</li>
 </ul></li>
-<li><p>Para grabar nuestra hoja de código y así respaldar nuestros análisis, File &gt; Save (o ctrl+s), y dar un nombre al archivo. Recordar: breve, sin espacios ni tildes ni eñes. Por defecto, la extensión de estos archivos es .R</p></li>
 </ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(school23)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(school23)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(school23<span class="sc">$</span>homework) </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>school23 <span class="ot">&lt;-</span> <span class="fu">within</span>(school23, homework <span class="ot">&lt;-</span> <span class="fu">unclass</span>(homework)) <span class="co"># pasar a continua</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(school23<span class="sc">$</span>homework)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Estimación modelo</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>m23 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> homework <span class="sc">+</span> structure <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> school.ID),<span class="at">data=</span>school23)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m23, <span class="at">cor=</span><span class="cn">FALSE</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML ['lmerMod']
+Formula: math ~ homework + structure + (1 | school.ID)
+   Data: school23
+
+REML criterion at convergence: 3724.5
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.6617 -0.7063 -0.0151  0.6665  3.2326 
+
+Random effects:
+ Groups    Name        Variance Std.Dev.
+ school.ID (Intercept) 19.54    4.421   
+ Residual              71.31    8.445   
+Number of obs: 519, groups:  school.ID, 23
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept)  52.2355     5.3948   9.683
+homework      2.3938     0.2771   8.640
+structure    -2.0950     1.3239  -1.582</code></pre>
+</div>
+</div>
+<p>Plot descriptivo</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>struct <span class="ot">&lt;-</span> school23 <span class="sc">%&gt;%</span> <span class="fu">select</span>(school.ID, structure, math) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(school.ID) <span class="sc">%&gt;%</span> <span class="fu">summarise_all</span>(mean) <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>() </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dotplot</span>(math <span class="sc">~</span> <span class="fu">factor</span>(structure), <span class="co"># lattice</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        struct,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">type=</span><span class="fu">c</span>(<span class="st">"p"</span>,<span class="st">"a"</span>),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span><span class="st">"Class structure level"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab=</span><span class="st">"Average Math Test Score"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="08-practico_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Calculando medidas de influencia basados en función <tt><code>influence</code></tt> de <tt><code>influence.ME</code></tt></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>estex.m23 <span class="ot">&lt;-</span> <span class="fu">influence</span>(m23, <span class="st">"school.ID"</span>) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Genera objeto estex.m23 para futuras estimaciones de influencia</p>
+<p>DFBETAS</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dfbetas</span>(estex.m23) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      (Intercept)    homework    structure
+6053   0.20438272 -0.13353782 -0.168112863
+6327   0.11706086 -0.44769047  0.020480558
+6467  -0.01647348  0.21089491  0.015320693
+7194   0.03155659 -0.44641518  0.036749233
+7472  -1.20542747 -0.55839049  1.254798224
+7474  -0.22112732 -0.51980380  0.353431371
+7801   0.07862924 -0.45872039 -0.012145337
+7829   0.58739143 -0.77957141 -0.555013123
+7930  -0.09131583  0.65291967  0.019638096
+24371 -0.07478227  0.37515821 -0.002611182
+24725 -0.14550292  0.60660357 -0.005518191
+25456  0.07021527 -0.36410988 -0.005086597
+25642  0.02256001 -0.21373926 -0.013416556
+26537  0.06514836  0.28956822 -0.095167486
+46417 -0.01740458  0.26325092  0.023438196
+47583 -0.05615965  0.23266306  0.026355535
+54344  0.38857969  0.08338389 -0.474978335
+62821  0.66202562 -0.92371257 -0.455327896
+68448 -0.30385524  0.41369769  0.222734720
+68493 -0.05718403  0.25071141 -0.006237296
+72080 -0.04604135  0.32986115  0.008072893
+72292 -0.11354833  0.62278357  0.003905476
+72991 -0.06669580  0.52021276  0.021627589</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dfbetas</span>(estex.m23,<span class="at">parameters=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         homework    structure
+6053  -0.13353782 -0.168112863
+6327  -0.44769047  0.020480558
+6467   0.21089491  0.015320693
+7194  -0.44641518  0.036749233
+7472  -0.55839049  1.254798224
+7474  -0.51980380  0.353431371
+7801  -0.45872039 -0.012145337
+7829  -0.77957141 -0.555013123
+7930   0.65291967  0.019638096
+24371  0.37515821 -0.002611182
+24725  0.60660357 -0.005518191
+25456 -0.36410988 -0.005086597
+25642 -0.21373926 -0.013416556
+26537  0.28956822 -0.095167486
+46417  0.26325092  0.023438196
+47583  0.23266306  0.026355535
+54344  0.08338389 -0.474978335
+62821 -0.92371257 -0.455327896
+68448  0.41369769  0.222734720
+68493  0.25071141 -0.006237296
+72080  0.32986115  0.008072893
+72292  0.62278357  0.003905476
+72991  0.52021276  0.021627589</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">23</span>) <span class="co"># cut point</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4170288</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>dfbeta_estex.m32<span class="ot">=</span><span class="fu">as.data.frame</span>(<span class="fu">dfbetas</span>(estex.m23))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>dfbeta_estex.m32 <span class="sc">%&gt;%</span>  <span class="fu">filter</span>(homework <span class="sc">&gt;</span> <span class="fl">0.417</span> <span class="sc">|</span> structure <span class="sc">&gt;</span> <span class="fl">0.417</span> )</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      (Intercept)   homework    structure
+7472  -1.20542747 -0.5583905  1.254798224
+7930  -0.09131583  0.6529197  0.019638096
+24725 -0.14550292  0.6066036 -0.005518191
+72292 -0.11354833  0.6227836  0.003905476
+72991 -0.06669580  0.5202128  0.021627589</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(estex.m23, <span class="at">which=</span><span class="st">"dfbetas"</span>, <span class="at">parameters=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">xlab=</span><span class="st">"DFbetaS"</span>, <span class="at">ylab=</span><span class="st">"School ID"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="08-practico_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Distancia de Cook</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cooks.distance</span>(estex.m23, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span><span class="sc">/</span><span class="dv">23</span> <span class="co"># cut point</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(estex.m23, <span class="at">which=</span><span class="st">"cook"</span>,</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">cutoff=</span>.<span class="dv">17</span>, <span class="at">sort=</span><span class="cn">TRUE</span>,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Cooks Distance"</span>,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"School ID"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="08-practico_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Statistical significance</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sigtest</span>(estex.m23, <span class="at">test=</span><span class="sc">-</span><span class="fl">1.96</span>)<span class="sc">$</span>structure[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,]</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Altered.Teststat Altered.Sig Changed.Sig
+6053         -1.326219       FALSE       FALSE
+6327         -1.688461       FALSE       FALSE
+6467         -1.589753       FALSE       FALSE
+7194         -1.512465       FALSE       FALSE
+7472         -2.715381        TRUE        TRUE
+7474         -1.894861       FALSE       FALSE
+7801         -1.533801       FALSE       FALSE
+7829         -1.045699       FALSE       FALSE
+7930         -1.565893       FALSE       FALSE
+24371        -1.546618       FALSE       FALSE</code></pre>
+</div>
+</div>
+<p>Para la variable structure, se muestran las primeras 10 filas, y se establece un criterio de significación de 1.96 para detectar si hay alteraciones en la significación</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>datab<span class="ot">=</span><span class="fu">filter</span>(school23,school.ID<span class="sc">!=</span><span class="dv">7472</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>m23b <span class="ot">&lt;-</span> <span class="fu">lmer</span>(math <span class="sc">~</span> homework <span class="sc">+</span> structure <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> school.ID),<span class="at">data=</span>datab) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>sjPlot<span class="sc">::</span><span class="fu">tab_model</span>(m23, m23b, </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">show.ci =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">dv.labels =</span> <span class="fu">c</span>(<span class="st">"Modelo original"</span>, <span class="st">"Modelo sin influyentes"</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table style="border-collapse:collapse; border:none;">
+<tbody><tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
+<th colspan="2" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">Modelo original</th>
+<th colspan="2" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">Modelo sin influyentes</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">Predictors</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">p</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">p</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">52.24</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">59.41</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">homework</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">2.39</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">2.55</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">structure</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-2.10</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.114</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-3.89</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>0.007</strong></td>
+</tr>
+<tr>
+<td colspan="5" style="font-weight:bold; text-align:left; padding-top:.8em;">Random Effects</td>
+</tr>
+
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">σ<sup>2</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">71.31</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">70.67</td>
+</tr>
+
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">τ<sub>00</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">19.54 <sub>school.ID</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">15.33 <sub>school.ID</sub></td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">ICC</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.22</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.18</td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">N</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">23 <sub>school.ID</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">22 <sub>school.ID</sub></td>
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">Observations</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="2">519</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="2">496</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">Marginal R<sup>2</sup> / Conditional R<sup>2</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.158 / 0.339</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.235 / 0.371</td>
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+<p>¿Qué diferencia hay entre el modelo con y sin la observación influyente de nivel 2?</p>
+</section>
+<section id="foro" class="level1">
+<h1>Foro</h1>
+<script src="https://giscus.app/client.js" data-repo="cursos-metodos-facso/multinivel" data-repo-id="MDEwOlJlcG9zaXRvcnkyMDA3MTE2MDk=" data-category="Q&amp;A" data-category-id="DIC_kwDOC_aduc4CYhjI" data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="es" crossorigin="anonymous" async="">
+</script>
 
 
 </section>
-</section></section></main></div>
 
-
-
-
- <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -751,7 +1008,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
- <!-- /content -->
+</div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
