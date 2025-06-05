@@ -8,7 +8,7 @@
 
 <meta name="description" content="Modelos Multinivel">
 
-<title>Introducción al análisis longitudinal – Modelos Multinivel</title>
+<title>Modelos multinivel para más de dos niveles – Modelos Multinivel</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -104,37 +104,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<meta property="og:title" content="Introducción al análisis longitudinal – Modelos Multinivel">
+<meta property="og:title" content="Modelos multinivel para más de dos niveles – Modelos Multinivel">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://multinivel-facso.netlify.app/files/img/logo-multinivel.png">
 <meta property="og:site_name" content="Modelos Multinivel">
@@ -143,7 +114,7 @@ window.Quarto = {
 <meta property="og:image:width" content="521">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -177,7 +148,7 @@ window.Quarto = {
 <span class="menu-text">Clases</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../assignment/index.html"> 
+    <a class="nav-link active" href="../assignment/index.html" aria-current="page"> 
 <span class="menu-text">Prácticos</span></a>
   </li>  
   <li class="nav-item">
@@ -199,19 +170,122 @@ window.Quarto = {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignment/01-practico.html">Guías</a></li><li class="breadcrumb-item"><a href="../assignment/10-practico.html">10: Tres niveles</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Sobre prácticos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Instrucciones generales</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Guías</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/01-practico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1: Repaso inferencia</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/02-practico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2: Datos y estimaciones en dos niveles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/03-practico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3: Estimación modelos multinivel con lmer en R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/04-practico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4: Combinando datos de distintos niveles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/05-practico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5: Efectos aleatorios</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/06-practico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6: Interacción entre niveles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/07-practico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">7: Centrado</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/08-practico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">8: Observaciones influyentes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/09-practico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">9: Variables categóricas</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/10-practico.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">10: Tres niveles</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">En esta página</h2>
    
   <ul>
-  <li><a href="#introducción-análisis-longitudinal" id="toc-introducción-análisis-longitudinal" class="nav-link active" data-scroll-target="#introducción-análisis-longitudinal">Introducción análisis longitudinal</a></li>
-  <li><a href="#análisis-longitudinal-ii-estimación" id="toc-análisis-longitudinal-ii-estimación" class="nav-link" data-scroll-target="#análisis-longitudinal-ii-estimación">Análisis longitudinal II: Estimación</a></li>
-  <li><a href="#ejemplo-singer-willett-cap.-3" id="toc-ejemplo-singer-willett-cap.-3" class="nav-link" data-scroll-target="#ejemplo-singer-willett-cap.-3">Ejemplo Singer &amp; Willett cap. 3</a></li>
+  <li><a href="#modelos-de-3-niveles" id="toc-modelos-de-3-niveles" class="nav-link active" data-scroll-target="#modelos-de-3-niveles">Modelos de 3 niveles</a></li>
   <li><a href="#foro" id="toc-foro" class="nav-link" data-scroll-target="#foro">Foro</a></li>
   </ul>
 </nav>
@@ -220,7 +294,7 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header">
-<h1 class="title display-7">Introducción al análisis longitudinal</h1>
+<h1 class="title display-7">Modelos multinivel para más de dos niveles</h1>
 
 <div class="date-block bg-assignment text-white p-2">
   <p class="date">Correspondiente a la sesión del jueves, 5 de junio de 2025</p>
@@ -228,205 +302,116 @@ window.Quarto = {
 </header>
 
 
-<section id="introducción-análisis-longitudinal" class="level2">
-<h2 class="anchored" data-anchor-id="introducción-análisis-longitudinal">Introducción análisis longitudinal</h2>
+<p>Cargar paquetes</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyr,plyr, dplyr, lattice, stargazer,readr, sjPlot)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(car, <span class="co"># función recode</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                stargazer, <span class="co"># tablas latex</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                lme4, <span class="co"># multilevel</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                lattice, <span class="co"># dotplot</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                sjPlot, <span class="co"># multilevel plots</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                dplyr,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                doBy, <span class="co"># agregar datos</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                VGAM, <span class="co"># predict logit</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                texreg,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                nlme,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                dplyr,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                sjmisc,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                sjPlot)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>) <span class="co"># para desactivar notacion cientifica</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Datos</p>
+<section id="modelos-de-3-niveles" class="level2">
+<h2 class="anchored" data-anchor-id="modelos-de-3-niveles">Modelos de 3 niveles</h2>
+<p>Ejemplo Finch Cap. 4, pag. 80</p>
+<p>Lectura y limpieza datos (Achieve, base de datos de estudiantes en clases en escuelas)</p>
 <ul>
-<li>National Youth Survey (Raudenbusch &amp; Chan, 1992)</li>
-<li>Encuesta anual desde los 11 años en adelante, 5 olas, una al año (i.e.&nbsp;hasta 15 años)</li>
-<li>Medida: instrumento de tolerancia <strong>TOL</strong> a conductas desviadas, promedio 9 items, likert 1-4 desde “muy mal” hasta “nada mal”. Por ejemplo “fumar marihuana”, “copiar en una prueba” .Mayores puntajes indican mayor tolerancia a desviación.</li>
-<li>Predictores: sexo <strong>MALE</strong>=1 y autoreporte de exposición a conductas desviadas a los 11 años <strong>EXPOSURE</strong>. Esta variable se construye estimando la proporción de amigos cercanos que se han visto envueltos en actividades de los mismos 9 items de autoreporte (1=ninguno, 4=todos), los cuales se promedian.</li>
+<li>“geread”: puntaje en lectura</li>
+<li>“gevocab”: puntaje en vocabulario</li>
+<li>“gender”: genero</li>
+<li>“clenroll”: tamaño de los cursos</li>
+<li>“cenroll”: tamaño del colegio</li>
+<li>“class”: id cursos</li>
+<li>“school”: id escuelas</li>
+<li>“corp”: id distritos</li>
 </ul>
-<p>Lectura datos nivel-persona</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>tolerance  <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://github.com/cursos-metodos-facso/multinivel-facso/raw/refs/heads/main/assignment/data/tolerance1.txt"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(tolerance,<span class="at">row.names=</span><span class="cn">FALSE</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   id tol11 tol12 tol13 tol14 tol15 male exposure
-    9  2.23  1.79  1.90  2.12  2.66    0     1.54
-   45  1.12  1.45  1.45  1.45  1.99    1     1.16
-  268  1.45  1.34  1.99  1.79  1.34    1     0.90
-  314  1.22  1.22  1.55  1.12  1.12    0     0.81
-  442  1.45  1.99  1.45  1.67  1.90    0     1.13
-  514  1.34  1.67  2.23  2.12  2.44    1     0.90
-  569  1.79  1.90  1.90  1.99  1.99    0     1.99
-  624  1.12  1.12  1.22  1.12  1.22    1     0.98
-  723  1.22  1.34  1.12  1.00  1.12    0     0.81
-  918  1.00  1.00  1.22  1.99  1.22    0     1.21
-  949  1.99  1.55  1.12  1.45  1.55    1     0.93
-  978  1.22  1.34  2.12  3.46  3.32    1     1.59
- 1105  1.34  1.90  1.99  1.90  2.12    1     1.38
- 1542  1.22  1.22  1.99  1.79  2.12    0     1.44
- 1552  1.00  1.12  2.23  1.55  1.55    0     1.04
- 1653  1.11  1.11  1.34  1.55  2.12    0     1.25</code></pre>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Achieve <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://github.com/cursos-metodos-facso/multinivel-facso/raw/refs/heads/main/assignment/data/Achieve.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(Achieve)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>myvars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"geread"</span>, <span class="co"># puntaje en lectura</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">"gevocab"</span>, <span class="co">#puntaje en vocabulario</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">"gender"</span>, <span class="co"># genero</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">"clenroll"</span>, <span class="co"># tamaño de los cursos</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">"cenroll"</span>, <span class="co"># tamaño del colegio</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">"class"</span>, <span class="co"># id cursos</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>            <span class="st">"school"</span>, <span class="co"># id escuelas</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            <span class="st">"corp"</span> <span class="co"># id distritos</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>            ) <span class="co"># seleccionar variables</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>Achieve <span class="ot">&lt;-</span> Achieve[myvars] <span class="co"># definir data con variables seleccionadas</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(Achieve)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(Achieve)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># para descriptivos por nivel</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(school)) <span class="co"># Número escuelas</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(class)) <span class="co"># Número (máximo) salas clases por escuela</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>Achieve<span class="sc">$</span>class2<span class="ot">=</span>(school<span class="sc">*</span><span class="dv">10000</span>)<span class="sc">+</span>class <span class="co"># id único por clase</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(Achieve<span class="sc">$</span>class2)) </span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>AchieveL2 <span class="ot">=</span> Achieve <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(class2) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>            <span class="fu">summarise_all</span>(<span class="fu">funs</span>(mean))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `funs()` was deprecated in dplyr 0.8.0.
+ℹ Please use a list of either functions or lambdas:
+
+# Simple named list: list(mean = mean, median = median)
+
+# Auto named with `tibble::lst()`: tibble::lst(mean, median)
+
+# Using lambdas list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>AchieveL2 <span class="ot">=</span> <span class="fu">as.data.frame</span>(AchieveL2) <span class="co"># para stargazer</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>AchieveL3 <span class="ot">=</span> Achieve <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(school) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">summarise_all</span>(<span class="fu">funs</span>(mean))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `funs()` was deprecated in dplyr 0.8.0.
+ℹ Please use a list of either functions or lambdas:
+
+# Simple named list: list(mean = mean, median = median)
+
+# Auto named with `tibble::lst()`: tibble::lst(mean, median)
+
+# Using lambdas list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))</code></pre>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(tolerance, <span class="at">type=</span><span class="st">"text"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-=========================================
-Statistic N   Mean   St. Dev.  Min   Max 
------------------------------------------
-id        16 762.812 516.239    9   1,653
-tol11     16  1.364   0.353   1.000 2.230
-tol12     16  1.441   0.321   1.000 1.990
-tol13     16  1.676   0.406   1.120 2.230
-tol14     16  1.754   0.575   1.000 3.460
-tol15     16  1.861   0.618   1.120 3.320
-male      16  0.438   0.512     0     1  
-exposure  16  1.191   0.329   0.810 1.990
------------------------------------------</code></pre>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>AchieveL3 <span class="ot">=</span> <span class="fu">as.data.frame</span>(AchieveL3) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<p>Transformación datos período-persona función <tt><code>pivot_longer()</code></tt> de la librería <tt><code>tidyr</code></tt></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(tolerance)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Pasar a long</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>tolerance.pp <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> tolerance,</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">cols =</span> tol11<span class="sc">:</span>tol15,</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">names_to =</span> <span class="st">"variable"</span>,</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">values_to =</span> <span class="st">"value"</span>,</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">names_transform =</span> <span class="fu">list</span>(<span class="at">variable =</span> as.factor)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Algunas comparaciones entre wide y long</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(tolerance)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "id"       "tol11"    "tol12"    "tol13"    "tol14"    "tol15"    "male"    
-[8] "exposure"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tolerance)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   id tol11 tol12 tol13 tol14 tol15 male exposure
-1   9  2.23  1.79  1.90  2.12  2.66    0     1.54
-2  45  1.12  1.45  1.45  1.45  1.99    1     1.16
-3 268  1.45  1.34  1.99  1.79  1.34    1     0.90
-4 314  1.22  1.22  1.55  1.12  1.12    0     0.81
-5 442  1.45  1.99  1.45  1.67  1.90    0     1.13
-6 514  1.34  1.67  2.23  2.12  2.44    1     0.90</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(tolerance)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 16  8</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(tolerance.pp)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "id"       "male"     "exposure" "variable" "value"   </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tolerance.pp)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 5
-     id  male exposure variable value
-  &lt;int&gt; &lt;int&gt;    &lt;dbl&gt; &lt;fct&gt;    &lt;dbl&gt;
-1     9     0     1.54 tol11     2.23
-2     9     0     1.54 tol12     1.79
-3     9     0     1.54 tol13     1.9 
-4     9     0     1.54 tol14     2.12
-5     9     0     1.54 tol15     2.66
-6    45     1     1.16 tol11     1.12</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(tolerance.pp)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 80  5</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>tolerance.pp <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">32</span>) <span class="co"># muestra dos primeras medidas de tolerancia (16 casos primera, 16 segunda), ordenado por mediciones en lugar de casos</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 32 × 5
-      id  male exposure variable value
-   &lt;int&gt; &lt;int&gt;    &lt;dbl&gt; &lt;fct&gt;    &lt;dbl&gt;
- 1     9     0     1.54 tol11     2.23
- 2     9     0     1.54 tol12     1.79
- 3     9     0     1.54 tol13     1.9 
- 4     9     0     1.54 tol14     2.12
- 5     9     0     1.54 tol15     2.66
- 6    45     1     1.16 tol11     1.12
- 7    45     1     1.16 tol12     1.45
- 8    45     1     1.16 tol13     1.45
- 9    45     1     1.16 tol14     1.45
-10    45     1     1.16 tol15     1.99
-# ℹ 22 more rows</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort by id</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>tolerance.pp <span class="ot">=</span> <span class="fu">arrange</span>(tolerance.pp, id)</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>tolerance.pp <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>) <span class="co"># muestra tres primeras ID con sus correspondientes 5 mediciones</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 15 × 5
-      id  male exposure variable value
-   &lt;int&gt; &lt;int&gt;    &lt;dbl&gt; &lt;fct&gt;    &lt;dbl&gt;
- 1     9     0     1.54 tol11     2.23
- 2     9     0     1.54 tol12     1.79
- 3     9     0     1.54 tol13     1.9 
- 4     9     0     1.54 tol14     2.12
- 5     9     0     1.54 tol15     2.66
- 6    45     1     1.16 tol11     1.12
- 7    45     1     1.16 tol12     1.45
- 8    45     1     1.16 tol13     1.45
- 9    45     1     1.16 tol14     1.45
-10    45     1     1.16 tol15     1.99
-11   268     1     0.9  tol11     1.45
-12   268     1     0.9  tol12     1.34
-13   268     1     0.9  tol13     1.99
-14   268     1     0.9  tol14     1.79
-15   268     1     0.9  tol15     1.34</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># adecuar a cap. 2 Singer &amp; Willet</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>tolerance.pp<span class="sc">$</span>age<span class="ot">=</span><span class="fu">as.numeric</span>(tolerance.pp<span class="sc">$</span>variable)<span class="sc">+</span><span class="dv">10</span> <span class="co"># para identificar edad</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>tolerance.pp <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">rename</span>(tolerance.pp,<span class="at">tolerance=</span>value)</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(tolerance.pp)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "id"        "male"      "exposure"  "variable"  "tolerance" "age"      </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(tolerance.pp)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Plot trayectorias</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">xyplot</span>(tolerance <span class="sc">~</span> age <span class="sc">|</span> id, <span class="at">data=</span>tolerance.pp, <span class="at">as.table=</span>T)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="10-practico_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Matriz de correlaciones</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits=</span><span class="dv">2</span>)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>cortol<span class="ot">=</span><span class="fu">cor</span>(tolerance[ , <span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>])</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(cortol, <span class="at">type =</span> <span class="st">"html"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Algunos descriptivos</p>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(Achieve[<span class="fu">c</span>(<span class="st">"geread"</span>, <span class="st">"gevocab"</span>,<span class="st">"gender"</span>)],<span class="at">title=</span><span class="st">"Estadísticos descriptivos L1"</span>, <span class="at">type =</span> <span class="st">"html"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <table style="text-align:center">
+<caption>
+<strong>Estadísticos descriptivos L1</strong>
+</caption>
 <tbody><tr>
 <td colspan="6" style="border-bottom: 1px solid black">
 </td>
 </tr>
 <tr>
 <td style="text-align:left">
+Statistic
 </td>
 <td>
-tol11
+N
 </td>
 <td>
-tol12
+Mean
 </td>
 <td>
-tol13
+St.&nbsp;Dev.
 </td>
 <td>
-tol14
+Min
 </td>
 <td>
-tol15
+Max
 </td>
 </tr>
 <tr>
@@ -435,102 +420,62 @@ tol15
 </tr>
 <tr>
 <td style="text-align:left">
-tol11
+geread
 </td>
 <td>
-1
+10,320
 </td>
 <td>
-0.660
+4.341
 </td>
 <td>
-0.062
+2.332
 </td>
 <td>
-0.140
+0.000
 </td>
 <td>
-0.260
+12.000
 </td>
 </tr>
 <tr>
 <td style="text-align:left">
-tol12
+gevocab
 </td>
 <td>
-0.660
+10,320
 </td>
 <td>
-1
+4.494
 </td>
 <td>
-0.250
+2.368
 </td>
 <td>
-0.210
+0.000
 </td>
 <td>
-0.390
+11.200
 </td>
 </tr>
 <tr>
 <td style="text-align:left">
-tol13
+gender
 </td>
 <td>
-0.062
+10,320
 </td>
 <td>
-0.250
+1.502
 </td>
 <td>
-1
-</td>
-<td>
-0.590
-</td>
-<td>
-0.570
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-tol14
-</td>
-<td>
-0.140
-</td>
-<td>
-0.210
-</td>
-<td>
-0.590
+0.500
 </td>
 <td>
 1
 </td>
 <td>
-0.820
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-tol15
-</td>
-<td>
-0.260
-</td>
-<td>
-0.390
-</td>
-<td>
-0.570
-</td>
-<td>
-0.820
-</td>
-<td>
-1
+2
 </td>
 </tr>
 <tr>
@@ -538,681 +483,410 @@ tol15
 </td>
 </tr>
 </tbody></table>
-<p>Plot trayectorias no paramétricas</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">xyplot</span>(tolerance<span class="sc">~</span>age <span class="sc">|</span> id, <span class="at">data=</span>tolerance.pp,</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">prepanel =</span> <span class="cf">function</span>(x, y) <span class="fu">prepanel.loess</span>(x, y, <span class="at">family=</span><span class="st">"gaussian"</span>),</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">"Age"</span>, <span class="at">ylab =</span> <span class="st">"Tolerance"</span>,</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel =</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">panel.xyplot</span>(x, y)</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">panel.loess</span>(x,y, <span class="at">family=</span><span class="st">"gaussian"</span>) },</span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">4</span>), <span class="at">as.table=</span>T)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="10-practico_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Aproximación de modelos individuales (regresiones)</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>tolerance.pp<span class="sc">$</span>agec<span class="ot">=</span>tolerance.pp<span class="sc">$</span>age<span class="dv">-11</span> <span class="co"># centrar</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Generar regresiones individuales</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">by</span>(tolerance.pp, id, <span class="cf">function</span>(x) <span class="fu">summary</span>(<span class="fu">lm</span>(tolerance <span class="sc">~</span> agec, <span class="at">data=</span>x)))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Análisis de interceptos, pendientes y <span class="math inline">\(R^{2}\)</span></p>
-<p>Interceptos</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>int <span class="ot">&lt;-</span> <span class="fu">by</span>(tolerance.pp, id, <span class="cf">function</span>(data)</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">coefficients</span>(<span class="fu">lm</span>(tolerance <span class="sc">~</span> agec, <span class="at">data =</span> data))[[<span class="dv">1</span>]])</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>int <span class="ot">&lt;-</span> <span class="fu">unlist</span>(int)</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(int) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>int</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(int)</span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="fu">stem</span>(int, <span class="at">scale=</span><span class="dv">3</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Pendientes/tasa de cambio</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>rate <span class="ot">&lt;-</span> <span class="fu">by</span>(tolerance.pp, id, <span class="cf">function</span>(data)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>              <span class="fu">coefficients</span>(<span class="fu">lm</span>(tolerance <span class="sc">~</span> age, <span class="at">data =</span> data))[[<span class="dv">2</span>]])</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>rate <span class="ot">&lt;-</span> <span class="fu">unlist</span>(rate)</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(rate) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rate)</span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="fu">stem</span>(rate, <span class="at">scale=</span><span class="dv">2</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><span class="math inline">\(R^{2}\)</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>rsq <span class="ot">&lt;-</span> <span class="fu">by</span>(tolerance.pp, id, <span class="cf">function</span>(data)</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>             <span class="fu">summary</span>(<span class="fu">lm</span>(tolerance <span class="sc">~</span> agec, <span class="at">data =</span> data))<span class="sc">$</span>r.squared)</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>rsq <span class="ot">&lt;-</span> <span class="fu">unlist</span>(rsq)</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(rsq) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rsq)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
- 0.0154  0.2505  0.3917  0.4910  0.7971  0.8864 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stem</span>(rsq, <span class="at">scale=</span><span class="dv">2</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-  The decimal point is 1 digit(s) to the left of the |
-
-  0 | 27
-  1 | 3
-  2 | 55
-  3 | 113
-  4 | 5
-  5 | 
-  6 | 8
-  7 | 78
-  8 | 6889</code></pre>
-</div>
-</div>
-<p>Plot de trayectorias individuales</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">xyplot</span>(tolerance <span class="sc">~</span> age <span class="sc">|</span> id, <span class="at">data=</span>tolerance.pp, </span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="at">panel =</span> <span class="cf">function</span>(x, y){</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">panel.xyplot</span>(x, y)</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="fu">panel.lmline</span>(x, y)</span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>}, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">4</span>), <span class="at">as.table=</span>T)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="10-practico_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Plot de trayectorias brutas conjuntas</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">interaction.plot</span>(tolerance.pp<span class="sc">$</span>age, tolerance.pp<span class="sc">$</span>id, tolerance.pp<span class="sc">$</span>tolerance)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="10-practico_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Plot de trayectorias lineales conjuntas</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fitting the linear model by id</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">by</span>(tolerance.pp, id, <span class="cf">function</span>(bydata) <span class="fu">fitted.values</span>(<span class="fu">lm</span>(tolerance <span class="sc">~</span> age, <span class="at">data=</span>bydata))) </span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">unlist</span>(fit)</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co"># plotting the linear fit by id</span></span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="fu">interaction.plot</span>(tolerance.pp<span class="sc">$</span>age, tolerance.pp<span class="sc">$</span>id, fit, <span class="at">xlab=</span><span class="st">"age"</span>, <span class="at">ylab=</span><span class="st">"tolerance"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="10-practico_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Análisis del efecto de variables de nivel 2 (sexo)</p>
-<p>Hombres</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fitting the linear model by id, males only</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>tolm <span class="ot">&lt;-</span> tolerance.pp[male<span class="sc">==</span><span class="dv">1</span> , ]</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>fitmlist <span class="ot">&lt;-</span> <span class="fu">by</span>(tolm, tolm<span class="sc">$</span>id, <span class="cf">function</span>(bydata) <span class="fu">fitted.values</span>(<span class="fu">lm</span>(tolerance <span class="sc">~</span> age, <span class="at">data=</span>bydata))) </span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>fitm <span class="ot">&lt;-</span> <span class="fu">unlist</span>(fitmlist)</span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="co">#appending the average for the whole group</span></span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>lm.m <span class="ot">&lt;-</span> <span class="fu">fitted</span>( <span class="fu">lm</span>(tolerance <span class="sc">~</span> age, <span class="at">data=</span>tolm) )</span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(lm.m) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>fit.m2 <span class="ot">&lt;-</span> <span class="fu">c</span>(fitm, lm.m[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span>
-<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>age.m <span class="ot">&lt;-</span> <span class="fu">c</span>(tolm<span class="sc">$</span>age, <span class="fu">seq</span>(<span class="dv">11</span>,<span class="dv">15</span>))</span>
-<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>id.m <span class="ot">&lt;-</span> <span class="fu">c</span>(tolm<span class="sc">$</span>id, <span class="fu">rep</span>(<span class="dv">111</span>, <span class="dv">5</span>))</span>
-<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a><span class="co">#plotting the linear fit by id, males</span></span>
-<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a><span class="co">#id.m=111 denotes the average value for males</span></span>
-<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a><span class="fu">interaction.plot</span>(age.m, id.m, fit.m2, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">4</span>), <span class="at">xlab=</span><span class="st">"AGE"</span>, <span class="at">ylab=</span><span class="st">"TOLERANCE"</span>, <span class="at">lwd=</span><span class="dv">1</span>, <span class="at">main=</span><span class="st">"Males"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="10-practico_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Mujeres</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co">#fitting the linear model by id, females only</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>tol.pp.fm <span class="ot">&lt;-</span> tolerance.pp[tolerance.pp<span class="sc">$</span>male<span class="sc">==</span><span class="dv">0</span> , ]</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>fit.fm <span class="ot">&lt;-</span> <span class="fu">by</span>(tol.pp.fm, tol.pp.fm<span class="sc">$</span>id, </span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>          <span class="cf">function</span>(data) <span class="fu">fitted.values</span>(<span class="fu">lm</span>(tolerance <span class="sc">~</span> age, <span class="at">data=</span>data))) </span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>fit.fm1 <span class="ot">&lt;-</span> <span class="fu">unlist</span>(fit.fm)</span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(fit.fm1) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="co">#appending the average for the whole group</span></span>
-<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>lm.fm <span class="ot">&lt;-</span> <span class="fu">fitted</span>( <span class="fu">lm</span>(tolerance <span class="sc">~</span> age, <span class="at">data=</span>tol.pp.fm) )</span>
-<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(lm.fm) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>fit.fm2 <span class="ot">&lt;-</span> <span class="fu">c</span>(fit.fm1, lm.fm[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span>
-<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>age.fm <span class="ot">&lt;-</span> <span class="fu">c</span>(tol.pp.fm<span class="sc">$</span>age, <span class="fu">seq</span>(<span class="dv">11</span>,<span class="dv">15</span>))</span>
-<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>id.fm <span class="ot">&lt;-</span> <span class="fu">c</span>(tol.pp.fm<span class="sc">$</span>id, <span class="fu">rep</span>(<span class="dv">1111</span>, <span class="dv">5</span>))</span>
-<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a><span class="co">#plotting the linear fit by id, females</span></span>
-<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a><span class="co">#id.fm=1111 denotes the average for females</span></span>
-<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a><span class="fu">interaction.plot</span>(age.fm, id.fm, fit.fm2, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">4</span>), <span class="at">xlab=</span><span class="st">"AGE"</span>, <span class="at">ylab=</span><span class="st">"TOLERANCE"</span>, <span class="at">lwd=</span><span class="dv">1</span>,<span class="at">main=</span><span class="st">"Females"</span> )</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="10-practico_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="análisis-longitudinal-ii-estimación" class="level2">
-<h2 class="anchored" data-anchor-id="análisis-longitudinal-ii-estimación">Análisis longitudinal II: Estimación</h2>
-<p>Sesión basada principalmente en Singer &amp; Willett ALDA (Applied Longitudinal Data Analysis), capítulos 2 &amp; 3</p>
-<p>Cargar paquetes</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>haven,</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>lme4,</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>dplyr,</span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>lattice,</span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>texreg</span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="ejemplo-singer-willett-cap.-3" class="level2">
-<h2 class="anchored" data-anchor-id="ejemplo-singer-willett-cap.-3">Ejemplo Singer &amp; Willett cap. 3</h2>
-<ul>
-<li>Datos: estudio sobre efecto de intervencíon temprana en habilidades cognitivas</li>
-<li>3 mediciones a 103 niños de familias de bajos ingresos</li>
-<li>A los 6 meses, la mitad (58) fue asignado a una intervención de estimulación cognitiva</li>
-<li>Mediciones a los 12, 18 y 24 meses</li>
-<li>Variable dependiente: puntaje en habilidades cognitivas (cog)</li>
-</ul>
-<p>Lectura de datos</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>early.int<span class="ot">&lt;-</span><span class="fu">read_stata</span>(<span class="st">"https://github.com/cursos-metodos-facso/multinivel-facso/raw/refs/heads/main/assignment/data/earlyint_pp.dta"</span>)</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(early.int)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       id           cog           age         program           time    
- Min.   : 68   Min.   : 57   Min.   :1.0   Min.   :0.000   Min.   :0.0  
- 1st Qu.:102   1st Qu.: 92   1st Qu.:1.0   1st Qu.:0.000   1st Qu.:0.0  
- Median :144   Median :103   Median :1.5   Median :1.000   Median :0.5  
- Mean   :474   Mean   :103   Mean   :1.5   Mean   :0.563   Mean   :0.5  
- 3rd Qu.:940   3rd Qu.:113   3rd Qu.:2.0   3rd Qu.:1.000   3rd Qu.:1.0  
- Max.   :985   Max.   :137   Max.   :2.0   Max.   :1.000   Max.   :1.0  </code></pre>
-</div>
-</div>
-<p>Exploración con casos seleccionados</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>early.int<span class="sc">$</span>id</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  [1]  68  68  68  70  70  70  71  71  71  72  72  72  75  75  75  76  76  76
- [19]  77  77  77  79  79  79  80  80  80  81  81  81  83  83  83  84  84  84
- [37]  86  86  86  87  87  87  89  89  89  90  90  90  91  91  91  92  92  92
- [55]  93  93  93  96  96  96  97  97  97  98  98  98  99  99  99 100 100 100
- [73] 101 101 101 102 102 102 105 105 105 106 106 106 107 107 107 109 109 109
- [91] 110 110 110 111 111 111 112 112 112 113 113 113 114 114 114 115 115 115
-[109] 116 116 116 117 117 117 120 120 120 121 121 121 122 122 122 125 125 125
-[127] 126 126 126 127 127 127 128 128 128 129 129 129 134 134 134 135 135 135
-[145] 136 136 136 137 137 137 143 143 143 144 144 144 145 145 145 146 146 146
-[163] 148 148 148 149 149 149 151 151 151 152 152 152 902 902 902 904 904 904
-[181] 906 906 906 908 908 908 909 909 909 911 911 911 913 913 913 916 916 916
-[199] 917 917 917 919 919 919 924 924 924 925 925 925 926 926 926 929 929 929
-[217] 931 931 931 934 934 934 935 935 935 936 936 936 938 938 938 940 940 940
-[235] 941 941 941 942 942 942 944 944 944 947 947 947 949 949 949 950 950 950
-[253] 953 953 953 960 960 960 964 964 964 966 966 966 967 967 967 968 968 968
-[271] 969 969 969 970 970 970 971 971 971 972 972 972 973 973 973 975 975 975
-[289] 976 976 976 977 977 977 979 979 979 980 980 980 982 982 982 984 984 984
-[307] 985 985 985
-attr(,"format.stata")
-[1] "%9.0g"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>early.int <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="fu">mean</span>(program))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 103 × 2
-      id `mean(program)`
-   &lt;dbl&gt;           &lt;dbl&gt;
- 1    68               1
- 2    70               1
- 3    71               1
- 4    72               1
- 5    75               1
- 6    76               1
- 7    77               1
- 8    79               1
- 9    80               1
-10    81               1
-# ℹ 93 more rows</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>early.int1 <span class="ot">&lt;-</span> early.int <span class="sc">%&gt;%</span> <span class="fu">filter</span>(id <span class="sc">&gt;=</span> <span class="dv">68</span> <span class="sc">&amp;</span> id <span class="sc">&lt;=</span><span class="dv">75</span> <span class="sc">|</span> id <span class="sc">&gt;=</span> <span class="dv">902</span> <span class="sc">&amp;</span> id <span class="sc">&lt;=</span><span class="dv">906</span>)</span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>early.int1</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 24 × 5
-      id   cog   age program  time
-   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
- 1    68   103   1         1   0  
- 2    68   119   1.5       1   0.5
- 3    68    96   2         1   1  
- 4    70   106   1         1   0  
- 5    70   107   1.5       1   0.5
- 6    70    96   2         1   1  
- 7    71   112   1         1   0  
- 8    71    86   1.5       1   0.5
- 9    71    73   2         1   1  
-10    72   100   1         1   0  
-# ℹ 14 more rows</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">xyplot</span>(cog<span class="sc">~</span>age <span class="sc">|</span> id, <span class="at">data=</span>early.int1, </span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">panel =</span> <span class="cf">function</span>(x, y){</span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">panel.xyplot</span>(x, y)</span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">panel.lmline</span>(x, y)</span>
-<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>  }, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">150</span>), <span class="at">as.table=</span>T)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="10-practico_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Estimación de modelo lineal por id y plot</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">by</span>(early.int, early.int<span class="sc">$</span>id, <span class="cf">function</span>(data) <span class="fu">fitted.values</span>(<span class="fu">lm</span>(cog <span class="sc">~</span> age, <span class="at">data=</span>data)))  </span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> <span class="fu">unlist</span>(fit)</span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(fit1) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="co">#plotting the linear fit by id</span></span>
-<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a><span class="fu">xyplot</span>(cog <span class="sc">~</span> age, <span class="at">groups=</span>id, <span class="at">data=</span>early.int, <span class="at">type=</span><span class="st">"r"</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">50</span>,<span class="dv">150</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="10-practico_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Plot según participación en programa de estimulación de habilidades cognitivas</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plotting the linear fit by idm program = 0</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>early.int0<span class="ot">=</span><span class="fu">subset</span>(early.int, program<span class="sc">&lt;</span><span class="dv">1</span>)</span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="fu">xyplot</span>(cog <span class="sc">~</span> age, <span class="at">groups=</span>id, <span class="at">data=</span>early.int0, <span class="at">type=</span><span class="st">"r"</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">50</span>,<span class="dv">150</span>), <span class="at">main =</span> <span class="st">"Program=0"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="10-practico_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plotting the linear fit by idm program = 1</span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>early.int01<span class="ot">=</span><span class="fu">subset</span>(early.int, program<span class="sc">&gt;</span><span class="dv">0</span>)</span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="fu">xyplot</span>(cog <span class="sc">~</span> age, <span class="at">groups=</span>id, <span class="at">data=</span>early.int01, <span class="at">type=</span><span class="st">"r"</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">50</span>,<span class="dv">150</span>), <span class="at">main =</span> <span class="st">"Program=1"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="10-practico_files/figure-html/unnamed-chunk-25-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Estimación multinivel</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>results0 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(cog <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id), <span class="at">data=</span>early.int, <span class="at">REML=</span><span class="cn">FALSE</span>)</span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>reghelper<span class="sc">::</span><span class="fu">ICC</span>(results0)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.34</code></pre>
-</div>
-</div>
-<p>Modelos con variable nivel 2, variable nivel 1 e interacción</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>results1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(cog <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> program <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>id), <span class="at">data=</span>early.int, <span class="at">REML=</span><span class="cn">FALSE</span>)</span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(results1)</span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>results2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(cog <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> program <span class="sc">+</span> time<span class="sc">+</span>  (<span class="dv">1</span><span class="sc">|</span>id), <span class="at">data=</span>early.int, <span class="at">REML=</span><span class="cn">FALSE</span>)</span>
-<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(results2)</span>
-<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>results3 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(cog <span class="sc">~</span> time<span class="sc">*</span>program <span class="sc">+</span> (time<span class="sc">|</span>id), <span class="at">data=</span>early.int, <span class="at">REML=</span><span class="cn">FALSE</span>)</span>
-<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(results3)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">htmlreg</span>(<span class="fu">list</span>(results0, results1,results2, results3))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<table class="texreg" style="margin: 10px auto;border-collapse: collapse;border-spacing: 0px;caption-side: bottom;color: #000000;border-top: 2px solid #000000;">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(AchieveL2[<span class="fu">c</span>(<span class="st">"clenroll"</span>,<span class="st">"class"</span>)],<span class="at">title=</span><span class="st">"Estadísticos descriptivos L2"</span>, <span class="at">type =</span> <span class="st">"html"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table style="text-align:center">
 <caption>
-Statistical models
+<strong>Estadísticos descriptivos L2</strong>
 </caption>
-<thead>
-<tr>
-<th style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</th>
-<th style="padding-left: 5px;padding-right: 5px;">
-Model 1
-</th>
-<th style="padding-left: 5px;padding-right: 5px;">
-Model 2
-</th>
-<th style="padding-left: 5px;padding-right: 5px;">
-Model 3
-</th>
-<th style="padding-left: 5px;padding-right: 5px;">
-Model 4
-</th>
-</tr>
-</thead>
-<tbody>
-<tr style="border-top: 1px solid #000000;">
-<td style="padding-left: 5px;padding-right: 5px;">
-(Intercept)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-102.62<sup>***</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-97.27<sup>***</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-106.36<sup>***</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-107.84<sup>***</sup>
+<tbody><tr>
+<td colspan="6" style="border-bottom: 1px solid black">
 </td>
 </tr>
 <tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
+<td style="text-align:left">
+Statistic
 </td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(1.16)
+<td>
+N
 </td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(1.61)
+<td>
+Mean
 </td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(1.72)
+<td>
+St.&nbsp;Dev.
 </td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(2.03)
+<td>
+Min
 </td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-program
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-9.49<sup>***</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-9.49<sup>***</sup>
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-6.85<sup>*</sup>
+<td>
+Max
 </td>
 </tr>
 <tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(2.14)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(2.14)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(2.71)
+<td colspan="6" style="border-bottom: 1px solid black">
 </td>
 </tr>
 <tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-time
+<td style="text-align:left">
+clenroll
 </td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
+<td>
+568
 </td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
+<td>
+20.944
 </td>
-<td style="padding-left: 5px;padding-right: 5px;">
--18.17<sup>***</sup>
+<td>
+3.080
 </td>
-<td style="padding-left: 5px;padding-right: 5px;">
--21.13<sup>***</sup>
+<td>
+12
 </td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(1.24)
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(1.88)
+<td>
+31
 </td>
 </tr>
 <tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-time:program
+<td style="text-align:left">
+class
 </td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
+<td>
+568
 </td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
+<td>
+2.555
 </td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
+<td>
+1.418
 </td>
-<td style="padding-left: 5px;padding-right: 5px;">
-5.27<sup>*</sup>
+<td>
+1
 </td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-(2.51)
-</td>
-</tr>
-<tr style="border-top: 1px solid #000000;">
-<td style="padding-left: 5px;padding-right: 5px;">
-AIC
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-2551.12
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-2535.12
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-2389.84
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-2385.94
+<td>
+8
 </td>
 </tr>
 <tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-BIC
+<td colspan="6" style="border-bottom: 1px solid black">
 </td>
-<td style="padding-left: 5px;padding-right: 5px;">
-2562.32
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-2550.05
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-2408.50
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-2415.81
+</tr>
+</tbody></table>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(AchieveL3[<span class="fu">c</span>(<span class="st">"cenroll"</span>,<span class="st">"school"</span>)],<span class="at">title=</span><span class="st">"Estadísticos descriptivos L3"</span>, <span class="at">type =</span> <span class="st">"html"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table style="text-align:center">
+<caption>
+<strong>Estadísticos descriptivos L3</strong>
+</caption>
+<tbody><tr>
+<td colspan="6" style="border-bottom: 1px solid black">
 </td>
 </tr>
 <tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-Log Likelihood
+<td style="text-align:left">
+Statistic
 </td>
-<td style="padding-left: 5px;padding-right: 5px;">
--1272.56
+<td>
+N
 </td>
-<td style="padding-left: 5px;padding-right: 5px;">
--1263.56
+<td>
+Mean
 </td>
-<td style="padding-left: 5px;padding-right: 5px;">
--1189.92
+<td>
+St.&nbsp;Dev.
 </td>
-<td style="padding-left: 5px;padding-right: 5px;">
--1184.97
+<td>
+Min
 </td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-Num. obs.
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-309
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-309
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-309
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-309
+<td>
+Max
 </td>
 </tr>
 <tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-Num. groups: id
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-103
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-103
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-103
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-103
+<td colspan="6" style="border-bottom: 1px solid black">
 </td>
 </tr>
 <tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-Var: id (Intercept)
+<td style="text-align:left">
+cenroll
 </td>
-<td style="padding-left: 5px;padding-right: 5px;">
-84.35
+<td>
+160
 </td>
-<td style="padding-left: 5px;padding-right: 5px;">
-62.19
+<td>
+7,494.138
 </td>
-<td style="padding-left: 5px;padding-right: 5px;">
-89.69
+<td>
+8,656.893
 </td>
-<td style="padding-left: 5px;padding-right: 5px;">
-123.97
+<td>
+110
 </td>
-</tr>
-<tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-Var: Residual
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-161.50
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-161.50
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-79.01
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-74.76
+<td>
+41,359
 </td>
 </tr>
 <tr>
-<td style="padding-left: 5px;padding-right: 5px;">
-Var: id time
+<td style="text-align:left">
+school
 </td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
+<td>
+160
 </td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
+<td>
+4,522.288
 </td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
+<td>
+2,533.673
 </td>
-<td style="padding-left: 5px;padding-right: 5px;">
-10.10
+<td>
+767
 </td>
-</tr>
-<tr style="border-bottom: 2px solid #000000;">
-<td style="padding-left: 5px;padding-right: 5px;">
-Cov: id (Intercept) time
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
-&nbsp;
-</td>
-<td style="padding-left: 5px;padding-right: 5px;">
--35.38
+<td>
+9,173
 </td>
 </tr>
-</tbody>
-<tfoot>
 <tr>
-<td style="font-size: 0.8em;" colspan="5">
-<sup>***</sup>p &lt; 0.001; <sup>**</sup>p &lt; 0.01; <sup>*</sup>p &lt; 0.05
+<td colspan="6" style="border-bottom: 1px solid black">
 </td>
 </tr>
-</tfoot>
-</table>
-<p>Gráfico de interacción</p>
+</tbody></table>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>a<span class="ot">&lt;-</span><span class="fu">fitted.values</span> (results3)</span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">interaction.plot</span>(early.int<span class="sc">$</span>age, early.int<span class="sc">$</span>program, a, <span class="at">xlab=</span><span class="st">"AGE"</span>, <span class="at">ylab=</span><span class="st">"COG"</span>, </span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">150</span>), <span class="at">lwd=</span><span class="dv">4</span>, <span class="at">lty=</span><span class="dv">1</span>, <span class="at">col=</span><span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="10-practico_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(Achieve<span class="sc">$</span>school, Achieve<span class="sc">$</span>class) <span class="co"># cursos por escuela y N</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Modelo Nulo</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>Model4<span class="fl">.7</span> <span class="ot">&lt;-</span> <span class="fu">lmer</span>(geread<span class="sc">~</span><span class="dv">1</span><span class="sc">+</span>(<span class="dv">1</span><span class="sc">|</span>school<span class="sc">/</span>class), <span class="at">data =</span> Achieve)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>sjPlot<span class="sc">::</span><span class="fu">tab_model</span>(Model4<span class="fl">.7</span>, <span class="at">show.ci =</span> <span class="cn">FALSE</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table style="border-collapse:collapse; border:none;">
+<tbody><tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
+<th colspan="2" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">geread</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">Predictors</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">p</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">4.31</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td colspan="3" style="font-weight:bold; text-align:left; padding-top:.8em;">Random Effects</td>
+</tr>
+
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">σ<sup>2</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">4.85</td>
+</tr>
+
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">τ<sub>00</sub> <sub>class:school</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.27</td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">τ<sub>00</sub> <sub>school</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.31</td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">ICC</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.11</td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">N <sub>class</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">8</td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">N <sub>school</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">160</td>
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">Observations</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="2">10320</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">Marginal R<sup>2</sup> / Conditional R<sup>2</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.000 / 0.108</td>
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+<ul>
+<li>Correlación intra-clase</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fl">0.273</span><span class="sc">/</span>(<span class="fl">0.273+4.847</span>) <span class="co"># Correlación intra clase de class</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fl">0.312</span><span class="sc">/</span>(<span class="fl">0.312</span> <span class="sc">+</span> <span class="fl">0.273</span> <span class="sc">+</span> <span class="fl">4.847</span>) <span class="co"># Correlación intra clase de schools</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Modelos con predictores</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>Model4<span class="fl">.8</span> <span class="ot">&lt;-</span> <span class="fu">lmer</span>( geread<span class="sc">~</span>gevocab<span class="sc">+</span>clenroll<span class="sc">+</span>cenroll<span class="sc">+</span>(<span class="dv">1</span><span class="sc">|</span>school<span class="sc">/</span>class), <span class="at">data =</span> Achieve)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Some predictor variables are on very different scales: consider
+rescaling</code></pre>
+</div>
+</div>
+<p>Cuatro niveles</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>Model4<span class="fl">.10</span> <span class="ot">&lt;-</span> <span class="fu">lmer</span>( geread<span class="sc">~</span><span class="dv">1</span><span class="sc">+</span>(<span class="dv">1</span><span class="sc">|</span>corp<span class="sc">/</span>school<span class="sc">/</span>class), <span class="at">data =</span> Achieve)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Pendiente aleatoria</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>Model4<span class="fl">.11</span>  <span class="ot">&lt;-</span>  <span class="fu">lmer</span>( geread<span class="sc">~</span>gevocab<span class="sc">+</span>gender<span class="sc">+</span>(gender<span class="sc">|</span>school<span class="sc">/</span>class), <span class="at">data =</span> Achieve)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv, :
+Model failed to converge with max|grad| = 0.0625298 (tol = 0.002, component 1)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>sjPlot<span class="sc">::</span><span class="fu">tab_model</span>(Model4<span class="fl">.8</span>, Model4<span class="fl">.10</span>, Model4<span class="fl">.11</span>,</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">show.ci =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">dv.labels =</span> <span class="fu">c</span>(<span class="st">"Modelo con predictores"</span>, <span class="st">"Cuatro niveles"</span>, <span class="st">"Pendiente aleatoria"</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table style="border-collapse:collapse; border:none;">
+<tbody><tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
+<th colspan="2" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">Modelo con predictores</th>
+<th colspan="2" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">Cuatro niveles</th>
+<th colspan="2" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">Pendiente aleatoria</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">Predictors</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">p</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">p</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col7">p</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">1.68</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">4.33</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">2.02</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">gevocab</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.51</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.51</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">clenroll</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.02</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>0.047</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">cenroll</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.00</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.307</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">gender</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.02</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">0.658</td>
+</tr>
+<tr>
+<td colspan="7" style="font-weight:bold; text-align:left; padding-top:.8em;">Random Effects</td>
+</tr>
+
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">σ<sup>2</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">3.70</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">4.85</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">3.69</td>
+</tr>
+
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">τ<sub>00</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.09 <sub>class:school</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.28 <sub>class:(school:corp)</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.13 <sub>class:school</sub></td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;"></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.08 <sub>school</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.09 <sub>school:corp</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.04 <sub>school</sub></td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;"></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">&nbsp;</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.18 <sub>corp</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">&nbsp;</td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">τ<sub>11</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">&nbsp;</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">&nbsp;</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.01 <sub>class:school.gender</sub></td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;"></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">&nbsp;</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">&nbsp;</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.01 <sub>school.gender</sub></td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">ρ<sub>01</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">&nbsp;</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">&nbsp;</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">-0.56 <sub>class:school</sub></td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;"></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">&nbsp;</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">&nbsp;</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.20 <sub>school</sub></td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">ICC</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.04</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.10</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.04</td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">N</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">8 <sub>class</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">8 <sub>class</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">8 <sub>class</sub></td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;"></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">160 <sub>school</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">160 <sub>school</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">160 <sub>school</sub></td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;"></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">&nbsp;</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">59 <sub>corp</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">&nbsp;</td>
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">Observations</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="2">10320</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="2">10320</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="2">10320</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">Marginal R<sup>2</sup> / Conditional R<sup>2</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.275 / 0.306</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.000 / 0.100</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.273 / 0.306</td>
+</tr>
+
+</tbody></table>
+
 </div>
 </div>
 </section>
