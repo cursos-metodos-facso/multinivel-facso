@@ -1,0 +1,374 @@
+---
+title: "Introducción al análisis longitudinal"
+date: "2025-06-05"
+lang: es
+number-sections: false
+website:
+  comments:
+    giscus:
+      repo: cursos-metodos-facso/multinivel
+---
+
+```{r setup, include=FALSE, cache = FALSE}
+require("knitr")
+opts_chunk$set(warning=FALSE,
+             message=FALSE,
+             echo=TRUE,
+             cache = FALSE, fig.width=7, fig.height=5.2)
+knitr::opts_knit$set(root.dir = here::here())
+```
+
+## Introducción análisis longitudinal
+
+```{r}
+pacman::p_load(tidyr,plyr, dplyr, lattice, stargazer,readr, sjPlot)
+```
+
+Datos
+
+-  National Youth Survey (Raudenbusch & Chan, 1992)
+-  Encuesta anual desde los 11 años en adelante, 5 olas, una al año (i.e. hasta 15 años)
+-  Medida: instrumento de tolerancia **TOL** a conductas desviadas, promedio 9 items, likert 1-4 desde "muy mal" hasta "nada mal". Por ejemplo "fumar marihuana", "copiar en una prueba" .Mayores puntajes indican mayor tolerancia a desviación.
+-  Predictores: sexo **MALE**=1 y autoreporte de exposición a conductas desviadas a los 11 años **EXPOSURE**. Esta variable se construye estimando la proporción de amigos cercanos que se han visto envueltos en actividades de los mismos 9 items de autoreporte (1=ninguno, 4=todos), los cuales se promedian.
+
+
+Lectura datos nivel-persona
+
+
+```{r}
+tolerance  <- read.csv("https://github.com/cursos-metodos-facso/multinivel-facso/raw/refs/heads/main/assignment/data/tolerance1.txt")
+print(tolerance,row.names=FALSE)
+```
+
+
+```{r }
+stargazer(tolerance, type="text")
+```
+
+Transformación datos período-persona función <tt>`pivot_longer()`</tt> de la librería <tt>`tidyr`</tt>
+
+
+```{r results='hide'}
+attach(tolerance)
+
+# Pasar a long
+tolerance.pp <- pivot_longer(
+  data = tolerance,
+  cols = tol11:tol15,
+  names_to = "variable",
+  values_to = "value",
+  names_transform = list(variable = as.factor)
+)
+```
+
+
+```{r}
+# Algunas comparaciones entre wide y long
+names(tolerance)
+head(tolerance)
+dim(tolerance)
+names(tolerance.pp)
+head(tolerance.pp)
+dim(tolerance.pp)
+
+tolerance.pp %>% slice(1:32) # muestra dos primeras medidas de tolerancia (16 casos primera, 16 segunda), ordenado por mediciones en lugar de casos
+
+# Sort by id
+
+tolerance.pp = arrange(tolerance.pp, id)
+tolerance.pp %>% slice(1:15) # muestra tres primeras ID con sus correspondientes 5 mediciones
+```
+
+```{r}
+# adecuar a cap. 2 Singer & Willet
+tolerance.pp$age=as.numeric(tolerance.pp$variable)+10 # para identificar edad
+tolerance.pp = dplyr::rename(tolerance.pp,tolerance=value)
+names(tolerance.pp)
+attach(tolerance.pp)
+```
+
+Plot trayectorias
+
+```{r}
+xyplot(tolerance ~ age | id, data=tolerance.pp, as.table=T)
+```
+
+Matriz de correlaciones
+```{r}
+options(digits=2)
+cortol=cor(tolerance[ , 2:6])
+```
+
+```{r results= 'asis'}
+stargazer(cortol, type = "html")
+```
+
+Plot trayectorias no paramétricas
+```{r warning=FALSE, message=FALSE}
+xyplot(tolerance~age | id, data=tolerance.pp,
+      prepanel = function(x, y) prepanel.loess(x, y, family="gaussian"),
+      xlab = "Age", ylab = "Tolerance",
+      panel = function(x, y) {
+      panel.xyplot(x, y)
+      panel.loess(x,y, family="gaussian") },
+      ylim=c(0, 4), as.table=T)
+
+```
+
+Aproximación de modelos individuales (regresiones)
+
+```{r results='hide'}
+tolerance.pp$agec=tolerance.pp$age-11 # centrar
+
+# Generar regresiones individuales
+by(tolerance.pp, id, function(x) summary(lm(tolerance ~ agec, data=x)))
+```
+
+
+Análisis de interceptos, pendientes y $R^{2}$
+
+Interceptos
+
+```{r results='hide'}
+int <- by(tolerance.pp, id, function(data)
+       coefficients(lm(tolerance ~ agec, data = data))[[1]])
+int <- unlist(int)
+names(int) <- NULL
+int
+summary(int)
+
+stem(int, scale=3)
+```
+
+Pendientes/tasa de cambio
+```{r results='hide'}
+
+rate <- by(tolerance.pp, id, function(data)
+              coefficients(lm(tolerance ~ age, data = data))[[2]])
+rate <- unlist(rate)
+names(rate) <- NULL
+summary(rate)
+
+stem(rate, scale=2)
+
+```
+
+$R^{2}$
+```{r}
+rsq <- by(tolerance.pp, id, function(data)
+             summary(lm(tolerance ~ agec, data = data))$r.squared)
+rsq <- unlist(rsq)
+names(rsq) <- NULL
+summary(rsq)
+
+stem(rsq, scale=2)
+```
+
+Plot de trayectorias individuales
+```{r warning=FALSE, message=FALSE}
+xyplot(tolerance ~ age | id, data=tolerance.pp, 
+panel = function(x, y){
+panel.xyplot(x, y)
+panel.lmline(x, y)
+}, ylim=c(0, 4), as.table=T)
+```
+
+Plot de trayectorias brutas conjuntas
+```{r}
+interaction.plot(tolerance.pp$age, tolerance.pp$id, tolerance.pp$tolerance)
+```
+
+
+
+Plot de trayectorias lineales conjuntas
+
+```{r results='hide'}
+# fitting the linear model by id
+fit <- by(tolerance.pp, id, function(bydata) fitted.values(lm(tolerance ~ age, data=bydata))) 
+fit <- unlist(fit)
+
+# plotting the linear fit by id
+interaction.plot(tolerance.pp$age, tolerance.pp$id, fit, xlab="age", ylab="tolerance")
+
+```
+
+Análisis del efecto de variables de nivel 2 (sexo)
+
+Hombres
+
+```{r}
+# fitting the linear model by id, males only
+tolm <- tolerance.pp[male==1 , ]
+fitmlist <- by(tolm, tolm$id, function(bydata) fitted.values(lm(tolerance ~ age, data=bydata))) 
+fitm <- unlist(fitmlist)
+
+#appending the average for the whole group
+lm.m <- fitted( lm(tolerance ~ age, data=tolm) )
+names(lm.m) <- NULL
+fit.m2 <- c(fitm, lm.m[1:5])
+age.m <- c(tolm$age, seq(11,15))
+id.m <- c(tolm$id, rep(111, 5))
+
+#plotting the linear fit by id, males
+#id.m=111 denotes the average value for males
+interaction.plot(age.m, id.m, fit.m2, ylim=c(0, 4), xlab="AGE", ylab="TOLERANCE", lwd=1, main="Males")
+
+```
+
+
+Mujeres
+
+```{r results='hide'}
+#fitting the linear model by id, females only
+tol.pp.fm <- tolerance.pp[tolerance.pp$male==0 , ]
+fit.fm <- by(tol.pp.fm, tol.pp.fm$id, 
+          function(data) fitted.values(lm(tolerance ~ age, data=data))) 
+fit.fm1 <- unlist(fit.fm)
+names(fit.fm1) <- NULL
+
+#appending the average for the whole group
+lm.fm <- fitted( lm(tolerance ~ age, data=tol.pp.fm) )
+names(lm.fm) <- NULL
+fit.fm2 <- c(fit.fm1, lm.fm[1:5])
+age.fm <- c(tol.pp.fm$age, seq(11,15))
+id.fm <- c(tol.pp.fm$id, rep(1111, 5))
+
+#plotting the linear fit by id, females
+#id.fm=1111 denotes the average for females
+interaction.plot(age.fm, id.fm, fit.fm2, ylim=c(0, 4), xlab="AGE", ylab="TOLERANCE", lwd=1,main="Females" )
+```
+
+## Análisis longitudinal II: Estimación
+
+Sesión basada principalmente en Singer \& Willett ALDA (Applied Longitudinal Data Analysis), capítulos 2 \& 3
+
+Cargar paquetes
+```{r}
+pacman::p_load(
+haven,
+lme4,
+dplyr,
+lattice,
+texreg
+)
+
+```
+
+
+
+## Ejemplo Singer & Willett cap. 3
+
+- Datos: estudio sobre efecto de intervencíon temprana en habilidades cognitivas
+- 3 mediciones a 103 niños de familias de bajos ingresos
+- A los 6 meses, la mitad (58) fue asignado a una intervención de estimulación cognitiva
+- Mediciones a los 12, 18 y 24 meses
+- Variable dependiente: puntaje en habilidades cognitivas (cog)
+
+
+Lectura de datos
+
+```{r}
+early.int<-read_stata("https://github.com/cursos-metodos-facso/multinivel-facso/raw/refs/heads/main/assignment/data/earlyint_pp.dta")
+summary(early.int)
+```
+
+Exploración con casos seleccionados
+
+```{r}
+early.int$id
+early.int %>% group_by(id) %>% summarise(mean(program))
+
+early.int1 <- early.int %>% filter(id >= 68 & id <=75 | id >= 902 & id <=906)
+
+early.int1
+```
+
+```{r results='hide'}
+xyplot(cog~age | id, data=early.int1, 
+  panel = function(x, y){
+    panel.xyplot(x, y)
+    panel.lmline(x, y)
+  }, ylim=c(50, 150), as.table=T)
+```
+
+Estimación de modelo lineal por id y plot
+```{r}
+fit <- by(early.int, early.int$id, function(data) fitted.values(lm(cog ~ age, data=data)))  
+fit1 <- unlist(fit)
+names(fit1) <- NULL
+
+#plotting the linear fit by id
+xyplot(cog ~ age, groups=id, data=early.int, type="r", ylim=c(50,150))
+```
+
+Plot según participación en programa de estimulación de habilidades cognitivas
+
+```{r}
+#plotting the linear fit by idm program = 0
+early.int0=subset(early.int, program<1)
+xyplot(cog ~ age, groups=id, data=early.int0, type="r", ylim=c(50,150), main = "Program=0")
+
+#plotting the linear fit by idm program = 1
+early.int01=subset(early.int, program>0)
+xyplot(cog ~ age, groups=id, data=early.int01, type="r", ylim=c(50,150), main = "Program=1")
+
+```
+
+Estimación multinivel
+
+```{r}
+results0 <- lmer(cog ~ 1 + (1|id), data=early.int, REML=FALSE)
+
+reghelper::ICC(results0)
+```
+
+
+Modelos con variable nivel 2, variable nivel 1 e interacción
+
+```{r results='hide'}
+results1 <- lmer(cog ~ 1 + program + (1|id), data=early.int, REML=FALSE)
+summary(results1)
+
+results2 <- lmer(cog ~ 1 + program + time+  (1|id), data=early.int, REML=FALSE)
+summary(results2)
+
+results3 <- lmer(cog ~ time*program + (time|id), data=early.int, REML=FALSE)
+summary(results3)
+```
+
+```{r results='asis'}
+htmlreg(list(results0, results1,results2, results3))
+
+```
+
+
+Gráfico de interacción
+```{r}
+a<-fitted.values (results3)
+interaction.plot(early.int$age, early.int$program, a, xlab="AGE", ylab="COG", 
+                 ylim=c(50, 150), lwd=4, lty=1, col=4:5)
+```
+
+
+
+
+# Foro
+
+<script src="https://giscus.app/client.js"
+        data-repo="cursos-metodos-facso/multinivel"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyMDA3MTE2MDk="
+        data-category="Q&A"
+        data-category-id="DIC_kwDOC_aduc4CYhjI"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="es"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+
