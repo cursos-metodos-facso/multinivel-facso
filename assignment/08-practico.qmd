@@ -1,0 +1,155 @@
+---
+title: "Observaciones influyentes"
+date: "2025-06-05"
+lang: es
+number-sections: false
+website:
+  comments:
+    giscus:
+      repo: cursos-metodos-facso/multinivel
+---
+
+```{r setup, include=FALSE, cache = FALSE}
+require("knitr")
+opts_chunk$set(warning=FALSE,
+             message=FALSE,
+             echo=TRUE,
+             cache = FALSE, fig.width=7, fig.height=5.2)
+knitr::opts_knit$set(root.dir = here::here())
+```
+
+## 1. Casos influyentes Multinivel
+```{r}
+pacman::p_load(influence.ME,
+               lattice, # dotplot
+               dplyr,
+               texreg,
+               stargazer,
+               tidyr
+                )
+
+```
+
+Datos (incluidos en el paquete influence.ME)
+
+- 23 escuelas, 519 individuos
+- variables principales: 
+    - Dependiente: rendimiento en matemática
+    - Independiente L1: homework, tiempo realizando tareas
+    - Independiente L2: structure, grado de estructura de las clases
+  
+
+```{r results='hide'}
+data(school23)
+dim(school23)
+
+str(school23$homework) 
+school23 <- within(school23, homework <- unclass(homework)) # pasar a continua
+str(school23$homework)
+```
+Estimación modelo
+ 
+```{r}
+m23 <- lmer(math ~ homework + structure + (1 | school.ID),data=school23)
+
+summary(m23, cor=FALSE)
+```
+
+Plot descriptivo
+
+```{r}
+struct <- school23 %>% select(school.ID, structure, math) %>% group_by(school.ID) %>% summarise_all(mean) %>% as.data.frame() 
+
+dotplot(math ~ factor(structure), # lattice
+        struct,
+        type=c("p","a"),
+        xlab="Class structure level",
+        ylab="Average Math Test Score")
+
+
+```
+
+Calculando medidas de influencia basados en función <tt>`influence`</tt> de <tt>`influence.ME`</tt>
+
+
+```{r}
+estex.m23 <- influence(m23, "school.ID") 
+```
+
+Genera objeto estex.m23 para futuras estimaciones de influencia
+
+DFBETAS
+
+```{r results='hide'}
+dfbetas(estex.m23) 
+dfbetas(estex.m23,parameters=c(2,3))
+
+2/sqrt(23) # cut point
+
+dfbeta_estex.m32=as.data.frame(dfbetas(estex.m23))
+
+dfbeta_estex.m32 %>%  filter(homework > 0.417 | structure > 0.417 )
+
+
+
+```
+
+
+```{r}
+plot(estex.m23, which="dfbetas", parameters=c(2,3), xlab="DFbetaS", ylab="School ID")
+
+```
+
+
+Distancia de Cook
+```{r results='hide'}
+cooks.distance(estex.m23, sort = TRUE)
+4/23 # cut point
+```
+
+```{r}
+plot(estex.m23, which="cook",
+     cutoff=.17, sort=TRUE,
+     xlab="Cooks Distance",
+     ylab="School ID")
+```
+
+Statistical significance
+```{r}
+sigtest(estex.m23, test=-1.96)$structure[1:10,]
+
+```
+
+Para la variable structure, se muestran las primeras 10 filas, y se establece un criterio de significación de 1.96 para detectar si hay alteraciones en la significación
+
+```{r}
+datab=filter(school23,school.ID!=7472)
+
+m23b <- lmer(math ~ homework + structure + (1 | school.ID),data=datab) 
+summary(m23b)
+```
+
+¿Qué diferencia hay entre el modelo con y sin la observación influyente de nivel 2?
+
+
+
+# Foro
+
+<script src="https://giscus.app/client.js"
+        data-repo="cursos-metodos-facso/multinivel"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyMDA3MTE2MDk="
+        data-category="Q&A"
+        data-category-id="DIC_kwDOC_aduc4CYhjI"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="es"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+
