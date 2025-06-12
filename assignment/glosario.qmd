@@ -1,0 +1,63 @@
+---
+title: "Glosario"
+date: "2025-06-12"
+lang: es
+website:
+  comments:
+    giscus:
+      repo: cursos-metodos-facso/multinivel
+---
+
+```{r setup, include=FALSE, cache = TRUE}
+require("knitr")
+opts_chunk$set(warning=FALSE,
+             message=FALSE,
+             echo=TRUE,
+             cache = TRUE, fig.width=7, fig.height=5.2)
+```
+
+::: {.callout-note}
+Este glosario resume los principales conceptos y componentes usados en modelos multinivel, útiles para interpretar salidas de `lmer()` o `glmer()` en R.
+:::
+
+| Término                                     | Notación         | Significado                                                                                                                      |
+|----------------|----------------|---------------------------------------|
+| **Modelo multinivel**                       | —                | Modelo que analiza datos jerárquicos (ej., estudiantes dentro de escuelas), también llamado HLM o de efectos mixtos.             |
+| **lmer()**                                  | —                | Función del paquete `lme4` en R para estimar modelos lineales multinivel.                                                        |
+| **glmer()**                                 | —                | Versión para variables dependientes no continuas (binarias, conteos, ordinales, etc.).                                           |
+| **Nivel**                                   | Nivel 1, 2, 3... | Cada jerarquía del modelo (ej., nivel 1: individuos; nivel 2: grupos como escuelas o países).                                    |
+| **Efecto fijo**                             | —                | Coeficiente que representa el efecto promedio de una variable para toda la población.                                            |
+| **Efecto aleatorio**                        | —                | Permite que interceptos/pendientes varíen entre grupos; se modelan como distribuciones normales.                                 |
+| **Intercepto aleatorio**                    | —                | El valor medio de la variable dependiente varía entre los grupos.                                                                |
+| **Pendiente aleatoria**                     | —                | El efecto de una variable predictora puede cambiar entre los grupos.                                                             |
+| **Varianza entre grupos**                   | τ₀₀ (`tau00`)    | Cuánta variabilidad del resultado se debe a diferencias entre grupos.                                                            |
+| **Varianza dentro de grupos**               | σ² (`sigma2`)    | Variabilidad residual entre individuos dentro de los mismos grupos.                                                              |
+| **Varianza de pendiente aleatoria**         | τ₁₁ (`tau11`)    | Mide cuánto varía el efecto de una variable de nivel 1 entre los grupos.                                                         |
+| **Covarianza entre intercepto y pendiente** | τ₀₁ (`tau01`)    | Relación entre intercepto y pendiente aleatoria en los grupos.                                                                   |
+| **Correlación intraclase (ICC)**            | ρ                | Proporción de la varianza de la variable dependiente que se asocia a la pertenencia a unidades de nivel 2: ρ = τ₀₀ / (τ₀₀ + σ²). |
+| **Modelo nulo**                             | —                | Modelo sin predictores, usado para estimar la ICC y justificar el enfoque multinivel.                                            |
+| **Centrado en la media grupal**             | —                | Se resta la media del grupo a cada valor individual: aísla el efecto individual.                                                 |
+| **Centrado en la media general**            | —                | Se resta la media total de la muestra a cada valor individual.                                                                   |
+| **Interacción de niveles (cross-level)**    | —                | Efecto de una variable de nivel 1 varía según una variable de nivel 2.                                                           |
+| **Error residual (nivel 1)**                | ε                | Variación no explicada entre individuos dentro de grupos.                                                                        |
+| **AIC / BIC**                               | —                | Criterios para comparar modelos; penalizan por complejidad, valores más bajos indican mejor ajuste.                              |
+
+# Foro
+
+```{=html}
+<script src="https://giscus.app/client.js"
+        data-repo="cursos-metodos-facso/multinivel"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyMDA3MTE2MDk="
+        data-category="Q&A"
+        data-category-id="DIC_kwDOC_aduc4CYhjI"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="es"
+        crossorigin="anonymous"
+        async>
+</script>
+```
