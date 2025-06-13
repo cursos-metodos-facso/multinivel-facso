@@ -1,5 +1,5 @@
 ---
-title: "Nuevas cositas: Presentaciones, Mathjax & Longitudinal"
+title: "Nuevas cositas: Presentaciones, Mathjax, Glosario & Longitudinal"
 author: "JC Castillo"
 date: "2025-06-13"
 categories: [info]
@@ -18,6 +18,8 @@ En la página de prácticos agregamos:
 - [tutorial para presentaciones en Quarto](/assignment/quarto-presentations.html), para quienes quieran hacer su presentación en este formato. No es obligación, pero tiene la ventaja que combina bien con código R y sus respectivos outputs (tablas, gráficos ...)
 
 - [tutorial de Mathjax](/assignment/mathjax.html), para quienes quieran mostrar sus modelos formalizados
+
+- [Glosario](/assignment/glosario.html) de conceptos del curso
 
 - [práctico estimación longitudinal con métodos multinivel](/assignment/11-practico.html), para quienes se interesen por este tema y lo puedan tener como referencia.
 

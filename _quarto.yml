@@ -122,6 +122,8 @@ website:
               file: assignment/10-practico.qmd
             - text: "11: Longitudinal"
               file: assignment/11-practico.qmd
+            - text: "Glosario"
+              file: assignment/glosario.qmd
             - text: "Bonus track: MathJax"
               file: assignment/mathjax.qmd
             - text: "Presentaciones en Quarto"

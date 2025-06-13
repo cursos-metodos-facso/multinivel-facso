@@ -1,6 +1,5 @@
 ---
 title: "Glosario"
-date: "2025-06-12"
 lang: es
 website:
   comments:
@@ -16,6 +15,7 @@ opts_chunk$set(warning=FALSE,
              cache = TRUE, fig.width=7, fig.height=5.2)
 ```
 
+    
 ::: {.callout-note}
 Este glosario resume los principales conceptos y componentes usados en modelos multinivel, útiles para interpretar salidas de `lmer()` o `glmer()` en R.
 :::
