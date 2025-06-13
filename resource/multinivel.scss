@@ -1,0 +1,107 @@
+// Include theme-specific fonts
+@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');/* Updated font import */
+
+/*-- scss:defaults --*/
+// Override theme settings (see ../template/settings.scss)
+// Base settings for all themes that can optionally be
+// overridden by the super-theme
+
+// Background of the presentation
+$backgroundColor: #ffffff;
+
+// Primary/body text
+$mainFont: 'Noto Serif', sans-serif; /* Updated font */
+$mainFontSize: 35px;
+$mainColor: #272828;
+
+// Vertical spacing between blocks of text
+$blockMargin: 20px;
+
+// Headings
+$headingMargin: 0 0 $blockMargin 0;
+$headingFont: 'Roboto', Impact, sans-serif; /* Updated font */
+$headingColor: #1a0b36;
+$headingLineHeight: 1.2;
+$headingLetterSpacing: normal;
+$headingTextTransform: none;
+$headingTextShadow: none;
+$headingFontWeight: normal;
+$heading1TextShadow: $headingTextShadow;
+
+
+$heading1Size: 1.70em;
+$heading2Size: 1.30em;
+$heading3Size: 1.00em;
+$heading4Size: 0.5em;
+
+$codeFont: monospace;
+
+.citation {
+  color: #1a0b36;
+}
+
+// Links and actions
+$linkColor: #00b5b5;
+$linkColorHover: $headingColor;
+
+// Text selection
+$selectionBackgroundColor: #F27983;
+$selectionColor: #fff;
+
+
+/*-- scss:defaults --*/
+
+$primary: #1a0b36 !default;
+$font-size-root: 18px !default;
+
+// Links and actions
+$linkColor: #00b5b5;
+$linkColorHover: $headingColor;
+
+// Text selection
+$selectionBackgroundColor: #F27983;
+$selectionColor: #fff;
+
+/*-- scss:rules --*/
+
+.sidebar-title {
+  color: #1a0b36;
+}
+
+div.sidebar-item-container .active {
+  font-weight: bold;
+}
+
+.sidebar nav[role=doc-toc] ul>li>a.active, .sidebar nav[role=doc-toc] ul>li>ul>li>a.active{
+  font-weight: bold;
+}
+
+img.quarto-cover-image {
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+}
+
+
+.citation {
+  color: #1a0b36;
+}
+
+
+/* Code ------------------------------------------------ */
+
+code {
+  color: #373a3c;
+}
+
+code a:any-link {
+  text-decoration: underline;
+  text-decoration-color: #ccc;
+}
+
+pre {
+  background-image: linear-gradient(160deg,#f8f8f8 0,#f1f1f1 100%);
+}
+
+.small-table {
+  font-size: 70%;
+}

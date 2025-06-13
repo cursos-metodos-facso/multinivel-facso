@@ -1,0 +1,297 @@
+---
+title: "MathJax"
+date: "2025-06-13"
+lang: es
+website:
+  comments:
+    giscus:
+      repo: cursos-metodos-facso/multinivel
+---
+
+```{r setup, include=FALSE, cache = TRUE}
+require("knitr")
+opts_chunk$set(warning=FALSE,
+             message=FALSE,
+             echo=TRUE,
+             cache = TRUE, fig.width=7, fig.height=5.2)
+```
+
+![](https://miro.medium.com/v2/resize:fit:720/format:webp/1*7BTsaJ5wtuOCxw1qZOyD6w.png)
+
+MathJax es una biblioteca de JavaScript que permite mostrar notación matemática escrita en LaTeX, MathML o AsciiMath directamente en páginas web. Fue creada para que las expresiones matemáticas se vean bien, sean accesibles y funcionen en todos los navegadores modernos sin necesidad de software adicional.
+
+En Quarto, MathJax se utiliza automáticamente para renderizar fórmulas matemáticas cuando el formato de salida es HTML o Reveal.js. No tienes que instalar nada extra ni importar manualmente 
+
+
+## Formato de ecuaciones con MathJax
+
+Para representar ecuaciones en la misma línea de texto, se deben escribir dentro de un par de signos '$'. Ejemplo:
+
+```
+Este texto contiene la siguiente ecuación: $E = mc^2$
+```
+
+genera:
+
+- Este texto contiene la siguiente ecuación: $E = mc^2$
+
+Para visualizar las ecuaciones en una siguiente línea, centrado, van dos pares del signo '$'. Ejemplo:
+ 
+```
+$$
+E = mc^2
+$$
+```
+
+genera:
+
+$$
+E = mc^2
+$$
+
+### Elementos de MathJax
+
+#### Fracciones
+
+:::: columns
+::: {.column width="45%"}
+```
+$$
+\frac{1}{2}
+$$
+```
+:::
+
+::: {.column width="45%"}
+
+$$
+\frac{1}{2}
+$$
+:::
+::::
+
+#### Subíndice y exponenciales
+
+:::: columns
+::: {.column width="45%"}
+```
+$$
+Y = X_1 + X_2
+$$
+```
+
+:::
+::: {.column width="45%"}
+$$
+Y = X_1 + X_2
+$$
+:::
+::::
+
+
+:::: columns
+::: {.column width="45%"}
+```
+$$
+a^2 + b^2 = c^2
+$$
+```
+
+:::
+::: {.column width="45%"}
+$$
+a^2 + b^2 = c^2
+$$
+:::
+::::
+
+#### Raíz cuadrada
+
+:::: columns
+::: {.column width="45%"}
+
+```
+$$
+\sqrt{p}
+$$
+```
+:::
+::: {.column width="45%"}
+
+$$
+\sqrt{p}
+$$
+:::
+::::
+
+:::: columns
+::: {.column width="45%"}
+
+```
+$$
+x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+$$
+```
+:::
+::: {.column width="45%"}
+
+$$
+x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+$$
+:::
+::::
+
+#### Sumatoria
+
+:::: columns
+::: {.column width="45%"}
+
+```
+$$
+\sum_{i = 1}^{n}{(\bar{x} - x_i)^2}
+$$
+```
+:::
+
+::: {.column width="45%"}
+
+$$
+\sum_{i = 1}^{n}{(\bar{x} - x_i)^2}
+$$
+:::
+::::
+
+#### Modelo lineal
+
+:::: columns
+::: {.column width="45%"}
+```
+$$
+Y \sim X\beta_0 + X\beta_1 + \epsilon
+$$
+```
+:::
+
+::: {.column width="45%"}
+
+$$
+Y \sim X\beta_0 + X\beta_1 + \epsilon
+$$
+:::
+::::
+
+y como todo en R... ya casi todo se puede automatizar
+
+## Equatiomatic
+
+```{r}
+if (!require("pacman")) install.packages("pacman") # solo la primera vez
+pacman::p_load(lme4,
+               reghelper,
+               haven,
+               stargazer,
+               ggplot2, # gráficos
+               texreg, # tablas de regresion (screenreg)
+               dplyr, # manipulacion de datos
+               equatiomatic) # paquetes a cargar
+
+mlm = read_dta("http://www.stata-press.com/data/mlmus3/hsb.dta")
+
+mlm = mlm %>% 
+  select(minority,female,ses,mathach,size,sector,pracad,disclim,himinty,mnses,schoolid) %>%
+  as.data.frame()
+```
+
+```{r}
+reg_lineal<- lm(mathach~ses+female+sector+minority, data=mlm)
+
+extract_eq(reg_lineal)
+```
+
+Sin embargo, aún no disponible para estimaciones con `lmer`
+
+```{r}
+results_3 = lmer(mathach ~ 1 + ses + female + sector + mnses + (1 | schoolid), data = mlm)
+extract_eq(results_3)
+```
+
+Por lo tanto, se deben hacer manualmente:
+
+```
+$$
+y_{ij} = \gamma_{00} + \gamma_{01} \text{ses} + \gamma_{02} \text{female} + \gamma_{03} \text{sector} + \gamma_{04} \text{mnses} + u_{0j} + r_{ij}
+$$
+
+```
+
+$$
+mathach_{ij} = \gamma_{00} + \gamma_{01} \text{ses} + \gamma_{02} \text{female} + \gamma_{03} \text{sector} + \gamma_{04} \text{mnses} + u_{0j} + r_{ij}
+$$
+
+
+un intento de solución:
+
+```{r}
+lmer_to_mathjax <- function(model, response_name = "y_{ij}") {
+  # Extrae los términos del modelo
+  terms_fixed <- attr(terms(model), "term.labels")
+  re_terms <- lme4::findbars(formula(model)[[3]])
+  
+  # Construye la parte fija de la ecuación
+  gamma_terms <- paste0("\\gamma_{0", seq_along(terms_fixed), "} \\text{", terms_fixed, "}")
+  gamma_0 <- "\\gamma_{00}"
+  fixed_part <- paste(c(gamma_0, gamma_terms), collapse = " + ")
+  
+  # Construye la parte aleatoria
+  random_parts <- c()
+  for (re in re_terms) {
+    var_name <- as.character(re[[2]])
+    if (length(re[[2]]) == 1) {
+      random_parts <- c(random_parts, paste0("u_{0j}"))
+    } else {
+      random_parts <- c(random_parts, paste0("u_{1j}"))
+    }
+  }
+  random_part <- paste(unique(random_parts), collapse = " + ")
+  
+  # Ruido
+  noise_part <- "r_{ij}"
+  
+  # Construcción final
+  rhs <- paste(c(fixed_part, random_part, noise_part), collapse = " + ")
+  equation <- paste0("$$\n", response_name, " = ", rhs, "\n$$")
+  
+  cat(equation)
+}
+
+```
+
+
+```{r results='asis'}
+# Generate MathJax
+cat(lmer_to_mathjax(results_3))
+```
+
+
+
+
+# Foro
+
+<script src="https://giscus.app/client.js"
+        data-repo="cursos-metodos-facso/multinivel"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyMDA3MTE2MDk="
+        data-category="Q&A"
+        data-category-id="DIC_kwDOC_aduc4CYhjI"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="es"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+

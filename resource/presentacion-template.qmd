@@ -1,0 +1,148 @@
+---
+title: "Template para presentaciones con Quarto"
+author: "Kevin Carrasco"
+format:
+  revealjs:
+    theme: multinivel.scss
+    incremental: true 
+    slideNumber: true
+editor: source
+---
+
+```{r}
+if (!require("pacman")) install.packages("pacman") # solo la primera vez
+pacman::p_load(lme4,
+               kableExtra,
+               haven,
+               car,
+               sjmisc,
+               sjPlot,
+               stargazer,
+               ggplot2, # gráficos
+               dplyr, # manipulacion de datos
+               equatiomatic) # paquetes a cargar
+
+mlm = read_dta("http://www.stata-press.com/data/mlmus3/hsb.dta")
+
+mlm = mlm %>% 
+  select(mathach, female,ses,sector,mnses,schoolid) %>%
+  as.data.frame()
+
+
+results_0 = lmer(mathach ~ 1 + (1 | schoolid), data = mlm)
+results_1 = lmer(mathach ~ 1 + ses + female + (1 | schoolid), data = mlm)
+results_2 = lmer(mathach ~ 1 + sector + mnses + (1 | schoolid), data = mlm)
+results_3 = lmer(mathach ~ 1 + ses + female + sector + mnses + (1 | schoolid), data = mlm)
+results_4 = lmer(mathach ~ 1 + ses + female + sector + mnses + ses*sector + (1 | schoolid), data = mlm)
+```
+
+
+## Planteamiento del problema
+
+Este estudio analiza cómo el nivel socioeconómico, el género y el tipo de escuela influyen en el rendimiento en matemáticas de estudiantes de secundaria en Estados Unidos.
+
+Se espera que los estudiantes con mayor nivel socioeconómico obtengan mejores resultados, que las mujeres presenten un rendimiento ligeramente menor en matemáticas, y que asistir a una escuela privada se asocie con un mayor desempeño en comparación con escuelas públicas. Este análisis busca aportar evidencia sobre los factores individuales y contextuales que inciden en el logro académico.
+
+## Variables de nivel 1
+
+- Ses
+
+- Female
+
+## Variables de nivel 2
+
+- Sector
+
+- Mean ses
+
+## Datos
+
+Esta investigación fue realizada con datos de...
+
+y se estimó el siguiente modelo:
+
+$$
+y_{ij} = \gamma_{00} + \gamma_{01} \text{ses} + \gamma_{02} \text{female} + \gamma_{03} \text{sector} + \gamma_{04} \text{mnses} + u_{0j} + r_{ij}
+$$
+
+## Descriptivos {.scrollable .smaller}
+
+```{r}
+sjmisc::descr(mlm,
+      show = c("label","range", "mean", "sd", "NA.prc", "n"))%>% # Selecciona estadísticos
+      kable(.,"html")  %>%# Esto es para que se vea bien en quarto
+  kable_styling()
+```
+
+
+## Resultados
+
+```{r}
+scatterplot(mlm$mathach ~ mlm$ses, data=mlm, xlab="Ses", ylab="Math Score", main="Math on SES", smooth=FALSE)
+```
+
+
+## Resultados
+
+Los resultados de los modelos de regresión pueden ser presentados en un coefplot
+
+```{r}
+plot_model(results_3, 
+            title = "", #quitar titulo
+            show.values = TRUE, #mostrar valor de efectos
+            dot.size = 3, #tamaño circulos
+            line.size = 1, #tamaño CI
+            value.size = 4, #tamaño valor efectoss
+            spacing = 1, #espacio entre efectos
+            vline.color = "red", # linea roja en punto neutro (0)
+            axis.labels = rev(c("Ses",
+                              "Female", 
+                              "Sector", 
+                              "Mean sed")), #con rev porque automatico los tira en otro orden
+            show.legend = FALSE) + # variables dependientes
+  theme_bw()
+```
+
+
+## Resultados {.scrollable-x .smaller}
+
+o mediante tablas
+
+
+```{r}
+tab_model(results_0,results_1,results_2,results_3,results_4,
+          show.ci=FALSE,
+          show.icc=FALSE)
+```
+
+## Interacción
+
+:::: columns
+::: {.column width="70%"}
+
+```{r}
+plot_model(results_4, type="int") +
+  theme_bw()
+```
+
+:::
+
+::: {.column width="30%"}
+
+La interacción muestra que...
+
+:::
+:::
+
+
+## Conclusiones {data-background-color="black"}
+
+De esta forma, 
+
+::: incremental
+-   
+-  
+-
+:::
+
+## Referencias
