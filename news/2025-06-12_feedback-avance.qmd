@@ -113,6 +113,8 @@ _**¿En qué tabla de descriptivos va la tabla de cluster?**_
 
 ### Presentación
 
+(revisar también la sección correspondiente en la [página de trabajos](/trabajos.html)
+
   **¿Cuántas personas presentan?**
 
 - Se recomienda máximo 2; quienes no presentan responden las preguntas..

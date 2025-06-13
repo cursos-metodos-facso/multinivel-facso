@@ -121,6 +121,15 @@ Las entregas y revisiones de trabajos del curso operarán en la plataforma Githu
 
 Si bien es posible utilizar Github desde RStudio, existen mejores herramientas para esto. La más usada es Github Desktop, se recomienda. Acá un un [tutorial](/assignment/desktop.html). 
 
+# Presentaciones de trabajos
+
+- Al final de semestre cada grupo presenta su trabajo.
+- La asistencia a la sesión de presentaciones es **obligatoria**
+- Cada presentación  será de 15 minutos + 10 de preguntas. 
+- En la página de prácticos hay una [guía para hacer la presentación en Quarto](/assignment/quarto-presentations.html) (no es obligación hacerla en este formato).
+- El documento de presentación o link correspondiente debe ser enviado antes de que comience la sesión de presentaciones
+- Se sugiere que presenten máximo 2 personas, y quienes no presentan responden preferentemente las preguntas.
+
 
 # Foro de preguntas sobre el trabajo
 
