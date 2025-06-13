@@ -10,7 +10,212 @@
 <atom:link href="https://multinivel-facso.netlify.app/news/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.5.57</generator>
-<lastBuildDate>Thu, 22 May 2025 04:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 13 Jun 2025 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Nuevas cositas: Presentaciones, Mathjax &amp; Longitudinal</title>
+  <dc:creator>JC Castillo</dc:creator>
+  <link>https://multinivel-facso.netlify.app/news/2025-06-13_nuevos-practicos.html</link>
+  <description><![CDATA[ 
+
+<div class="back-nav"><a href="../news/">← News</a></div>
+
+
+
+
+<p><img src="https://multinivel-facso.netlify.app/news/images/cositas2.jpeg" class="img-fluid"></p>
+<p>En la página de prácticos agregamos:</p>
+<ul>
+<li><p><a href="../assignment/quarto-presentations.html">tutorial para presentaciones en Quarto</a>, para quienes quieran hacer su presentación en este formato. No es obligación, pero tiene la ventaja que combina bien con código R y sus respectivos outputs (tablas, gráficos …)</p></li>
+<li><p><a href="../assignment/mathjax.html">tutorial de Mathjax</a>, para quienes quieran mostrar sus modelos formalizados</p></li>
+<li><p><a href="../assignment/11-practico.html">práctico estimación longitudinal con métodos multinivel</a>, para quienes se interesen por este tema y lo puedan tener como referencia.</p></li>
+</ul>
+
+
+
+ ]]></description>
+  <category>info</category>
+  <guid>https://multinivel-facso.netlify.app/news/2025-06-13_nuevos-practicos.html</guid>
+  <pubDate>Fri, 13 Jun 2025 04:00:00 GMT</pubDate>
+  <media:content url="https://multinivel-facso.netlify.app/news/images/cositas.png" medium="image" type="image/png" height="152" width="144"/>
+</item>
+<item>
+  <title>Comentarios e indicaciones sobre informe final y presentaciones</title>
+  <dc:creator>JC Castillo</dc:creator>
+  <link>https://multinivel-facso.netlify.app/news/2025-06-12_feedback-avance.html</link>
+  <description><![CDATA[ 
+
+<div class="back-nav"><a href="../news/">← News</a></div>
+
+
+
+
+<p><img src="https://multinivel-facso.netlify.app/news/images/reporte.png" class="img-fluid"></p>
+<p>Abajo algunas indicaciones respecto a la elaboración del informe final.</p>
+<p>En general, se recomienda leer las siguientes recomendaciones de escritura, si bien el informe final de este curso tiene una estructura distinta y más resumida: <a href="https://jc-castillo.com/blog/posts/escritura-academica/">https://jc-castillo.com/blog/posts/escritura-academica/</a>.</p>
+<p>Y en particular para este informe: lo primero es revisar bien la pauta que se encuentra en la <a href="../trabajos.html">pestaña de trabajos</a>. Y ahora sí lo más específico, en base a la revisión de los avances y también las últimas reuniones de asesoría a trabajos:</p>
+<section id="abstract" class="level1">
+<h1>Abstract</h1>
+<ul>
+<li>recordar incluirlo y los contenidos que debe contener</li>
+</ul>
+</section>
+<section id="introducción" class="level1">
+<h1>Introducción</h1>
+<ul>
+<li>en la problemática a abordar debe quedar claramente establecido cuál es el objeto de estudio y como se define (que luego se operacionaliza en la variable dependiente). Posteriormente, se deben desarrollar los argumentos y conceptos para factores asociados (luego variables independientes) <strong>tanto de nivel 1 como de nivel 2</strong>. Bastan un par para cada nivel. Y finalmente, el argumento para la interacción entre niveles.</li>
+<li>conceptos y argumentos respaldados con citas.</li>
+<li>presentar una pregunta de investigación que incluya elementos de nivel 1 y de nivel 2 (o también pueden ser 2 preguntas por separado).</li>
+</ul>
+</section>
+<section id="objetivo-hipótesis" class="level1">
+<h1>Objetivo / hipótesis</h1>
+<ul>
+<li>hipótesis por cada factor asociado presentado en la introducción (y que deben reflejar la estructura argumentativa anterior).</li>
+<li>para la segunda entrega basta con objetivo general y luego las hipótesis específicas (si las hipótesis están bien planteadas los objetivos específicos son algo redundantes).</li>
+</ul>
+</section>
+<section id="datos-variables-y-métodos" class="level1">
+<h1>Datos, variables y métodos</h1>
+<ul>
+<li>al momento de presentar las variables generar tabla de descriptivos univariados (recodar N diferenciado por nivel).</li>
+<li>en los métodos: describir los elementos centrales de la estimación multinivel, el orden de los modelos a presentar, y por qué es adecuada para analizar estos datos.</li>
+<li>opcional, presentar acá la formalización de los modelos (ver guía de mathjax).</li>
+</ul>
+</section>
+<section id="resultados" class="level1">
+<h1>Resultados</h1>
+<ol type="a">
+<li><p><strong>Descriptivos</strong>: presentar un par de gráficos bivariados, se presta para scatter o boxplots con variables independientes de nivel 2.</p></li>
+<li><p><strong>Modelos</strong>:</p></li>
+</ol>
+<ul>
+<li><p>al principio explicar la organización de la(s) tabla(s) y también comentar las decisiones respecto al centrado de las variables</p></li>
+<li><p>de preferencia una sola tabla con la siguiente estructura:</p>
+<ol type="1">
+<li>Modelo nulo: sirve para estimar la correlación intraclase. En el texto que sigue con el análisis de la tabla comentar su cálculo e interpretación.</li>
+<li>1 + variables independientes nivel 1</li>
+<li>1 + variables independientes nivel 2</li>
+<li>independientes 1 + 2</li>
+<li>+ pendiente aleatoria (y test de devianza)</li>
+<li>+ interacción entre niveles</li>
+</ol>
+<ul>
+<li>Comentar modelo por modelo, tomando en cuenta coeficientes, significación estadística y ajuste.</li>
+</ul></li>
+</ul>
+<ol start="3" type="a">
+<li>Gráficos de pendientes aleatorias / interacción</li>
+<li>Análisis de casos influyentes L2 (gráficos e interpretación): si producto del análisis de influyentes corresponde eliminar algunos casos de nivel 2 y estimar nuevamente, solo reportar los nuevos modelos en caso que haya cambios significativos. De lo contrario, señalar que no hay grandes cambios y reportar nueva estimación en apéndice.</li>
+</ol>
+<p><strong>Sobre tabla(s)</strong>: si calzar todos los modelos en una tabla resulta demasiado apretado, los puntos 5 y 6 pueden ser desarrollados en una tabla aparte (sobre todo si hay más de una pendiente aleatoria/interacción entre niveles). Esta segunda tabla requeriría solo los términos considerados en la interacción y la interacción(es). Para evitar que la tabla sea muy larga se pueden omitir las variables/coeficientes que no participan de la interacción. Es decir, el modelo se estima con todas las variables pero se omiten los que no son relevantes (ej: opción <code>drop</code> del tab_model)</p>
+<p>La otra opción es agregar a una sola tabla un scroll horizontal si se quiere mantener una tabla con todo, tipo:</p>
+<pre><code>&lt;div style="overflow-x: auto; width: 100%;"&gt;
+```r
+library(sjPlot)
+tab_model(model)
+```
+&lt;/div&gt; </code></pre>
+</section>
+<section id="discusión-y-conclusiones" class="level1">
+<h1>Discusión y conclusiones</h1>
+<ul>
+<li>La discusión es discusión de las <strong>hipótesis</strong>, una por una.</li>
+<li>Y se cierra concluyendo con principales aportes de haber utilizado la metodología multinivel para abordar el problema de investigación, limitaciones y proyecciones.</li>
+</ul>
+</section>
+<section id="bibliografía" class="level1">
+<h1>Bibliografía</h1>
+<ul>
+<li>referencias pertinentes</li>
+</ul>
+</section>
+<section id="faqs" class="level1">
+<h1><span style="color: red;">FAQs</span></h1>
+<section id="trabajo" class="level3">
+<h3 class="anchored" data-anchor-id="trabajo">Trabajo</h3>
+<p><em><strong>¿Cómo elegir la pendiente que se aleatoriza?</strong></em></p>
+<ul>
+<li>Se aleatoriza la variable de nivel 1 comprometida en la hipótesis de interacción. Recordar que para establecer si la pendiente es efectivamente aleatoria (es decir, que las diferencias de la pendiente entre grupos es estadísticamente distinta de cero) se deben contrastar los modelos con y sin pendiente aleatoria con un test de devianza. Si la pendiente no es aleatoria, entonces no corresponde proceder con interacción entre niveles.</li>
+</ul>
+<p><em><strong>¿Qué variable es independiente, y cuál es de control?</strong></em></p>
+<ul>
+<li>las variables independientes son los predictores asociados a las hipótesis de investigación. Si hay más predictores que se considera relevante incorporar, pero no tan relevantes como para estar en las hipótesis, entonces son de control.</li>
+</ul>
+<p><em><strong>¿Cuál <img src="https://latex.codecogs.com/png.latex?R%C2%B2"> reportar?</strong></em></p>
+<ul>
+<li>El que se considere más conveniente y que aporte más información al análisis.</li>
+</ul>
+<p><em><strong>¿Qué variables se centran</strong></em></p>
+<ul>
+<li>Por regla general, las de nivel 1 se centran al grupo y las de nivel 2 a la gran media.</li>
+<li>De acuerdo al texto de Enders &amp; Tofighi, no es necesario centrar variables de nivel 1 cuya media por cluster se encuetre como predictor a nivel 2 (los coeficientes nivel 1 son equivalentes en uno y otro caso).</li>
+<li>La variable que de todas maneras debe estar centrada es la comprometida en la interacción.</li>
+</ul>
+<p><em><strong>¿Se puede modificar la plantilla para que se vea mejor el html del trabajo?</strong></em></p>
+<ul>
+<li>Por supuesto. Para eso se modifica el contenido del archivo .css, o se llama un css distinto desde el YAML. Por ejemplo, en el caso de este trabajo: <a href="https://multinivel-facso.github.io/trabajo1-grupo-1/Primera%20entrega%20multinivel.html">https://multinivel-facso.github.io/trabajo1-grupo-1/Primera%20entrega%20multinivel.html</a>, en el YAML del <a href="https://github.com/multinivel-facso/trabajo1-grupo-1/blob/main/Primera%20entrega%20multinivel.qmd">qmd</a> se llama un archivo <code>multinivel.scss</code>, que se puede copiar/modificar desde el mismo repo.</li>
+</ul>
+<p><em><strong>¿Me puedo pasar del número de palabras para cada sección?</strong></em></p>
+<ul>
+<li>El número de palabras es solo referencial.</li>
+</ul>
+<p><em><strong>¿En qué tabla de descriptivos va la tabla de cluster?</strong></em></p>
+<ul>
+<li>En la de variables de nivel 2</li>
+</ul>
+</section>
+<section id="presentación" class="level3">
+<h3 class="anchored" data-anchor-id="presentación">Presentación</h3>
+<p><strong>¿Cuántas personas presentan?</strong></p>
+<ul>
+<li>Se recomienda máximo 2; quienes no presentan responden las preguntas..</li>
+</ul>
+<p><em><strong>¿Cuánto dura la presentación?</strong></em></p>
+<ul>
+<li>máximo de 15 minutos, y 10 min de preguntas</li>
+</ul>
+</section>
+</section>
+<section id="foro" class="level1">
+<h1><span style="color: red;">FORO</span></h1>
+<p>Por acá todas las preguntas que tengan que ver con el trabajo final y la presentación.</p>
+<script src="https://giscus.app/client.js" data-repo="cursos-metodos-facso/multinivel-facso" data-repo-id="R_kgDOKF_d_w" data-category="Q&amp;A" data-category-id="DIC_kwDOKF_d_84CrdfL" data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="light" data-lang="es" crossorigin="anonymous" async="">
+</script>
+
+
+</section>
+
+ ]]></description>
+  <category>info</category>
+  <guid>https://multinivel-facso.netlify.app/news/2025-06-12_feedback-avance.html</guid>
+  <pubDate>Thu, 12 Jun 2025 04:00:00 GMT</pubDate>
+  <media:content url="https://multinivel-facso.netlify.app/images/reporte.png" medium="image" type="image/png"/>
+</item>
+<item>
+  <title>Nuevos ejercicios prácticos</title>
+  <link>https://multinivel-facso.netlify.app/news/2025-05-26_nuevas-practicas.html</link>
+  <description><![CDATA[ 
+
+<div class="back-nav"><a href="../news/">← News</a></div>
+
+
+
+
+<p>Se han agregado 3 ejercicios prácticos nuevos, ya disponibles en la sección <a href="../assignment/">Prácticos</a>. Estos prácticos fueron suspendidos debido a la toma y existen contenidos que pueden ser útiles para la realización del Trabajo 1.</p>
+<ul>
+<li><p><a href="../assignment/04-practico.html">Práctico 4</a> - Combinando datos de distintos niveles: En este práctico se utiliza la base de datos de ISSP 2009 y la base Quality of Goverment. El objetivo es vincular ambas bases a través de la variable de identificación de países.</p></li>
+<li><p><a href="../assignment/05-practico.html">Práctico 5</a> - Predicción de efectos aleatorios: En este práctico se revisan los principales códigos y procesos para la estimación de efectos aleatorios. En la sección final se incluyen gráficos de efectos aleatorios.</p></li>
+<li><p><a href="../assignment/06-practico.html">Práctico 6</a> - Interacción entre niveles: En este práctico se revisan dos ejercicios para la estimación de efectos de interacción entre niveles. El primer ejemplo es con los datos de High School and Beyond (HSB) y el segundo ejemplo es con datos del paper de Aguinis, et al.&nbsp;(2013).</p></li>
+</ul>
+
+
+
+ ]]></description>
+  <category>info</category>
+  <guid>https://multinivel-facso.netlify.app/news/2025-05-26_nuevas-practicas.html</guid>
+  <pubDate>Mon, 26 May 2025 04:00:00 GMT</pubDate>
+  <media:content url="https://multinivel-facso.netlify.app/news/news/images/interac.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>Tutorial Github Desktop</title>
   <link>https://multinivel-facso.netlify.app/news/2025-05-23_github-desktop.html</link>

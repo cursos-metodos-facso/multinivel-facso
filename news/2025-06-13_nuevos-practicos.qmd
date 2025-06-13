@@ -1,0 +1,23 @@
+---
+title: "Nuevas cositas: Presentaciones, Mathjax & Longitudinal"
+author: "JC Castillo"
+date: "2025-06-13"
+categories: [info]
+image: images/cositas.png
+lang: es
+website:
+  comments:
+    giscus:
+      repo: cursos-metodos-facso/multinivel-facso
+---
+
+![](/news/images/cositas2.jpeg)
+
+En la página de prácticos agregamos:
+
+- [tutorial para presentaciones en Quarto](/assignment/quarto-presentations.html), para quienes quieran hacer su presentación en este formato. No es obligación, pero tiene la ventaja que combina bien con código R y sus respectivos outputs (tablas, gráficos ...)
+
+- [tutorial de Mathjax](/assignment/mathjax.html), para quienes quieran mostrar sus modelos formalizados
+
+- [práctico estimación longitudinal con métodos multinivel](/assignment/11-practico.html), para quienes se interesen por este tema y lo puedan tener como referencia.
+

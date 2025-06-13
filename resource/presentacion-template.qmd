@@ -1,13 +1,19 @@
 ---
-title: "Template para presentaciones con Quarto"
-author: "Kevin Carrasco"
 format:
   revealjs:
+    title-slide: false
     theme: multinivel.scss
     incremental: true 
     slideNumber: true
+    auto-stretch: false
+    transition: fade
+    transition-speed: slow
 editor: source
 ---
+
+
+#
+
 
 ```{r}
 if (!require("pacman")) install.packages("pacman") # solo la primera vez
@@ -37,52 +43,98 @@ results_4 = lmer(mathach ~ 1 + ses + female + sector + mnses + ses*sector + (1 |
 ```
 
 
-## Planteamiento del problema
+::: columns
+::: {.column width="20%"}
 
-Este estudio analiza cómo el nivel socioeconómico, el género y el tipo de escuela influyen en el rendimiento en matemáticas de estudiantes de secundaria en Estados Unidos.
+:::
 
-Se espera que los estudiantes con mayor nivel socioeconómico obtengan mejores resultados, que las mujeres presenten un rendimiento ligeramente menor en matemáticas, y que asistir a una escuela privada se asocie con un mayor desempeño en comparación con escuelas públicas. Este análisis busca aportar evidencia sobre los factores individuales y contextuales que inciden en el logro académico.
+::: {.column .column-right width="80%"}
 
-## Variables de nivel 1
+# **(titulo del trabajo)**
 
-- Ses
+------------------------------------------------------------------------
 
-- Female
+**Autor1, autor2 & autor3**
 
-## Variables de nivel 2
 
-- Sector
+::: {.red2 .medium}
 
-- Mean ses
+**Análisis de datos multinivel - 2025**
+
+**Departamento de Sociología, Universidad de Chile**
+
+
+
+:::
+
+Santiago, 18 de Junio de 2025
+
+:::
+
+[Github repo](link al repo)
+:::
+
+::: {.notes}
+Aquí mis notas
+:::
+
+# Introducción
+
+- [problema, objeto de estudio] Rendimiento en matemáticas decreciente y aumentan brechas por género
+
+- [factores asociados L1] Nivel socioeconómico y género de estudiantes
+  
+- [factores asociados L2] Nivel socioeconómico de la escuela y composición de género de las salas de clases.
+
+## {data-background-color="#5f5758"}
+
+
+::: {.center .middle}
+
+<span style="font-size: 250%;">¿En qué medida el nivel socioeconómico y el género a nivel individual y de escuela afectan el rendimiento en matemática?</span>
+:::
+
+# Hipótesis:
+
+Nivel 1:
+
+$H_1$:
+
+$H_2$:
+
+Nivel 2
+
+$H_3$:
+
+$H_4$:
+
+# Metodología{data-background-color="#5f5758"}
 
 ## Datos
 
-Esta investigación fue realizada con datos de...
+## Variables
 
-y se estimó el siguiente modelo:
+(incluir tablas univariados por nivel)
+
+## Métodos
+
+... se estimó el siguiente modelo:
 
 $$
 y_{ij} = \gamma_{00} + \gamma_{01} \text{ses} + \gamma_{02} \text{female} + \gamma_{03} \text{sector} + \gamma_{04} \text{mnses} + u_{0j} + r_{ij}
 $$
 
-## Descriptivos {.scrollable .smaller}
-
-```{r}
-sjmisc::descr(mlm,
-      show = c("label","range", "mean", "sd", "NA.prc", "n"))%>% # Selecciona estadísticos
-      kable(.,"html")  %>%# Esto es para que se vea bien en quarto
-  kable_styling()
-```
+# Resultados{data-background-color="#5f5758"}
 
 
-## Resultados
+## Descriptivos
 
 ```{r}
 scatterplot(mlm$mathach ~ mlm$ses, data=mlm, xlab="Ses", ylab="Math Score", main="Math on SES", smooth=FALSE)
 ```
 
 
-## Resultados
+## Modelos
 
 Los resultados de los modelos de regresión pueden ser presentados en un coefplot
 
@@ -135,14 +187,13 @@ La interacción muestra que...
 :::
 
 
-## Conclusiones {data-background-color="black"}
+# Conclusiones {data-background-color="black"}
 
-De esta forma, 
 
 ::: incremental
--   
--  
--
+-   bla bla bla
+-  bla bla
+- bla
 :::
 
 ## Referencias

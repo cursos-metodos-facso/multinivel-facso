@@ -120,6 +120,12 @@ website:
               file: assignment/09-practico.qmd
             - text: "10: Tres niveles"
               file: assignment/10-practico.qmd
+            - text: "11: Longitudinal"
+              file: assignment/11-practico.qmd
+            - text: "Bonus track: MathJax"
+              file: assignment/mathjax.qmd
+            - text: "Presentaciones en Quarto"
+              file: assignment/quarto-presentations.qmd                        
   page-footer:
     left: |
       Content {{< fa brands creative-commons >}} {{< var course.copyright_year >}} by [{{< var instructor.name_no_title >}}]({{< var instructor.url >}}) <br>

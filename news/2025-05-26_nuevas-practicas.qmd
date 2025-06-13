@@ -2,7 +2,7 @@
 title: "Nuevos ejercicios prácticos"
 date: "2025-05-26"
 categories: [info]
-image: /news/images/interac.png
+image: images/interac.png
 ---
 
 

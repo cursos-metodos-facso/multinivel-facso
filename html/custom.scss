@@ -302,3 +302,19 @@ pre.text {
   border-radius: 50%;
   object-fit: cover;
 }
+
+/* Make the question callouts stand out */
+.callout.callout-question {
+  border-left: 5px solid #007acc;
+  background-color: #f0f8ff;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 15px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+.callout.callout-question .callout-title {
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #007acc;
+}
